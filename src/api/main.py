@@ -8,6 +8,15 @@ from fastapi import FastAPI, HTTPException, BackgroundTasks, Query
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 
+# Manually load .env file if it exists (zero-dependency env loading for local dev)
+if os.path.exists(".env"):
+    with open(".env", "r", encoding="utf-8") as f:
+        for line in f:
+            line = line.strip()
+            if line and not line.startswith("#") and "=" in line:
+                key, val = line.split("=", 1)
+                os.environ[key.strip()] = val.strip()
+
 from src.utils.db import get_connection, init_db
 from src.scraper.scheduler import ScrapingScheduler
 from src.etl.pipeline import ETLPipeline
