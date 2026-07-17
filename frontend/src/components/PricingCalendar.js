@@ -15,7 +15,7 @@ import {
 
 const rawApiUrl = process.env.NEXT_PUBLIC_API_URL;
 const cleanUrl = rawApiUrl && rawApiUrl.replace(/^["']|["']$/g, "").trim();
-const API_BASE = (cleanUrl && cleanUrl !== "undefined" && cleanUrl !== "null") ? cleanUrl : "https://airbnb-market-intelligence.onrender.com";
+const API_BASE = (cleanUrl && cleanUrl !== "undefined" && cleanUrl !== "null" && cleanUrl !== "[SENSITIVE]") ? cleanUrl : "https://airbnb-market-intelligence.onrender.com";
 
 export default function PricingCalendar({ recs, listingId, feeStructure = "simplified", onOverrideUpdated }) {
   const [selectedDay, setSelectedDay] = useState(null);
