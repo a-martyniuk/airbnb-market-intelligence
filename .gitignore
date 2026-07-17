@@ -20,6 +20,7 @@ ENV/
 data/*.db
 data/*.sqlite
 data/*.sqlite3
+!data/airbnb_intelligence.db
 data/raw/
 data/raw_temp/
 !data/.gitkeep
