@@ -51,13 +51,10 @@ jobs:
     needs: build-and-test
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Setup flyctl
-        uses: superfly/flyctl-actions/setup-flyctl@master
-
-      - name: Deploy to Fly.io
-        run: flyctl deploy --remote-only
+      - name: Trigger Render Backend Deploy Hook
         env:
-          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+          RENDER_DEPLOY_HOOK: ${{ secrets.RENDER_DEPLOY_HOOK }}
+        if: env.RENDER_DEPLOY_HOOK != ''
+        run: |
+          echo "Triggering Render deployment..."
+          curl -f "$RENDER_DEPLOY_HOOK"

@@ -227,6 +227,13 @@ def bg_run_incremental_scrape(mode: str = "total"):
         pipeline_state["message"] = f"Actualización finalizada con éxito (Modo: {mode})."
         pipeline_state["progress"] = 1.0
         
+        # Synchronize updated database and target settings back to GitHub
+        try:
+            from src.utils.git_db import sync_to_github
+            sync_to_github([DB_PATH, "config/target_settings.json"])
+        except Exception as sync_err:
+            logger.error(f"Failed to sync database to GitHub in background task: {str(sync_err)}")
+        
     except Exception as e:
         logger.error(f"Incremental pipeline failed for mode {mode}: {str(e)}")
         pipeline_state["status"] = "error"
@@ -722,7 +729,7 @@ class RulesUpdate(BaseModel):
     average_stay_days: int = 3
 
 @app.post("/api/settings/rules")
-def update_pricing_rules(payload: RulesUpdate):
+def update_pricing_rules(payload: RulesUpdate, background_tasks: BackgroundTasks):
     """Updates pricing rules in settings.yaml and regenerates recommendations in SQLite."""
     try:
         # 1. Read existing config
@@ -758,6 +765,10 @@ def update_pricing_rules(payload: RulesUpdate):
         for l_id in listing_ids:
             pricing_engine.generate_and_save_recommendations(l_id, days=30, db_path=DB_PATH)
             
+        # Sync updated config and database to GitHub
+        from src.utils.git_db import sync_to_github
+        background_tasks.add_task(sync_to_github, [DB_PATH, "config/settings.yaml"])
+        
         return {"status": "success", "message": "Pricing rules updated and database price recommendations recalculated!"}
         
     except Exception as e:
@@ -771,7 +782,7 @@ class ResetPayload(BaseModel):
     date: str
 
 @app.post("/api/listings/{listing_id}/recommendations/override")
-def save_price_override(listing_id: str, payload: OverridePayload):
+def save_price_override(listing_id: str, payload: OverridePayload, background_tasks: BackgroundTasks):
     """Saves a manual price override for a specific listing and date."""
     conn = get_connection(DB_PATH)
     try:
@@ -796,6 +807,10 @@ def save_price_override(listing_id: str, payload: OverridePayload):
         WHERE listing_id = ? AND date = ?
         """, (payload.price, json.dumps(features_dict), listing_id, payload.date))
         conn.commit()
+        # Sync updated database to GitHub
+        from src.utils.git_db import sync_to_github
+        background_tasks.add_task(sync_to_github, [DB_PATH])
+        
         return {"status": "success", "message": f"Saved manual price override of ${payload.price} for {payload.date}."}
     except HTTPException as he:
         raise he
@@ -806,7 +821,7 @@ def save_price_override(listing_id: str, payload: OverridePayload):
         conn.close()
 
 @app.post("/api/listings/{listing_id}/recommendations/reset")
-def reset_price_override(listing_id: str, payload: ResetPayload):
+def reset_price_override(listing_id: str, payload: ResetPayload, background_tasks: BackgroundTasks):
     """Resets a manual price override, restoring the original AI recommendation."""
     conn = get_connection(DB_PATH)
     try:
@@ -834,7 +849,12 @@ def reset_price_override(listing_id: str, payload: ResetPayload):
             WHERE listing_id = ? AND date = ?
             """, (original_price, json.dumps(features_dict), listing_id, payload.date))
             conn.commit()
+            # Sync updated database to GitHub
+            from src.utils.git_db import sync_to_github
+            background_tasks.add_task(sync_to_github, [DB_PATH])
+            
             return {"status": "success", "message": f"Reset price to AI recommended rate of ${original_price:.2f}."}
+        
         return {"status": "success", "message": "Price was not overridden."}
     except HTTPException as he:
         raise he
@@ -1200,8 +1220,10 @@ def save_target_listing_settings(payload: Dict[str, Any], background_tasks: Back
             # Empty database, trigger total crawl to seed everything
             logger.info("Empty database, queuing total live scrape to seed target and watchlist...")
             background_tasks.add_task(bg_run_incremental_scrape, "total")
-            message = "Target listing saved and total database seed scrape queued in background."
-            
+        # Sync local target_settings.json to GitHub immediately
+        from src.utils.git_db import sync_to_github
+        background_tasks.add_task(sync_to_github, ["config/target_settings.json"])
+        
         return {"status": "success", "message": message}
     except Exception as e:
         logger.error(f"Error saving target settings: {str(e)}")

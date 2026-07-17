@@ -1,0 +1,55 @@
+name: Daily Airbnb Scrape & ETL
+
+on:
+  schedule:
+    # Run daily at 05:00 UTC (02:00 AM in Buenos Aires / UTC-3)
+    - cron: '0 5 * * *'
+  workflow_dispatch:
+    # Allow manual triggering from the GitHub Actions tab
+
+jobs:
+  run-pipeline:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          # Fetch all history so git commits work correctly
+          fetch-depth: 0
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run Scraper & ETL Pipeline
+        env:
+          DATABASE_PATH: data/airbnb_intelligence.db
+        run: python -m src.etl.run_daily_pipeline
+
+      - name: Commit updated SQLite database
+        run: |
+          git config --global user.name "GitHub Action Bot"
+          git config --global user.email "actions@github.com"
+          git add data/airbnb_intelligence.db
+          # Only commit and push if there are changes
+          if git diff --staged --quiet; then
+            echo "No database updates detected."
+          else
+            git commit -m "chore: daily database auto-update [skip ci]"
+            git push origin main
+          fi
+
+      - name: Trigger Render Deploy Hook
+        env:
+          RENDER_DEPLOY_HOOK: ${{ secrets.RENDER_DEPLOY_HOOK }}
+        if: env.RENDER_DEPLOY_HOOK != ''
+        run: |
+          echo "Triggering Render deployment..."
+          curl -f "$RENDER_DEPLOY_HOOK"
