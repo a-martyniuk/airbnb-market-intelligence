@@ -388,7 +388,8 @@ const getCompetitorImage = (listingId) => {
 };
 
 const rawApiUrl = process.env.NEXT_PUBLIC_API_URL;
-const API_BASE = (rawApiUrl && rawApiUrl.replace(/^["']|["']$/g, "")) || "https://airbnb-market-intelligence.onrender.com";
+const cleanUrl = rawApiUrl && rawApiUrl.replace(/^["']|["']$/g, "").trim();
+const API_BASE = (cleanUrl && cleanUrl !== "undefined" && cleanUrl !== "null") ? cleanUrl : "https://airbnb-market-intelligence.onrender.com";
 
 export default function UnifiedDashboard() {
   // Navigation & UI States
