@@ -1,5 +1,5 @@
 name: Deploy AirMarket AI
-
+# Trigger clean run with correct root directory configurations
 on:
   push:
     branches:
