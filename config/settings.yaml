@@ -1,0 +1,51 @@
+competitor_analysis:
+  k_neighbors: 20
+  weights:
+    accommodates: 0.2
+    bathrooms: 0.1
+    bedrooms: 0.2
+    distance: 0.5
+database:
+  db_path: data/airbnb_intelligence.db
+market:
+  buenos_aires:
+    center_lat: -34.5861
+    center_lon: -58.4373
+    neighborhoods:
+    - Palermo Hollywood
+    - Palermo Soho
+    - Chacarita
+    - Colegiales
+    - Villa Crespo
+    radius_km: 3.0
+pricing_model:
+  average_stay_days: 3
+  base_price_factor: 1.0
+  cleaning_fee: 15.0
+  high_season_months:
+  - 11
+  - 12
+  - 1
+  - 2
+  high_season_premium: 1.2
+  holiday_premium: 1.2
+  last_minute_discount: 0.85
+  last_minute_discount_days: 3
+  low_season_discount: 0.9
+  low_season_months:
+  - 6
+  - 7
+  - 8
+  weekend_premium: 1.15
+scraper:
+  default_city: Buenos Aires
+  max_listings_per_run: 50
+  mock_mode: false
+  request_timeout: 10
+  user_agents:
+  - Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)
+    Chrome/120.0.0.0 Safari/537.36
+  - Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like
+    Gecko) Version/17.0 Safari/605.1.15
+  - Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0
+    Safari/537.36

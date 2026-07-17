@@ -1,0 +1,28 @@
+{
+  "target_url": "https://www.airbnb.com.ar/rooms/1716762976739155303",
+  "target_id": "1716762976739155303",
+  "details": {
+    "listing_id": "1716762976739155303",
+    "title": "Dpto. Moderno, Espacioso & Pileta | Self Check-in",
+    "accommodates": 4,
+    "bedrooms": 1,
+    "bathrooms": 1.5,
+    "neighborhood": "Palermo Hollywood",
+    "price": 90,
+    "rating": 5,
+    "reviews_count": 0,
+    "host_is_superhost": 1,
+    "amenities": [
+      "Wifi",
+      "Air conditioning",
+      "Cocina",
+      "Lavarropas",
+      "Pool",
+      "Check-in autónomo"
+    ],
+    "latitude": -34.5875,
+    "longitude": -58.4396,
+    "fee_structure": "split",
+    "monthly_discount": 22
+  }
+}
