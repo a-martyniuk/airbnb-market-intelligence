@@ -1229,6 +1229,7 @@ def save_target_listing_settings(payload: Dict[str, Any], background_tasks: Back
             # Empty database, trigger total crawl to seed everything
             logger.info("Empty database, queuing total live scrape to seed target and watchlist...")
             background_tasks.add_task(bg_run_incremental_scrape, "total")
+            message = "Target listing saved and total market scrape initiated."
         # Sync local target_settings.json to GitHub immediately
         from src.utils.git_db import sync_to_github
         background_tasks.add_task(sync_to_github, ["config/target_settings.json"])
