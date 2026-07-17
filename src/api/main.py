@@ -73,7 +73,7 @@ app = FastAPI(
 
 # CORS configuration to enable Next.js frontend calls
 allowed_origins_str = os.getenv("ALLOWED_ORIGINS", "*")
-allowed_origins = [orig.strip() for orig in allowed_origins_str.split(",") if orig.strip()]
+allowed_origins = [orig.strip().rstrip('/') for orig in allowed_origins_str.split(",") if orig.strip()]
 
 app.add_middleware(
     CORSMiddleware,
