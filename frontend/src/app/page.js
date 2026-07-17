@@ -387,7 +387,8 @@ const getCompetitorImage = (listingId) => {
   return competitorImages[idx];
 };
 
-const API_BASE = process.env.NEXT_PUBLIC_API_URL || "https://airbnb-market-intelligence.onrender.com";
+const rawApiUrl = process.env.NEXT_PUBLIC_API_URL;
+const API_BASE = (rawApiUrl && rawApiUrl.replace(/^["']|["']$/g, "")) || "https://airbnb-market-intelligence.onrender.com";
 
 export default function UnifiedDashboard() {
   // Navigation & UI States

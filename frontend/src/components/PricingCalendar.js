@@ -13,7 +13,8 @@ import {
   ReferenceLine
 } from "recharts";
 
-const API_BASE = process.env.NEXT_PUBLIC_API_URL || "https://airbnb-market-intelligence.onrender.com";
+const rawApiUrl = process.env.NEXT_PUBLIC_API_URL;
+const API_BASE = (rawApiUrl && rawApiUrl.replace(/^["']|["']$/g, "")) || "https://airbnb-market-intelligence.onrender.com";
 
 export default function PricingCalendar({ recs, listingId, feeStructure = "simplified", onOverrideUpdated }) {
   const [selectedDay, setSelectedDay] = useState(null);
