@@ -2123,7 +2123,7 @@ POR ESTADÍA (${stayN} noches):
                   gap: "20px",
                   marginTop: "10px"
                 }}>
-                  {competitors.map((c) => {
+                  {competitors.slice(0, 15).map((c) => {
                     const diff = c.price - details.price;
                     return (
                       <div 
@@ -2340,7 +2340,7 @@ POR ESTADÍA (${stayN} noches):
                       </tr>
                     </thead>
                     <tbody>
-                      {competitors.map((c) => {
+                      {competitors.slice(0, 15).map((c) => {
                         const diff = c.price - details.price;
                         return (
                           <tr 
