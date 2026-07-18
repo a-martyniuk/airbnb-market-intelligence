@@ -390,13 +390,13 @@ const getCompetitorImage = (listingId) => {
 const getSimilarityBadge = (score) => {
   if (score === undefined || score === null) return null;
   if (score <= 0.15) {
-    return { text: "Muy Alta", color: "#10b981", bg: "rgba(16, 185, 129, 0.12)" };
+    return { text: "Muy Alta", color: "#10b981", bg: "#10b981", textColor: "#050609" };
   } else if (score <= 0.35) {
-    return { text: "Alta", color: "#34d399", bg: "rgba(52, 211, 153, 0.1)" };
+    return { text: "Alta", color: "#34d399", bg: "#34d399", textColor: "#050609" };
   } else if (score <= 0.55) {
-    return { text: "Media", color: "var(--accent-gold)", bg: "rgba(240, 186, 21, 0.1)" };
+    return { text: "Media", color: "var(--accent-gold)", bg: "var(--accent-gold)", textColor: "#050609" };
   } else {
-    return { text: "Baja", color: "#9ca3af", bg: "rgba(156, 163, 175, 0.1)" };
+    return { text: "Baja", color: "#9ca3af", bg: "#4b5563", textColor: "#fff" };
   }
 };
 
@@ -2118,16 +2118,17 @@ POR ESTADÍA (${stayN} noches):
                                 top: "10px",
                                 right: "10px",
                                 background: badge.bg,
-                                border: `1px solid ${badge.color}`,
-                                color: badge.color,
-                                padding: "3.5px 8px",
-                                borderRadius: "8px",
+                                color: badge.textColor,
+                                padding: "4px 10px",
+                                borderRadius: "20px",
                                 fontSize: "0.68rem",
                                 fontWeight: "800",
                                 textTransform: "uppercase",
-                                letterSpacing: "0.5px"
+                                letterSpacing: "0.8px",
+                                boxShadow: "0 4px 12px rgba(0,0,0,0.5)",
+                                border: "none"
                               }}>
-                                Similitud: {badge.text}
+                                {badge.text}
                               </div>
                             );
                           })()}
@@ -2280,9 +2281,8 @@ POR ESTADÍA (${stayN} noches):
                                   <span style={{
                                     display: "inline-block",
                                     background: badge.bg,
-                                    border: `1px solid ${badge.color}`,
-                                    color: badge.color,
-                                    padding: "2px 6px",
+                                    color: badge.textColor,
+                                    padding: "2.5px 8px",
                                     borderRadius: "12px",
                                     fontSize: "0.68rem",
                                     fontWeight: "800",

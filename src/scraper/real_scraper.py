@@ -487,6 +487,22 @@ class RealAirbnbScraper(BaseAirbnbScraper):
                 except Exception:
                     pass
             
+            # Heuristic amenities from title/subtitle
+            detected_amenities = ["Wifi", "Air conditioning", "Cocina"]
+            text_to_search = (title + " " + (r.get("subtitle") or "")).lower()
+            if "pool" in text_to_search or "pileta" in text_to_search or "piscina" in text_to_search:
+                detected_amenities.append("Pool")
+            if "gym" in text_to_search or "gimnasio" in text_to_search:
+                detected_amenities.append("Gym")
+            if "jacuzzi" in text_to_search or "hot tub" in text_to_search or "hidromasaje" in text_to_search:
+                detected_amenities.append("Jacuzzi")
+            if "parking" in text_to_search or "cochera" in text_to_search or "estacionamiento" in text_to_search or "garaje" in text_to_search:
+                detected_amenities.append("Parking")
+            if "laundry" in text_to_search or "washer" in text_to_search or "lavarropas" in text_to_search or "lavadora" in text_to_search:
+                detected_amenities.append("Lavarropas")
+            if "self check-in" in text_to_search or "check-in autónomo" in text_to_search or "smart lock" in text_to_search:
+                detected_amenities.append("Check-in autónomo")
+
             listing_dict = {
                 "listing_id": str(listing_id),
                 "title": title,
@@ -503,6 +519,7 @@ class RealAirbnbScraper(BaseAirbnbScraper):
                 "host_id": "host_" + str(listing_id),
                 "host_name": "Host",
                 "host_is_superhost": is_superhost,
+                "amenities": detected_amenities,
                 "picture_url": picture_url
             }
             listings.append(listing_dict)
