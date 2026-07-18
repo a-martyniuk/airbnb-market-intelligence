@@ -452,6 +452,59 @@ export default function UnifiedDashboard() {
   const [averageStay, setAverageStay] = useState(3);
   const [savingSettings, setSavingSettings] = useState(false);
 
+  const getRanking = () => {
+    if (!details || !competitors || competitors.length === 0) {
+      return { rankText: "Rank 1 de 1", pctText: "Top 100%", trend: "neutral", trendText: "Cargando..." };
+    }
+    
+    const targetRevPAR = (details.price || 90.0) * ((details.estimated_occupancy_rate_30d || 70.0) / 100.0);
+    
+    const allRevPARs = competitors.map(c => {
+      const occ = c.estimated_occupancy_rate_30d || 50.0;
+      return {
+        id: c.listing_id,
+        revpar: c.price * (occ / 100.0)
+      };
+    });
+    
+    allRevPARs.push({
+      id: details.listing_id,
+      revpar: targetRevPAR
+    });
+    
+    allRevPARs.sort((a, b) => b.revpar - a.revpar);
+    
+    const targetRank = allRevPARs.findIndex(item => item.id === details.listing_id) + 1;
+    const totalListings = allRevPARs.length;
+    const pct = (targetRank / totalListings) * 100;
+    
+    let pctText = `Top ${pct.toFixed(0)}%`;
+    let trend = "positive";
+    let trendText = "Rendimiento Superior";
+    
+    if (pct <= 15) {
+      pctText = `Top ${Math.max(1, Math.round(pct))}%`;
+      trend = "positive";
+      trendText = "Rendimiento Superior";
+    } else if (pct <= 40) {
+      trend = "positive";
+      trendText = "Rendimiento Promedio-Alto";
+    } else if (pct <= 70) {
+      trend = "neutral";
+      trendText = "Rendimiento Promedio";
+    } else {
+      trend = "negative";
+      trendText = "Rendimiento Bajo";
+    }
+    
+    return {
+      rankText: `Rank ${targetRank} de ${totalListings}`,
+      pctText,
+      trend,
+      trendText
+    };
+  };
+
   const getFeeBreakdownTooltip = (price) => {
     const feeStructure = targetDetails?.fee_structure || "simplified";
     const stayN = parseInt(averageStay) || 3;
@@ -1678,16 +1731,21 @@ POR ESTADÍA (${stayN} noches):
                 trendType="neutral"
                 tooltipText="Número de alojamientos directos con características similares en tu radio geográfico."
               />
-              <KpiCard
-                title="Ranking Competitivo"
-                value="Rank 4 de 41"
-                delta="Top 10%"
-                deltaType="positive"
-                icon={Award}
-                trendText="Rendimiento Superior"
-                trendType="positive"
-                tooltipText="Tu posición de RevPAR en el vecindario frente a las publicaciones activas del segmento."
-              />
+              {(() => {
+                const ranking = getRanking();
+                return (
+                  <KpiCard
+                    title="Ranking Competitivo"
+                    value={ranking.rankText}
+                    delta={ranking.pctText}
+                    deltaType={ranking.trend === "negative" ? "negative" : "positive"}
+                    icon={Award}
+                    trendText={ranking.trendText}
+                    trendType={ranking.trend}
+                    tooltipText="Tu posición de RevPAR en el vecindario frente a las publicaciones activas del segmento."
+                  />
+                );
+              })()}
             </div>
 
             {/* Próximos 30 días chart */}
