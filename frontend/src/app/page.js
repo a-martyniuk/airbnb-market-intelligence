@@ -1117,8 +1117,8 @@ POR ESTADÍA (${stayN} noches):
                       <h3 style={{ margin: "0 0 10px 0", textTransform: "none" }}>Distribución y Geolocalización de Competidores</h3>
                       <LeafletMap
                         listings={listings}
-                        center={[details?.latitude || -34.5861, details?.longitude || -58.4373]}
-                        targetListingId={details?.listing_id}
+                        center={[targetDetails?.latitude || details?.latitude || -34.5861, targetDetails?.longitude || details?.longitude || -58.4373]}
+                        targetListingId={targetDetails?.listing_id || details?.listing_id}
                         selectedListingId={selectedId}
                       />
                     </div>
