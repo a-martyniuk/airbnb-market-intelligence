@@ -783,21 +783,20 @@ POR ESTADÍA (${stayN} noches):
 
         {/* Target listing switcher */}
         <div style={{ display: "flex", alignItems: "center", gap: "15px" }}>
-          {listings.length > 0 && (
-            <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-              <span style={{ fontSize: "0.75rem", color: "var(--text-secondary)" }}>Propiedad activa:</span>
-              <select
-                className="select-input"
-                style={{ width: "220px", marginBottom: 0, padding: "5px 10px", borderRadius: "6px", fontSize: "0.78rem" }}
-                value={selectedId}
-                onChange={(e) => setSelectedId(e.target.value)}
-              >
-                {listings.map(l => (
-                  <option key={l.listing_id} value={l.listing_id}>{l.title}</option>
-                ))}
-              </select>
-            </div>
-          )}
+          <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+            <span style={{ fontSize: "0.75rem", color: "var(--text-secondary)" }}>Propiedad activa:</span>
+            <span style={{
+              fontSize: "0.78rem",
+              fontWeight: "bold",
+              color: "#fff",
+              backgroundColor: "rgba(255,255,255,0.06)",
+              border: "1px solid rgba(255,255,255,0.1)",
+              padding: "4px 12px",
+              borderRadius: "6px"
+            }}>
+              {targetDetails?.title || details?.title || "Cargando propiedad..."}
+            </span>
+          </div>
 
           {/* Sync indicator */}
           {hydrating && (
