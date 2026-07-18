@@ -1193,6 +1193,8 @@ def save_target_listing_settings(payload: Dict[str, Any], background_tasks: Back
                 round(price, 2)
             ))
             
+        conn.commit()
+        
         # Check if we have competitor listings in DB (other than target)
         cursor.execute("SELECT COUNT(*) FROM listings WHERE listing_id != ?", (str(listing_id),))
         competitor_count = cursor.fetchone()[0]
@@ -1217,7 +1219,7 @@ def save_target_listing_settings(payload: Dict[str, Any], background_tasks: Back
             set_pipeline_status_time("last_update_competitors")
             
             # Retrain models
-            from ml.pricing_model import DynamicPricingModel
+            from src.ml.pricing_model import DynamicPricingModel
             pricing_engine = DynamicPricingModel()
             pricing_engine.train_model(DB_PATH)
             pricing_engine.generate_and_save_recommendations(str(listing_id), days=30, db_path=DB_PATH)
