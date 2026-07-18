@@ -2,6 +2,7 @@ import sqlite3
 import pandas as pd
 import numpy as np
 import yaml
+import json
 from typing import List, Dict, Any
 from src.utils.db import get_connection
 
@@ -107,12 +108,25 @@ class CompetitorAnalyzer:
             accom_diff = abs(target['accommodates'] - row['accommodates'])
             norm_accom = min(accom_diff / 6.0, 1.0) # max accommodates diff 6
 
+            # Calculate amenities match score (0.0 means perfect match, 1.0 means complete mismatch)
+            row_am = json.loads(row['amenities']) if row['amenities'] else []
+            target_am = json.loads(target['amenities']) if target['amenities'] else []
+            
+            row_am_set = set(row_am)
+            target_am_set = set(target_am)
+            
+            # Key amenities for pricing tier comparison
+            key_amenities = ["Pool", "Gym", "Jacuzzi", "Parking", "Air conditioning"]
+            am_diff_count = sum(1 for am in key_amenities if (am in target_am_set) != (am in row_am_set))
+            norm_am_diff = am_diff_count / len(key_amenities)
+
             # Compute weighted similarity distance (smaller is better/closer)
+            # Since bedrooms are filtered to be exactly equal, we reallocate bedroom weight to amenities.
             weighted_score = (
-                self.weights['distance'] * norm_dist +
-                self.weights['bedrooms'] * norm_bed +
-                self.weights['bathrooms'] * norm_bath +
-                self.weights['accommodates'] * norm_accom
+                0.35 * norm_dist +
+                0.10 * norm_bath +
+                0.20 * norm_accom +
+                0.35 * norm_am_diff
             )
 
             competitor_scores.append({
