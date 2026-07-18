@@ -177,6 +177,9 @@ export default function UnifiedDashboard() {
   const [recs, setRecs] = useState([]);
   const [marketHistory, setMarketHistory] = useState([]);
   
+  // Target details editable state
+  const [targetDetails, setTargetDetails] = useState(null);
+  
   // Loading states
   const [loading, setLoading] = useState(true);
   const [subLoading, setSubLoading] = useState(false);
@@ -193,6 +196,7 @@ export default function UnifiedDashboard() {
   const [savingSettings, setSavingSettings] = useState(false);
   const [targetUrlInput, setTargetUrlInput] = useState("");
   const [resolvingTarget, setResolvingTarget] = useState(false);
+  const [savingTargetDetails, setSavingTargetDetails] = useState(false);
 
   // Strategy Simulator Slider State (-30% to +30%)
   const [simulatorPct, setSimulatorPct] = useState(0);
@@ -282,13 +286,78 @@ export default function UnifiedDashboard() {
     };
   };
 
+  const getFeeBreakdownTooltip = (price) => {
+    const feeStructure = targetDetails?.fee_structure || "simplified";
+    const stayN = parseInt(averageStay) || 3;
+    const cleanFee = parseFloat(cleaningFee) || 0;
+    
+    const cleanProrated = cleanFee / stayN;
+    const nightlyTotal = price + cleanProrated;
+    
+    const stayBase = price * stayN;
+    const stayTotal = stayBase + cleanFee;
+
+    if (feeStructure === "simplified") {
+      const hostFeeNight = nightlyTotal * 0.15;
+      const hostPayoutNight = nightlyTotal * 0.85;
+      
+      const hostFeeStay = stayTotal * 0.15;
+      const hostPayoutStay = stayTotal * 0.85;
+
+      return `Desglose con Limpieza (Tarifa Simplificada):
+• Estadía Promedio: ${stayN} noches
+• Tasa de Limpieza: $${cleanFee.toFixed(0)} USD ($${cleanProrated.toFixed(1)}/noche)
+
+POR NOCHE (Promedio):
+• Total Huésped: $${nightlyTotal.toFixed(1)} USD (Base: $${price.toFixed(0)} + Limpieza: $${cleanProrated.toFixed(1)})
+• Comisión Airbnb (15%): $${hostFeeNight.toFixed(1)} USD
+• Cobro Neto Anfitrión (85%): $${hostPayoutNight.toFixed(1)} USD
+
+POR ESTADÍA (${stayN} noches):
+• Total Huésped: $${stayTotal.toFixed(1)} USD (Base: $${stayBase.toFixed(0)} + Limpieza: $${cleanFee.toFixed(0)})
+• Comisión Airbnb (15%): $${hostFeeStay.toFixed(1)} USD
+• Cobro Neto Anfitrión (85%): $${hostPayoutStay.toFixed(1)} USD`;
+    } else {
+      const hostFeeNight = nightlyTotal * 0.03;
+      const hostPayoutNight = nightlyTotal * 0.97;
+      const guestFeeNight = nightlyTotal * 0.142;
+      const guestTotalNight = nightlyTotal + guestFeeNight;
+
+      const hostFeeStay = stayTotal * 0.03;
+      const hostPayoutStay = stayTotal * 0.97;
+      const guestFeeStay = stayTotal * 0.142;
+      const guestTotalStay = stayTotal + guestFeeStay;
+
+      return `Desglose con Limpieza (Tarifa Dividida):
+• Estadía Promedio: ${stayN} noches
+• Tasa de Limpieza: $${cleanFee.toFixed(0)} USD ($${cleanProrated.toFixed(1)}/noche)
+
+POR NOCHE (Promedio):
+• Precio Anuncio + Limpieza: $${nightlyTotal.toFixed(1)} USD
+• Tarifa Huésped (~14.2%): $${guestFeeNight.toFixed(1)} USD
+• Total Huésped: $${guestTotalNight.toFixed(1)} USD
+• Comisión Airbnb (3%): $${hostFeeNight.toFixed(1)} USD
+• Cobro Neto Anfitrión (97%): $${hostPayoutNight.toFixed(1)} USD
+
+POR ESTADÍA (${stayN} noches):
+• Precio Anuncio + Limpieza: $${stayTotal.toFixed(1)} USD
+• Tarifa Huésped (~14.2%): $${guestFeeStay.toFixed(1)} USD
+• Total Huésped: $${guestTotalStay.toFixed(1)} USD
+• Comisión Airbnb (3%): $${hostFeeStay.toFixed(1)} USD
+• Cobro Neto Anfitrión (97%): $${hostPayoutStay.toFixed(1)} USD`;
+    }
+  };
+
   // API Callbacks
   const fetchTargetSettings = async () => {
     try {
       const res = await fetch(`${API_BASE}/api/settings/target`);
       if (res.ok) {
         const data = await res.json();
-        if (data.target_url) setTargetUrlInput(data.target_url);
+        if (data.target_url) {
+          setTargetUrlInput(data.target_url);
+          setTargetDetails(data.details);
+        }
       }
     } catch (e) {
       console.error("Error fetching target settings:", e);
@@ -447,20 +516,52 @@ export default function UnifiedDashboard() {
     if (!targetUrlInput.trim()) return;
     setResolvingTarget(true);
     try {
-      const res = await fetch(`${API_BASE}/api/settings/target`, {
+      const res = await fetch(`${API_BASE}/api/settings/target/resolve`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ target_url: targetUrlInput.trim() })
+        body: JSON.stringify({ url: targetUrlInput.trim() })
+      });
+      const data = await res.json();
+      if (data.details) {
+        setTargetDetails(data.details);
+        if (data.status === "partial") {
+          alert(data.message);
+        } else {
+          alert("Propiedad objetivo resuelta con éxito. Revisa y completa los detalles abajo antes de guardar.");
+        }
+      } else {
+        alert(data.message || "No se pudo resolver la propiedad objetivo.");
+      }
+    } catch (e) {
+      console.error(e);
+      alert("Error al resolver la propiedad.");
+    } finally {
+      setResolvingTarget(false);
+    }
+  };
+
+  const handleSaveTargetDetails = async () => {
+    if (!targetDetails) return;
+    setSavingTargetDetails(true);
+    try {
+      const res = await fetch(`${API_BASE}/api/settings/target/save`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          target_url: targetUrlInput,
+          target_id: targetDetails.listing_id,
+          details: targetDetails
+        })
       });
       const data = await res.json();
       setHydrating(true);
-      alert("Propiedad objetivo configurada con éxito. Iniciando sincronización de datos...");
+      alert(data.message || "Detalles de propiedad objetivo guardados exitosamente. Iniciando sincronización de mercado...");
       fetchInitialData();
     } catch (e) {
       console.error(e);
-      alert("Error al configurar la propiedad.");
+      alert("Error al guardar los detalles de la propiedad.");
     } finally {
-      setResolvingTarget(false);
+      setSavingTargetDetails(false);
     }
   };
 
@@ -906,7 +1007,7 @@ export default function UnifiedDashboard() {
                     {/* 15 Competitor Cards Grid */}
                     <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline" }}>
                       <h3 style={{ margin: 0, textTransform: "none" }}>Top 15 Competidores Más Relevantes (k-NN)</h3>
-                      <span style={{ fontSize: "0.75rem", color: "var(--text-secondary)" }}>Filtrado por dormitorios exactos e índice de similitud</span>
+                      <span style={{ fontSize: "0.75rem", color: "var(--text-secondary)" }}>Haz clic en cualquier tarjeta para ver el desglose completo de amenities y fotos</span>
                     </div>
 
                     <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "20px" }}>
@@ -934,7 +1035,8 @@ export default function UnifiedDashboard() {
                         return (
                           <div
                             key={c.listing_id}
-                            className="glass-card"
+                            className="glass-card hover-glow"
+                            onClick={() => setSelectedCompDetails(c)}
                             style={{
                               display: "flex",
                               flexDirection: "column",
@@ -942,7 +1044,8 @@ export default function UnifiedDashboard() {
                               borderRadius: "14px",
                               overflow: "hidden",
                               border: selectedId === c.listing_id ? "2px solid var(--accent-gold)" : "1px solid var(--card-border)",
-                              margin: 0
+                              margin: 0,
+                              cursor: "pointer"
                             }}
                           >
                             {/* Image Header with Badge Overlay */}
@@ -1244,7 +1347,7 @@ export default function UnifiedDashboard() {
                       <div className="glass-card" style={{ margin: 0, borderLeft: "4px solid #ef4444", padding: "16px 20px" }}>
                         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "6px" }}>
                           <strong style={{ color: "#fff", fontSize: "0.85rem" }}>Precio Fuera de Rango (Sobreprecio)</strong>
-                          <span style={{ fontSize: "0.7rem", color: "var(--text-secondary)" }}>Hace 3 horas</span>
+                          <span style={{ fontSize: "0.7" }}>Hace 3 horas</span>
                         </div>
                         <p style={{ margin: 0, fontSize: "0.8rem", color: "var(--text-secondary)" }}>
                           Tu tarifa actual publicada de $110 USD está un <strong>18% por encima</strong> del promedio de competidores directos con ocupación para la semana que viene. Conviene ajustar la tarifa a la baja.
@@ -1304,6 +1407,178 @@ export default function UnifiedDashboard() {
                       <p style={{ margin: "6px 0 0 0", fontSize: "0.72rem", color: "var(--text-secondary)" }}>
                         Ejemplo: https://www.airbnb.com.ar/rooms/1126744888258385312
                       </p>
+                    </div>
+
+                    {/* Ficha Técnica de la Propiedad (Scraped & Editable) */}
+                    <div className="glass-card">
+                      <h3 style={{ margin: "0 0 15px 0" }}>Ficha Técnica y Amenities de la Propiedad</h3>
+                      
+                      {targetDetails ? (
+                        <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
+                          
+                          {/* Details fields */}
+                          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: "15px" }}>
+                            <div>
+                              <label style={{ fontSize: "0.78rem", color: "var(--text-secondary)", display: "block", marginBottom: "4px" }}>Título</label>
+                              <input
+                                type="text"
+                                className="text-input"
+                                value={targetDetails.title || ""}
+                                onChange={(e) => setTargetDetails({ ...targetDetails, title: e.target.value })}
+                              />
+                            </div>
+                            <div>
+                              <label style={{ fontSize: "0.78rem", color: "var(--text-secondary)", display: "block", marginBottom: "4px" }}>Vecindario / Barrio</label>
+                              <input
+                                type="text"
+                                className="text-input"
+                                value={targetDetails.neighborhood || ""}
+                                onChange={(e) => setTargetDetails({ ...targetDetails, neighborhood: e.target.value })}
+                              />
+                            </div>
+                            <div>
+                              <label style={{ fontSize: "0.78rem", color: "var(--text-secondary)", display: "block", marginBottom: "4px" }}>Capacidad (Huéspedes)</label>
+                              <input
+                                type="number"
+                                className="text-input"
+                                value={targetDetails.accommodates || 2}
+                                onChange={(e) => setTargetDetails({ ...targetDetails, accommodates: parseInt(e.target.value) || 2 })}
+                              />
+                            </div>
+                            <div>
+                              <label style={{ fontSize: "0.78rem", color: "var(--text-secondary)", display: "block", marginBottom: "4px" }}>Dormitorios</label>
+                              <input
+                                type="number"
+                                className="text-input"
+                                value={targetDetails.bedrooms || 1}
+                                onChange={(e) => setTargetDetails({ ...targetDetails, bedrooms: parseInt(e.target.value) || 1 })}
+                              />
+                            </div>
+                            <div>
+                              <label style={{ fontSize: "0.78rem", color: "var(--text-secondary)", display: "block", marginBottom: "4px" }}>Baños</label>
+                              <input
+                                type="number"
+                                step="0.5"
+                                className="text-input"
+                                value={targetDetails.bathrooms || 1.0}
+                                onChange={(e) => setTargetDetails({ ...targetDetails, bathrooms: parseFloat(e.target.value) || 1.0 })}
+                              />
+                            </div>
+                            <div>
+                              <label style={{ fontSize: "0.78rem", color: "var(--text-secondary)", display: "block", marginBottom: "4px" }}>Precio Publicado Base (USD)</label>
+                              <input
+                                type="number"
+                                className="text-input"
+                                value={targetDetails.price || 100.0}
+                                onChange={(e) => setTargetDetails({ ...targetDetails, price: parseFloat(e.target.value) || 100.0 })}
+                              />
+                            </div>
+                            <div>
+                              <label style={{ fontSize: "0.78rem", color: "var(--text-secondary)", display: "block", marginBottom: "4px" }}>Estructura de Tarifas Airbnb</label>
+                              <select
+                                className="select-input"
+                                style={{ width: "100%" }}
+                                value={targetDetails.fee_structure || "simplified"}
+                                onChange={(e) => setTargetDetails({ ...targetDetails, fee_structure: e.target.value })}
+                              >
+                                <option value="simplified">Tarifa Simplificada (15% cargo al anfitrión, 0% al huésped)</option>
+                                <option value="split">Tarifa Dividida (3% cargo al anfitrión, ~14.2% al huésped)</option>
+                              </select>
+                            </div>
+                            <div>
+                              <label style={{ fontSize: "0.78rem", color: "var(--text-secondary)", display: "block", marginBottom: "4px" }}>Calificación Promedio</label>
+                              <input
+                                type="number"
+                                step="0.01"
+                                className="text-input"
+                                value={targetDetails.rating || 5.0}
+                                onChange={(e) => setTargetDetails({ ...targetDetails, rating: parseFloat(e.target.value) || 5.0 })}
+                              />
+                            </div>
+                            <div>
+                              <label style={{ fontSize: "0.78rem", color: "var(--text-secondary)", display: "block", marginBottom: "4px" }}>Reseñas Totales</label>
+                              <input
+                                type="number"
+                                className="text-input"
+                                value={targetDetails.reviews_count || 0}
+                                onChange={(e) => setTargetDetails({ ...targetDetails, reviews_count: parseInt(e.target.value) || 0 })}
+                              />
+                            </div>
+                            <div>
+                              <label style={{ fontSize: "0.78rem", color: "var(--text-secondary)", display: "block", marginBottom: "4px" }}>Estado Superhost</label>
+                              <select
+                                className="select-input"
+                                style={{ width: "100%" }}
+                                value={targetDetails.host_is_superhost ? "1" : "0"}
+                                onChange={(e) => setTargetDetails({ ...targetDetails, host_is_superhost: e.target.value === "1" })}
+                              >
+                                <option value="1">Sí, es Superhost</option>
+                                <option value="0">No es Superhost</option>
+                              </select>
+                            </div>
+                          </div>
+
+                          {/* Amenities checklists */}
+                          <div style={{ borderTop: "1px solid rgba(255,255,255,0.06)", paddingTop: "15px" }}>
+                            <span style={{ fontSize: "0.82rem", color: "#fff", display: "block", marginBottom: "10px", fontWeight: "bold" }}>
+                              Amenities y Servicios Activos (k-NN Match weights):
+                            </span>
+                            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(200px, 1fr))", gap: "10px" }}>
+                              {[
+                                { label: "📶 Wifi de Alta Velocidad", value: "Wifi" },
+                                { label: "🍳 Cocina Completa", value: "Cocina" },
+                                { label: "🧺 Lavarropas", value: "Lavarropas" },
+                                { label: "🔑 Check-in autónomo", value: "Check-in autónomo" },
+                                { label: "🏊 Pileta / Piscina", value: "Pool" },
+                                { label: "🚗 Cochera / Estacionamiento", value: "Parking" },
+                                { label: "🛁 Jacuzzi / Hidromasaje", value: "Jacuzzi" },
+                                { label: "💪 Gimnasio", value: "Gym" },
+                                { label: "💻 Espacio de trabajo", value: "Workspace" },
+                                { label: "❄️ Aire acondicionado", value: "Air conditioning" }
+                              ].map(item => {
+                                const amenitiesList = targetDetails.amenities || [];
+                                const isChecked = amenitiesList.includes(item.value);
+                                return (
+                                  <label key={item.value} style={{ display: "flex", alignItems: "center", gap: "8px", fontSize: "0.78rem", color: "var(--text-secondary)", cursor: "pointer" }}>
+                                    <input 
+                                      type="checkbox"
+                                      checked={isChecked}
+                                      onChange={(e) => {
+                                        let newList = [...amenitiesList];
+                                        if (e.target.checked) {
+                                          if (!newList.includes(item.value)) newList.push(item.value);
+                                        } else {
+                                          newList = newList.filter(x => x !== item.value);
+                                        }
+                                        setTargetDetails({ ...targetDetails, amenities: newList });
+                                      }}
+                                      style={{ accentColor: "var(--accent-gold)", cursor: "pointer" }}
+                                    />
+                                    {item.label}
+                                  </label>
+                                );
+                              })}
+                            </div>
+                          </div>
+
+                          {/* Save details button */}
+                          <div style={{ display: "flex", justifyContent: "flex-end", marginTop: "10px" }}>
+                            <button
+                              onClick={handleSaveTargetDetails}
+                              className="vercel-btn"
+                              style={{ width: "auto", padding: "10px 24px" }}
+                              disabled={savingTargetDetails}
+                            >
+                              {savingTargetDetails ? "Guardando Ficha..." : "Guardar Ficha de Amenities"}
+                            </button>
+                          </div>
+
+                        </div>
+                      ) : (
+                        <div style={{ color: "var(--text-secondary)", fontSize: "0.8rem", fontStyle: "italic", textAlign: "center", padding: "20px" }}>
+                          Configura la URL de tu propiedad arriba para ver y editar la ficha técnica de amenities.
+                        </div>
+                      )}
                     </div>
 
                     {/* Multipliers & Rules */}
@@ -1413,6 +1688,115 @@ export default function UnifiedDashboard() {
         </main>
 
       </div>
+
+      {/* Slide-out Side Panel Drawer Overlay for Competitors */}
+      {selectedCompDetails && (
+        <div 
+          style={{
+            position: "fixed",
+            top: 0,
+            right: 0,
+            width: "420px",
+            height: "100vh",
+            background: "rgba(10, 11, 16, 0.98)",
+            backdropFilter: "blur(15px)",
+            borderLeft: "1px solid rgba(255, 255, 255, 0.08)",
+            zIndex: 2000,
+            padding: "30px",
+            boxShadow: "-10px 0 40px rgba(0,0,0,0.8)",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "space-between",
+            overflowY: "auto"
+          }}
+          className="view-fade-in"
+        >
+          <div>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: "20px" }}>
+              <h3 style={{ margin: 0, color: "#fff", maxWidth: "300px", fontSize: "1.1rem" }}>{selectedCompDetails.title}</h3>
+              <button 
+                onClick={() => setSelectedCompDetails(null)}
+                style={{ background: "none", border: "none", color: "var(--text-secondary)", fontSize: "1.5rem", cursor: "pointer", padding: 0 }}
+              >
+                ×
+              </button>
+            </div>
+
+            {/* Competitor Image inside Drawer */}
+            <div style={{ width: "100%", height: "200px", borderRadius: "10px", overflow: "hidden", marginBottom: "20px", border: "1px solid rgba(255,255,255,0.08)" }}>
+              <img 
+                src={selectedCompDetails.picture_url || getCompetitorImage(selectedCompDetails.listing_id)} 
+                alt={selectedCompDetails.title}
+                style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                onError={(e) => {
+                  e.target.src = getCompetitorImage(selectedCompDetails.listing_id);
+                }}
+              />
+            </div>
+
+            <div style={{ display: "flex", flexDirection: "column", gap: "15px", fontSize: "0.85rem", color: "var(--text-secondary)" }}>
+              
+              <div style={{ background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.04)", borderRadius: "8px", padding: "12px 15px" }}>
+                <span style={{ fontSize: "0.75rem", display: "block", textTransform: "uppercase" }}>Precio por noche publicado</span>
+                <span style={{ margin: 0, opacity: 1, display: "inline-block" }}>
+                  <strong style={{ fontSize: "1.4rem", color: "var(--accent-emerald)" }}>
+                    ${selectedCompDetails.price} USD
+                  </strong>
+                </span>
+              </div>
+
+              <div>
+                <strong>Calificación de Huéspedes:</strong> {selectedCompDetails.reviews_count === 0 ? (
+                  <span>★ Novedad (0 reseñas)</span>
+                ) : (
+                  <span>⭐ {selectedCompDetails.rating ? selectedCompDetails.rating.toFixed(2) : "4.90"} ({selectedCompDetails.reviews_count} reseñas)</span>
+                )}
+              </div>
+
+              <div>
+                <strong>Ubicación:</strong> {selectedCompDetails.neighborhood || "Palermo Hollywood"} ({selectedCompDetails.geo_distance_km ? selectedCompDetails.geo_distance_km.toFixed(2) : "0.5"} km de distancia)
+              </div>
+
+              <div>
+                <strong>Distribución Física:</strong> 👥 {selectedCompDetails.accommodates} Huéspedes • 🛏️ {selectedCompDetails.bedrooms} dorm. • 🚿 {selectedCompDetails.bathrooms} baños
+              </div>
+
+              <div>
+                <strong>Amenities detectados por el Scraper:</strong>
+                <div style={{ display: "flex", flexWrap: "wrap", gap: "6px", marginTop: "6px" }}>
+                  {(selectedCompDetails.amenities ? 
+                    (typeof selectedCompDetails.amenities === 'string' ? JSON.parse(selectedCompDetails.amenities || "[]") : selectedCompDetails.amenities)
+                    : ["Wifi", "Aire Acondicionado", "Cocina", "TV"]
+                  ).map((am, idx) => (
+                    <span key={idx} style={{ padding: "2px 8px", background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.05)", borderRadius: "10px", fontSize: "0.72rem", color: "#fff" }}>
+                      {am}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div style={{ marginTop: "20px", borderTop: "1px solid rgba(255, 255, 255, 0.08)", paddingTop: "15px" }}>
+            <a
+              href={`https://www.airbnb.com/rooms/${selectedCompDetails.listing_id}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="vercel-btn"
+              style={{
+                display: "block",
+                width: "100%",
+                textDecoration: "none",
+                fontWeight: "bold",
+                textAlign: "center"
+              }}
+            >
+              Ver anuncio real en Airbnb ➔
+            </a>
+          </div>
+        </div>
+      )}
+
     </div>
   );
 }
