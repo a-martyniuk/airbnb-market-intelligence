@@ -35,6 +35,7 @@ class RealAirbnbScraper(BaseAirbnbScraper):
         Attempts to fetch public listings for a city across target neighborhoods.
         """
         queries = [city]
+        target_accommodates = None
         if city.lower() in ("buenos aires", "buenos-aires"):
             # Check if a target listing is configured
             target_neighborhood = None
@@ -45,6 +46,7 @@ class RealAirbnbScraper(BaseAirbnbScraper):
                         t_settings = json.load(f)
                         if t_settings.get("details"):
                             target_neighborhood = t_settings["details"].get("neighborhood")
+                            target_accommodates = t_settings["details"].get("accommodates")
                 except Exception:
                     pass
             
@@ -58,12 +60,24 @@ class RealAirbnbScraper(BaseAirbnbScraper):
                     "Recoleta, Buenos Aires",
                     "Belgrano, Buenos Aires"
                 ]
+        else:
+            settings_file = "config/target_settings.json"
+            if os.path.exists(settings_file):
+                try:
+                    with open(settings_file, "r", encoding="utf-8") as f:
+                        t_settings = json.load(f)
+                        if t_settings.get("details"):
+                            target_accommodates = t_settings["details"].get("accommodates")
+                except Exception:
+                    pass
         
         all_listings = {}
         
         for query in queries:
             formatted_query = query.replace(" ", "-").replace(",", "")
             url = f"https://www.airbnb.com/s/{formatted_query}/homes"
+            if target_accommodates:
+                url += f"?adults={target_accommodates}"
             logger.info(f"Scraping real Airbnb listings for query '{query}' at {url}...")
             try:
                 response = self.session.get(url, timeout=15)
@@ -109,6 +123,8 @@ class RealAirbnbScraper(BaseAirbnbScraper):
             try:
                 formatted_city = city.replace(" ", "-")
                 url = f"https://www.airbnb.com/s/{formatted_city}/homes"
+                if target_accommodates:
+                    url += f"?adults={target_accommodates}"
                 response = self.session.get(url, timeout=15)
                 if response.status_code == 200:
                     soup = BeautifulSoup(response.text, 'html.parser')
