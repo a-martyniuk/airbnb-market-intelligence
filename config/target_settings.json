@@ -53,8 +53,8 @@
       "Terraza",
       "Elevador"
     ],
-    "latitude": -34.5861,
-    "longitude": -58.4373,
+    "latitude": -34.587396618302606,
+    "longitude": -58.439733276956126,
     "fee_structure": "split",
     "monthly_discount": 22,
     "has_elevator": true,
