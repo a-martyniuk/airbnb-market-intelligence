@@ -80,12 +80,12 @@ class CompetitorAnalyzer:
             # 1. Exact bedroom match
             if row['bedrooms'] != target['bedrooms']:
                 continue
-            # 2. Tight capacity match (max 1 guest difference)
-            if abs(target['accommodates'] - row['accommodates']) > 1:
+            # 2. Capacity match (max 2 guests difference)
+            if abs(target['accommodates'] - row['accommodates']) > 2:
                 continue
-            # 3. Realistic price range (+60% / -40% of target base price)
+            # 3. Realistic price range (+80% / -40% of target base price)
             target_base_price = target['price'] if target['price'] else 90.0
-            if not (0.6 * target_base_price <= row['price'] <= 1.6 * target_base_price):
+            if not (0.6 * target_base_price <= row['price'] <= 1.8 * target_base_price):
                 continue
 
             # 1. Geo distance (km)
