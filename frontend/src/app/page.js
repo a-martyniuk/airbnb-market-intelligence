@@ -1530,6 +1530,26 @@ POR ESTADÍA (${stayN} noches):
         const priceDeltaPct = Math.round(((recommendedToday - currentPrice) / currentPrice) * 100);
         const nextWeekendPrice = weekendPrice;
 
+        const proratedCleaning = parseFloat(cleaningFee) / (parseInt(averageStay) || 3);
+        const currentRevPAR = (currentPrice + proratedCleaning) * (details?.estimated_occupancy_rate_30d || 70.0) / 100.0;
+        const recommendedRevPAR = (recommendedToday + proratedCleaning) * (details?.estimated_occupancy_rate_30d || 70.0) / 100.0;
+        const revparDelta = currentRevPAR > 0 ? ((recommendedRevPAR - currentRevPAR) / currentRevPAR) * 100 : 0;
+        const revparDeltaPct = Math.round(revparDelta);
+        const revparDeltaText = `${revparDeltaPct >= 0 ? "+" : ""}${revparDeltaPct}%`;
+        const revparTrendType = revparDeltaPct >= 0 ? "positive" : "negative";
+        const revparTrendText = revparDeltaPct >= 0 ? "Rentabilidad en Suba" : "Rentabilidad en Baja";
+
+        const avgCompOccupancy = competitors.length > 0 
+          ? competitors.reduce((acc, c) => acc + (c.estimated_occupancy_rate_30d || 50.0), 0) / competitors.length 
+          : 70.0;
+        const occDiff = (details?.estimated_occupancy_rate_30d || 70.0) - avgCompOccupancy;
+        const occDeltaText = `${occDiff >= 0 ? "+" : ""}${occDiff.toFixed(1)}% vs mercado`;
+        const occTrendType = occDiff >= 0 ? "positive" : "negative";
+        const occTrendText = occDiff >= 0 ? "Ocupación Superior" : "Ocupación Inferior";
+
+        const highSimilarityComps = competitors.filter(c => (c.similarity_score !== undefined && c.similarity_score <= 0.35)).length;
+        const compsDeltaText = `${highSimilarityComps} muy afines`;
+
         
         return (
           <div className="view-fade-in" style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
@@ -1701,30 +1721,30 @@ POR ESTADÍA (${stayN} noches):
                   />
                 }
               />
-              <KpiCard
+               <KpiCard
                 title="RevPAR Proyectado"
-                value={`$${((recommendedToday + (parseFloat(cleaningFee) / (parseInt(averageStay) || 3))) * (details?.estimated_occupancy_rate_30d || 82) / 100).toFixed(0)} USD`}
-                delta="+6.0%"
-                deltaType="positive"
+                value={`$${((recommendedToday + (parseFloat(cleaningFee) / (parseInt(averageStay) || 3))) * (details?.estimated_occupancy_rate_30d || 70.0) / 100).toFixed(0)} USD`}
+                delta={revparDeltaText}
+                deltaType={revparTrendType}
                 icon={Sliders}
-                trendText="Rentabilidad en Suba"
-                trendType="positive"
-                tooltipText={`RevPAR Proyectado (Ingreso por Habitación Disponible): Promedio real ingresado por noche disponible.\n\nFórmula: (Tarifa Noche + Limpieza / Estadía Promedio) × Ocupación.\n• Tarifa Noche Hoy: $${Math.round(recommendedToday)} USD\n• Limpieza prorrateada: $${(parseFloat(cleaningFee) / (parseInt(averageStay) || 3)).toFixed(1)} USD ($${cleaningFee} USD / ${averageStay} noches)\n• Ocupación estimada: ${details?.estimated_occupancy_rate_30d || 82}%`}
+                trendText={revparTrendText}
+                trendType={revparTrendType}
+                tooltipText={`RevPAR Proyectado (Ingreso por Habitación Disponible): Promedio real ingresado por noche disponible.\n\nFórmula: (Tarifa Noche + Limpieza / Estadía Promedio) × Ocupación.\n• Tarifa Noche Hoy: $${Math.round(recommendedToday)} USD\n• Limpieza prorrateada: $${(parseFloat(cleaningFee) / (parseInt(averageStay) || 3)).toFixed(1)} USD ($${cleaningFee} USD / ${averageStay} noches)\n• Ocupación estimada: ${details?.estimated_occupancy_rate_30d || 70.0}%`}
               />
               <KpiCard
                 title="Ocupación Promedio"
-                value={`${details?.estimated_occupancy_rate_30d || 82}%`}
-                delta="0.0%"
-                deltaType="positive"
+                value={`${details?.estimated_occupancy_rate_30d || 70.0}%`}
+                delta={occDeltaText}
+                deltaType={occTrendType}
                 icon={CalendarDays}
-                trendText="Ocupación Estable"
-                trendType="neutral"
-                tooltipText="Porcentaje promedio estimado de noches reservadas para los próximos 30 días."
+                trendText={occTrendText}
+                trendType={occTrendType}
+                tooltipText="Porcentaje promedio estimado de noches reservadas para los próximos 30 días en comparación con la media de la competencia."
               />
               <KpiCard
                 title="Competidores Cerca"
                 value={competitors.length.toString()}
-                delta="Activos"
+                delta={compsDeltaText}
                 deltaType="positive"
                 icon={Users}
                 trendText="Mercado Activo"
