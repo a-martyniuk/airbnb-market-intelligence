@@ -33,7 +33,12 @@ import {
   CalendarDays,
   HelpCircle,
   TrendingUp,
-  Info
+  Info,
+  Home,
+  CheckSquare,
+  SlidersHorizontal,
+  Compass,
+  Image as ImageIcon
 } from "lucide-react";
 
 import {
@@ -101,6 +106,21 @@ const getSimilarityBadge = (score) => {
 const rawApiUrl = process.env.NEXT_PUBLIC_API_URL;
 const cleanUrl = rawApiUrl && rawApiUrl.replace(/^["']|["']$/g, "").trim();
 const API_BASE = (cleanUrl && cleanUrl !== "undefined" && cleanUrl !== "null" && cleanUrl !== "[SENSITIVE]") ? cleanUrl : "https://airbnb-market-intelligence.onrender.com";
+
+// Default pre-populated list of amenities by category for search/filter/add capabilities
+const defaultAmenitiesByCategory = {
+  General: ["Wifi", "Aire acondicionado", "Calefacción", "Agua caliente", "Plancha", "Secador de pelo", "Lavarropas", "Secarropas", "Perchas"],
+  Kitchen: ["Cocina", "Heladera", "Microondas", "Horno", "Pava eléctrica", "Cafetera", "Tostadora", "Vajilla y cubiertos", "Lavavajillas"],
+  Bathroom: ["Champú", "Jabón corporal", "Bañera", "Ducha de mano", "Bidet"],
+  Bedroom: ["Sábanas", "Almohadas", "Placard", "Cortinas black-out"],
+  Entertainment: ["TV", "Cable", "Netflix / Streaming", "Consola de juegos", "Equipo de música"],
+  Workspace: ["Workspace", "Escritorio", "Silla ergonómica", "Internet de alta velocidad"],
+  Safety: ["Detector de humo", "Detector de monóxido de carbono", "Extinguidor", "Botiquín de primeros auxilios"],
+  Accessibility: ["Sin escaleras", "Entrada amplia", "Silla de ruedas accesible"],
+  Outdoor: ["Pool", "Balcón", "Patio", "Parrilla / Grill", "Terraza"],
+  Parking: ["Parking", "Cochera techada", "Estacionamiento gratuito"],
+  Building: ["Gym", "Elevador", "Portería 24hs", "Jacuzzi", "Seguridad"]
+};
 
 // Simple UI custom Tooltip component
 function Tooltip({ text, children }) {
@@ -177,7 +197,7 @@ export default function UnifiedDashboard() {
   const [recs, setRecs] = useState([]);
   const [marketHistory, setMarketHistory] = useState([]);
   
-  // Target details editable state
+  // Target details editable state (single source of truth for configuration)
   const [targetDetails, setTargetDetails] = useState(null);
   
   // Loading states
@@ -198,6 +218,12 @@ export default function UnifiedDashboard() {
   const [resolvingTarget, setResolvingTarget] = useState(false);
   const [savingTargetDetails, setSavingTargetDetails] = useState(false);
 
+  // Amenities list search & filter
+  const [searchQueryAmenities, setSearchQueryAmenities] = useState("");
+  const [selectedCategoryFilter, setSelectedCategoryFilter] = useState("All");
+  const [newAmenityName, setNewAmenityName] = useState("");
+  const [newAmenityCategory, setNewAmenityCategory] = useState("General");
+
   // Strategy Simulator Slider State (-30% to +30%)
   const [simulatorPct, setSimulatorPct] = useState(0);
   
@@ -206,6 +232,11 @@ export default function UnifiedDashboard() {
 
   // Historical comparative states
   const [historyCompareDate, setHistoryCompareDate] = useState("");
+
+  // Autosave status for Property Setup (Notion/Airtable style)
+  const [autoSaveStatus, setAutoSaveStatus] = useState("saved"); // "saving", "saved", "error"
+  const isFirstMount = useRef(true);
+  const saveTimeoutRef = useRef(null);
 
   const getSimulatedPrice = (rec, wk, hs, hol, lm) => {
     if (!rec || !rec.features) return 0.0;
@@ -432,9 +463,11 @@ POR ESTADÍA (${stayN} noches):
       const res = await fetch(`${API_BASE}/api/pipeline/status`);
       const statusData = await res.json();
       setPipelineStatus(statusData);
-      if (statusData.hydration_job?.status !== "running") {
+      if (statusData.hydration_job?.status === "success") {
         setHydrating(false);
         fetchInitialData();
+      } else if (statusData.hydration_job?.status === "error") {
+        setHydrating(false);
       }
     } catch (e) {
       console.error(e);
@@ -527,7 +560,7 @@ POR ESTADÍA (${stayN} noches):
         if (data.status === "partial") {
           alert(data.message);
         } else {
-          alert("Propiedad objetivo resuelta con éxito. Revisa y completa los detalles abajo antes de guardar.");
+          alert("Propiedad objetivo resuelta con éxito. Revisa y completa los detalles en la sección de CONFIGURACIÓN DE PROPIEDAD.");
         }
       } else {
         alert(data.message || "No se pudo resolver la propiedad objetivo.");
@@ -564,6 +597,44 @@ POR ESTADÍA (${stayN} noches):
       setSavingTargetDetails(false);
     }
   };
+
+  // Debounced auto-save hook for Property Setup (Notion style)
+  useEffect(() => {
+    if (isFirstMount.current) {
+      isFirstMount.current = false;
+      return;
+    }
+    if (!targetDetails) return;
+
+    setAutoSaveStatus("saving");
+    if (saveTimeoutRef.current) clearTimeout(saveTimeoutRef.current);
+    
+    saveTimeoutRef.current = setTimeout(async () => {
+      try {
+        const res = await fetch(`${API_BASE}/api/settings/target/save`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            target_url: targetUrlInput,
+            target_id: targetDetails.listing_id,
+            details: targetDetails
+          })
+        });
+        if (res.ok) {
+          setAutoSaveStatus("saved");
+        } else {
+          setAutoSaveStatus("error");
+        }
+      } catch (e) {
+        console.error("Auto-save error:", e);
+        setAutoSaveStatus("error");
+      }
+    }, 1500);
+
+    return () => {
+      if (saveTimeoutRef.current) clearTimeout(saveTimeoutRef.current);
+    };
+  }, [targetDetails]);
 
   // Sync to local/theme on mount
   useEffect(() => {
@@ -613,17 +684,28 @@ POR ESTADÍA (${stayN} noches):
   const highSimilarityComps = competitors.filter(c => (c.similarity_score !== undefined && c.similarity_score <= 0.35)).length;
   const ranking = getRanking();
 
-  // Sidebar link items
-  const sidebarLinks = [
-    { id: "dashboard", label: "Decision Center", icon: LayoutDashboard },
-    { id: "pricing", label: "Pricing Intelligence", icon: DollarSign },
-    { id: "competidores", label: "Competidores Afines", icon: Users },
-    { id: "calendario", label: "Calendario Tarifario", icon: CalendarDays },
-    { id: "forecast", label: "Forecast & Escenarios", icon: BarChart3 },
-    { id: "historicos", label: "Análisis Histórico", icon: History },
-    { id: "alertas", label: "Feed de Alertas", icon: Bell },
-    { id: "sistema", label: "Configuración", icon: Settings }
-  ];
+  // Navigation Sidebar categories
+  const navStructure = {
+    INTELLIGENCE: [
+      { id: "dashboard", label: "Decision Center", icon: LayoutDashboard },
+      { id: "pricing", label: "Pricing Intelligence", icon: DollarSign },
+      { id: "competidores", label: "Competidores Afines", icon: Users },
+      { id: "forecast", label: "Forecast & Escenarios", icon: BarChart3 },
+      { id: "calendario", label: "Calendario Tarifario", icon: CalendarDays }
+    ],
+    "PROPERTY SETUP": [
+      { id: "overview", label: "Property Overview", icon: Home },
+      { id: "amenities", label: "Amenities Manager", icon: CheckSquare },
+      { id: "features", label: "Property Features", icon: SlidersHorizontal },
+      { id: "location", label: "Location & Photos", icon: Map },
+      { id: "pricing_rules", label: "Pricing Rules", icon: Sliders },
+      { id: "competitor_engine", label: "Competitor Engine", icon: Compass }
+    ],
+    SYSTEM: [
+      { id: "historicos", label: "Análisis Histórico", icon: History },
+      { id: "alertas", label: "Feed de Alertas", icon: Bell }
+    ]
+  };
 
   // Simulator dynamic values
   const baseOcc = details?.estimated_occupancy_rate_30d || 70.0;
@@ -653,6 +735,37 @@ POR ESTADÍA (${stayN} noches):
     if (simulatorPct < -10) return "var(--accent-coral)";
     if (simulatorPct > 12) return "var(--accent-gold)";
     return "var(--accent-emerald)";
+  };
+
+  // Filtering amenities
+  const getFilteredAmenities = () => {
+    const amenitiesList = targetDetails?.amenities || [];
+    let listToFilter = [];
+    
+    if (selectedCategoryFilter === "All") {
+      Object.keys(defaultAmenitiesByCategory).forEach(cat => {
+        listToFilter = listToFilter.concat(defaultAmenitiesByCategory[cat]);
+      });
+      // add custom ones that are not in default list
+      amenitiesList.forEach(am => {
+        if (!listToFilter.includes(am)) listToFilter.push(am);
+      });
+    } else {
+      listToFilter = defaultAmenitiesByCategory[selectedCategoryFilter] || [];
+      // add custom ones that were added to this category
+      amenitiesList.forEach(am => {
+        if (!listToFilter.includes(am) && defaultAmenitiesByCategory[selectedCategoryFilter]?.includes(am)) {
+          listToFilter.push(am);
+        }
+      });
+    }
+
+    if (searchQueryAmenities.trim()) {
+      const q = searchQueryAmenities.toLowerCase();
+      listToFilter = listToFilter.filter(item => item.toLowerCase().includes(q));
+    }
+
+    return Array.from(new Set(listToFilter));
   };
 
   return (
@@ -708,39 +821,46 @@ POR ESTADÍA (${stayN} noches):
       <div style={{ display: "flex", flex: 1, padding: "0 30px 30px 30px", gap: "25px" }}>
         
         {/* Left Sidebar Menu */}
-        <aside style={{ width: "230px", display: "flex", flexDirection: "column", gap: "8px" }}>
-          {sidebarLinks.map(link => {
-            const Icon = link.icon;
-            const isActive = activeView === link.id;
-            return (
-              <button
-                key={link.id}
-                onClick={() => {
-                  setActiveView(link.id);
-                  setSelectedCompDetails(null);
-                }}
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "10px",
-                  padding: "10px 14px",
-                  borderRadius: "8px",
-                  border: "none",
-                  cursor: "pointer",
-                  fontSize: "0.85rem",
-                  fontWeight: isActive ? "700" : "500",
-                  backgroundColor: isActive ? "rgba(255,255,255,0.06)" : "transparent",
-                  color: isActive ? "#fff" : "var(--text-secondary)",
-                  textAlign: "left",
-                  transition: "all 0.15s ease"
-                }}
-                className={isActive ? "" : "top-nav-item"}
-              >
-                <Icon size={15} style={{ color: isActive ? "var(--accent-gold)" : "var(--text-secondary)" }} />
-                <span>{link.label}</span>
-              </button>
-            );
-          })}
+        <aside style={{ width: "230px", display: "flex", flexDirection: "column", gap: "18px" }}>
+          {Object.keys(navStructure).map(category => (
+            <div key={category} style={{ display: "flex", flexDirection: "column", gap: "5px" }}>
+              <span style={{ fontSize: "0.62rem", fontWeight: "bold", color: "rgba(255, 255, 255, 0.3)", letterSpacing: "1.2px", paddingLeft: "14px", marginBottom: "3px" }}>
+                {category}
+              </span>
+              {navStructure[category].map(link => {
+                const Icon = link.icon;
+                const isActive = activeView === link.id;
+                return (
+                  <button
+                    key={link.id}
+                    onClick={() => {
+                      setActiveView(link.id);
+                      setSelectedCompDetails(null);
+                    }}
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "10px",
+                      padding: "8px 14px",
+                      borderRadius: "8px",
+                      border: "none",
+                      cursor: "pointer",
+                      fontSize: "0.82rem",
+                      fontWeight: isActive ? "700" : "500",
+                      backgroundColor: isActive ? "rgba(255,255,255,0.06)" : "transparent",
+                      color: isActive ? "#fff" : "var(--text-secondary)",
+                      textAlign: "left",
+                      transition: "all 0.15s ease"
+                    }}
+                    className={isActive ? "" : "top-nav-item"}
+                  >
+                    <Icon size={14} style={{ color: isActive ? "var(--accent-gold)" : "var(--text-secondary)" }} />
+                    <span>{link.label}</span>
+                  </button>
+                );
+              })}
+            </div>
+          ))}
         </aside>
 
         {/* Right Tab Content Area */}
@@ -1268,319 +1388,533 @@ POR ESTADÍA (${stayN} noches):
                   </div>
                 );
 
-              case "historicos":
+              case "overview":
                 return (
                   <div className="view-fade-in" style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
-                    
-                    {/* Snapshot Picker */}
-                    <div className="glass-card">
-                      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "10px" }}>
+                    <div className="glass-card" style={{ display: "flex", gap: "25px", flexWrap: "wrap" }}>
+                      <div style={{ width: "240px", height: "160px", borderRadius: "10px", overflow: "hidden" }}>
+                        <img 
+                          src={targetDetails?.picture_url || "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=400&q=80"} 
+                          alt="Tu propiedad"
+                          style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                        />
+                      </div>
+                      <div style={{ flex: 1, display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
                         <div>
-                          <h3 style={{ margin: 0 }}>Análisis Histórico de Snapshots</h3>
-                          <p style={{ margin: 0, fontSize: "0.8rem", color: "var(--text-secondary)" }}>Compara cualquier fecha guardada en el histórico de raspado para ver la evolución del mercado.</p>
-                        </div>
-                        {marketHistory.length > 0 && (
-                          <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-                            <span style={{ fontSize: "0.75rem", color: "var(--text-secondary)" }}>Ver histórico desde:</span>
-                            <select
-                              className="select-input"
-                              style={{ width: "160px", marginBottom: 0, padding: "5px 10px", borderRadius: "6px", fontSize: "0.78rem" }}
-                              value={historyCompareDate}
-                              onChange={(e) => setHistoryCompareDate(e.target.value)}
-                            >
-                              {marketHistory.map(h => (
-                                <option key={h.date} value={h.date}>{h.date}</option>
-                              ))}
-                            </select>
+                          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline" }}>
+                            <h2 style={{ margin: 0, color: "#fff", fontSize: "1.3rem" }}>{targetDetails?.title || "Propiedad sin título"}</h2>
+                            <span style={{ fontSize: "0.7rem", color: "var(--accent-gold)", border: "1px solid rgba(212,175,55,0.2)", padding: "2px 8px", borderRadius: "20px" }}>
+                              {targetDetails?.host_is_superhost ? "Host Superhost" : "Host Estándar"}
+                            </span>
                           </div>
-                        )}
+                          <p style={{ margin: "5px 0 15px 0", fontSize: "0.82rem", color: "var(--text-secondary)" }}>
+                            {targetDetails?.neighborhood || "Barrio no configurado"} • {targetDetails?.listing_id}
+                          </p>
+                        </div>
+                        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(100px, 1fr))", gap: "10px", borderTop: "1px solid rgba(255,255,255,0.06)", paddingTop: "15px" }}>
+                          <div>
+                            <span style={{ fontSize: "0.65rem", color: "var(--text-secondary)" }}>DORMITORIOS</span>
+                            <div style={{ fontSize: "1.1rem", color: "#fff", fontWeight: "bold" }}>{targetDetails?.bedrooms || 1}</div>
+                          </div>
+                          <div>
+                            <span style={{ fontSize: "0.65rem", color: "var(--text-secondary)" }}>BAÑOS</span>
+                            <div style={{ fontSize: "1.1rem", color: "#fff", fontWeight: "bold" }}>{targetDetails?.bathrooms || 1.0}</div>
+                          </div>
+                          <div>
+                            <span style={{ fontSize: "0.65rem", color: "var(--text-secondary)" }}>HUÉSPEDES</span>
+                            <div style={{ fontSize: "1.1rem", color: "#fff", fontWeight: "bold" }}>{targetDetails?.accommodates || 2}</div>
+                          </div>
+                          <div>
+                            <span style={{ fontSize: "0.65rem", color: "var(--text-secondary)" }}>PRECIO BASE</span>
+                            <div style={{ fontSize: "1.1rem", color: "#fff", fontWeight: "bold" }}>${targetDetails?.price || 90} USD</div>
+                          </div>
+                        </div>
                       </div>
                     </div>
 
-                    {/* Historical Comparison Charts */}
                     <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "20px" }}>
-                      
-                      <div className="glass-card" style={{ margin: 0 }}>
-                        <h4 style={{ margin: "0 0 10px 0", fontSize: "0.85rem", color: "#fff" }}>Evolución del Precio Promedio del Mercado</h4>
-                        <ResponsiveContainer width="100%" height={200}>
-                          <LineChart data={marketHistory}>
-                            <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.03)" />
-                            <XAxis dataKey="date" stroke="#64748b" fontSize={9} />
-                            <YAxis stroke="#64748b" fontSize={9} />
-                            <RechartsTooltip />
-                            <Line type="monotone" dataKey="avg_price" stroke="var(--accent-gold)" strokeWidth={2} name="Precio Promedio (USD)" dot={false} />
-                          </LineChart>
-                        </ResponsiveContainer>
+                      <div className="glass-card">
+                        <h3 style={{ margin: "0 0 10px 0" }}>Configuración Rápida</h3>
+                        <p style={{ fontSize: "0.8rem", color: "var(--text-secondary)", lineHeight: "1.5" }}>
+                          La ficha técnica y los amenities cargados en este panel sirven como base de datos centralizada. La similitud KNN con tus 15 competidores directos se calcula contrastando directamente estos atributos.
+                        </p>
+                        <div style={{ display: "flex", gap: "10px", marginTop: "15px" }}>
+                          <button onClick={() => setActiveView("features")} className="vercel-btn" style={{ fontSize: "0.78rem" }}>Editar Características</button>
+                          <button onClick={() => setActiveView("amenities")} className="vercel-btn vercel-btn-secondary" style={{ fontSize: "0.78rem" }}>Gestionar Amenities</button>
+                        </div>
                       </div>
-
-                      <div className="glass-card" style={{ margin: 0 }}>
-                        <h4 style={{ margin: "0 0 10px 0", fontSize: "0.85rem", color: "#fff" }}>Evolución del Volumen de Listados Activos</h4>
-                        <ResponsiveContainer width="100%" height={200}>
-                          <LineChart data={marketHistory}>
-                            <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.03)" />
-                            <XAxis dataKey="date" stroke="#64748b" fontSize={9} />
-                            <YAxis stroke="#64748b" fontSize={9} />
-                            <RechartsTooltip />
-                            <Line type="monotone" dataKey="active_listings" stroke="var(--accent-cyan)" strokeWidth={2} name="Listados Activos" dot={false} />
-                          </LineChart>
-                        </ResponsiveContainer>
+                      <div className="glass-card" style={{ display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
+                        <div>
+                          <h3 style={{ margin: "0 0 5px 0" }}>Estado de Sincronización</h3>
+                          <span style={{ fontSize: "0.72rem", color: autoSaveStatus === "saved" ? "var(--accent-emerald)" : "var(--accent-gold)" }}>
+                            ● {autoSaveStatus === "saved" ? "Autoguardado activado y al día" : "Sincronizando cambios..."}
+                          </span>
+                        </div>
+                        <p style={{ fontSize: "0.8rem", color: "var(--text-secondary)", margin: "10px 0 0 0" }}>
+                          Cualquier cambio que realices en las pestañas de PROPERTY SETUP se guardará automáticamente en segundo plano.
+                        </p>
                       </div>
-
                     </div>
-
                   </div>
                 );
 
-              case "alertas":
+              case "amenities":
                 return (
                   <div className="view-fade-in" style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
                     
-                    {/* Header */}
+                    {/* Amenities Toolbar */}
                     <div className="glass-card">
-                      <h3 style={{ margin: 0 }}>Feed Cronológico de Alertas de Mercado</h3>
-                      <p style={{ margin: 0, fontSize: "0.8rem", color: "var(--text-secondary)" }}>Eventos importantes detectados automáticamente en las últimas 48 horas en el segmento de tu propiedad.</p>
+                      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "15px", flexWrap: "wrap", gap: "10px" }}>
+                        <div>
+                          <h3 style={{ margin: 0 }}>Amenities Manager</h3>
+                          <p style={{ margin: 0, fontSize: "0.78rem", color: "var(--text-secondary)" }}>Configura los servicios y comodidades de tu propiedad. Se guardan y aplican automáticamente.</p>
+                        </div>
+                        <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+                          <span style={{ fontSize: "0.75rem", color: autoSaveStatus === "saved" ? "var(--accent-emerald)" : "var(--accent-gold)", display: "flex", alignItems: "center", gap: "4px" }}>
+                            {autoSaveStatus === "saving" && <RefreshCw size={10} className="animate-spin" />}
+                            {autoSaveStatus === "saved" && "✓"}
+                            {autoSaveStatus === "saving" ? "Autoguardando..." : "Cambios guardados"}
+                          </span>
+                        </div>
+                      </div>
+
+                      {/* Search and Category filter pillbar */}
+                      <div style={{ display: "flex", gap: "10px", alignItems: "center", flexWrap: "wrap" }}>
+                        <div style={{ position: "relative", flex: 1, minWidth: "220px" }}>
+                          <Search size={14} style={{ position: "absolute", left: "10px", top: "10px", color: "var(--text-secondary)" }} />
+                          <input
+                            type="text"
+                            className="text-input"
+                            style={{ paddingLeft: "32px", marginBottom: 0, fontSize: "0.8rem" }}
+                            placeholder="Buscar amenities por nombre..."
+                            value={searchQueryAmenities}
+                            onChange={(e) => setSearchQueryAmenities(e.target.value)}
+                          />
+                        </div>
+                        
+                        <select
+                          className="select-input"
+                          style={{ width: "160px", marginBottom: 0, fontSize: "0.8rem" }}
+                          value={selectedCategoryFilter}
+                          onChange={(e) => setSelectedCategoryFilter(e.target.value)}
+                        >
+                          <option value="All">Todas las Categorías</option>
+                          {Object.keys(defaultAmenitiesByCategory).map(cat => (
+                            <option key={cat} value={cat}>{cat}</option>
+                          ))}
+                        </select>
+                      </div>
                     </div>
 
-                    {/* Alerts list */}
-                    <div style={{ display: "flex", flexDirection: "column", gap: "15px" }}>
-                      
-                      <div className="glass-card" style={{ margin: 0, borderLeft: "4px solid #ef4444", padding: "16px 20px" }}>
-                        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "6px" }}>
-                          <strong style={{ color: "#fff", fontSize: "0.85rem" }}>Precio Fuera de Rango (Sobreprecio)</strong>
-                          <span style={{ fontSize: "0.7" }}>Hace 3 horas</span>
-                        </div>
-                        <p style={{ margin: 0, fontSize: "0.8rem", color: "var(--text-secondary)" }}>
-                          Tu tarifa actual publicada de $110 USD está un <strong>18% por encima</strong> del promedio de competidores directos con ocupación para la semana que viene. Conviene ajustar la tarifa a la baja.
-                        </p>
-                      </div>
-
-                      <div className="glass-card" style={{ margin: 0, borderLeft: "4px solid var(--accent-gold)", padding: "16px 20px" }}>
-                        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "6px" }}>
-                          <strong style={{ color: "#fff", fontSize: "0.85rem" }}>Nuevos Competidores Publicados</strong>
-                          <span style={{ fontSize: "0.7rem", color: "var(--text-secondary)" }}>Ayer, 18:24</span>
-                        </div>
-                        <p style={{ margin: 0, fontSize: "0.8rem", color: "var(--text-secondary)" }}>
-                          Se publicaron <strong>2 nuevos competidores</strong> directos de 1 dormitorio en un radio de 500 metros en Palermo Hollywood. Uno de ellos ofrece cochera y se posicionó a tarifa de penetración agresiva ($82 USD).
-                        </p>
-                      </div>
-
-                      <div className="glass-card" style={{ margin: 0, borderLeft: "4px solid #10b981", padding: "16px 20px" }}>
-                        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "6px" }}>
-                          <strong style={{ color: "#fff", fontSize: "0.85rem" }}>Alerta de Alta Demanda (Pico de Ocupación)</strong>
-                          <span style={{ fontSize: "0.7rem", color: "var(--text-secondary)" }}>Hace 1 día</span>
-                        </div>
-                        <p style={{ margin: 0, fontSize: "0.8rem", color: "var(--text-secondary)" }}>
-                          La ocupación general de Palermo subió un 12% para el fin de semana del 24 de Julio. Tu competidor directo <em>Palermo Soho Loft</em> se quedó sin disponibilidad, lo que abre una ventana para subir tus tarifas de fin de semana un 10%.
-                        </p>
-                      </div>
-
-                    </div>
-
-                  </div>
-                );
-
-              case "sistema":
-                return (
-                  <div className="view-fade-in" style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
-                    
-                    {/* Target Property Configuration */}
+                    {/* New Custom Amenity Adder */}
                     <div className="glass-card">
-                      <h3 style={{ margin: "0 0 15px 0" }}>Configuración de Propiedad Objetivo</h3>
-                      <form onSubmit={handleConfigureTargetUrl} style={{ display: "flex", gap: "10px", alignItems: "center" }}>
+                      <h4 style={{ margin: "0 0 10px 0", fontSize: "0.85rem", color: "#fff" }}>Agregar Servicio Personalizado</h4>
+                      <div style={{ display: "flex", gap: "10px" }}>
                         <input
                           type="text"
                           className="text-input"
-                          style={{ marginBottom: 0, flex: 1, padding: "8px 12px", borderRadius: "6px" }}
-                          placeholder="Ingresa la URL de la propiedad de Airbnb que deseas monitorear..."
-                          value={targetUrlInput}
-                          onChange={(e) => setTargetUrlInput(e.target.value)}
+                          style={{ marginBottom: 0, fontSize: "0.8rem" }}
+                          placeholder="Nombre del servicio (Ej: Cafetera Nespresso, PlayStation 5...)"
+                          value={newAmenityName}
+                          onChange={(e) => setNewAmenityName(e.target.value)}
                         />
-                        <button
-                          type="submit"
-                          className="vercel-btn"
-                          disabled={resolvingTarget}
-                          style={{ padding: "9px 18px", fontSize: "0.8rem", flexShrink: 0 }}
+                        <select
+                          className="select-input"
+                          style={{ width: "150px", marginBottom: 0, fontSize: "0.8rem" }}
+                          value={newAmenityCategory}
+                          onChange={(e) => setNewAmenityCategory(e.target.value)}
                         >
-                          {resolvingTarget ? "Resolviendo..." : "Configurar"}
+                          {Object.keys(defaultAmenitiesByCategory).map(cat => (
+                            <option key={cat} value={cat}>{cat}</option>
+                          ))}
+                        </select>
+                        <button
+                          onClick={() => {
+                            if (!newAmenityName.trim()) return;
+                            const amenitiesList = targetDetails?.amenities || [];
+                            if (!amenitiesList.includes(newAmenityName.trim())) {
+                              const newList = [...amenitiesList, newAmenityName.trim()];
+                              setTargetDetails({ ...targetDetails, amenities: newList });
+                            }
+                            setNewAmenityName("");
+                          }}
+                          className="vercel-btn"
+                          style={{ width: "auto", padding: "0 20px" }}
+                        >
+                          Añadir
                         </button>
-                      </form>
-                      <p style={{ margin: "6px 0 0 0", fontSize: "0.72rem", color: "var(--text-secondary)" }}>
-                        Ejemplo: https://www.airbnb.com.ar/rooms/1126744888258385312
-                      </p>
+                      </div>
                     </div>
 
-                    {/* Ficha Técnica de la Propiedad (Scraped & Editable) */}
-                    <div className="glass-card">
-                      <h3 style={{ margin: "0 0 15px 0" }}>Ficha Técnica y Amenities de la Propiedad</h3>
-                      
-                      {targetDetails ? (
-                        <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
-                          
-                          {/* Details fields */}
-                          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: "15px" }}>
-                            <div>
-                              <label style={{ fontSize: "0.78rem", color: "var(--text-secondary)", display: "block", marginBottom: "4px" }}>Título</label>
-                              <input
-                                type="text"
-                                className="text-input"
-                                value={targetDetails.title || ""}
-                                onChange={(e) => setTargetDetails({ ...targetDetails, title: e.target.value })}
-                              />
-                            </div>
-                            <div>
-                              <label style={{ fontSize: "0.78rem", color: "var(--text-secondary)", display: "block", marginBottom: "4px" }}>Vecindario / Barrio</label>
-                              <input
-                                type="text"
-                                className="text-input"
-                                value={targetDetails.neighborhood || ""}
-                                onChange={(e) => setTargetDetails({ ...targetDetails, neighborhood: e.target.value })}
-                              />
-                            </div>
-                            <div>
-                              <label style={{ fontSize: "0.78rem", color: "var(--text-secondary)", display: "block", marginBottom: "4px" }}>Capacidad (Huéspedes)</label>
-                              <input
-                                type="number"
-                                className="text-input"
-                                value={targetDetails.accommodates || 2}
-                                onChange={(e) => setTargetDetails({ ...targetDetails, accommodates: parseInt(e.target.value) || 2 })}
-                              />
-                            </div>
-                            <div>
-                              <label style={{ fontSize: "0.78rem", color: "var(--text-secondary)", display: "block", marginBottom: "4px" }}>Dormitorios</label>
-                              <input
-                                type="number"
-                                className="text-input"
-                                value={targetDetails.bedrooms || 1}
-                                onChange={(e) => setTargetDetails({ ...targetDetails, bedrooms: parseInt(e.target.value) || 1 })}
-                              />
-                            </div>
-                            <div>
-                              <label style={{ fontSize: "0.78rem", color: "var(--text-secondary)", display: "block", marginBottom: "4px" }}>Baños</label>
-                              <input
-                                type="number"
-                                step="0.5"
-                                className="text-input"
-                                value={targetDetails.bathrooms || 1.0}
-                                onChange={(e) => setTargetDetails({ ...targetDetails, bathrooms: parseFloat(e.target.value) || 1.0 })}
-                              />
-                            </div>
-                            <div>
-                              <label style={{ fontSize: "0.78rem", color: "var(--text-secondary)", display: "block", marginBottom: "4px" }}>Precio Publicado Base (USD)</label>
-                              <input
-                                type="number"
-                                className="text-input"
-                                value={targetDetails.price || 100.0}
-                                onChange={(e) => setTargetDetails({ ...targetDetails, price: parseFloat(e.target.value) || 100.0 })}
-                              />
-                            </div>
-                            <div>
-                              <label style={{ fontSize: "0.78rem", color: "var(--text-secondary)", display: "block", marginBottom: "4px" }}>Estructura de Tarifas Airbnb</label>
-                              <select
-                                className="select-input"
-                                style={{ width: "100%" }}
-                                value={targetDetails.fee_structure || "simplified"}
-                                onChange={(e) => setTargetDetails({ ...targetDetails, fee_structure: e.target.value })}
-                              >
-                                <option value="simplified">Tarifa Simplificada (15% cargo al anfitrión, 0% al huésped)</option>
-                                <option value="split">Tarifa Dividida (3% cargo al anfitrión, ~14.2% al huésped)</option>
-                              </select>
-                            </div>
-                            <div>
-                              <label style={{ fontSize: "0.78rem", color: "var(--text-secondary)", display: "block", marginBottom: "4px" }}>Calificación Promedio</label>
-                              <input
-                                type="number"
-                                step="0.01"
-                                className="text-input"
-                                value={targetDetails.rating || 5.0}
-                                onChange={(e) => setTargetDetails({ ...targetDetails, rating: parseFloat(e.target.value) || 5.0 })}
-                              />
-                            </div>
-                            <div>
-                              <label style={{ fontSize: "0.78rem", color: "var(--text-secondary)", display: "block", marginBottom: "4px" }}>Reseñas Totales</label>
-                              <input
-                                type="number"
-                                className="text-input"
-                                value={targetDetails.reviews_count || 0}
-                                onChange={(e) => setTargetDetails({ ...targetDetails, reviews_count: parseInt(e.target.value) || 0 })}
-                              />
-                            </div>
-                            <div>
-                              <label style={{ fontSize: "0.78rem", color: "var(--text-secondary)", display: "block", marginBottom: "4px" }}>Estado Superhost</label>
-                              <select
-                                className="select-input"
-                                style={{ width: "100%" }}
-                                value={targetDetails.host_is_superhost ? "1" : "0"}
-                                onChange={(e) => setTargetDetails({ ...targetDetails, host_is_superhost: e.target.value === "1" })}
-                              >
-                                <option value="1">Sí, es Superhost</option>
-                                <option value="0">No es Superhost</option>
-                              </select>
-                            </div>
-                          </div>
+                    {/* Categorized Grid View */}
+                    <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
+                      {Object.keys(defaultAmenitiesByCategory)
+                        .filter(cat => selectedCategoryFilter === "All" || selectedCategoryFilter === cat)
+                        .map(cat => {
+                          const amenitiesInCat = getFilteredAmenities().filter(am => {
+                            // Check if it belongs to default list of category or custom matched list
+                            if (defaultAmenitiesByCategory[cat].includes(am)) return true;
+                            // Otherwise fallback to grouping general custom ones in General
+                            return cat === "General" && !Object.values(defaultAmenitiesByCategory).some(l => l.includes(am));
+                          });
 
-                          {/* Amenities checklists */}
-                          <div style={{ borderTop: "1px solid rgba(255,255,255,0.06)", paddingTop: "15px" }}>
-                            <span style={{ fontSize: "0.82rem", color: "#fff", display: "block", marginBottom: "10px", fontWeight: "bold" }}>
-                              Amenities y Servicios Activos (k-NN Match weights):
-                            </span>
-                            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(200px, 1fr))", gap: "10px" }}>
-                              {[
-                                { label: "📶 Wifi de Alta Velocidad", value: "Wifi" },
-                                { label: "🍳 Cocina Completa", value: "Cocina" },
-                                { label: "🧺 Lavarropas", value: "Lavarropas" },
-                                { label: "🔑 Check-in autónomo", value: "Check-in autónomo" },
-                                { label: "🏊 Pileta / Piscina", value: "Pool" },
-                                { label: "🚗 Cochera / Estacionamiento", value: "Parking" },
-                                { label: "🛁 Jacuzzi / Hidromasaje", value: "Jacuzzi" },
-                                { label: "💪 Gimnasio", value: "Gym" },
-                                { label: "💻 Espacio de trabajo", value: "Workspace" },
-                                { label: "❄️ Aire acondicionado", value: "Air conditioning" }
-                              ].map(item => {
-                                const amenitiesList = targetDetails.amenities || [];
-                                const isChecked = amenitiesList.includes(item.value);
-                                return (
-                                  <label key={item.value} style={{ display: "flex", alignItems: "center", gap: "8px", fontSize: "0.78rem", color: "var(--text-secondary)", cursor: "pointer" }}>
-                                    <input 
-                                      type="checkbox"
-                                      checked={isChecked}
-                                      onChange={(e) => {
-                                        let newList = [...amenitiesList];
-                                        if (e.target.checked) {
-                                          if (!newList.includes(item.value)) newList.push(item.value);
-                                        } else {
-                                          newList = newList.filter(x => x !== item.value);
-                                        }
-                                        setTargetDetails({ ...targetDetails, amenities: newList });
+                          if (amenitiesInCat.length === 0 && searchQueryAmenities) return null;
+
+                          return (
+                            <div key={cat} className="glass-card" style={{ margin: 0, padding: "20px" }}>
+                              <h4 style={{ margin: "0 0 12px 0", color: "var(--accent-gold)", fontSize: "0.88rem", borderBottom: "1px solid rgba(255,255,255,0.05)", paddingBottom: "6px" }}>
+                                {cat}
+                              </h4>
+                              <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(200px, 1fr))", gap: "10px" }}>
+                                {amenitiesInCat.map(am => {
+                                  const isChecked = targetDetails?.amenities?.includes(am);
+                                  return (
+                                    <label
+                                      key={am}
+                                      style={{
+                                        display: "flex",
+                                        alignItems: "center",
+                                        justifyContent: "space-between",
+                                        padding: "8px 12px",
+                                        borderRadius: "6px",
+                                        backgroundColor: isChecked ? "rgba(212,175,55,0.03)" : "rgba(255,255,255,0.01)",
+                                        border: isChecked ? "1px solid rgba(212,175,55,0.2)" : "1px solid rgba(255,255,255,0.04)",
+                                        cursor: "pointer",
+                                        fontSize: "0.78rem",
+                                        color: isChecked ? "#fff" : "var(--text-secondary)"
                                       }}
-                                      style={{ accentColor: "var(--accent-gold)", cursor: "pointer" }}
-                                    />
-                                    {item.label}
-                                  </label>
-                                );
-                              })}
+                                    >
+                                      <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+                                        <input
+                                          type="checkbox"
+                                          checked={isChecked}
+                                          onChange={(e) => {
+                                            const amenitiesList = targetDetails?.amenities || [];
+                                            let newList = [...amenitiesList];
+                                            if (e.target.checked) {
+                                              if (!newList.includes(am)) newList.push(am);
+                                            } else {
+                                              newList = newList.filter(x => x !== am);
+                                            }
+                                            setTargetDetails({ ...targetDetails, amenities: newList });
+                                          }}
+                                          style={{ accentColor: "var(--accent-gold)" }}
+                                        />
+                                        <span>{am}</span>
+                                      </div>
+                                      
+                                      {/* Delete button if custom */}
+                                      {!defaultAmenitiesByCategory[cat].includes(am) && (
+                                        <button
+                                          onClick={(e) => {
+                                            e.preventDefault();
+                                            const amenitiesList = targetDetails?.amenities || [];
+                                            const newList = amenitiesList.filter(x => x !== am);
+                                            setTargetDetails({ ...targetDetails, amenities: newList });
+                                          }}
+                                          style={{ border: "none", background: "none", color: "var(--accent-coral)", cursor: "pointer", fontSize: "0.95rem" }}
+                                        >
+                                          ×
+                                        </button>
+                                      )}
+                                    </label>
+                                  );
+                                })}
+                              </div>
                             </div>
+                          );
+                        })}
+                    </div>
+
+                  </div>
+                );
+
+              case "features":
+                return (
+                  <div className="view-fade-in" style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
+                    
+                    {/* Database properties spreadsheet editor (Airtable / Notion style) */}
+                    <div className="glass-card">
+                      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "15px" }}>
+                        <div>
+                          <h3 style={{ margin: 0 }}>Property Features Database</h3>
+                          <p style={{ margin: 0, fontSize: "0.78rem", color: "var(--text-secondary)" }}>Edita las características físicas y políticas del alojamiento. Las modificaciones se auto-guardan.</p>
+                        </div>
+                        <span style={{ fontSize: "0.75rem", color: autoSaveStatus === "saved" ? "var(--accent-emerald)" : "var(--accent-gold)" }}>
+                          ● {autoSaveStatus === "saving" ? "Guardando..." : "Autoguardado activo"}
+                        </span>
+                      </div>
+
+                      {targetDetails ? (
+                        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "25px" }}>
+                          
+                          {/* Left Column: physical specs */}
+                          <div style={{ display: "flex", flexDirection: "column", gap: "15px" }}>
+                            <h4 style={{ margin: 0, fontSize: "0.85rem", color: "var(--accent-gold)", borderBottom: "1px solid rgba(255,255,255,0.06)", paddingBottom: "6px" }}>
+                              Especificaciones Físicas
+                            </h4>
+                            
+                            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px" }}>
+                              <div>
+                                <label style={{ fontSize: "0.72rem", color: "var(--text-secondary)" }}>Tipo de Propiedad</label>
+                                <select
+                                  className="select-input"
+                                  style={{ width: "100%", fontSize: "0.8rem" }}
+                                  value={targetDetails.property_type || "Apartment"}
+                                  onChange={(e) => setTargetDetails({ ...targetDetails, property_type: e.target.value })}
+                                >
+                                  <option value="Apartment">Apartamento / Loft</option>
+                                  <option value="House">Casa</option>
+                                  <option value="Condo">Condominio</option>
+                                  <option value="Serviced apartment">Apartamento Turístico</option>
+                                </select>
+                              </div>
+                              
+                              <div>
+                                <label style={{ fontSize: "0.72rem", color: "var(--text-secondary)" }}>Tipo de Habitación</label>
+                                <select
+                                  className="select-input"
+                                  style={{ width: "100%", fontSize: "0.8rem" }}
+                                  value={targetDetails.room_type || "Entire home/apt"}
+                                  onChange={(e) => setTargetDetails({ ...targetDetails, room_type: e.target.value })}
+                                >
+                                  <option value="Entire home/apt">Alojamiento Entero</option>
+                                  <option value="Private room">Habitación Privada</option>
+                                  <option value="Shared room">Habitación Compartida</option>
+                                </select>
+                              </div>
+
+                              <div>
+                                <label style={{ fontSize: "0.72rem", color: "var(--text-secondary)" }}>Metros Cuadrados (m²)</label>
+                                <input
+                                  type="number"
+                                  className="text-input"
+                                  style={{ fontSize: "0.8rem" }}
+                                  value={targetDetails.square_meters || 45}
+                                  onChange={(e) => setTargetDetails({ ...targetDetails, square_meters: parseInt(e.target.value) || 0 })}
+                                />
+                              </div>
+
+                              <div>
+                                <label style={{ fontSize: "0.72rem", color: "var(--text-secondary)" }}>Número de Camas</label>
+                                <input
+                                  type="number"
+                                  className="text-input"
+                                  style={{ fontSize: "0.8rem" }}
+                                  value={targetDetails.beds || 1}
+                                  onChange={(e) => setTargetDetails({ ...targetDetails, beds: parseInt(e.target.value) || 1 })}
+                                />
+                              </div>
+
+                              <div>
+                                <label style={{ fontSize: "0.72rem", color: "var(--text-secondary)" }}>Piso / Altura</label>
+                                <input
+                                  type="number"
+                                  className="text-input"
+                                  style={{ fontSize: "0.8rem" }}
+                                  value={targetDetails.floor || 2}
+                                  onChange={(e) => setTargetDetails({ ...targetDetails, floor: parseInt(e.target.value) || 0 })}
+                                />
+                              </div>
+
+                              <div>
+                                <label style={{ fontSize: "0.72rem", color: "var(--text-secondary)" }}>Velocidad Internet (Mbps)</label>
+                                <input
+                                  type="number"
+                                  className="text-input"
+                                  style={{ fontSize: "0.8rem" }}
+                                  value={targetDetails.internet_speed || 100}
+                                  onChange={(e) => setTargetDetails({ ...targetDetails, internet_speed: parseInt(e.target.value) || 0 })}
+                                />
+                              </div>
+                            </div>
+
+                            {/* Boolean specs */}
+                            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "10px", marginTop: "5px" }}>
+                              {[
+                                { key: "has_elevator", label: "Tiene Elevador / Ascensor" },
+                                { key: "has_balcony", label: "Tiene Balcón" },
+                                { key: "has_parking", label: "Tiene Cochera incluida" },
+                                { key: "has_workspace", label: "Espacio de Trabajo Dedicado" }
+                              ].map(item => (
+                                <label key={item.key} style={{ display: "flex", alignItems: "center", gap: "8px", fontSize: "0.78rem", color: "var(--text-secondary)", cursor: "pointer" }}>
+                                  <input
+                                    type="checkbox"
+                                    checked={!!targetDetails[item.key]}
+                                    onChange={(e) => setTargetDetails({ ...targetDetails, [item.key]: e.target.checked })}
+                                    style={{ accentColor: "var(--accent-gold)" }}
+                                  />
+                                  {item.label}
+                                </label>
+                              ))}
+                            </div>
+
                           </div>
 
-                          {/* Save details button */}
-                          <div style={{ display: "flex", justifyContent: "flex-end", marginTop: "10px" }}>
-                            <button
-                              onClick={handleSaveTargetDetails}
-                              className="vercel-btn"
-                              style={{ width: "auto", padding: "10px 24px" }}
-                              disabled={savingTargetDetails}
-                            >
-                              {savingTargetDetails ? "Guardando Ficha..." : "Guardar Ficha de Amenities"}
-                            </button>
+                          {/* Right Column: Policies & Logistics */}
+                          <div style={{ display: "flex", flexDirection: "column", gap: "15px" }}>
+                            <h4 style={{ margin: 0, fontSize: "0.85rem", color: "var(--accent-gold)", borderBottom: "1px solid rgba(255,255,255,0.06)", paddingBottom: "6px" }}>
+                              Políticas, Reglas y Estadía
+                            </h4>
+
+                            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px" }}>
+                              <div>
+                                <label style={{ fontSize: "0.72rem", color: "var(--text-secondary)" }}>Mínimo de Noches</label>
+                                <input
+                                  type="number"
+                                  className="text-input"
+                                  style={{ fontSize: "0.8rem" }}
+                                  value={targetDetails.minimum_nights || 2}
+                                  onChange={(e) => setTargetDetails({ ...targetDetails, minimum_nights: parseInt(e.target.value) || 1 })}
+                                />
+                              </div>
+
+                              <div>
+                                <label style={{ fontSize: "0.72rem", color: "var(--text-secondary)" }}>Máximo de Noches</label>
+                                <input
+                                  type="number"
+                                  className="text-input"
+                                  style={{ fontSize: "0.8rem" }}
+                                  value={targetDetails.maximum_nights || 365}
+                                  onChange={(e) => setTargetDetails({ ...targetDetails, maximum_nights: parseInt(e.target.value) || 365 })}
+                                />
+                              </div>
+
+                              <div>
+                                <label style={{ fontSize: "0.72rem", color: "var(--text-secondary)" }}>Horario Check-in</label>
+                                <input
+                                  type="text"
+                                  className="text-input"
+                                  style={{ fontSize: "0.8rem" }}
+                                  value={targetDetails.check_in_time || "15:00"}
+                                  onChange={(e) => setTargetDetails({ ...targetDetails, check_in_time: e.target.value })}
+                                />
+                              </div>
+
+                              <div>
+                                <label style={{ fontSize: "0.72rem", color: "var(--text-secondary)" }}>Horario Check-out</label>
+                                <input
+                                  type="text"
+                                  className="text-input"
+                                  style={{ fontSize: "0.8rem" }}
+                                  value={targetDetails.check_out_time || "11:00"}
+                                  onChange={(e) => setTargetDetails({ ...targetDetails, check_out_time: e.target.value })}
+                                />
+                              </div>
+
+                              <div style={{ gridColumn: "span 2" }}>
+                                <label style={{ fontSize: "0.72rem", color: "var(--text-secondary)" }}>Política de Cancelación</label>
+                                <select
+                                  className="select-input"
+                                  style={{ width: "100%", fontSize: "0.8rem" }}
+                                  value={targetDetails.cancellation_policy || "moderate"}
+                                  onChange={(e) => setTargetDetails({ ...targetDetails, cancellation_policy: e.target.value })}
+                                >
+                                  <option value="flexible">Flexible (Reembolso completo 24h antes)</option>
+                                  <option value="moderate">Moderada (Reembolso completo 5 días antes)</option>
+                                  <option value="strict">Estricta (50% reembolso hasta 1 semana antes)</option>
+                                </select>
+                              </div>
+                            </div>
+
+                            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "10px", marginTop: "5px" }}>
+                              {[
+                                { key: "pets_allowed", label: "Se aceptan Mascotas" },
+                                { key: "smoking_allowed", label: "Se permite Fumar" },
+                                { key: "children_allowed", label: "Apto para Niños" }
+                              ].map(item => (
+                                <label key={item.key} style={{ display: "flex", alignItems: "center", gap: "8px", fontSize: "0.78rem", color: "var(--text-secondary)", cursor: "pointer" }}>
+                                  <input
+                                    type="checkbox"
+                                    checked={!!targetDetails[item.key]}
+                                    onChange={(e) => setTargetDetails({ ...targetDetails, [item.key]: e.target.checked })}
+                                    style={{ accentColor: "var(--accent-gold)" }}
+                                  />
+                                  {item.label}
+                                </label>
+                              ))}
+                            </div>
+
                           </div>
 
                         </div>
                       ) : (
                         <div style={{ color: "var(--text-secondary)", fontSize: "0.8rem", fontStyle: "italic", textAlign: "center", padding: "20px" }}>
-                          Configura la URL de tu propiedad arriba para ver y editar la ficha técnica de amenities.
+                          Configura la URL de tu propiedad en la pestaña CONFIGURACIÓN DE PROPIEDAD para ver y editar la base de datos de características.
+                        </div>
+                      )}
+
+                    </div>
+
+                  </div>
+                );
+
+              case "location":
+                return (
+                  <div className="view-fade-in" style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
+                    
+                    {/* Location fields card */}
+                    <div className="glass-card">
+                      <h3 style={{ margin: "0 0 15px 0" }}>Ubicación Geográfica y Fotos</h3>
+                      {targetDetails ? (
+                        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "20px" }}>
+                          <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+                            <div>
+                              <label style={{ fontSize: "0.72rem", color: "var(--text-secondary)" }}>Latitud</label>
+                              <input
+                                type="number"
+                                step="0.000001"
+                                className="text-input"
+                                value={targetDetails.latitude !== undefined ? targetDetails.latitude : -34.5861}
+                                onChange={(e) => setTargetDetails({ ...targetDetails, latitude: parseFloat(e.target.value) || -34.5861 })}
+                              />
+                            </div>
+                            <div>
+                              <label style={{ fontSize: "0.72rem", color: "var(--text-secondary)" }}>Longitud</label>
+                              <input
+                                type="number"
+                                step="0.000001"
+                                className="text-input"
+                                value={targetDetails.longitude !== undefined ? targetDetails.longitude : -58.4373}
+                                onChange={(e) => setTargetDetails({ ...targetDetails, longitude: parseFloat(e.target.value) || -58.4373 })}
+                              />
+                            </div>
+                            <div>
+                              <label style={{ fontSize: "0.72rem", color: "var(--text-secondary)" }}>URL de la Foto de Portada</label>
+                              <input
+                                type="text"
+                                className="text-input"
+                                value={targetDetails.picture_url || ""}
+                                onChange={(e) => setTargetDetails({ ...targetDetails, picture_url: e.target.value })}
+                              />
+                            </div>
+                          </div>
+                          <div style={{ display: "flex", flexDirection: "column" }}>
+                            <span style={{ fontSize: "0.72rem", color: "var(--text-secondary)", marginBottom: "6px" }}>Vista Previa en Mapa</span>
+                            <div style={{ width: "100%", height: "200px", borderRadius: "8px", overflow: "hidden", border: "1px solid var(--card-border)" }}>
+                              <LeafletMap
+                                listings={listings}
+                                center={[targetDetails.latitude || -34.5861, targetDetails.longitude || -58.4373]}
+                                targetListingId={targetDetails.listing_id}
+                                selectedListingId={selectedId}
+                              />
+                            </div>
+                          </div>
+                        </div>
+                      ) : (
+                        <div style={{ color: "var(--text-secondary)", fontSize: "0.8rem", fontStyle: "italic", textAlign: "center" }}>
+                          Configura la URL de tu propiedad para ver y editar la ubicación.
                         </div>
                       )}
                     </div>
 
+                  </div>
+                );
+
+              case "pricing_rules":
+                return (
+                  <div className="view-fade-in" style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
+                    
                     {/* Multipliers & Rules */}
                     <div className="glass-card">
                       <h3 style={{ margin: "0 0 15px 0" }}>Ajustes del Motor de Precios y Reglas</h3>
@@ -1675,6 +2009,163 @@ POR ESTADÍA (${stayN} noches):
                           Ejecutar Ingesta Manual (Scraper)
                         </button>
                       </div>
+                    </div>
+
+                  </div>
+                );
+
+              case "competitor_engine":
+                return (
+                  <div className="view-fade-in" style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
+                    
+                    {/* Target Property Configuration */}
+                    <div className="glass-card">
+                      <h3 style={{ margin: "0 0 15px 0" }}>Configuración de Propiedad Objetivo</h3>
+                      <form onSubmit={handleConfigureTargetUrl} style={{ display: "flex", gap: "10px", alignItems: "center" }}>
+                        <input
+                          type="text"
+                          className="text-input"
+                          style={{ marginBottom: 0, flex: 1, padding: "8px 12px", borderRadius: "6px" }}
+                          placeholder="Ingresa la URL de la propiedad de Airbnb que deseas monitorear..."
+                          value={targetUrlInput}
+                          onChange={(e) => setTargetUrlInput(e.target.value)}
+                        />
+                        <button
+                          type="submit"
+                          className="vercel-btn"
+                          disabled={resolvingTarget}
+                          style={{ padding: "9px 18px", fontSize: "0.8rem", flexShrink: 0 }}
+                        >
+                          {resolvingTarget ? "Resolviendo..." : "Configurar"}
+                        </button>
+                      </form>
+                      <p style={{ margin: "6px 0 0 0", fontSize: "0.72rem", color: "var(--text-secondary)" }}>
+                        Ejemplo: https://www.airbnb.com.ar/rooms/1126744888258385312
+                      </p>
+                    </div>
+
+                    {/* KNN thresholds explanation */}
+                    <div className="glass-card">
+                      <h3 style={{ margin: "0 0 10px 0" }}>Límites y Reglas KNN</h3>
+                      <p style={{ fontSize: "0.8rem", color: "var(--text-secondary)", lineHeight: "1.5" }}>
+                        La watchlist de competidores directos se calcula aplicando una métrica de distancia euclidiana ponderada:<br/>
+                        • <strong>Distancia Geográfica (Haversine):</strong> 35% de peso (radio límite de 5km).<br/>
+                        • <strong>Coincidencia de Amenities:</strong> 35% de peso (Piscina, Gimnasio, Jacuzzi, Cochera, Aire acondicionado).<br/>
+                        • <strong>Capacidad de Huéspedes:</strong> 20% de peso (máximo +/- 2 huéspedes de diferencia).<br/>
+                        • <strong>Cantidad de Baños:</strong> 10% de peso.<br/>
+                        • <strong>Hard Constraint:</strong> Mismo número exacto de dormitorios.
+                      </p>
+                    </div>
+
+                  </div>
+                );
+
+              case "historicos":
+                return (
+                  <div className="view-fade-in" style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
+                    
+                    {/* Snapshot Picker */}
+                    <div className="glass-card">
+                      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "10px" }}>
+                        <div>
+                          <h3 style={{ margin: 0 }}>Análisis Histórico de Snapshots</h3>
+                          <p style={{ margin: 0, fontSize: "0.8rem", color: "var(--text-secondary)" }}>Compara cualquier fecha guardada en el histórico de raspado para ver la evolución del mercado.</p>
+                        </div>
+                        {marketHistory.length > 0 && (
+                          <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+                            <span style={{ fontSize: "0.75rem", color: "var(--text-secondary)" }}>Ver histórico desde:</span>
+                            <select
+                              className="select-input"
+                              style={{ width: "160px", marginBottom: 0, padding: "5px 10px", borderRadius: "6px", fontSize: "0.78rem" }}
+                              value={historyCompareDate}
+                              onChange={(e) => setHistoryCompareDate(e.target.value)}
+                            >
+                              {marketHistory.map(h => (
+                                <option key={h.date} value={h.date}>{h.date}</option>
+                              ))}
+                            </select>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+
+                    {/* Historical Comparison Charts */}
+                    <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "20px" }}>
+                      
+                      <div className="glass-card" style={{ margin: 0 }}>
+                        <h4 style={{ margin: "0 0 10px 0", fontSize: "0.85rem", color: "#fff" }}>Evolución del Precio Promedio del Mercado</h4>
+                        <ResponsiveContainer width="100%" height={200}>
+                          <LineChart data={marketHistory}>
+                            <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.03)" />
+                            <XAxis dataKey="date" stroke="#64748b" fontSize={9} />
+                            <YAxis stroke="#64748b" fontSize={9} />
+                            <RechartsTooltip />
+                            <Line type="monotone" dataKey="avg_price" stroke="var(--accent-gold)" strokeWidth={2} name="Precio Promedio (USD)" dot={false} />
+                          </LineChart>
+                        </ResponsiveContainer>
+                      </div>
+
+                      <div className="glass-card" style={{ margin: 0 }}>
+                        <h4 style={{ margin: "0 0 10px 0", fontSize: "0.85rem", color: "#fff" }}>Evolución del Volumen de Listados Activos</h4>
+                        <ResponsiveContainer width="100%" height={200}>
+                          <LineChart data={marketHistory}>
+                            <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.03)" />
+                            <XAxis dataKey="date" stroke="#64748b" fontSize={9} />
+                            <YAxis stroke="#64748b" fontSize={9} />
+                            <RechartsTooltip />
+                            <Line type="monotone" dataKey="active_listings" stroke="var(--accent-cyan)" strokeWidth={2} name="Listados Activos" dot={false} />
+                          </LineChart>
+                        </ResponsiveContainer>
+                      </div>
+
+                    </div>
+
+                  </div>
+                );
+
+              case "alertas":
+                return (
+                  <div className="view-fade-in" style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
+                    
+                    {/* Header */}
+                    <div className="glass-card">
+                      <h3 style={{ margin: 0 }}>Feed Cronológico de Alertas de Mercado</h3>
+                      <p style={{ margin: 0, fontSize: "0.8rem", color: "var(--text-secondary)" }}>Eventos importantes detectados automáticamente en las últimas 48 horas en el segmento de tu propiedad.</p>
+                    </div>
+
+                    {/* Alerts list */}
+                    <div style={{ display: "flex", flexDirection: "column", gap: "15px" }}>
+                      
+                      <div className="glass-card" style={{ margin: 0, borderLeft: "4px solid #ef4444", padding: "16px 20px" }}>
+                        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "6px" }}>
+                          <strong style={{ color: "#fff", fontSize: "0.85rem" }}>Precio Fuera de Rango (Sobreprecio)</strong>
+                          <span style={{ fontSize: "0.7rem", color: "var(--text-secondary)" }}>Hace 3 horas</span>
+                        </div>
+                        <p style={{ margin: 0, fontSize: "0.8rem", color: "var(--text-secondary)" }}>
+                          Tu tarifa actual publicada de $110 USD está un <strong>18% por encima</strong> del promedio de competidores directos con ocupación para la semana que viene. Conviene ajustar la tarifa a la baja.
+                        </p>
+                      </div>
+
+                      <div className="glass-card" style={{ margin: 0, borderLeft: "4px solid var(--accent-gold)", padding: "16px 20px" }}>
+                        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "6px" }}>
+                          <strong style={{ color: "#fff", fontSize: "0.85rem" }}>Nuevos Competidores Publicados</strong>
+                          <span style={{ fontSize: "0.7rem", color: "var(--text-secondary)" }}>Ayer, 18:24</span>
+                        </div>
+                        <p style={{ margin: 0, fontSize: "0.8rem", color: "var(--text-secondary)" }}>
+                          Se publicaron <strong>2 nuevos competidores</strong> directos de 1 dormitorio en un radio de 500 metros en Palermo Hollywood. Uno de ellos ofrece cochera y se posicionó a tarifa de penetración agresiva ($82 USD).
+                        </p>
+                      </div>
+
+                      <div className="glass-card" style={{ margin: 0, borderLeft: "4px solid #10b981", padding: "16px 20px" }}>
+                        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "6px" }}>
+                          <strong style={{ color: "#fff", fontSize: "0.85rem" }}>Alerta de Alta Demanda (Pico de Ocupación)</strong>
+                          <span style={{ fontSize: "0.7rem", color: "var(--text-secondary)" }}>Hace 1 día</span>
+                        </div>
+                        <p style={{ margin: 0, fontSize: "0.8rem", color: "var(--text-secondary)" }}>
+                          La ocupación general de Palermo subió un 12% para el fin de semana del 24 de Julio. Tu competidor directo <em>Palermo Soho Loft</em> se quedó sin disponibilidad, lo que abre una ventana para subir tus tarifas de fin de semana un 10%.
+                        </p>
+                      </div>
+
                     </div>
 
                   </div>
