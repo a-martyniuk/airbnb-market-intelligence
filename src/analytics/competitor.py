@@ -75,6 +75,12 @@ class CompetitorAnalyzer:
             if row['listing_id'] == target_listing_id:
                 continue # Skip self
 
+            # Filter out listings that are too different
+            if abs(target['bedrooms'] - row['bedrooms']) > 1:
+                continue # Max difference of 1 bedroom
+            if abs(target['accommodates'] - row['accommodates']) > 2:
+                continue # Max difference of 2 guests capacity
+
             # 1. Geo distance (km)
             geo_dist = self._haversine_distance(
                 target['latitude'], target['longitude'],
