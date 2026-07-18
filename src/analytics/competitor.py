@@ -51,7 +51,17 @@ class CompetitorAnalyzer:
         SELECT l.*, 
                COALESCE(ld.price, 0.0) as price, 
                COALESCE(ld.estimated_occupancy_rate_30d, 0.0) as estimated_occupancy_rate_30d,
-               COALESCE(ld.snapshot_date, 'Nunca') as last_scraped
+               COALESCE(ld.snapshot_date, 'Nunca') as last_scraped,
+               ld.weekend_price,
+               ld.weekly_discount,
+               ld.monthly_discount,
+               ld.early_bird_discount,
+               ld.last_minute_discount,
+               ld.cleaning_fee,
+               ld.minimum_stay,
+               ld.maximum_stay,
+               ld.instant_book,
+               ld.cancellation_policy
         FROM listings l
         LEFT JOIN listings_daily ld ON l.listing_id = ld.listing_id
           AND ld.snapshot_date = (SELECT MAX(snapshot_date) FROM listings_daily WHERE listing_id = l.listing_id)
@@ -145,7 +155,17 @@ class CompetitorAnalyzer:
                 "price": float(row['price']),
                 "estimated_occupancy_rate_30d": round(float(row['estimated_occupancy_rate_30d']) * 100, 1),
                 "last_scraped": row['last_scraped'],
-                "picture_url": str(row['picture_url']) if pd.notna(row.get('picture_url')) else None
+                "picture_url": str(row['picture_url']) if pd.notna(row.get('picture_url')) else None,
+                "weekend_price": float(row['weekend_price']) if pd.notna(row.get('weekend_price')) else None,
+                "weekly_discount": float(row['weekly_discount']) if pd.notna(row.get('weekly_discount')) else None,
+                "monthly_discount": float(row['monthly_discount']) if pd.notna(row.get('monthly_discount')) else None,
+                "early_bird_discount": float(row['early_bird_discount']) if pd.notna(row.get('early_bird_discount')) else None,
+                "last_minute_discount": float(row['last_minute_discount']) if pd.notna(row.get('last_minute_discount')) else None,
+                "cleaning_fee": float(row['cleaning_fee']) if pd.notna(row.get('cleaning_fee')) else None,
+                "minimum_stay": int(row['minimum_stay']) if pd.notna(row.get('minimum_stay')) else None,
+                "maximum_stay": int(row['maximum_stay']) if pd.notna(row.get('maximum_stay')) else None,
+                "instant_book": bool(row['instant_book']) if pd.notna(row.get('instant_book')) and row.get('instant_book') is not None else None,
+                "cancellation_policy": str(row['cancellation_policy']) if pd.notna(row.get('cancellation_policy')) else None
             })
 
         # Sort by similarity score ascending

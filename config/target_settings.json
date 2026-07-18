@@ -62,5 +62,7 @@
     "minimum_nights": 3,
     "floor": 1,
     "cancellation_policy": "flexible"
-  }
+  },
+  "pricing_overrides": {},
+  "manual_override_flags": {}
 }

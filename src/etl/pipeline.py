@@ -160,21 +160,42 @@ class ETLPipeline:
                 # 5. Insert daily listing stats snapshot
                 cursor.execute("""
                 INSERT INTO listings_daily (
-                    snapshot_date, listing_id, price, rating, reviews_count, estimated_occupancy_rate_30d
-                ) VALUES (?, ?, ?, ?, ?, ?)
+                    snapshot_date, listing_id, price, rating, reviews_count, estimated_occupancy_rate_30d,
+                    weekend_price, weekly_discount, monthly_discount, early_bird_discount, last_minute_discount,
+                    cleaning_fee, minimum_stay, maximum_stay, instant_book, cancellation_policy
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                 ON CONFLICT(snapshot_date, listing_id) DO UPDATE SET
                     price=excluded.price,
                     rating=excluded.rating,
                     reviews_count=excluded.reviews_count,
-                    estimated_occupancy_rate_30d=excluded.estimated_occupancy_rate_30d
+                    estimated_occupancy_rate_30d=excluded.estimated_occupancy_rate_30d,
+                    weekend_price=excluded.weekend_price,
+                    weekly_discount=excluded.weekly_discount,
+                    monthly_discount=excluded.monthly_discount,
+                    early_bird_discount=excluded.early_bird_discount,
+                    last_minute_discount=excluded.last_minute_discount,
+                    cleaning_fee=excluded.cleaning_fee,
+                    minimum_stay=excluded.minimum_stay,
+                    maximum_stay=excluded.maximum_stay,
+                    instant_book=excluded.instant_book,
+                    cancellation_policy=excluded.cancellation_policy
                 """, (
                     target_date_str,
                     listing_id,
-                    # We store today's listing baseline price (e.g. from the first calendar entry or details)
                     calendar_data[0]["price"] if calendar_data else 0.0,
                     listing_data.get("rating"),
                     listing_data.get("reviews_count"),
-                    occupancy_rate
+                    occupancy_rate,
+                    listing_data.get("weekend_price"),
+                    listing_data.get("weekly_discount"),
+                    listing_data.get("monthly_discount"),
+                    listing_data.get("early_bird_discount"),
+                    listing_data.get("last_minute_discount"),
+                    listing_data.get("cleaning_fee"),
+                    listing_data.get("minimum_stay"),
+                    listing_data.get("maximum_stay"),
+                    listing_data.get("instant_book"),
+                    listing_data.get("cancellation_policy")
                 ))
 
             conn.commit()

@@ -29,6 +29,65 @@ class DynamicPricingModel:
         self.model = None
         self.is_trained = False
 
+    def _resolve_pricing_value(self, listing_id: str, field_key: str, default_val: Any, db_path: str) -> Any:
+        import os
+        # Priority 1: Scraped value (from listings_daily)
+        scraped_val = None
+        conn = get_connection(db_path)
+        try:
+            cursor = conn.cursor()
+            db_col = field_key if field_key != "weekend_multiplier" else "weekend_price"
+            # Fetch the latest daily snapshot for this listing
+            cursor.execute(f"""
+            SELECT {db_col}, price, weekend_price FROM listings_daily
+            WHERE listing_id = ?
+            ORDER BY snapshot_date DESC LIMIT 1
+            """, (listing_id,))
+            row = cursor.fetchone()
+            if row:
+                if field_key == "weekend_multiplier":
+                    if row["weekend_price"] is not None and row["price"] is not None and row["price"] > 0:
+                        scraped_val = round(row["weekend_price"] / row["price"], 2)
+                else:
+                    scraped_val = row[db_col]
+        except Exception as e:
+            logger.error(f"Error fetching scraped value {field_key} for {listing_id}: {str(e)}")
+        finally:
+            conn.close()
+
+        # If it's the target listing, check for manual overrides
+        target_settings_file = "config/target_settings.json"
+        is_target = False
+        pricing_overrides = {}
+        manual_override_flags = {}
+        if os.path.exists(target_settings_file):
+            try:
+                with open(target_settings_file, "r", encoding="utf-8") as f:
+                    t_settings = json.load(f)
+                    if str(t_settings.get("target_id")) == str(listing_id):
+                        is_target = True
+                        pricing_overrides = t_settings.get("pricing_overrides", {})
+                        manual_override_flags = t_settings.get("manual_override_flags", {})
+            except Exception:
+                pass
+
+        if is_target:
+            flag = bool(manual_override_flags.get(field_key, False))
+            manual_val = pricing_overrides.get(field_key)
+            if flag:
+                return manual_val if manual_val is not None else default_val
+            elif scraped_val is not None:
+                return scraped_val
+            elif manual_val is not None:
+                return manual_val
+            else:
+                return default_val
+        else:
+            if scraped_val is not None:
+                return scraped_val
+            else:
+                return default_val
+
     def train_model(self, db_path: str = "data/airbnb_intelligence.db") -> bool:
         """
         Loads historical snapshot data from the database and trains the ML Pricing Model.
@@ -313,12 +372,22 @@ class DynamicPricingModel:
             base_optimized_price = base_ml_price
 
 
+        # Resolve pricing variables using priority chain
+        resolved_weekend_multiplier = self._resolve_pricing_value(listing_id, "weekend_multiplier", self.config.get('weekend_premium', 1.15), db_path)
+        resolved_cleaning_fee = self._resolve_pricing_value(listing_id, "cleaning_fee", self.config.get('cleaning_fee', 15.0), db_path)
+        resolved_minimum_stay = self._resolve_pricing_value(listing_id, "minimum_stay", self.config.get('average_stay_days', 3), db_path)
+        resolved_maximum_stay = self._resolve_pricing_value(listing_id, "maximum_stay", 365, db_path)
+        resolved_weekly_discount = self._resolve_pricing_value(listing_id, "weekly_discount", 0.0, db_path)
+        resolved_monthly_discount = self._resolve_pricing_value(listing_id, "monthly_discount", 0.0, db_path)
+        resolved_early_bird_discount = self._resolve_pricing_value(listing_id, "early_bird_discount", 0.0, db_path)
+        resolved_last_minute_discount = self._resolve_pricing_value(listing_id, "last_minute_discount", self.config.get('last_minute_discount', 0.85), db_path)
+
         # Apply Dynamic Rule Overlays on top of the mathematically optimized base price
         recommended_price = base_optimized_price
         
         # Rule 1: Weekend Premium
         if is_weekend:
-            recommended_price *= self.config.get('weekend_premium', 1.15)
+            recommended_price *= resolved_weekend_multiplier
             
         # Rule 2: Seasonality
         if month in self.config.get('high_season_months', []):
@@ -333,7 +402,8 @@ class DynamicPricingModel:
         # Rule 3: Last-Minute Discount (Apply if lead time is short and listing occupancy is low)
         last_minute_days = self.config.get('last_minute_discount_days', 3)
         if 0 <= lead_time <= last_minute_days and current_occupancy < 0.4:
-            recommended_price *= self.config.get('last_minute_discount', 0.85)
+            lm_factor = (100.0 - resolved_last_minute_discount) / 100.0 if resolved_last_minute_discount > 1 else resolved_last_minute_discount
+            recommended_price *= lm_factor
 
         # Rule 4: Competitor Anchoring & Hard Boundaries
         if comp_avg_price:
@@ -368,7 +438,15 @@ class DynamicPricingModel:
             "is_low_season": bool(month in self.config.get('low_season_months', [])),
             "current_occupancy_rate": round(current_occupancy, 2),
             "is_holiday": bool(is_holiday),
-            "holiday_name": holiday_name
+            "holiday_name": holiday_name,
+            "cleaning_fee": resolved_cleaning_fee,
+            "weekly_discount": resolved_weekly_discount,
+            "monthly_discount": resolved_monthly_discount,
+            "early_bird_discount": resolved_early_bird_discount,
+            "last_minute_discount": resolved_last_minute_discount,
+            "weekend_multiplier": resolved_weekend_multiplier,
+            "minimum_stay": resolved_minimum_stay,
+            "maximum_stay": resolved_maximum_stay
         }
 
         return recommended_price, confidence_score, features_used

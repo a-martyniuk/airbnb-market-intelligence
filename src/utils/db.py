@@ -138,6 +138,26 @@ def init_db(db_path="data/airbnb_intelligence.db"):
         cursor.execute("ALTER TABLE listings ADD COLUMN picture_url TEXT;")
         logger.info("Migrated listings table: added 'picture_url' column.")
 
+    # Safe schema migration for new pricing columns in listings_daily
+    cursor.execute("PRAGMA table_info(listings_daily);")
+    daily_columns = [row[1] for row in cursor.fetchall()]
+    new_daily_cols = {
+        "weekend_price": "REAL",
+        "weekly_discount": "REAL",
+        "monthly_discount": "REAL",
+        "early_bird_discount": "REAL",
+        "last_minute_discount": "REAL",
+        "cleaning_fee": "REAL",
+        "minimum_stay": "INTEGER",
+        "maximum_stay": "INTEGER",
+        "instant_book": "INTEGER",
+        "cancellation_policy": "TEXT"
+    }
+    for col_name, col_type in new_daily_cols.items():
+        if col_name not in daily_columns:
+            cursor.execute(f"ALTER TABLE listings_daily ADD COLUMN {col_name} {col_type};")
+            logger.info(f"Migrated listings_daily table: added '{col_name}' column.")
+
     conn.commit()
     conn.close()
     logger.info(f"Database initialized at {db_path}")

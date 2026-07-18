@@ -617,7 +617,9 @@ POR ESTADÍA (${stayN} noches):
           body: JSON.stringify({
             target_url: targetUrlInput,
             target_id: targetDetails.listing_id,
-            details: targetDetails
+            details: targetDetails,
+            pricing_overrides: targetDetails.pricing_overrides || {},
+            manual_override_flags: targetDetails.manual_override_flags || {}
           })
         });
         if (res.ok) {
@@ -2010,6 +2012,127 @@ POR ESTADÍA (${stayN} noches):
                       </div>
                     </div>
 
+                    {/* Property-Specific Override Rules */}
+                    {targetDetails && (
+                      <div className="glass-card" style={{ marginTop: "20px" }}>
+                        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "20px" }}>
+                          <div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
+                            <h3 style={{ margin: 0, textTransform: "none" }}>Estrategia Operativa y Reglas de Mi Propiedad</h3>
+                            <span style={{ fontSize: "0.72rem", color: "var(--text-secondary)" }}>
+                              Define los valores operativos de tu anuncio. Tienen prioridad los datos escrapeados directamente de Airbnb.
+                            </span>
+                          </div>
+                          <span style={{
+                            fontSize: "0.72rem",
+                            fontWeight: "500",
+                            color: autoSaveStatus === "saving" ? "var(--accent-gold)" : autoSaveStatus === "saved" ? "var(--accent-emerald)" : "var(--text-secondary)",
+                            backgroundColor: "rgba(255,255,255,0.02)",
+                            padding: "4px 10px",
+                            borderRadius: "6px",
+                            border: "1px solid var(--card-border)"
+                          }}>
+                            {autoSaveStatus === "saving" ? "Guardando..." : autoSaveStatus === "saved" ? "✓ Autoguardado activo" : "Sin guardar"}
+                          </span>
+                        </div>
+
+                        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "20px" }}>
+                          {[
+                            { key: "cleaning_fee", label: "Tasa de Limpieza (USD)", type: "number", step: "1" },
+                            { key: "weekend_multiplier", label: "Multiplicador de Fin de Semana (x)", type: "number", step: "0.05" },
+                            { key: "weekly_discount", label: "Descuento Semanal (%)", type: "number", step: "1" },
+                            { key: "monthly_discount", label: "Descuento Mensual (%)", type: "number", step: "1" },
+                            { key: "early_bird_discount", label: "Descuento Reserva Anticipada (%)", type: "number", step: "1" },
+                            { key: "last_minute_discount", label: "Descuento Último Minuto (%)", type: "number", step: "1" },
+                            { key: "minimum_stay", label: "Estadía Mínima (Noches)", type: "number", step: "1" },
+                            { key: "maximum_stay", label: "Estadía Máxima (Noches)", type: "number", step: "1" }
+                          ].map((item) => {
+                            const resolvedVal = targetDetails.pricing_resolved?.[item.key];
+                            const source = targetDetails.pricing_sources?.[item.key] || "Default Rule";
+                            const isForced = !!targetDetails.manual_override_flags?.[item.key];
+                            const isEditable = isForced || source !== "Scraped";
+                            const inputValue = targetDetails.pricing_overrides?.[item.key] ?? "";
+
+                            return (
+                              <div key={item.key} style={{
+                                padding: "16px",
+                                backgroundColor: "rgba(255,255,255,0.01)",
+                                border: "1px solid var(--card-border)",
+                                borderRadius: "8px",
+                                display: "flex",
+                                flexDirection: "column",
+                                gap: "10px"
+                              }}>
+                                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                                  <span style={{ fontSize: "0.8rem", fontWeight: "600", color: "#fff" }}>{item.label}</span>
+                                  {(() => {
+                                    let style = {
+                                      fontSize: "0.68rem",
+                                      padding: "2px 8px",
+                                      borderRadius: "4px",
+                                      fontWeight: "600",
+                                      display: "inline-flex",
+                                      alignItems: "center",
+                                      gap: "4px",
+                                      border: "1px solid"
+                                    };
+                                    if (source === "Scraped") {
+                                      style = { ...style, color: "var(--accent-emerald)", backgroundColor: "rgba(16,185,129,0.06)", borderColor: "rgba(16,185,129,0.15)" };
+                                      return <span style={style}>✓ Scraped</span>;
+                                    } else if (source === "Manual Override") {
+                                      style = { ...style, color: "var(--accent-gold)", backgroundColor: "rgba(212,175,55,0.06)", borderColor: "rgba(212,175,55,0.15)" };
+                                      return <span style={style}>✏ Manual Override</span>;
+                                    } else {
+                                      style = { ...style, color: "var(--text-secondary)", backgroundColor: "rgba(255,255,255,0.03)", borderColor: "rgba(255,255,255,0.08)" };
+                                      return <span style={style}>⚙ Default Rule</span>;
+                                    }
+                                  })()}
+                                </div>
+
+                                <div style={{ display: "flex", alignItems: "center", gap: "10px", fontSize: "0.75rem", color: "var(--text-secondary)" }}>
+                                  <span>Valor actual en uso:</span>
+                                  <strong style={{ color: "#fff", fontSize: "0.82rem" }}>
+                                    {resolvedVal !== null && resolvedVal !== undefined ? 
+                                      (item.key === "weekend_multiplier" ? `${resolvedVal}x` : 
+                                       item.key.includes("discount") ? `${resolvedVal}%` : 
+                                       item.key.includes("fee") ? `$${resolvedVal} USD` : `${resolvedVal} noches`) : 
+                                      "N/A"}
+                                  </strong>
+                                </div>
+
+                                <div style={{ display: "flex", alignItems: "center", gap: "12px", marginTop: "4px" }}>
+                                  <input
+                                    type={item.type}
+                                    step={item.step}
+                                    className="text-input"
+                                    style={{ marginBottom: 0, padding: "6px 10px", fontSize: "0.8rem", flex: 1, backgroundColor: isEditable ? "rgba(255,255,255,0.03)" : "rgba(255,255,255,0.01)", opacity: isEditable ? 1 : 0.5 }}
+                                    disabled={!isEditable}
+                                    placeholder={resolvedVal !== null && resolvedVal !== undefined ? String(resolvedVal) : "No configurado"}
+                                    value={inputValue}
+                                    onChange={(e) => {
+                                      const val = e.target.value === "" ? "" : parseFloat(e.target.value);
+                                      const pricing_overrides = { ...(targetDetails.pricing_overrides || {}), [item.key]: val };
+                                      setTargetDetails({ ...targetDetails, pricing_overrides });
+                                    }}
+                                  />
+                                  <label style={{ display: "flex", alignItems: "center", gap: "6px", cursor: "pointer", fontSize: "0.72rem", color: isForced ? "var(--accent-gold)" : "var(--text-secondary)" }}>
+                                    <input
+                                      type="checkbox"
+                                      checked={isForced}
+                                      onChange={(e) => {
+                                        const manual_override_flags = { ...(targetDetails.manual_override_flags || {}), [item.key]: e.target.checked };
+                                        setTargetDetails({ ...targetDetails, manual_override_flags });
+                                      }}
+                                    />
+                                    Forzar Manual
+                                  </label>
+                                </div>
+                              </div>
+                            );
+                          })}
+                        </div>
+                      </div>
+                    )}
+
                   </div>
                 );
 
@@ -2249,6 +2372,47 @@ POR ESTADÍA (${stayN} noches):
 
               <div>
                 <strong>Distribución Física:</strong> 👥 {selectedCompDetails.accommodates} Huéspedes • 🛏️ {selectedCompDetails.bedrooms} dorm. • 🚿 {selectedCompDetails.bathrooms} baños
+              </div>
+
+              <div style={{ background: "rgba(255,255,255,0.01)", border: "1px solid rgba(255,255,255,0.05)", borderRadius: "8px", padding: "12px 15px", display: "flex", flexDirection: "column", gap: "10px" }}>
+                <span style={{ fontSize: "0.75rem", display: "block", textTransform: "uppercase", fontWeight: "600", color: "#fff" }}>Configuración Tarifaria (Scraped)</span>
+                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "10px", fontSize: "0.78rem" }}>
+                  <div>
+                    <span style={{ color: "var(--text-secondary)", display: "block" }}>Precio Finde:</span>
+                    <strong style={{ color: "#fff" }}>{selectedCompDetails.weekend_price ? `$${selectedCompDetails.weekend_price} USD` : "N/D"}</strong>
+                  </div>
+                  <div>
+                    <span style={{ color: "var(--text-secondary)", display: "block" }}>Limpieza:</span>
+                    <strong style={{ color: "#fff" }}>{selectedCompDetails.cleaning_fee ? `$${selectedCompDetails.cleaning_fee} USD` : "N/E"}</strong>
+                  </div>
+                  <div>
+                    <span style={{ color: "var(--text-secondary)", display: "block" }}>Desc. Semanal:</span>
+                    <strong style={{ color: "#fff" }}>{selectedCompDetails.weekly_discount ? `${selectedCompDetails.weekly_discount}%` : "N/E"}</strong>
+                  </div>
+                  <div>
+                    <span style={{ color: "var(--text-secondary)", display: "block" }}>Desc. Mensual:</span>
+                    <strong style={{ color: "#fff" }}>{selectedCompDetails.monthly_discount ? `${selectedCompDetails.monthly_discount}%` : "N/E"}</strong>
+                  </div>
+                  <div>
+                    <span style={{ color: "var(--text-secondary)", display: "block" }}>Reserva Antic.:</span>
+                    <strong style={{ color: "#fff" }}>{selectedCompDetails.early_bird_discount ? `${selectedCompDetails.early_bird_discount}%` : "N/E"}</strong>
+                  </div>
+                  <div>
+                    <span style={{ color: "var(--text-secondary)", display: "block" }}>Último Minuto:</span>
+                    <strong style={{ color: "#fff" }}>{selectedCompDetails.last_minute_discount ? `${selectedCompDetails.last_minute_discount}%` : "N/E"}</strong>
+                  </div>
+                  <div>
+                    <span style={{ color: "var(--text-secondary)", display: "block" }}>Estadía Mínima:</span>
+                    <strong style={{ color: "#fff" }}>{selectedCompDetails.minimum_stay ? `${selectedCompDetails.minimum_stay} Noches` : "N/E"}</strong>
+                  </div>
+                  <div>
+                    <span style={{ color: "var(--text-secondary)", display: "block" }}>Pol. Cancelación:</span>
+                    <strong style={{ color: "#fff", fontSize: "0.7rem", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{selectedCompDetails.cancellation_policy || "N/E"}</strong>
+                  </div>
+                </div>
+                <div style={{ fontSize: "0.7rem", color: "var(--text-secondary)", borderTop: "1px solid rgba(255,255,255,0.04)", paddingTop: "6px" }}>
+                  <span>Reserva Inmediata: {selectedCompDetails.instant_book === true ? "Habilitado" : selectedCompDetails.instant_book === false ? "Deshabilitado" : "N/E"}</span>
+                </div>
               </div>
 
               <div>

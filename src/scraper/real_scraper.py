@@ -313,6 +313,72 @@ class RealAirbnbScraper(BaseAirbnbScraper):
                     est_price = max(45.0, min(est_price, 250.0))
                     self.listing_prices[str(listing_id)] = round(est_price, 2)
 
+            # Advanced pricing config extraction
+            instant_book = None
+            ib_match = re.search(r'"(?:is)?InstantBookable"\s*:\s*(true|false)', response.text, re.IGNORECASE)
+            if ib_match:
+                instant_book = 1 if ib_match.group(1).lower() == "true" else 0
+            
+            cancellation_policy = None
+            cp_match = re.search(r'"cancellationPolicyName"\s*:\s*"([^"]+)"', response.text, re.IGNORECASE) or \
+                       re.search(r'"cancellationPolicy"\s*:\s*"([^"]+)"', response.text, re.IGNORECASE)
+            if cp_match:
+                cancellation_policy = cp_match.group(1)
+
+            cleaning_fee = None
+            cf_match = re.search(r'"cleaningFee"\s*:\s*(\d+(?:\.\d+)?)', response.text, re.IGNORECASE) or \
+                       re.search(r'"cleaning_fee"\s*:\s*(\d+(?:\.\d+)?)', response.text, re.IGNORECASE)
+            if cf_match:
+                cleaning_fee = float(cf_match.group(1))
+
+            minimum_stay = None
+            min_match = re.search(r'"minNights"\s*:\s*(\d+)', response.text, re.IGNORECASE) or \
+                        re.search(r'"minimumNights"\s*:\s*(\d+)', response.text, re.IGNORECASE) or \
+                        re.search(r'"minimumStay"\s*:\s*(\d+)', response.text, re.IGNORECASE)
+            if min_match:
+                minimum_stay = int(min_match.group(1))
+
+            maximum_stay = None
+            max_match = re.search(r'"maxNights"\s*:\s*(\d+)', response.text, re.IGNORECASE) or \
+                        re.search(r'"maximumNights"\s*:\s*(\d+)', response.text, re.IGNORECASE) or \
+                        re.search(r'"maximumStay"\s*:\s*(\d+)', response.text, re.IGNORECASE)
+            if max_match:
+                maximum_stay = int(max_match.group(1))
+
+            weekly_discount = None
+            wd_match = re.search(r'"weeklyDiscountFactor"\s*:\s*(\d+(?:\.\d+)?)', response.text, re.IGNORECASE) or \
+                       re.search(r'"weekly_discount"\s*:\s*(\d+(?:\.\d+)?)', response.text, re.IGNORECASE)
+            if wd_match:
+                val = float(wd_match.group(1))
+                weekly_discount = val * 100 if val < 1 else val
+
+            monthly_discount = None
+            md_match = re.search(r'"monthlyDiscountFactor"\s*:\s*(\d+(?:\.\d+)?)', response.text, re.IGNORECASE) or \
+                       re.search(r'"monthly_discount"\s*:\s*(\d+(?:\.\d+)?)', response.text, re.IGNORECASE)
+            if md_match:
+                val = float(md_match.group(1))
+                monthly_discount = val * 100 if val < 1 else val
+
+            early_bird_discount = None
+            eb_match = re.search(r'"earlyBirdDiscountFactor"\s*:\s*(\d+(?:\.\d+)?)', response.text, re.IGNORECASE) or \
+                       re.search(r'"early_bird_discount"\s*:\s*(\d+(?:\.\d+)?)', response.text, re.IGNORECASE)
+            if eb_match:
+                val = float(eb_match.group(1))
+                early_bird_discount = val * 100 if val < 1 else val
+
+            last_minute_discount = None
+            lmd_match = re.search(r'"lastMinuteDiscountFactor"\s*:\s*(\d+(?:\.\d+)?)', response.text, re.IGNORECASE) or \
+                        re.search(r'"last_minute_discount"\s*:\s*(\d+(?:\.\d+)?)', response.text, re.IGNORECASE)
+            if lmd_match:
+                val = float(lmd_match.group(1))
+                last_minute_discount = val * 100 if val < 1 else val
+
+            weekend_price = None
+            we_match = re.search(r'"weekendPrice"\s*:\s*(\d+(?:\.\d+)?)', response.text, re.IGNORECASE) or \
+                       re.search(r'"weekend_price"\s*:\s*(\d+(?:\.\d+)?)', response.text, re.IGNORECASE)
+            if we_match:
+                weekend_price = float(we_match.group(1))
+
             return {
                 "listing_id": str(listing_id),
                 "title": title_text,
@@ -330,7 +396,17 @@ class RealAirbnbScraper(BaseAirbnbScraper):
                 "host_name": "Host",
                 "host_is_superhost": is_superhost,
                 "amenities": detected_amenities,
-                "picture_url": picture_url
+                "picture_url": picture_url,
+                "weekend_price": weekend_price,
+                "weekly_discount": weekly_discount,
+                "monthly_discount": monthly_discount,
+                "early_bird_discount": early_bird_discount,
+                "last_minute_discount": last_minute_discount,
+                "cleaning_fee": cleaning_fee,
+                "minimum_stay": minimum_stay,
+                "maximum_stay": maximum_stay,
+                "instant_book": instant_book,
+                "cancellation_policy": cancellation_policy
             }
         except Exception as e:
             logger.error(f"Error scraping real listing details: {str(e)}")

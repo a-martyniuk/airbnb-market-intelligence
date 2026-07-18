@@ -528,7 +528,9 @@ def get_listing_details(listing_id: str):
             raise HTTPException(status_code=404, detail="Listing not found")
             
         cursor.execute("""
-        SELECT price, estimated_occupancy_rate_30d 
+        SELECT price, estimated_occupancy_rate_30d,
+               weekend_price, weekly_discount, monthly_discount, early_bird_discount, last_minute_discount,
+               cleaning_fee, minimum_stay, maximum_stay, instant_book, cancellation_policy
         FROM listings_daily 
         WHERE listing_id = ? 
         ORDER BY snapshot_date DESC LIMIT 1
@@ -558,8 +560,18 @@ def get_listing_details(listing_id: str):
             "host_is_superhost": bool(listing["host_is_superhost"]),
             "amenities": json.loads(listing["amenities"]) if listing["amenities"] else [],
             "picture_url": listing["picture_url"] if "picture_url" in listing.keys() else None,
-            "price": daily[0] if daily else 0.0,
-            "estimated_occupancy_rate_30d": round(daily[1] * 100, 1) if daily else 0.0,
+            "price": daily["price"] if daily else 0.0,
+            "estimated_occupancy_rate_30d": round(daily["estimated_occupancy_rate_30d"] * 100, 1) if daily and daily["estimated_occupancy_rate_30d"] else 0.0,
+            "weekend_price": daily["weekend_price"] if daily else None,
+            "weekly_discount": daily["weekly_discount"] if daily else None,
+            "monthly_discount": daily["monthly_discount"] if daily else None,
+            "early_bird_discount": daily["early_bird_discount"] if daily else None,
+            "last_minute_discount": daily["last_minute_discount"] if daily else None,
+            "cleaning_fee": daily["cleaning_fee"] if daily else None,
+            "minimum_stay": daily["minimum_stay"] if daily else None,
+            "maximum_stay": daily["maximum_stay"] if daily else None,
+            "instant_book": bool(daily["instant_book"]) if daily and daily["instant_book"] is not None else None,
+            "cancellation_policy": daily["cancellation_policy"] if daily else None,
             "simulated_bookings_count": bookings[0] or 0,
             "simulated_revenue": round(bookings[1] or 0.0, 2)
         }
@@ -895,17 +907,130 @@ def execute_custom_query(payload: Dict[str, str]):
     finally:
         conn.close()
 
+def get_target_scraped_values(target_id: str) -> Dict[str, Any]:
+    scraped = {
+        "cleaning_fee": None,
+        "weekly_discount": None,
+        "monthly_discount": None,
+        "early_bird_discount": None,
+        "last_minute_discount": None,
+        "weekend_multiplier": None,
+        "minimum_stay": None,
+        "maximum_stay": None
+    }
+    if not target_id:
+        return scraped
+    conn = get_connection(DB_PATH)
+    try:
+        cursor = conn.cursor()
+        cursor.execute("""
+        SELECT price, weekend_price, weekly_discount, monthly_discount, early_bird_discount, last_minute_discount,
+               cleaning_fee, minimum_stay, maximum_stay
+        FROM listings_daily
+        WHERE listing_id = ?
+        ORDER BY snapshot_date DESC LIMIT 1
+        """, (target_id,))
+        row = cursor.fetchone()
+        if row:
+            scraped["cleaning_fee"] = row["cleaning_fee"]
+            scraped["weekly_discount"] = row["weekly_discount"]
+            scraped["monthly_discount"] = row["monthly_discount"]
+            scraped["early_bird_discount"] = row["early_bird_discount"]
+            scraped["last_minute_discount"] = row["last_minute_discount"]
+            scraped["minimum_stay"] = row["minimum_stay"]
+            scraped["maximum_stay"] = row["maximum_stay"]
+            
+            if row["weekend_price"] is not None and row["price"] is not None and row["price"] > 0:
+                scraped["weekend_multiplier"] = round(row["weekend_price"] / row["price"], 2)
+            else:
+                scraped["weekend_multiplier"] = None
+    except Exception as e:
+        logger.error(f"Error fetching target scraped values: {str(e)}")
+    finally:
+        conn.close()
+    return scraped
+
+def get_default_pricing_rules() -> Dict[str, Any]:
+    try:
+        with open("config/settings.yaml", "r", encoding="utf-8") as f:
+            settings = yaml.safe_load(f)
+        pricing_model = settings.get("pricing_model", {})
+    except Exception:
+        pricing_model = {}
+        
+    lm_factor = pricing_model.get("last_minute_discount", 0.85)
+    lm_discount = round((1 - lm_factor) * 100, 1) if lm_factor < 1 else 0.0
+    
+    return {
+        "cleaning_fee": pricing_model.get("cleaning_fee", 15.0),
+        "weekly_discount": 0.0,
+        "monthly_discount": 0.0,
+        "early_bird_discount": 0.0,
+        "last_minute_discount": lm_discount,
+        "weekend_multiplier": pricing_model.get("weekend_premium", 1.15),
+        "minimum_stay": pricing_model.get("average_stay_days", 3),
+        "maximum_stay": 365.0
+    }
+
+def resolve_pricing_configuration(target_id: str, settings_data: Dict[str, Any]) -> Dict[str, Any]:
+    scraped = get_target_scraped_values(target_id)
+    defaults = get_default_pricing_rules()
+    
+    pricing_overrides = settings_data.get("pricing_overrides", {})
+    manual_override_flags = settings_data.get("manual_override_flags", {})
+    
+    resolved = {}
+    sources = {}
+    
+    keys = ["cleaning_fee", "weekly_discount", "monthly_discount", "early_bird_discount", "last_minute_discount", "weekend_multiplier", "minimum_stay", "maximum_stay"]
+    
+    for k in keys:
+        scraped_val = scraped.get(k)
+        manual_val = pricing_overrides.get(k)
+        flag = bool(manual_override_flags.get(k, False))
+        default_val = defaults.get(k)
+        
+        if flag:
+            val = manual_val if manual_val is not None else default_val
+            src = "Manual Override"
+        elif scraped_val is not None:
+            val = scraped_val
+            src = "Scraped"
+        elif manual_val is not None:
+            val = manual_val
+            src = "Manual Override"
+        else:
+            val = default_val
+            src = "Default Rule"
+            
+        resolved[k] = val
+        sources[k] = src
+        
+    return {
+        "pricing_overrides": pricing_overrides,
+        "manual_override_flags": manual_override_flags,
+        "pricing_scraped": scraped,
+        "pricing_defaults": defaults,
+        "pricing_resolved": resolved,
+        "pricing_sources": sources
+    }
+
 # Settings endpoints for target listing
 @app.get("/api/settings/target")
 def get_target_listing_settings():
     settings_file = "config/target_settings.json"
+    settings_data = {"target_url": "", "target_id": "", "details": None}
     if os.path.exists(settings_file):
         with open(settings_file, "r", encoding="utf-8") as f:
             try:
-                return json.load(f)
+                settings_data = json.load(f)
             except Exception:
                 pass
-    return {"target_url": "", "target_id": "", "details": None}
+    
+    target_id = settings_data.get("target_id")
+    resolved_info = resolve_pricing_configuration(target_id, settings_data)
+    settings_data.update(resolved_info)
+    return settings_data
 
 @app.post("/api/settings/target/resolve")
 def resolve_target_listing_url(payload: Dict[str, str]):
@@ -1106,11 +1231,31 @@ def save_target_listing_settings(payload: Dict[str, Any], background_tasks: Back
     settings_file = "config/target_settings.json"
     os.makedirs(os.path.dirname(settings_file), exist_ok=True)
     
+    pricing_overrides = payload.get("pricing_overrides")
+    manual_override_flags = payload.get("manual_override_flags")
+    
+    # Preserve existing overrides/flags if not passed in payload but exist in file
+    if pricing_overrides is None or manual_override_flags is None:
+        if os.path.exists(settings_file):
+            try:
+                with open(settings_file, "r", encoding="utf-8") as f:
+                    old_data = json.load(f)
+                    if pricing_overrides is None:
+                        pricing_overrides = old_data.get("pricing_overrides", {})
+                    if manual_override_flags is None:
+                        manual_override_flags = old_data.get("manual_override_flags", {})
+            except Exception:
+                pass
+    if pricing_overrides is None: pricing_overrides = {}
+    if manual_override_flags is None: manual_override_flags = {}
+
     with open(settings_file, "w", encoding="utf-8") as f:
         json.dump({
             "target_url": url,
             "target_id": listing_id,
-            "details": details
+            "details": details,
+            "pricing_overrides": pricing_overrides,
+            "manual_override_flags": manual_override_flags
         }, f, indent=2, ensure_ascii=False)
         
     conn = get_connection(DB_PATH)
