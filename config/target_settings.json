@@ -58,6 +58,9 @@
     "fee_structure": "split",
     "monthly_discount": 22,
     "has_elevator": true,
-    "picture_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-1716762976739155303/original/64ae60a4-d0bf-4430-bcfb-e835345d0e2e.jpeg?im_w=1200"
+    "picture_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-1716762976739155303/original/64ae60a4-d0bf-4430-bcfb-e835345d0e2e.jpeg?im_w=1200",
+    "minimum_nights": 3,
+    "floor": 1,
+    "cancellation_policy": "flexible"
   }
 }
