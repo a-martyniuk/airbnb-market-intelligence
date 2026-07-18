@@ -75,11 +75,17 @@ class CompetitorAnalyzer:
             if row['listing_id'] == target_listing_id:
                 continue # Skip self
 
-            # Filter out listings that are too different
-            if abs(target['bedrooms'] - row['bedrooms']) > 1:
-                continue # Max difference of 1 bedroom
-            if abs(target['accommodates'] - row['accommodates']) > 2:
-                continue # Max difference of 2 guests capacity
+            # Direct Competitor Hard Filters:
+            # 1. Exact bedroom match
+            if row['bedrooms'] != target['bedrooms']:
+                continue
+            # 2. Tight capacity match (max 1 guest difference)
+            if abs(target['accommodates'] - row['accommodates']) > 1:
+                continue
+            # 3. Realistic price range (+60% / -40% of target base price)
+            target_base_price = target['price'] if target['price'] else 90.0
+            if not (0.6 * target_base_price <= row['price'] <= 1.6 * target_base_price):
+                continue
 
             # 1. Geo distance (km)
             geo_dist = self._haversine_distance(
