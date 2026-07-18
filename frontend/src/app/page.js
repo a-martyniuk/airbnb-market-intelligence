@@ -910,7 +910,7 @@ POR ESTADÍA (${stayN} noches):
                         <div style={{ fontSize: "1.4rem", fontWeight: "bold", margin: "6px 0", color: "#fff" }}>
                           ${Math.round(recommendedToday)} USD
                         </div>
-                        <span style={{ fontSize: "0.72rem", color: "var(--accent-emerald)" }}>
+                        <span style={{ fontSize: "0.72rem", color: priceDeltaPct > 0 ? "var(--accent-emerald)" : priceDeltaPct < 0 ? "var(--accent-coral)" : "var(--text-secondary)" }}>
                           {priceDeltaPct >= 0 ? "+" : ""}{priceDeltaPct}% vs actual
                         </span>
                       </div>
@@ -920,7 +920,7 @@ POR ESTADÍA (${stayN} noches):
                         <div style={{ fontSize: "1.4rem", fontWeight: "bold", margin: "6px 0", color: "#fff" }}>
                           ${Math.round(simulatedMonthlyRev)} USD
                         </div>
-                        <span style={{ fontSize: "0.72rem", color: "var(--accent-emerald)" }}>
+                        <span style={{ fontSize: "0.72rem", color: simRevparDeltaPct > 0 ? "var(--accent-emerald)" : simRevparDeltaPct < 0 ? "var(--accent-coral)" : "var(--text-secondary)" }}>
                           {simRevparDeltaPct >= 0 ? "+" : ""}{simRevparDeltaPct}% vs actual
                         </span>
                       </div>
@@ -930,7 +930,7 @@ POR ESTADÍA (${stayN} noches):
                         <div style={{ fontSize: "1.4rem", fontWeight: "bold", margin: "6px 0", color: "#fff" }}>
                           {simOcc}%
                         </div>
-                        <span style={{ fontSize: "0.72rem", color: "var(--text-secondary)" }}>
+                        <span style={{ fontSize: "0.72rem", color: occDiff > 0 ? "var(--accent-emerald)" : occDiff < 0 ? "var(--accent-coral)" : "var(--text-secondary)" }}>
                           {occDeltaText}
                         </span>
                       </div>
