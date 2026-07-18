@@ -387,6 +387,19 @@ const getCompetitorImage = (listingId) => {
   return competitorImages[idx];
 };
 
+const getSimilarityBadge = (score) => {
+  if (score === undefined || score === null) return null;
+  if (score <= 0.15) {
+    return { text: "Muy Alta", color: "#10b981", bg: "rgba(16, 185, 129, 0.12)" };
+  } else if (score <= 0.35) {
+    return { text: "Alta", color: "#34d399", bg: "rgba(52, 211, 153, 0.1)" };
+  } else if (score <= 0.55) {
+    return { text: "Media", color: "var(--accent-gold)", bg: "rgba(240, 186, 21, 0.1)" };
+  } else {
+    return { text: "Baja", color: "#9ca3af", bg: "rgba(156, 163, 175, 0.1)" };
+  }
+};
+
 const rawApiUrl = process.env.NEXT_PUBLIC_API_URL;
 const cleanUrl = rawApiUrl && rawApiUrl.replace(/^["']|["']$/g, "").trim();
 const API_BASE = (cleanUrl && cleanUrl !== "undefined" && cleanUrl !== "null" && cleanUrl !== "[SENSITIVE]") ? cleanUrl : "https://airbnb-market-intelligence.onrender.com";
@@ -2094,6 +2107,30 @@ POR ESTADÍA (${stayN} noches):
                           }}>
                             📍 {c.geo_distance_km ? c.geo_distance_km.toFixed(2) : "0.5"} km
                           </div>
+
+                          {/* Similarity Badge */}
+                          {(() => {
+                            const badge = getSimilarityBadge(c.similarity_score);
+                            if (!badge) return null;
+                            return (
+                              <div style={{
+                                position: "absolute",
+                                top: "10px",
+                                right: "10px",
+                                background: badge.bg,
+                                border: `1px solid ${badge.color}`,
+                                color: badge.color,
+                                padding: "3.5px 8px",
+                                borderRadius: "8px",
+                                fontSize: "0.68rem",
+                                fontWeight: "800",
+                                textTransform: "uppercase",
+                                letterSpacing: "0.5px"
+                              }}>
+                                Similitud: {badge.text}
+                              </div>
+                            );
+                          })()}
                         </div>
 
                         {/* Info details */}
@@ -2178,6 +2215,13 @@ POR ESTADÍA (${stayN} noches):
                     <thead>
                       <tr>
                         <th>Competidor</th>
+                        <th>
+                          Similitud
+                          <span className="ui-tooltip-wrapper">
+                            <span style={{ fontSize: "0.65rem", marginLeft: "4px" }}>ℹ️</span>
+                            <span className="ui-tooltip">Grado de equivalencia de la propiedad en base a dormitorios, capacidad, distancia y amenities (piscina, aire, etc).</span>
+                          </span>
+                        </th>
                         <th>Detalles</th>
                         <th>
                           Rating
@@ -2227,6 +2271,28 @@ POR ESTADÍA (${stayN} noches):
                           >
                             <td>
                               <strong>{c.title}</strong>
+                            </td>
+                            <td>
+                              {(() => {
+                                const badge = getSimilarityBadge(c.similarity_score);
+                                if (!badge) return <span style={{ color: "var(--text-secondary)" }}>-</span>;
+                                return (
+                                  <span style={{
+                                    display: "inline-block",
+                                    background: badge.bg,
+                                    border: `1px solid ${badge.color}`,
+                                    color: badge.color,
+                                    padding: "2px 6px",
+                                    borderRadius: "12px",
+                                    fontSize: "0.68rem",
+                                    fontWeight: "800",
+                                    textTransform: "uppercase",
+                                    letterSpacing: "0.5px"
+                                  }}>
+                                    {badge.text}
+                                  </span>
+                                );
+                              })()}
                             </td>
                             <td>👥 {c.accommodates} • 🛏️ {c.bedrooms} dorm.</td>
                             <td>⭐ {c.rating ? c.rating.toFixed(2) : "4.90"}</td>
