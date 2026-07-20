@@ -243,6 +243,77 @@ export default function UnifiedDashboard() {
     }
     return "";
   });
+  const [showPinModal, setShowPinModal] = useState(false);
+  const [pinModalCallback, setPinModalCallback] = useState(null);
+  const [pinInputVal, setPinInputVal] = useState("");
+  const [pinModalError, setPinModalError] = useState("");
+
+  const executeProtectedAction = (actionCallback) => {
+    if (!demoMode || adminPin === "232323") {
+      actionCallback();
+    } else {
+      setPinInputVal("");
+      setPinModalError("");
+      setPinModalCallback(() => actionCallback);
+      setShowPinModal(true);
+    }
+  };
+
+  const handlePinSubmit = (e) => {
+    e.preventDefault();
+    if (pinInputVal === "232323") {
+      setAdminPin(pinInputVal);
+      localStorage.setItem("adminPin", pinInputVal);
+      setShowPinModal(false);
+      // Wait for state to be available or pass it directly
+      if (pinModalCallback) {
+        // Run action but pass correct pin
+        setTimeout(() => {
+          pinModalCallback();
+        }, 50);
+      }
+    } else {
+      setPinModalError("PIN incorrecto. Intente nuevamente.");
+    }
+  };
+
+  const handleLockSession = () => {
+    setAdminPin("");
+    localStorage.removeItem("adminPin");
+    setAutoSaveStatus("sandbox");
+  };
+
+  const handleForceSaveTargetDetails = async () => {
+    setAutoSaveStatus("saving");
+    try {
+      const res = await fetch(`${API_BASE}/api/settings/target/save`, {
+        method: "POST",
+        headers: { 
+          "Content-Type": "application/json",
+          "X-Admin-Pin": "232323"
+        },
+        body: JSON.stringify({
+          target_url: targetUrlInput,
+          target_id: targetDetails.listing_id,
+          details: targetDetails,
+          pricing_overrides: targetDetails.pricing_overrides || {},
+          manual_override_flags: targetDetails.manual_override_flags || {}
+        })
+      });
+      if (res.ok) {
+        setAutoSaveStatus("saved");
+        alert("Configuración de propiedad guardada permanentemente en producción.");
+      } else {
+        setAutoSaveStatus("error");
+        alert("Error al guardar en producción.");
+      }
+    } catch (e) {
+      console.error(e);
+      setAutoSaveStatus("error");
+      alert("Error al conectar con el servidor.");
+    }
+  };
+
   const isFirstMount = useRef(true);
   const saveTimeoutRef = useRef(null);
 
@@ -572,7 +643,7 @@ POR ESTADÍA (${stayN} noches):
   };
 
   const handleConfigureTargetUrl = async (e) => {
-    e.preventDefault();
+    if (e) e.preventDefault();
     if (!targetUrlInput.trim()) return;
     setResolvingTarget(true);
     try {
@@ -590,7 +661,7 @@ POR ESTADÍA (${stayN} noches):
           method: "POST",
           headers: { 
             "Content-Type": "application/json",
-            "X-Admin-Pin": adminPin
+            "X-Admin-Pin": "232323"
           },
           body: JSON.stringify({
             target_url: targetUrlInput.trim(),
@@ -608,7 +679,7 @@ POR ESTADÍA (${stayN} noches):
           return;
         }
 
-        const saveData = await saveRes.json();
+        await saveRes.json();
         setHydrating(true);
         
         if (data.status === "partial") {
@@ -620,8 +691,8 @@ POR ESTADÍA (${stayN} noches):
       } else {
         alert(data.message || "No se pudo resolver la propiedad objetivo.");
       }
-    } catch (e) {
-      console.error(e);
+    } catch (err) {
+      console.error(err);
       alert("Error al resolver y guardar la propiedad.");
     } finally {
       setResolvingTarget(false);
@@ -667,6 +738,12 @@ POR ESTADÍA (${stayN} noches):
       return;
     }
     if (!targetDetails) return;
+
+    // In demo mode without a valid PIN → save only locally (sandbox mode)
+    if (demoMode && adminPin !== "232323") {
+      setAutoSaveStatus("sandbox");
+      return;
+    }
 
     setAutoSaveStatus("saving");
     if (saveTimeoutRef.current) clearTimeout(saveTimeoutRef.current);
@@ -1551,7 +1628,16 @@ POR ESTADÍA (${stayN} noches):
                         </button>
                       ))}
                       <span style={{ marginLeft: "auto", fontSize: "0.72rem", color: (demoMode && adminPin !== "232323") ? "var(--accent-gold)" : autoSaveStatus === "saved" ? "var(--accent-emerald)" : "var(--accent-gold)" }}>
-                        ● {demoMode ? (adminPin === "232323" ? "Modo Administrador" : "Modo Demostración (Lectura)") : autoSaveStatus === "saving" ? "Guardando..." : autoSaveStatus === "error" ? "Error al guardar" : "Autoguardado al día"}
+                        {demoMode ? (
+                          adminPin === "232323" ? (
+                            <>
+                              🔓 Modo Administrador
+                              <button onClick={handleLockSession} style={{ marginLeft: "8px", background: "none", border: "1px solid rgba(255,255,255,0.12)", borderRadius: "4px", color: "rgba(255,255,255,0.5)", fontSize: "0.65rem", padding: "1px 6px", cursor: "pointer" }}>Bloquear</button>
+                            </>
+                          ) : <span style={{ cursor: "pointer", textDecoration: "underline dotted" }} onClick={() => executeProtectedAction(() => {})}>🔒 Protegido — clic para editar</span>
+                        ) : (
+                          autoSaveStatus === "saving" ? "Guardando..." : autoSaveStatus === "error" ? "Error al guardar" : "● Autoguardado al día"
+                        )}
                       </span>
                     </div>
 
@@ -1562,36 +1648,7 @@ POR ESTADÍA (${stayN} noches):
                         {/* Target Property URL Input */}
                         <div className="glass-card">
                           <h3 style={{ margin: "0 0 15px 0" }}>Configuración de Propiedad Objetivo</h3>
-                          {demoMode && (
-                            <div style={{ display: "flex", alignItems: "center", gap: "10px", padding: "8px 12px", borderRadius: "6px", border: "1px solid rgba(255,255,255,0.06)", backgroundColor: "rgba(255,255,255,0.01)", marginBottom: "15px" }}>
-                              <span style={{ fontSize: "0.75rem", color: "var(--text-secondary)" }}>🔒 Clave de Edición:</span>
-                              <input
-                                type="password"
-                                placeholder="Ingrese PIN"
-                                value={adminPin}
-                                onChange={(e) => {
-                                  setAdminPin(e.target.value);
-                                  localStorage.setItem("adminPin", e.target.value);
-                                }}
-                                style={{
-                                  width: "120px",
-                                  background: "rgba(0,0,0,0.2)",
-                                  border: "1px solid rgba(255,255,255,0.1)",
-                                  borderRadius: "4px",
-                                  padding: "4px 8px",
-                                  color: "#fff",
-                                  fontSize: "0.75rem",
-                                  outline: "none"
-                                }}
-                              />
-                              {adminPin === "232323" ? (
-                                <span style={{ fontSize: "0.72rem", color: "var(--accent-emerald)" }}>✓ Desbloqueado</span>
-                              ) : (
-                                <span style={{ fontSize: "0.72rem", color: "var(--accent-gold)" }}>Solo lectura</span>
-                              )}
-                            </div>
-                          )}
-                          <form onSubmit={handleConfigureTargetUrl} style={{ display: "flex", gap: "10px", alignItems: "center" }}>
+                          <form onSubmit={(e) => { e.preventDefault(); executeProtectedAction(handleConfigureTargetUrl); }} style={{ display: "flex", gap: "10px", alignItems: "center" }}>
                             <input
                               type="text"
                               className="text-input"
@@ -2148,37 +2205,16 @@ POR ESTADÍA (${stayN} noches):
                   <div className="view-fade-in" style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
                     
                     <div className="glass-card">
-                      <h3 style={{ margin: "0 0 15px 0" }}>Ajustes del Motor de Precios y Reglas</h3>
-                      {demoMode && (
-                        <div style={{ display: "flex", alignItems: "center", gap: "10px", padding: "8px 12px", borderRadius: "6px", border: "1px solid rgba(255,255,255,0.06)", backgroundColor: "rgba(255,255,255,0.01)", marginBottom: "15px" }}>
-                          <span style={{ fontSize: "0.75rem", color: "var(--text-secondary)" }}>🔒 Clave de Edición:</span>
-                          <input
-                            type="password"
-                            placeholder="Ingrese PIN"
-                            value={adminPin}
-                            onChange={(e) => {
-                              setAdminPin(e.target.value);
-                              localStorage.setItem("adminPin", e.target.value);
-                            }}
-                            style={{
-                              width: "120px",
-                              background: "rgba(0,0,0,0.2)",
-                              border: "1px solid rgba(255,255,255,0.1)",
-                              borderRadius: "4px",
-                              padding: "4px 8px",
-                              color: "#fff",
-                              fontSize: "0.75rem",
-                              outline: "none"
-                            }}
-                          />
-                          {adminPin === "232323" ? (
-                            <span style={{ fontSize: "0.72rem", color: "var(--accent-emerald)" }}>✓ Desbloqueado</span>
+                      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "15px" }}>
+                        <h3 style={{ margin: 0 }}>Ajustes del Motor de Precios y Reglas</h3>
+                        {demoMode && (
+                          adminPin === "232323" ? (
+                            <button onClick={handleLockSession} style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.1)", borderRadius: "6px", color: "rgba(255,255,255,0.5)", fontSize: "0.72rem", padding: "4px 10px", cursor: "pointer" }}>🔓 Bloquear sesión</button>
                           ) : (
-                            <span style={{ fontSize: "0.72rem", color: "var(--accent-gold)" }}>Solo lectura</span>
-                          )}
-                        </div>
-                      )}
-                      
+                            <span style={{ fontSize: "0.72rem", color: "var(--accent-gold)", cursor: "pointer", padding: "4px 10px", border: "1px solid rgba(245,158,11,0.25)", borderRadius: "6px" }} onClick={() => executeProtectedAction(() => {})}>🔒 Solo lectura — clic para desbloquear</span>
+                          )
+                        )}
+                      </div>
                       <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "20px", marginBottom: "20px" }}>
                         <div>
                           <label style={{ fontSize: "0.78rem", color: "var(--text-secondary)", display: "block", marginBottom: "6px" }}>
@@ -2276,7 +2312,7 @@ POR ESTADÍA (${stayN} noches):
 
                       <div style={{ display: "flex", gap: "10px" }}>
                         <button
-                          onClick={saveSettings}
+                          onClick={() => executeProtectedAction(saveSettings)}
                           className="vercel-btn"
                           style={{ width: "auto", padding: "10px 24px" }}
                           disabled={savingSettings}
@@ -2284,7 +2320,7 @@ POR ESTADÍA (${stayN} noches):
                           {savingSettings ? "Guardando..." : "Guardar Reglas"}
                         </button>
                         <button
-                          onClick={() => triggerUpdate("total")}
+                          onClick={() => executeProtectedAction(() => triggerUpdate("total"))}
                           className="vercel-btn vercel-btn-secondary"
                           style={{ width: "auto", padding: "10px 24px" }}
                         >
@@ -2303,17 +2339,31 @@ POR ESTADÍA (${stayN} noches):
                               Define los valores operativos de tu anuncio. Tienen prioridad los datos escrapeados directamente de Airbnb.
                             </span>
                           </div>
-                          <span style={{
-                            fontSize: "0.72rem",
-                            fontWeight: "500",
-                            color: (demoMode && adminPin !== "232323") ? "var(--accent-gold)" : autoSaveStatus === "saving" ? "var(--accent-gold)" : autoSaveStatus === "saved" ? "var(--accent-emerald)" : "var(--text-secondary)",
-                            backgroundColor: "rgba(255,255,255,0.02)",
-                            padding: "4px 10px",
-                            borderRadius: "6px",
-                            border: "1px solid var(--card-border)"
-                          }}>
-                            {demoMode ? (adminPin === "232323" ? "✓ Modo Administrador" : "Modo Demo (Lectura)") : autoSaveStatus === "saving" ? "Guardando..." : autoSaveStatus === "saved" ? "✓ Autoguardado activo" : "Sin guardar"}
-                          </span>
+                          <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+                            <span style={{
+                              fontSize: "0.72rem",
+                              fontWeight: "500",
+                              color: (demoMode && adminPin !== "232323") ? "var(--accent-gold)" : autoSaveStatus === "saving" ? "var(--accent-gold)" : autoSaveStatus === "saved" ? "var(--accent-emerald)" : "var(--text-secondary)",
+                              backgroundColor: "rgba(255,255,255,0.02)",
+                              padding: "4px 10px",
+                              borderRadius: "6px",
+                              border: "1px solid var(--card-border)"
+                            }}>
+                              {demoMode ? (adminPin === "232323" ? "✓ Modo Administrador" : "● Sandbox (cambios locales)") : autoSaveStatus === "saving" ? "Guardando..." : autoSaveStatus === "saved" ? "✓ Autoguardado activo" : "Sin guardar"}
+                            </span>
+                            {demoMode && adminPin !== "232323" && (
+                              <button
+                                onClick={() => executeProtectedAction(handleForceSaveTargetDetails)}
+                                style={{
+                                  fontSize: "0.7rem", padding: "4px 10px", borderRadius: "6px",
+                                  background: "rgba(245,158,11,0.1)", border: "1px solid rgba(245,158,11,0.3)",
+                                  color: "var(--accent-gold)", cursor: "pointer"
+                                }}
+                              >
+                                🔒 Guardar en Producción
+                              </button>
+                            )}
+                          </div>
                         </div>
 
                         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "20px" }}>
@@ -2684,6 +2734,87 @@ POR ESTADÍA (${stayN} noches):
             >
               Ver anuncio real en Airbnb ➔
             </a>
+          </div>
+        </div>
+      )}
+
+      {/* ── PIN Modal Overlay ─────────────────────────────────────── */}
+      {showPinModal && (
+        <div style={{
+          position: "fixed", inset: 0, zIndex: 9999,
+          display: "flex", alignItems: "center", justifyContent: "center",
+          backgroundColor: "rgba(5,6,9,0.85)",
+          backdropFilter: "blur(8px)",
+          animation: "fadeIn 0.15s ease"
+        }}>
+          <div className="glass-card" style={{
+            width: "100%", maxWidth: "380px", padding: "32px",
+            border: "1px solid rgba(255,255,255,0.1)",
+            boxShadow: "0 25px 60px rgba(0,0,0,0.6), 0 0 0 1px rgba(245,158,11,0.15)",
+            animation: "slideUp 0.2s ease"
+          }}>
+            <div style={{ textAlign: "center", marginBottom: "24px" }}>
+              <div style={{ fontSize: "2rem", marginBottom: "8px" }}>🔒</div>
+              <h3 style={{ margin: "0 0 6px 0", fontSize: "1.1rem" }}>Acción Protegida</h3>
+              <p style={{ margin: 0, fontSize: "0.8rem", color: "var(--text-secondary)", lineHeight: 1.5 }}>
+                Esta acción modifica datos de producción.<br />
+                Ingresa tu PIN de administrador para continuar.
+              </p>
+            </div>
+
+            <form onSubmit={handlePinSubmit} style={{ display: "flex", flexDirection: "column", gap: "14px" }}>
+              <input
+                autoFocus
+                type="password"
+                inputMode="numeric"
+                maxLength={8}
+                placeholder="••••••"
+                value={pinInputVal}
+                onChange={(e) => {
+                  setPinInputVal(e.target.value);
+                  setPinModalError("");
+                }}
+                style={{
+                  textAlign: "center",
+                  fontSize: "1.4rem",
+                  letterSpacing: "0.3em",
+                  padding: "12px",
+                  background: "rgba(0,0,0,0.3)",
+                  border: pinModalError ? "1px solid rgba(239,68,68,0.5)" : "1px solid rgba(255,255,255,0.12)",
+                  borderRadius: "8px",
+                  color: "#fff",
+                  outline: "none",
+                  width: "100%",
+                  boxSizing: "border-box"
+                }}
+              />
+              {pinModalError && (
+                <p style={{ margin: 0, fontSize: "0.75rem", color: "#ef4444", textAlign: "center" }}>
+                  {pinModalError}
+                </p>
+              )}
+              <div style={{ display: "flex", gap: "10px" }}>
+                <button
+                  type="button"
+                  onClick={() => setShowPinModal(false)}
+                  style={{
+                    flex: 1, padding: "10px", borderRadius: "8px",
+                    background: "rgba(255,255,255,0.04)",
+                    border: "1px solid rgba(255,255,255,0.08)",
+                    color: "var(--text-secondary)", cursor: "pointer", fontSize: "0.85rem"
+                  }}
+                >
+                  Cancelar
+                </button>
+                <button
+                  type="submit"
+                  className="vercel-btn"
+                  style={{ flex: 2, padding: "10px", fontSize: "0.9rem", fontWeight: "bold" }}
+                >
+                  Desbloquear y Continuar
+                </button>
+              </div>
+            </form>
           </div>
         </div>
       )}
