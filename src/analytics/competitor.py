@@ -165,7 +165,8 @@ class CompetitorAnalyzer:
                 "minimum_stay": int(row['minimum_stay']) if pd.notna(row.get('minimum_stay')) else None,
                 "maximum_stay": int(row['maximum_stay']) if pd.notna(row.get('maximum_stay')) else None,
                 "instant_book": bool(row['instant_book']) if pd.notna(row.get('instant_book')) and row.get('instant_book') is not None else None,
-                "cancellation_policy": str(row['cancellation_policy']) if pd.notna(row.get('cancellation_policy')) else None
+                "cancellation_policy": str(row['cancellation_policy']) if pd.notna(row.get('cancellation_policy')) else None,
+                "amenities": json.loads(row['amenities']) if row['amenities'] else []
             })
 
         # Sort by similarity score ascending

@@ -1203,9 +1203,18 @@ POR ESTADÍA (${stayN} noches):
 
                         // Extract physical amenities differences
                         const targetAms = details?.amenities || [];
-                        const compAmsStr = c.amenities ? (typeof c.amenities === 'string' ? c.amenities : JSON.stringify(c.amenities)) : "[]";
                         let compAms = [];
-                        try { compAms = JSON.parse(compAmsStr); } catch(e){}
+                        if (c.amenities) {
+                          if (Array.isArray(c.amenities)) {
+                            compAms = c.amenities;
+                          } else {
+                            try {
+                              compAms = typeof c.amenities === 'string' ? JSON.parse(c.amenities) : c.amenities;
+                            } catch(e) {
+                              compAms = [];
+                            }
+                          }
+                        }
                         const targetAmSet = new Set(targetAms.map(x => x.toLowerCase()));
                         const compAmSet = new Set(compAms.map(x => x.toLowerCase()));
                         
@@ -1214,6 +1223,18 @@ POR ESTADÍA (${stayN} noches):
                         const compHasTargetLacks = keyAms.filter(am => compAmSet.has(am) && !targetAmSet.has(am));
                         // le falta (target has it, competitor lacks it)
                         const targetHasCompLacks = keyAms.filter(am => targetAmSet.has(am) && !compAmSet.has(am));
+
+                        const translateAmenityKey = (x) => {
+                          switch (x) {
+                            case "pool": return "Piscina";
+                            case "gym": return "Gimnasio";
+                            case "parking": return "Cochera";
+                            case "air conditioning": return "Aire acondicionado";
+                            case "wifi": return "Wifi";
+                            case "jacuzzi": return "Jacuzzi";
+                            default: return x;
+                          }
+                        };
 
                         return (
                           <div
@@ -1285,12 +1306,12 @@ POR ESTADÍA (${stayN} noches):
                               <div style={{ display: "flex", flexDirection: "column", gap: "4px", fontSize: "0.72rem" }}>
                                 {compHasTargetLacks.length > 0 && (
                                   <div style={{ color: "var(--accent-coral)" }}>
-                                    ⚠️ <strong>Te falta:</strong> {compHasTargetLacks.map(x => x === "pool" ? "Piscina" : x === "gym" ? "Gimnasio" : x === "parking" ? "Cochera" : x).join(", ")}
+                                    ⚠️ <strong>Te falta:</strong> {compHasTargetLacks.map(translateAmenityKey).join(", ")}
                                   </div>
                                 )}
                                 {targetHasCompLacks.length > 0 && (
                                   <div style={{ color: "var(--accent-emerald)" }}>
-                                    ✓ <strong>Ventaja tuya:</strong> {targetHasCompLacks.map(x => x === "pool" ? "Piscina" : x === "gym" ? "Gimnasio" : x === "parking" ? "Cochera" : x).join(", ")}
+                                    ✓ <strong>Ventaja tuya:</strong> {targetHasCompLacks.map(translateAmenityKey).join(", ")}
                                   </div>
                                 )}
                                 {compHasTargetLacks.length === 0 && targetHasCompLacks.length === 0 && (
@@ -2291,119 +2312,7 @@ POR ESTADÍA (${stayN} noches):
                   </div>
                 );
 
-              case "competitor_engine":
-                return (
-                  <div className="view-fade-in" style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
-                    
-                    {/* Target Property Configuration */}
-                    <div className="glass-card">
-                      <h3 style={{ margin: "0 0 15px 0" }}>Configuración de Propiedad Objetivo</h3>
-                      <form onSubmit={handleConfigureTargetUrl} style={{ display: "flex", gap: "10px", alignItems: "center" }}>
-                        <input
-                          type="text"
-                          className="text-input"
-                          style={{ marginBottom: 0, flex: 1, padding: "8px 12px", borderRadius: "6px" }}
-                          placeholder="Ingresa la URL de la propiedad de Airbnb que deseas monitorear..."
-                          value={targetUrlInput}
-                          onChange={(e) => setTargetUrlInput(e.target.value)}
-                        />
-                        <button
-                          type="submit"
-                          className="vercel-btn"
-                          disabled={resolvingTarget}
-                          style={{ padding: "9px 18px", fontSize: "0.8rem", flexShrink: 0 }}
-                        >
-                          {resolvingTarget ? "Resolviendo..." : "Configurar"}
-                        </button>
-                      </form>
-                      <p style={{ margin: "6px 0 0 0", fontSize: "0.72rem", color: "var(--text-secondary)" }}>
-                        Ejemplo: https://www.airbnb.com.ar/rooms/1126744888258385312
-                      </p>
-                    </div>
 
-                    {targetDetails && (
-                      <div className="glass-card" style={{ borderLeft: "4px solid var(--accent-gold)", animation: "fadeIn 0.2s ease" }}>
-                        <h3 style={{ margin: "0 0 15px 0", color: "#fff", display: "flex", alignItems: "center", gap: "8px" }}>
-                          <span style={{ display: "inline-block", width: "8px", height: "8px", borderRadius: "50%", backgroundColor: "var(--accent-emerald)" }}></span>
-                          Propiedad Objetivo Cargada
-                        </h3>
-                        
-                        <div style={{ display: "flex", gap: "20px", flexWrap: "wrap", alignItems: "flex-start" }}>
-                          {targetDetails.picture_url && (
-                            <div style={{ width: "160px", height: "110px", borderRadius: "8px", overflow: "hidden", border: "1px solid rgba(255,255,255,0.06)" }}>
-                              <img src={targetDetails.picture_url} alt="Portada" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
-                            </div>
-                          )}
-                          
-                          <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: "10px" }}>
-                            <div>
-                              <strong style={{ fontSize: "1rem", color: "#fff", display: "block" }}>{targetDetails.title}</strong>
-                              <span style={{ fontSize: "0.75rem", color: "var(--text-secondary)" }}>ID de Airbnb: <code>{targetDetails.listing_id}</code></span>
-                            </div>
-                            
-                            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(90px, 1fr))", gap: "10px", backgroundColor: "rgba(255,255,255,0.02)", padding: "10px 14px", borderRadius: "8px", border: "1px solid rgba(255,255,255,0.04)" }}>
-                              <div>
-                                <span style={{ fontSize: "0.6rem", color: "var(--text-secondary)", display: "block", textTransform: "uppercase" }}>Dormitorios</span>
-                                <strong style={{ color: "#fff", fontSize: "0.9rem" }}>{targetDetails.bedrooms || 0}</strong>
-                              </div>
-                              <div>
-                                <span style={{ fontSize: "0.6rem", color: "var(--text-secondary)", display: "block", textTransform: "uppercase" }}>Baños</span>
-                                <strong style={{ color: "#fff", fontSize: "0.9rem" }}>{targetDetails.bathrooms || 0}</strong>
-                              </div>
-                              <div>
-                                <span style={{ fontSize: "0.6rem", color: "var(--text-secondary)", display: "block", textTransform: "uppercase" }}>Huéspedes</span>
-                                <strong style={{ color: "#fff", fontSize: "0.9rem" }}>{targetDetails.accommodates || 0}</strong>
-                              </div>
-                              <div>
-                                <span style={{ fontSize: "0.6rem", color: "var(--text-secondary)", display: "block", textTransform: "uppercase" }}>Tarifa Base</span>
-                                <strong style={{ color: "var(--accent-gold)", fontSize: "0.9rem" }}>${targetDetails.price || 0} USD</strong>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-
-                        {/* Detected amenities list */}
-                        {targetDetails.amenities && targetDetails.amenities.length > 0 && (
-                          <div style={{ marginTop: "18px" }}>
-                            <span style={{ fontSize: "0.72rem", color: "var(--text-secondary)", display: "block", marginBottom: "8px", textTransform: "uppercase", fontWeight: "600", letterSpacing: "0.5px" }}>
-                              Amenities Detectados:
-                            </span>
-                            <div style={{ display: "flex", flexWrap: "wrap", gap: "6px" }}>
-                              {targetDetails.amenities.map((am, idx) => (
-                                <span key={idx} style={{ fontSize: "0.72rem", color: "#fff", backgroundColor: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.1)", padding: "2px 8px", borderRadius: "4px" }}>
-                                  ✓ {am}
-                                </span>
-                              ))}
-                            </div>
-                          </div>
-                        )}
-
-                        <div style={{ marginTop: "18px", borderTop: "1px solid rgba(255,255,255,0.06)", paddingTop: "15px", display: "flex", gap: "10px" }}>
-                          <button onClick={() => setActiveView("overview")} className="vercel-btn" style={{ fontSize: "0.75rem", padding: "6px 14px", width: "auto" }}>
-                            Ver Ficha Completa
-                          </button>
-                          <button onClick={() => setActiveView("features")} className="vercel-btn vercel-btn-secondary" style={{ fontSize: "0.75rem", padding: "6px 14px", width: "auto" }}>
-                            Ajustar Características
-                          </button>
-                        </div>
-                      </div>
-                    )}
-
-                    {/* KNN thresholds explanation */}
-                    <div className="glass-card">
-                      <h3 style={{ margin: "0 0 10px 0" }}>Límites y Reglas KNN</h3>
-                      <p style={{ fontSize: "0.8rem", color: "var(--text-secondary)", lineHeight: "1.5" }}>
-                        La watchlist de competidores directos se calcula aplicando una métrica de distancia euclidiana ponderada:<br/>
-                        • <strong>Distancia Geográfica (Haversine):</strong> 35% de peso (radio límite de 5km).<br/>
-                        • <strong>Coincidencia de Amenities:</strong> 35% de peso (Piscina, Gimnasio, Jacuzzi, Cochera, Aire acondicionado).<br/>
-                        • <strong>Capacidad de Huéspedes:</strong> 20% de peso (máximo +/- 2 huéspedes de diferencia).<br/>
-                        • <strong>Cantidad de Baños:</strong> 10% de peso.<br/>
-                        • <strong>Hard Constraint:</strong> Mismo número exacto de dormitorios.
-                      </p>
-                    </div>
-
-                  </div>
-                );
 
               case "historicos":
                 return (
