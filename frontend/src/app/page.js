@@ -557,17 +557,34 @@ POR ESTADÍA (${stayN} noches):
       const data = await res.json();
       if (data.details) {
         setTargetDetails(data.details);
+        
+        // Save resolved details to database/GitHub immediately
+        const saveRes = await fetch(`${API_BASE}/api/settings/target/save`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            target_url: targetUrlInput.trim(),
+            target_id: data.details.listing_id,
+            details: data.details,
+            pricing_overrides: data.details.pricing_overrides || {},
+            manual_override_flags: data.details.manual_override_flags || {}
+          })
+        });
+        const saveData = await saveRes.json();
+        setHydrating(true);
+        
         if (data.status === "partial") {
-          alert(data.message);
+          alert(`Resolución parcial: ${data.message}`);
         } else {
-          alert("Propiedad objetivo resuelta con éxito. Revisa y completa los detalles en la sección de CONFIGURACIÓN DE PROPIEDAD.");
+          alert("Propiedad objetivo configurada y guardada con éxito en la base de datos.");
         }
+        fetchInitialData();
       } else {
         alert(data.message || "No se pudo resolver la propiedad objetivo.");
       }
     } catch (e) {
       console.error(e);
-      alert("Error al resolver la propiedad.");
+      alert("Error al resolver y guardar la propiedad.");
     } finally {
       setResolvingTarget(false);
     }
@@ -2235,6 +2252,74 @@ POR ESTADÍA (${stayN} noches):
                         Ejemplo: https://www.airbnb.com.ar/rooms/1126744888258385312
                       </p>
                     </div>
+
+                    {targetDetails && (
+                      <div className="glass-card" style={{ borderLeft: "4px solid var(--accent-gold)", animation: "fadeIn 0.2s ease" }}>
+                        <h3 style={{ margin: "0 0 15px 0", color: "#fff", display: "flex", alignItems: "center", gap: "8px" }}>
+                          <span style={{ display: "inline-block", width: "8px", height: "8px", borderRadius: "50%", backgroundColor: "var(--accent-emerald)" }}></span>
+                          Propiedad Objetivo Cargada
+                        </h3>
+                        
+                        <div style={{ display: "flex", gap: "20px", flexWrap: "wrap", alignItems: "flex-start" }}>
+                          {targetDetails.picture_url && (
+                            <div style={{ width: "160px", height: "110px", borderRadius: "8px", overflow: "hidden", border: "1px solid rgba(255,255,255,0.06)" }}>
+                              <img src={targetDetails.picture_url} alt="Portada" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                            </div>
+                          )}
+                          
+                          <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: "10px" }}>
+                            <div>
+                              <strong style={{ fontSize: "1rem", color: "#fff", display: "block" }}>{targetDetails.title}</strong>
+                              <span style={{ fontSize: "0.75rem", color: "var(--text-secondary)" }}>ID de Airbnb: <code>{targetDetails.listing_id}</code></span>
+                            </div>
+                            
+                            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(90px, 1fr))", gap: "10px", backgroundColor: "rgba(255,255,255,0.02)", padding: "10px 14px", borderRadius: "8px", border: "1px solid rgba(255,255,255,0.04)" }}>
+                              <div>
+                                <span style={{ fontSize: "0.6rem", color: "var(--text-secondary)", display: "block", textTransform: "uppercase" }}>Dormitorios</span>
+                                <strong style={{ color: "#fff", fontSize: "0.9rem" }}>{targetDetails.bedrooms || 0}</strong>
+                              </div>
+                              <div>
+                                <span style={{ fontSize: "0.6rem", color: "var(--text-secondary)", display: "block", textTransform: "uppercase" }}>Baños</span>
+                                <strong style={{ color: "#fff", fontSize: "0.9rem" }}>{targetDetails.bathrooms || 0}</strong>
+                              </div>
+                              <div>
+                                <span style={{ fontSize: "0.6rem", color: "var(--text-secondary)", display: "block", textTransform: "uppercase" }}>Huéspedes</span>
+                                <strong style={{ color: "#fff", fontSize: "0.9rem" }}>{targetDetails.accommodates || 0}</strong>
+                              </div>
+                              <div>
+                                <span style={{ fontSize: "0.6rem", color: "var(--text-secondary)", display: "block", textTransform: "uppercase" }}>Tarifa Base</span>
+                                <strong style={{ color: "var(--accent-gold)", fontSize: "0.9rem" }}>${targetDetails.price || 0} USD</strong>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* Detected amenities list */}
+                        {targetDetails.amenities && targetDetails.amenities.length > 0 && (
+                          <div style={{ marginTop: "18px" }}>
+                            <span style={{ fontSize: "0.72rem", color: "var(--text-secondary)", display: "block", marginBottom: "8px", textTransform: "uppercase", fontWeight: "600", letterSpacing: "0.5px" }}>
+                              Amenities Detectados:
+                            </span>
+                            <div style={{ display: "flex", flexWrap: "wrap", gap: "6px" }}>
+                              {targetDetails.amenities.map((am, idx) => (
+                                <span key={idx} style={{ fontSize: "0.72rem", color: "#fff", backgroundColor: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.1)", padding: "2px 8px", borderRadius: "4px" }}>
+                                  ✓ {am}
+                                </span>
+                              ))}
+                            </div>
+                          </div>
+                        )}
+
+                        <div style={{ marginTop: "18px", borderTop: "1px solid rgba(255,255,255,0.06)", paddingTop: "15px", display: "flex", gap: "10px" }}>
+                          <button onClick={() => setActiveView("overview")} className="vercel-btn" style={{ fontSize: "0.75rem", padding: "6px 14px", width: "auto" }}>
+                            Ver Ficha Completa
+                          </button>
+                          <button onClick={() => setActiveView("features")} className="vercel-btn vercel-btn-secondary" style={{ fontSize: "0.75rem", padding: "6px 14px", width: "auto" }}>
+                            Ajustar Características
+                          </button>
+                        </div>
+                      </div>
+                    )}
 
                     {/* KNN thresholds explanation */}
                     <div className="glass-card">

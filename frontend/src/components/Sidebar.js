@@ -8,9 +8,9 @@ export default function Sidebar() {
   const pathname = usePathname();
 
   const links = [
-    { href: "/", label: "Market Explorer", icon: MapPin },
-    { href: "/optimizer", label: "Property Optimizer", icon: LineChart },
-    { href: "/etl", label: "Data Pipeline", icon: Cpu }
+    { href: "/", label: "Explorador de Mercado", icon: MapPin },
+    { href: "/optimizer", label: "Optimizador de Propiedad", icon: LineChart },
+    { href: "/etl", label: "Pipeline de Datos", icon: Cpu }
   ];
 
   return (
@@ -39,7 +39,7 @@ export default function Sidebar() {
       
       <div style={{ marginTop: "auto", borderTop: "1px solid var(--border-color)", paddingTop: "20px" }}>
         <span style={{ color: "var(--text-secondary)", fontSize: "0.8rem", display: "block" }}>
-          Target Location:
+          Ubicación Objetivo:
         </span>
         <span style={{ color: "#ffffff", fontWeight: 700, fontSize: "0.9rem", display: "block" }}>
           Palermo Hollywood
