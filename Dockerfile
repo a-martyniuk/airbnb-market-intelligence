@@ -12,9 +12,9 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy source code and configuration
-COPY src/ ./src/
+COPY backend/ ./backend/
 COPY config/ ./config/
-COPY data/ ./data/
+COPY database/ ./database/
 
 # Expose FastAPI port
 EXPOSE 8000
