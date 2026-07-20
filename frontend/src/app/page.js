@@ -237,6 +237,12 @@ export default function UnifiedDashboard() {
   // Autosave status for Property Setup (Notion/Airtable style)
   const [autoSaveStatus, setAutoSaveStatus] = useState("saved"); // "saving", "saved", "error"
   const [demoMode, setDemoMode] = useState(false);
+  const [adminPin, setAdminPin] = useState(() => {
+    if (typeof window !== "undefined") {
+      return localStorage.getItem("adminPin") || "";
+    }
+    return "";
+  });
   const isFirstMount = useRef(true);
   const saveTimeoutRef = useRef(null);
 
@@ -514,7 +520,10 @@ POR ESTADÍA (${stayN} noches):
     try {
       const res = await fetch(`${API_BASE}/api/settings/rules`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { 
+          "Content-Type": "application/json",
+          "X-Admin-Pin": adminPin
+        },
         body: JSON.stringify({
           weekend_premium: parseFloat(weekendPremium),
           high_season_premium: parseFloat(highSeasonPremium),
@@ -527,6 +536,9 @@ POR ESTADÍA (${stayN} noches):
       if (res.ok) {
         alert("Reglas de tarifas actualizadas exitosamente.");
         if (selectedId) fetchListingDetails(selectedId);
+      } else {
+        const errData = await res.json().catch(() => ({}));
+        alert(errData.detail || "Error al guardar configuraciones.");
       }
     } catch (e) {
       console.error(e);
@@ -539,9 +551,19 @@ POR ESTADÍA (${stayN} noches):
   const triggerUpdate = async (mode = "total") => {
     setHydrating(true);
     try {
-      const res = await fetch(`${API_BASE}/api/pipeline/update?mode=${mode}`, { method: "POST" });
+      const res = await fetch(`${API_BASE}/api/pipeline/update?mode=${mode}`, { 
+        method: "POST",
+        headers: {
+          "X-Admin-Pin": adminPin
+        }
+      });
       const data = await res.json();
-      alert(data.message || "Actualización iniciada en segundo plano.");
+      if (!res.ok) {
+        alert(data.detail || "Error al iniciar actualización.");
+        setHydrating(false);
+      } else {
+        alert(data.message || "Actualización iniciada en segundo plano.");
+      }
     } catch (e) {
       console.error(e);
       alert("Error al iniciar actualización.");
@@ -566,7 +588,10 @@ POR ESTADÍA (${stayN} noches):
         // Save resolved details to database/GitHub immediately
         const saveRes = await fetch(`${API_BASE}/api/settings/target/save`, {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
+          headers: { 
+            "Content-Type": "application/json",
+            "X-Admin-Pin": adminPin
+          },
           body: JSON.stringify({
             target_url: targetUrlInput.trim(),
             target_id: data.details.listing_id,
@@ -575,6 +600,14 @@ POR ESTADÍA (${stayN} noches):
             manual_override_flags: data.details.manual_override_flags || {}
           })
         });
+        
+        if (!saveRes.ok) {
+          const errData = await saveRes.json().catch(() => ({}));
+          alert(errData.detail || "Error al guardar la propiedad.");
+          setResolvingTarget(false);
+          return;
+        }
+
         const saveData = await saveRes.json();
         setHydrating(true);
         
@@ -601,7 +634,10 @@ POR ESTADÍA (${stayN} noches):
     try {
       const res = await fetch(`${API_BASE}/api/settings/target/save`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { 
+          "Content-Type": "application/json",
+          "X-Admin-Pin": adminPin
+        },
         body: JSON.stringify({
           target_url: targetUrlInput,
           target_id: targetDetails.listing_id,
@@ -609,9 +645,13 @@ POR ESTADÍA (${stayN} noches):
         })
       });
       const data = await res.json();
-      setHydrating(true);
-      alert(data.message || "Detalles de propiedad objetivo guardados exitosamente. Iniciando sincronización de mercado...");
-      fetchInitialData();
+      if (!res.ok) {
+        alert(data.detail || "Error al guardar los detalles de la propiedad.");
+      } else {
+        setHydrating(true);
+        alert(data.message || "Detalles de propiedad objetivo guardados exitosamente. Iniciando sincronización de mercado...");
+        fetchInitialData();
+      }
     } catch (e) {
       console.error(e);
       alert("Error al guardar los detalles de la propiedad.");
@@ -635,7 +675,10 @@ POR ESTADÍA (${stayN} noches):
       try {
         const res = await fetch(`${API_BASE}/api/settings/target/save`, {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
+          headers: { 
+            "Content-Type": "application/json",
+            "X-Admin-Pin": adminPin
+          },
           body: JSON.stringify({
             target_url: targetUrlInput,
             target_id: targetDetails.listing_id,
@@ -888,23 +931,7 @@ POR ESTADÍA (${stayN} noches):
               })}
             </div>
           ))}
-          {demoMode && (
-            <div style={{
-              marginTop: "auto",
-              padding: "12px",
-              borderRadius: "8px",
-              border: "1px solid rgba(245, 158, 11, 0.2)",
-              backgroundColor: "rgba(245, 158, 11, 0.05)",
-              color: "#f59e0b",
-              fontSize: "0.75rem",
-              lineHeight: "1.3"
-            }}>
-              <strong>🔓 Modo Demo Activo</strong>
-              <p style={{ margin: "4px 0 0 0", color: "rgba(255,255,255,0.6)", fontSize: "0.68rem" }}>
-                Las modificaciones están deshabilitadas en esta versión de portafolio público para proteger los datos de producción.
-              </p>
-            </div>
-          )}
+
         </aside>
 
         {/* Right Tab Content Area */}
@@ -1523,8 +1550,8 @@ POR ESTADÍA (${stayN} noches):
                           {sub.label}
                         </button>
                       ))}
-                      <span style={{ marginLeft: "auto", fontSize: "0.72rem", color: demoMode ? "var(--accent-gold)" : autoSaveStatus === "saved" ? "var(--accent-emerald)" : "var(--accent-gold)" }}>
-                        ● {demoMode ? "Modo Demostración (Lectura)" : autoSaveStatus === "saving" ? "Guardando..." : autoSaveStatus === "error" ? "Error al guardar" : "Autoguardado al día"}
+                      <span style={{ marginLeft: "auto", fontSize: "0.72rem", color: (demoMode && adminPin !== "232323") ? "var(--accent-gold)" : autoSaveStatus === "saved" ? "var(--accent-emerald)" : "var(--accent-gold)" }}>
+                        ● {demoMode ? (adminPin === "232323" ? "Modo Administrador" : "Modo Demostración (Lectura)") : autoSaveStatus === "saving" ? "Guardando..." : autoSaveStatus === "error" ? "Error al guardar" : "Autoguardado al día"}
                       </span>
                     </div>
 
@@ -1535,6 +1562,35 @@ POR ESTADÍA (${stayN} noches):
                         {/* Target Property URL Input */}
                         <div className="glass-card">
                           <h3 style={{ margin: "0 0 15px 0" }}>Configuración de Propiedad Objetivo</h3>
+                          {demoMode && (
+                            <div style={{ display: "flex", alignItems: "center", gap: "10px", padding: "8px 12px", borderRadius: "6px", border: "1px solid rgba(255,255,255,0.06)", backgroundColor: "rgba(255,255,255,0.01)", marginBottom: "15px" }}>
+                              <span style={{ fontSize: "0.75rem", color: "var(--text-secondary)" }}>🔒 Clave de Edición:</span>
+                              <input
+                                type="password"
+                                placeholder="Ingrese PIN"
+                                value={adminPin}
+                                onChange={(e) => {
+                                  setAdminPin(e.target.value);
+                                  localStorage.setItem("adminPin", e.target.value);
+                                }}
+                                style={{
+                                  width: "120px",
+                                  background: "rgba(0,0,0,0.2)",
+                                  border: "1px solid rgba(255,255,255,0.1)",
+                                  borderRadius: "4px",
+                                  padding: "4px 8px",
+                                  color: "#fff",
+                                  fontSize: "0.75rem",
+                                  outline: "none"
+                                }}
+                              />
+                              {adminPin === "232323" ? (
+                                <span style={{ fontSize: "0.72rem", color: "var(--accent-emerald)" }}>✓ Desbloqueado</span>
+                              ) : (
+                                <span style={{ fontSize: "0.72rem", color: "var(--accent-gold)" }}>Solo lectura</span>
+                              )}
+                            </div>
+                          )}
                           <form onSubmit={handleConfigureTargetUrl} style={{ display: "flex", gap: "10px", alignItems: "center" }}>
                             <input
                               type="text"
@@ -2091,9 +2147,37 @@ POR ESTADÍA (${stayN} noches):
                 return (
                   <div className="view-fade-in" style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
                     
-                    {/* Multipliers & Rules */}
                     <div className="glass-card">
                       <h3 style={{ margin: "0 0 15px 0" }}>Ajustes del Motor de Precios y Reglas</h3>
+                      {demoMode && (
+                        <div style={{ display: "flex", alignItems: "center", gap: "10px", padding: "8px 12px", borderRadius: "6px", border: "1px solid rgba(255,255,255,0.06)", backgroundColor: "rgba(255,255,255,0.01)", marginBottom: "15px" }}>
+                          <span style={{ fontSize: "0.75rem", color: "var(--text-secondary)" }}>🔒 Clave de Edición:</span>
+                          <input
+                            type="password"
+                            placeholder="Ingrese PIN"
+                            value={adminPin}
+                            onChange={(e) => {
+                              setAdminPin(e.target.value);
+                              localStorage.setItem("adminPin", e.target.value);
+                            }}
+                            style={{
+                              width: "120px",
+                              background: "rgba(0,0,0,0.2)",
+                              border: "1px solid rgba(255,255,255,0.1)",
+                              borderRadius: "4px",
+                              padding: "4px 8px",
+                              color: "#fff",
+                              fontSize: "0.75rem",
+                              outline: "none"
+                            }}
+                          />
+                          {adminPin === "232323" ? (
+                            <span style={{ fontSize: "0.72rem", color: "var(--accent-emerald)" }}>✓ Desbloqueado</span>
+                          ) : (
+                            <span style={{ fontSize: "0.72rem", color: "var(--accent-gold)" }}>Solo lectura</span>
+                          )}
+                        </div>
+                      )}
                       
                       <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "20px", marginBottom: "20px" }}>
                         <div>
@@ -2222,13 +2306,13 @@ POR ESTADÍA (${stayN} noches):
                           <span style={{
                             fontSize: "0.72rem",
                             fontWeight: "500",
-                            color: demoMode ? "var(--accent-gold)" : autoSaveStatus === "saving" ? "var(--accent-gold)" : autoSaveStatus === "saved" ? "var(--accent-emerald)" : "var(--text-secondary)",
+                            color: (demoMode && adminPin !== "232323") ? "var(--accent-gold)" : autoSaveStatus === "saving" ? "var(--accent-gold)" : autoSaveStatus === "saved" ? "var(--accent-emerald)" : "var(--text-secondary)",
                             backgroundColor: "rgba(255,255,255,0.02)",
                             padding: "4px 10px",
                             borderRadius: "6px",
                             border: "1px solid var(--card-border)"
                           }}>
-                            {demoMode ? "Modo Demo (Lectura)" : autoSaveStatus === "saving" ? "Guardando..." : autoSaveStatus === "saved" ? "✓ Autoguardado activo" : "Sin guardar"}
+                            {demoMode ? (adminPin === "232323" ? "✓ Modo Administrador" : "Modo Demo (Lectura)") : autoSaveStatus === "saving" ? "Guardando..." : autoSaveStatus === "saved" ? "✓ Autoguardado activo" : "Sin guardar"}
                           </span>
                         </div>
 

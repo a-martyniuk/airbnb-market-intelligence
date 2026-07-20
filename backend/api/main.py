@@ -4,7 +4,7 @@ import json
 import logging
 from datetime import datetime, date, timedelta
 from typing import Dict, Any, List, Optional
-from fastapi import FastAPI, HTTPException, BackgroundTasks, Query
+from fastapi import FastAPI, HTTPException, BackgroundTasks, Query, Header
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 
@@ -19,12 +19,14 @@ if os.path.exists(".env"):
 
 from backend.utils.db import get_connection, init_db
 
-def check_demo_mode():
+def check_demo_mode(x_admin_pin: Optional[str] = None):
     if os.getenv("DEMO_MODE", "false").lower() == "true":
-        raise HTTPException(
-            status_code=403,
-            detail="Modo Demostración Activo: Las modificaciones y actualizaciones de configuración están deshabilitadas en la demo pública."
-        )
+        admin_pin = os.getenv("ADMIN_PIN", "232323")
+        if x_admin_pin != admin_pin:
+            raise HTTPException(
+                status_code=403,
+                detail="Modo Demostración Activo: PIN de Administrador incorrecto o ausente."
+            )
 from backend.scraper.scheduler import ScrapingScheduler
 from backend.etl.pipeline import ETLPipeline
 from backend.ml.pricing_model import DynamicPricingModel
@@ -323,27 +325,37 @@ class UpdateRequest(BaseModel):
     mode: str  # "prices", "prices_availability", "competitors", "total"
 
 @app.post("/api/pipeline/update")
-def trigger_incremental_update(payload: UpdateRequest, background_tasks: BackgroundTasks):
-    check_demo_mode()
+def trigger_incremental_update(
+    background_tasks: BackgroundTasks,
+    payload: Optional[UpdateRequest] = None,
+    mode: Optional[str] = Query(None),
+    x_admin_pin: Optional[str] = Header(None)
+):
+    check_demo_mode(x_admin_pin)
     global pipeline_state
     if pipeline_state["status"] == "running":
         return {"message": "A scrape job is already running.", "status": pipeline_state}
         
-    mode = payload.mode
-    if mode not in ("prices", "prices_availability", "competitors", "total"):
+    resolved_mode = None
+    if payload and payload.mode:
+        resolved_mode = payload.mode
+    elif mode:
+        resolved_mode = mode
+        
+    if not resolved_mode or resolved_mode not in ("prices", "prices_availability", "competitors", "total"):
         raise HTTPException(status_code=400, detail="Invalid update mode")
         
     pipeline_state = {
         "status": "starting",
-        "message": f"Iniciando actualización ({mode})...",
+        "message": f"Iniciando actualización ({resolved_mode})...",
         "progress": 0.0
     }
-    background_tasks.add_task(bg_run_incremental_scrape, mode)
-    return {"message": f"Update sequence in mode '{mode}' triggered successfully", "status": pipeline_state}
+    background_tasks.add_task(bg_run_incremental_scrape, resolved_mode)
+    return {"message": f"Update sequence in mode '{resolved_mode}' triggered successfully", "status": pipeline_state}
 
 @app.post("/api/pipeline/hydrate")
-def trigger_live_scrape(background_tasks: BackgroundTasks):
-    check_demo_mode()
+def trigger_live_scrape(background_tasks: BackgroundTasks, x_admin_pin: Optional[str] = Header(None)):
+    check_demo_mode(x_admin_pin)
     """Legacy endpoint - triggers total run in background."""
     global pipeline_state
     if pipeline_state["status"] == "running":
@@ -761,8 +773,8 @@ class RulesUpdate(BaseModel):
     average_stay_days: int = 3
 
 @app.post("/api/settings/rules")
-def update_pricing_rules(payload: RulesUpdate, background_tasks: BackgroundTasks):
-    check_demo_mode()
+def update_pricing_rules(payload: RulesUpdate, background_tasks: BackgroundTasks, x_admin_pin: Optional[str] = Header(None)):
+    check_demo_mode(x_admin_pin)
     """Updates pricing rules in settings.yaml and regenerates recommendations in SQLite."""
     try:
         # 1. Read existing config
@@ -816,7 +828,6 @@ class ResetPayload(BaseModel):
 
 @app.post("/api/listings/{listing_id}/recommendations/override")
 def save_price_override(listing_id: str, payload: OverridePayload, background_tasks: BackgroundTasks):
-    check_demo_mode()
     """Saves a manual price override for a specific listing and date."""
     conn = get_connection(DB_PATH)
     try:
@@ -856,7 +867,6 @@ def save_price_override(listing_id: str, payload: OverridePayload, background_ta
 
 @app.post("/api/listings/{listing_id}/recommendations/reset")
 def reset_price_override(listing_id: str, payload: ResetPayload, background_tasks: BackgroundTasks):
-    check_demo_mode()
     """Resets a manual price override, restoring the original AI recommendation."""
     conn = get_connection(DB_PATH)
     try:
@@ -1227,8 +1237,8 @@ def resolve_target_listing_url(payload: Dict[str, str]):
         }
 
 @app.post("/api/settings/target/save")
-def save_target_listing_settings(payload: Dict[str, Any], background_tasks: BackgroundTasks):
-    check_demo_mode()
+def save_target_listing_settings(payload: Dict[str, Any], background_tasks: BackgroundTasks, x_admin_pin: Optional[str] = Header(None)):
+    check_demo_mode(x_admin_pin)
     global pipeline_state
     details = payload.get("details")
     url = payload.get("target_url")
