@@ -16,7 +16,6 @@
       "Wifi",
       "Air conditioning",
       "Cocina",
-      "Lavarropas",
       "Pool",
       "Check-in autónomo",
       "Aire acondicionado",
@@ -51,7 +50,8 @@
       "Silla de ruedas accesible",
       "Parrilla / Grill",
       "Terraza",
-      "Elevador"
+      "Elevador",
+      "Lavarropas"
     ],
     "latitude": -34.587396618302606,
     "longitude": -58.439733276956126,
