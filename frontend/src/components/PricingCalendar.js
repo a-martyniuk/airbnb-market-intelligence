@@ -64,7 +64,7 @@ export default function PricingCalendar({ recs, listingId, feeStructure = "simpl
           key: updated.date,
           dateStr: updated.date,
           dayNum: d.getDate(),
-          monthName: d.toLocaleString("en-US", { month: "short" }),
+          monthName: d.toLocaleString("es-ES", { month: "short" }),
           price: updated.recommended_price,
           isAvailable: updated.is_available === 1,
           isWeekend: feats.is_weekend,
@@ -81,7 +81,7 @@ export default function PricingCalendar({ recs, listingId, feeStructure = "simpl
   }, [recs]);
 
   if (!recs || recs.length === 0) {
-    return <div style={{ color: "#94a3b8", padding: "40px", textAlign: "center" }}>No calendar data available.</div>;
+    return <div style={{ color: "#94a3b8", padding: "40px", textAlign: "center" }}>No hay datos de calendario disponibles.</div>;
   }
 
   const parseDateStr = (dateStr) => {
@@ -89,7 +89,7 @@ export default function PricingCalendar({ recs, listingId, feeStructure = "simpl
     return new Date(parts[0], parts[1] - 1, parts[2]);
   };
 
-  const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  const daysOfWeek = ["Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb"];
   const firstDate = parseDateStr(recs[0].date);
   const firstDayIndex = firstDate.getDay();
   
@@ -115,7 +115,7 @@ export default function PricingCalendar({ recs, listingId, feeStructure = "simpl
       key: r.date,
       dateStr: r.date,
       dayNum: d.getDate(),
-      monthName: d.toLocaleString("en-US", { month: "short" }),
+      monthName: d.toLocaleString("es-ES", { month: "short" }),
       price: r.recommended_price,
       isAvailable: r.is_available === 1,
       isWeekend: feats.is_weekend,
@@ -284,7 +284,7 @@ export default function PricingCalendar({ recs, listingId, feeStructure = "simpl
                 {/* Day Price */}
                 <div style={{ textAlign: "right" }}>
                   {!cell.isAvailable ? (
-                    <span style={{ fontSize: "0.75rem", color: "var(--text-secondary)", fontWeight: 600 }}>Booked</span>
+                    <span style={{ fontSize: "0.75rem", color: "var(--text-secondary)", fontWeight: 600 }}>Reservado</span>
                   ) : (
                     <span className="ui-tooltip-wrapper" style={{ margin: 0, opacity: 1, display: "inline-block" }}>
                       <span style={{ 
@@ -314,10 +314,10 @@ export default function PricingCalendar({ recs, listingId, feeStructure = "simpl
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: "20px" }}>
             <div>
               <h3 style={{ margin: 0, color: "#ffffff" }}>
-                Price Decision Workspace: {selectedDay.dayNum} de {selectedDay.monthName} {selectedDay.isOverride && "🔒 (Manual Override)"}
+                Espacio de Trabajo Tarifario: {selectedDay.dayNum} de {selectedDay.monthName} {selectedDay.isOverride && "🔒 (Sobrescribir)"}
               </h3>
               <p style={{ margin: 0, fontSize: "0.85rem", color: "var(--text-secondary)" }}>
-                Analyze expected revenue and override rates for check-in date: <code>{selectedDay.dateStr}</code>
+                Analiza el ingreso esperado y define tarifas personalizadas para la fecha de check-in: <code>{selectedDay.dateStr}</code>
               </p>
             </div>
             <button
@@ -325,7 +325,7 @@ export default function PricingCalendar({ recs, listingId, feeStructure = "simpl
               onClick={() => { setSelectedDay(null); setOverrideVal(""); }}
               style={{ width: "auto", padding: "5px 12px", fontSize: "0.8rem", height: "auto" }}
             >
-              Close Workspace
+              Cerrar Workspace
             </button>
           </div>
 
@@ -334,7 +334,7 @@ export default function PricingCalendar({ recs, listingId, feeStructure = "simpl
             <div style={{ display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
               <div style={{ display: "flex", flexDirection: "column", gap: "10px", fontSize: "0.9rem", paddingBottom: "20px" }}>
                 <div style={{ display: "flex", justifyContent: "space-between", paddingBottom: "6px", borderBottom: "1px solid rgba(255,255,255,0.05)" }}>
-                  <span style={{ color: "var(--text-secondary)" }}>Active Price:</span>
+                  <span style={{ color: "var(--text-secondary)" }}>Tarifa Activa:</span>
                   <span className="ui-tooltip-wrapper" style={{ margin: 0, opacity: 1 }}>
                     <strong style={{ color: selectedDay.isOverride ? "#f59e0b" : "#ffffff", fontSize: "1.05rem", borderBottom: "1px dashed rgba(255,255,255,0.2)", cursor: "help" }}>
                       ${selectedDay.price.toFixed(2)}
@@ -345,7 +345,7 @@ export default function PricingCalendar({ recs, listingId, feeStructure = "simpl
                   </span>
                 </div>
                 <div style={{ display: "flex", justifyContent: "space-between" }}>
-                  <span style={{ color: "var(--text-secondary)" }}>AI Expected Rate:</span>
+                  <span style={{ color: "var(--text-secondary)" }}>Tarifa Sugerida IA:</span>
                   <span className="ui-tooltip-wrapper" style={{ margin: 0, opacity: 1 }}>
                     <span style={{ color: "var(--text-primary)", borderBottom: "1px dashed rgba(255,255,255,0.2)", cursor: "help" }}>
                       ${selectedDay.basePrice.toFixed(2)}
@@ -356,7 +356,7 @@ export default function PricingCalendar({ recs, listingId, feeStructure = "simpl
                   </span>
                 </div>
                 <div style={{ display: "flex", justifyContent: "space-between" }}>
-                  <span style={{ color: "var(--text-secondary)" }}>Competitors Avg:</span>
+                  <span style={{ color: "var(--text-secondary)" }}>Promedio Competidores:</span>
                   <span className="ui-tooltip-wrapper" style={{ margin: 0, opacity: 1 }}>
                     <span style={{ color: "var(--text-primary)", borderBottom: "1px dashed rgba(255,255,255,0.2)", cursor: "help" }}>
                       ${selectedDay.compAvg.toFixed(2)}
@@ -367,12 +367,12 @@ export default function PricingCalendar({ recs, listingId, feeStructure = "simpl
                   </span>
                 </div>
                 <div style={{ display: "flex", justifyContent: "space-between" }}>
-                  <span style={{ color: "var(--text-secondary)" }}>Days to Check-in:</span>
-                  <span style={{ color: "var(--text-primary)" }}>{selectedDay.leadTime} days</span>
+                  <span style={{ color: "var(--text-secondary)" }}>Días para Check-in:</span>
+                  <span style={{ color: "var(--text-primary)" }}>{selectedDay.leadTime} días</span>
                 </div>
                 {selectedDay.isHoliday && (
                   <div style={{ display: "flex", justifyContent: "space-between", color: "var(--accent-coral)" }}>
-                    <span>National Holiday:</span>
+                    <span>Feriado Nacional:</span>
                     <span>{selectedDay.holidayName} (+20%)</span>
                   </div>
                 )}
@@ -381,7 +381,7 @@ export default function PricingCalendar({ recs, listingId, feeStructure = "simpl
               {/* Override Inputs */}
               <div style={{ backgroundColor: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.05)", padding: "16px", borderRadius: "10px" }}>
                 <span style={{ display: "block", fontSize: "0.8rem", color: "var(--text-secondary)", marginBottom: "8px", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.5px" }}>
-                  Set Custom Override Rate
+                  Establecer Tarifa Manual
                 </span>
                 <div style={{ display: "flex", gap: "10px" }}>
                   <div style={{ position: "relative", flex: 1 }}>
@@ -389,7 +389,7 @@ export default function PricingCalendar({ recs, listingId, feeStructure = "simpl
                     <input
                       type="number"
                       className="text-input"
-                      placeholder="Enter custom price"
+                      placeholder="Ingresar precio"
                       value={overrideVal}
                       onChange={(e) => setOverrideVal(e.target.value)}
                       style={{ paddingLeft: "24px", marginBottom: 0, height: "38px", fontSize: "0.9rem" }}
@@ -400,14 +400,14 @@ export default function PricingCalendar({ recs, listingId, feeStructure = "simpl
                     onClick={handleApplyOverride}
                     style={{ width: "auto", padding: "0 16px", height: "38px", display: "inline-flex", alignItems: "center", gap: "6px", fontSize: "0.85rem" }}
                   >
-                    <Check size={16} /> Apply
+                    <Check size={16} /> Aplicar
                   </button>
                   {selectedDay.isOverride && (
                     <button
                       className="btn btn-secondary"
                       onClick={handleResetOverride}
                       style={{ width: "auto", padding: "0 12px", height: "38px", display: "inline-flex", alignItems: "center", gap: "4px", fontSize: "0.85rem", border: "1px solid rgba(255,255,255,0.1)" }}
-                      title="Reset to AI recommendations"
+                      title="Restablecer a sugerido por la IA"
                     >
                       <RotateCcw size={16} /> Reset
                     </button>
@@ -419,7 +419,7 @@ export default function PricingCalendar({ recs, listingId, feeStructure = "simpl
             {/* Right Column: Elasticity expected revenue curve chart */}
             <div style={{ minHeight: "220px", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
               <span style={{ fontSize: "0.8rem", color: "var(--text-secondary)", display: "block", marginBottom: "10px", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.5px" }}>
-                Price Elasticity & Expected Revenue Curve
+                Curva de Elasticidad de Precios e Ingresos Esperados
               </span>
               <ResponsiveContainer width="100%" height={180}>
                 <LineChart data={elasticityData} margin={{ top: 5, right: 10, left: -20, bottom: 0 }}>
@@ -431,18 +431,18 @@ export default function PricingCalendar({ recs, listingId, feeStructure = "simpl
                     itemStyle={{ fontSize: "0.8rem" }}
                     labelStyle={{ fontSize: "0.8rem", fontWeight: "bold", color: "#fff" }}
                   />
-                  <ReferenceLine x={selectedDay.compAvg} stroke="rgba(255,255,255,0.2)" strokeDasharray="3 3" label={{ value: "Comp Avg", fill: "#94a3b8", fontSize: 8, position: "top" }} />
-                  <ReferenceLine x={selectedDay.price} stroke="var(--accent-coral)" strokeWidth={2} label={{ value: "Active", fill: "var(--accent-coral)", fontSize: 8, position: "top" }} />
-                  <Line type="monotone" dataKey="Expected Revenue ($)" name="Expected Rev ($)" stroke="var(--accent-coral)" strokeWidth={3} dot={false} />
-                  <Line type="monotone" dataKey="Booking Probability (%)" name="Booking Prob (%)" stroke="var(--accent-cyan)" strokeWidth={1.5} strokeDasharray="5 5" dot={false} />
+                  <ReferenceLine x={selectedDay.compAvg} stroke="rgba(255,255,255,0.2)" strokeDasharray="3 3" label={{ value: "Prom. Comp", fill: "#94a3b8", fontSize: 8, position: "top" }} />
+                  <ReferenceLine x={selectedDay.price} stroke="var(--accent-coral)" strokeWidth={2} label={{ value: "Activo", fill: "var(--accent-coral)", fontSize: 8, position: "top" }} />
+                  <Line type="monotone" dataKey="Expected Revenue ($)" name="Ingreso Proyectado ($)" stroke="var(--accent-coral)" strokeWidth={3} dot={false} />
+                  <Line type="monotone" dataKey="Booking Probability (%)" name="Probabilidad de Reserva (%)" stroke="var(--accent-cyan)" strokeWidth={1.5} strokeDasharray="5 5" dot={false} />
                 </LineChart>
               </ResponsiveContainer>
               <div style={{ display: "flex", gap: "10px", fontSize: "0.75rem", color: "var(--text-secondary)", marginTop: "8px", justifyContent: "center" }}>
                 <span style={{ display: "flex", alignItems: "center", gap: "4px" }}>
-                  <span style={{ width: "12px", height: "3px", backgroundColor: "var(--accent-coral)", display: "inline-block" }}></span> Expected Revenue (Rates × Prob)
+                  <span style={{ width: "12px", height: "3px", backgroundColor: "var(--accent-coral)", display: "inline-block" }}></span> Ingreso Proyectado (Tarifa × Probabilidad)
                 </span>
                 <span style={{ display: "flex", alignItems: "center", gap: "4px" }}>
-                  <span style={{ width: "12px", height: "3px", borderTop: "2px dashed var(--accent-cyan)", display: "inline-block" }}></span> Booking Probability
+                  <span style={{ width: "12px", height: "3px", borderTop: "2px dashed var(--accent-cyan)", display: "inline-block" }}></span> Probabilidad de Reserva
                 </span>
               </div>
             </div>

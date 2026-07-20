@@ -688,22 +688,22 @@ POR ESTADÍA (${stayN} noches):
 
   // Navigation Sidebar categories
   const navStructure = {
-    INTELLIGENCE: [
-      { id: "dashboard", label: "Decision Center", icon: LayoutDashboard },
-      { id: "pricing", label: "Pricing Intelligence", icon: DollarSign },
+    "INTELIGENCIA DE MERCADO": [
+      { id: "dashboard", label: "Centro de Decisiones", icon: LayoutDashboard },
+      { id: "pricing", label: "Inteligencia de Precios", icon: DollarSign },
       { id: "competidores", label: "Competidores Afines", icon: Users },
-      { id: "forecast", label: "Forecast & Escenarios", icon: BarChart3 },
+      { id: "forecast", label: "Forecast y Escenarios", icon: BarChart3 },
       { id: "calendario", label: "Calendario Tarifario", icon: CalendarDays }
     ],
-    "PROPERTY SETUP": [
-      { id: "overview", label: "Property Overview", icon: Home },
-      { id: "amenities", label: "Amenities Manager", icon: CheckSquare },
-      { id: "features", label: "Property Features", icon: SlidersHorizontal },
-      { id: "location", label: "Location & Photos", icon: Map },
-      { id: "pricing_rules", label: "Pricing Rules", icon: Sliders },
-      { id: "competitor_engine", label: "Competitor Engine", icon: Compass }
+    "CONFIGURACIÓN DE PROPIEDAD": [
+      { id: "overview", label: "Vista General", icon: Home },
+      { id: "amenities", label: "Gestor de Amenities", icon: CheckSquare },
+      { id: "features", label: "Características Físicas", icon: SlidersHorizontal },
+      { id: "location", label: "Ubicación y Fotos", icon: Map },
+      { id: "pricing_rules", label: "Reglas de Tarifas", icon: Sliders },
+      { id: "competitor_engine", label: "Motor de Competidores", icon: Compass }
     ],
-    SYSTEM: [
+    "SISTEMA Y AUDITORÍA": [
       { id: "historicos", label: "Análisis Histórico", icon: History },
       { id: "alertas", label: "Feed de Alertas", icon: Bell }
     ]
@@ -914,7 +914,15 @@ POR ESTADÍA (${stayN} noches):
                     <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))", gap: "15px" }}>
                       
                       <div className="glass-card" style={{ padding: "18px", margin: 0 }}>
-                        <span style={{ fontSize: "0.7rem", color: "var(--text-secondary)", textTransform: "uppercase", fontWeight: "bold" }}>Precio Recomendado</span>
+                        <div style={{ display: "flex", alignItems: "center", gap: "6px", marginBottom: "4px" }}>
+                          <span style={{ fontSize: "0.7rem", color: "var(--text-secondary)", textTransform: "uppercase", fontWeight: "bold" }}>Precio Recomendado</span>
+                          <span className="ui-tooltip-wrapper" style={{ cursor: "help", fontSize: "0.68rem", opacity: 0.6 }}>
+                            ℹ️
+                            <span className="ui-tooltip" style={{ bottom: "100%", left: "50%", transform: "translateX(-50%)", width: "220px", fontWeight: "normal", textTransform: "none", lineHeight: "1.3" }}>
+                              La tarifa óptima sugerida por la IA para hoy tras analizar factores estacionales y de competidores.
+                            </span>
+                          </span>
+                        </div>
                         <div style={{ fontSize: "1.4rem", fontWeight: "bold", margin: "6px 0", color: "#fff" }}>
                           ${Math.round(recommendedToday)} USD
                         </div>
@@ -924,7 +932,15 @@ POR ESTADÍA (${stayN} noches):
                       </div>
 
                       <div className="glass-card" style={{ padding: "18px", margin: 0 }}>
-                        <span style={{ fontSize: "0.7rem", color: "var(--text-secondary)", textTransform: "uppercase", fontWeight: "bold" }}>Ingreso Proyectado (30d)</span>
+                        <div style={{ display: "flex", alignItems: "center", gap: "6px", marginBottom: "4px" }}>
+                          <span style={{ fontSize: "0.7rem", color: "var(--text-secondary)", textTransform: "uppercase", fontWeight: "bold" }}>Ingreso Proyectado (30d)</span>
+                          <span className="ui-tooltip-wrapper" style={{ cursor: "help", fontSize: "0.68rem", opacity: 0.6 }}>
+                            ℹ️
+                            <span className="ui-tooltip" style={{ bottom: "100%", left: "50%", transform: "translateX(-50%)", width: "220px", fontWeight: "normal", textTransform: "none", lineHeight: "1.3" }}>
+                              Ingreso total proyectado estimado para los próximos 30 días basándose en la ocupación y tarifa simulada.
+                            </span>
+                          </span>
+                        </div>
                         <div style={{ fontSize: "1.4rem", fontWeight: "bold", margin: "6px 0", color: "#fff" }}>
                           ${Math.round(simulatedMonthlyRev)} USD
                         </div>
@@ -934,7 +950,15 @@ POR ESTADÍA (${stayN} noches):
                       </div>
 
                       <div className="glass-card" style={{ padding: "18px", margin: 0 }}>
-                        <span style={{ fontSize: "0.7rem", color: "var(--text-secondary)", textTransform: "uppercase", fontWeight: "bold" }}>Ocupación Esperada</span>
+                        <div style={{ display: "flex", alignItems: "center", gap: "6px", marginBottom: "4px" }}>
+                          <span style={{ fontSize: "0.7rem", color: "var(--text-secondary)", textTransform: "uppercase", fontWeight: "bold" }}>Ocupación Esperada</span>
+                          <span className="ui-tooltip-wrapper" style={{ cursor: "help", fontSize: "0.68rem", opacity: 0.6 }}>
+                            ℹ️
+                            <span className="ui-tooltip" style={{ bottom: "100%", left: "50%", transform: "translateX(-50%)", width: "220px", fontWeight: "normal", textTransform: "none", lineHeight: "1.3" }}>
+                              Tasa promedio de ocupación estimada para tu propiedad en base al precio actual o simulado.
+                            </span>
+                          </span>
+                        </div>
                         <div style={{ fontSize: "1.4rem", fontWeight: "bold", margin: "6px 0", color: "#fff" }}>
                           {simOcc}%
                         </div>
@@ -944,7 +968,15 @@ POR ESTADÍA (${stayN} noches):
                       </div>
 
                       <div className="glass-card" style={{ padding: "18px", margin: 0 }}>
-                        <span style={{ fontSize: "0.7rem", color: "var(--text-secondary)", textTransform: "uppercase", fontWeight: "bold" }}>Market Score</span>
+                        <div style={{ display: "flex", alignItems: "center", gap: "6px", marginBottom: "4px" }}>
+                          <span style={{ fontSize: "0.7rem", color: "var(--text-secondary)", textTransform: "uppercase", fontWeight: "bold" }}>Market Score</span>
+                          <span className="ui-tooltip-wrapper" style={{ cursor: "help", fontSize: "0.68rem", opacity: 0.6 }}>
+                            ℹ️
+                            <span className="ui-tooltip" style={{ bottom: "100%", left: "50%", transform: "translateX(-50%)", width: "220px", fontWeight: "normal", textTransform: "none", lineHeight: "1.3" }}>
+                              Puntaje general de competitividad de tu propiedad respecto a los 15 competidores directos.
+                            </span>
+                          </span>
+                        </div>
                         <div style={{ fontSize: "1.4rem", fontWeight: "bold", margin: "6px 0", color: "var(--accent-gold)" }}>
                           84/100
                         </div>
@@ -954,7 +986,15 @@ POR ESTADÍA (${stayN} noches):
                       </div>
 
                       <div className="glass-card" style={{ padding: "18px", margin: 0 }}>
-                        <span style={{ fontSize: "0.7rem", color: "var(--text-secondary)", textTransform: "uppercase", fontWeight: "bold" }}>Alertas Activas</span>
+                        <div style={{ display: "flex", alignItems: "center", gap: "6px", marginBottom: "4px" }}>
+                          <span style={{ fontSize: "0.7rem", color: "var(--text-secondary)", textTransform: "uppercase", fontWeight: "bold" }}>Alertas Activas</span>
+                          <span className="ui-tooltip-wrapper" style={{ cursor: "help", fontSize: "0.68rem", opacity: 0.6 }}>
+                            ℹ️
+                            <span className="ui-tooltip" style={{ bottom: "100%", left: "50%", transform: "translateX(-50%)", width: "220px", fontWeight: "normal", textTransform: "none", lineHeight: "1.3" }}>
+                              Notificaciones importantes y sugerencias de acción inmediata basadas en anomalías del mercado.
+                            </span>
+                          </span>
+                        </div>
                         <div style={{ fontSize: "1.4rem", fontWeight: "bold", margin: "6px 0", color: "var(--accent-coral)" }}>
                           3 Alertas
                         </div>
@@ -1060,7 +1100,7 @@ POR ESTADÍA (${stayN} noches):
                     
                     {/* Big Pricing Header */}
                     <div className="glass-card">
-                      <h3 style={{ margin: "0 0 15px 0" }}>Pricing Intelligence</h3>
+                      <h3 style={{ margin: "0 0 15px 0" }}>Inteligencia de Tarifas</h3>
                       <div style={{ display: "flex", gap: "30px", alignItems: "center", flexWrap: "wrap" }}>
                         <div>
                           <span style={{ fontSize: "0.72rem", color: "var(--text-secondary)", textTransform: "uppercase" }}>Precio Actual</span>
@@ -1078,7 +1118,7 @@ POR ESTADÍA (${stayN} noches):
                     <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "20px" }}>
                       
                       <div className="glass-card" style={{ margin: 0, borderLeft: "4px solid #ef4444" }}>
-                        <strong style={{ fontSize: "0.9rem", color: "#fff" }}>Minimum Competitive Price</strong>
+                        <strong style={{ fontSize: "0.9rem", color: "#fff" }}>Tarifa Mínima Competitiva (Suelo)</strong>
                         <div style={{ fontSize: "1.6rem", fontWeight: "bold", margin: "8px 0" }}>${Math.round(currentPrice * 0.70)} USD</div>
                         <p style={{ fontSize: "0.78rem", color: "var(--text-secondary)", lineHeight: "1.4", margin: 0 }}>
                           <strong>Matemática:</strong> comp_avg * 0.70.<br/>
@@ -1087,7 +1127,7 @@ POR ESTADÍA (${stayN} noches):
                       </div>
 
                       <div className="glass-card" style={{ margin: 0, borderLeft: "4px solid #10b981" }}>
-                        <strong style={{ fontSize: "0.9rem", color: "#fff" }}>Optimal Revenue Price</strong>
+                        <strong style={{ fontSize: "0.9rem", color: "#fff" }}>Tarifa de Ingresos Óptimos</strong>
                         <div style={{ fontSize: "1.6rem", fontWeight: "bold", margin: "8px 0" }}>${Math.round(recommendedToday)} USD</div>
                         <p style={{ fontSize: "0.78rem", color: "var(--text-secondary)", lineHeight: "1.4", margin: 0 }}>
                           <strong>Matemática:</strong> ML_base * multipliers.<br/>
@@ -1096,7 +1136,7 @@ POR ESTADÍA (${stayN} noches):
                       </div>
 
                       <div className="glass-card" style={{ margin: 0, borderLeft: "4px solid var(--accent-gold)" }}>
-                        <strong style={{ fontSize: "0.9rem", color: "#fff" }}>Premium Price</strong>
+                        <strong style={{ fontSize: "0.9rem", color: "#fff" }}>Tarifa Premium (Fin de Semana / Feriados)</strong>
                         <div style={{ fontSize: "1.6rem", fontWeight: "bold", margin: "8px 0" }}>${Math.round(recommendedToday * 1.25)} USD</div>
                         <p style={{ fontSize: "0.78rem", color: "var(--text-secondary)", lineHeight: "1.4", margin: 0 }}>
                           <strong>Matemática:</strong> recommended * 1.25.<br/>
@@ -1105,7 +1145,7 @@ POR ESTADÍA (${stayN} noches):
                       </div>
 
                       <div className="glass-card" style={{ margin: 0, borderLeft: "4px solid #3b82f6" }}>
-                        <strong style={{ fontSize: "0.9rem", color: "#fff" }}>Aggressive Price</strong>
+                        <strong style={{ fontSize: "0.9rem", color: "#fff" }}>Tarifa de Penetración Rápida</strong>
                         <div style={{ fontSize: "1.6rem", fontWeight: "bold", margin: "8px 0" }}>${Math.round(recommendedToday * 0.85)} USD</div>
                         <p style={{ fontSize: "0.78rem", color: "var(--text-secondary)", lineHeight: "1.4", margin: 0 }}>
                           <strong>Matemática:</strong> recommended * 0.85.<br/>
@@ -1646,7 +1686,7 @@ POR ESTADÍA (${stayN} noches):
                     <div className="glass-card">
                       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "15px" }}>
                         <div>
-                          <h3 style={{ margin: 0 }}>Property Features Database</h3>
+                          <h3 style={{ margin: 0 }}>Base de Datos de Características</h3>
                           <p style={{ margin: 0, fontSize: "0.78rem", color: "var(--text-secondary)" }}>Edita las características físicas y políticas del alojamiento. Las modificaciones se auto-guardan.</p>
                         </div>
                         <span style={{ fontSize: "0.75rem", color: autoSaveStatus === "saved" ? "var(--accent-emerald)" : "var(--accent-gold)" }}>
