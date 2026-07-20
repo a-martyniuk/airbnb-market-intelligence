@@ -239,6 +239,8 @@ export default function UnifiedDashboard() {
   const isFirstMount = useRef(true);
   const saveTimeoutRef = useRef(null);
 
+  const currentDetails = (selectedId && targetDetails && selectedId === targetDetails.listing_id) ? targetDetails : details;
+
   const getSimulatedPrice = (rec, wk, hs, hol, lm) => {
     if (!rec || !rec.features) return 0.0;
     const feats = rec.features;
@@ -266,11 +268,11 @@ export default function UnifiedDashboard() {
   const simulatedRecs = getSimulatedRecs();
 
   const getRanking = () => {
-    if (!details || !competitors || competitors.length === 0) {
+    if (!currentDetails || !competitors || competitors.length === 0) {
       return { rankText: "Rank 1 de 1", pctText: "Top 100%", trend: "neutral", trendText: "Cargando..." };
     }
     
-    const targetRevPAR = (details.price || 90.0) * ((details.estimated_occupancy_rate_30d || 70.0) / 100.0);
+    const targetRevPAR = (currentDetails.price || 90.0) * ((currentDetails.estimated_occupancy_rate_30d || 70.0) / 100.0);
     
     const allRevPARs = competitors.map(c => {
       const occ = c.estimated_occupancy_rate_30d || 50.0;
@@ -281,13 +283,13 @@ export default function UnifiedDashboard() {
     });
     
     allRevPARs.push({
-      id: details.listing_id,
+      id: currentDetails.listing_id,
       revpar: targetRevPAR
     });
     
     allRevPARs.sort((a, b) => b.revpar - a.revpar);
     
-    const targetRank = allRevPARs.findIndex(item => item.id === details.listing_id) + 1;
+    const targetRank = allRevPARs.findIndex(item => item.id === currentDetails.listing_id) + 1;
     const totalListings = allRevPARs.length;
     const pct = (targetRank / totalListings) * 100;
     
@@ -696,7 +698,7 @@ POR ESTADÍA (${stayN} noches):
     );
   }
 
-  const currentPrice = details?.price || 90.0;
+  const currentPrice = currentDetails?.price || 90.0;
   const recommendedToday = simulatedRecs[0] ? simulatedRecs[0].recommended_price : currentPrice * 1.08;
   const priceDeltaPct = Math.round(((recommendedToday - currentPrice) / currentPrice) * 100);
 
@@ -724,7 +726,7 @@ POR ESTADÍA (${stayN} noches):
   };
 
   // Simulator dynamic values
-  const baseOcc = details?.estimated_occupancy_rate_30d || 70.0;
+  const baseOcc = currentDetails?.estimated_occupancy_rate_30d || 70.0;
   const simOcc = Math.max(5, Math.min(99, Math.round(baseOcc / (1 + Math.exp(0.045 * simulatorPct)) * 2)));
   const simulatedPrice = Math.round(currentPrice * (1 + simulatorPct / 100));
   const proratedCleaning = parseFloat(cleaningFee) / (parseInt(averageStay) || 3);
@@ -738,7 +740,7 @@ POR ESTADÍA (${stayN} noches):
   const avgCompOccupancy = competitors.length > 0 
     ? competitors.reduce((acc, c) => acc + (c.estimated_occupancy_rate_30d || 50.0), 0) / competitors.length 
     : 70.0;
-  const occDiff = (details?.estimated_occupancy_rate_30d || 70.0) - avgCompOccupancy;
+  const occDiff = (currentDetails?.estimated_occupancy_rate_30d || 70.0) - avgCompOccupancy;
   const occDeltaText = `${occDiff >= 0 ? "+" : ""}${occDiff.toFixed(1)}% vs mercado`;
 
   const getSimStrategyText = () => {
@@ -810,7 +812,7 @@ POR ESTADÍA (${stayN} noches):
               padding: "4px 12px",
               borderRadius: "6px"
             }}>
-              {targetDetails?.title || details?.title || "Cargando propiedad..."}
+              {targetDetails?.title || currentDetails?.title || "Cargando propiedad..."}
             </span>
           </div>
 
@@ -920,7 +922,7 @@ POR ESTADÍA (${stayN} noches):
                         </h3>
                       </div>
                       <p style={{ margin: 0, fontSize: "0.88rem", color: "var(--text-secondary)", lineHeight: "1.5" }}>
-                        Hoy recomendamos aumentar tu precio un <strong>{priceDeltaPct}%</strong>. La demanda general en <strong>{details?.neighborhood || "Palermo Hollywood"}</strong> subió un 12% impulsada por alta ocupación estacional. Se identificaron <strong>{highSimilarityComps} competidores directos</strong> altamente activos. No se sugieren promociones de último momento hoy para proteger tu ADR. RevPAR proyectado: <strong>+${simRevparDeltaPct}% respecto a tu precio publicado</strong>.
+                        Hoy recomendamos aumentar tu precio un <strong>{priceDeltaPct}%</strong>. La demanda general en <strong>{currentDetails?.neighborhood || "Palermo Hollywood"}</strong> subió un 12% impulsada por alta ocupación estacional. Se identificaron <strong>{highSimilarityComps} competidores directos</strong> altamente activos. No se sugieren promociones de último momento hoy para proteger tu ADR. RevPAR proyectado: <strong>+${simRevparDeltaPct}% respecto a tu precio publicado</strong>.
                       </p>
                     </div>
 
@@ -1181,8 +1183,8 @@ POR ESTADÍA (${stayN} noches):
                       <h3 style={{ margin: "0 0 10px 0", textTransform: "none" }}>Distribución y Geolocalización de Competidores</h3>
                       <LeafletMap
                         listings={listings}
-                        center={[targetDetails?.latitude || details?.latitude || -34.5861, targetDetails?.longitude || details?.longitude || -58.4373]}
-                        targetListingId={targetDetails?.listing_id || details?.listing_id}
+                        center={[targetDetails?.latitude || currentDetails?.latitude || -34.5861, targetDetails?.longitude || currentDetails?.longitude || -58.4373]}
+                        targetListingId={targetDetails?.listing_id || currentDetails?.listing_id}
                         selectedListingId={selectedId}
                       />
                     </div>
@@ -1202,7 +1204,7 @@ POR ESTADÍA (${stayN} noches):
                         const cRevpar = Math.round(cPrice * cOcc / 100);
 
                         // Extract physical amenities differences
-                        const targetAms = details?.amenities || [];
+                        const targetAms = currentDetails?.amenities || [];
                         let compAms = [];
                         if (c.amenities) {
                           if (Array.isArray(c.amenities)) {
@@ -1352,7 +1354,7 @@ POR ESTADÍA (${stayN} noches):
                       <PricingCalendar
                         recs={recs}
                         listingId={selectedId}
-                        feeStructure={details?.fee_structure || "simplified"}
+                        feeStructure={currentDetails?.fee_structure || "simplified"}
                       />
                     </div>
 
