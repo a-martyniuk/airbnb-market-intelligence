@@ -800,6 +800,14 @@ POR ESTADÍA (${stayN} noches):
             </span>
           </div>
 
+          {/* Last scraped date / update time */}
+          {pipelineStatus?.database?.last_scraped_at && (
+            <div style={{ display: "flex", alignItems: "center", gap: "6px", fontSize: "0.72rem", color: "var(--text-secondary)", backgroundColor: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.05)", padding: "4px 10px", borderRadius: "6px" }}>
+              <span style={{ width: "6px", height: "6px", backgroundColor: "var(--accent-emerald)", borderRadius: "50%", display: "inline-block" }}></span>
+              <span>Mercado al: {pipelineStatus.database.last_scraped_at}</span>
+            </div>
+          )}
+
           {/* Sync indicator */}
           {hydrating && (
             <div style={{ display: "flex", alignItems: "center", gap: "6px", fontSize: "0.75rem", color: "var(--accent-gold)" }}>
@@ -1992,6 +2000,28 @@ POR ESTADÍA (${stayN} noches):
                           />
                         </div>
                       </div>
+
+                      {pipelineStatus?.timestamps && (
+                        <div style={{ marginTop: "18px", marginBottom: "18px", borderTop: "1px solid rgba(255,255,255,0.06)", paddingTop: "15px" }}>
+                          <span style={{ fontSize: "0.72rem", color: "var(--text-secondary)", display: "block", marginBottom: "8px", textTransform: "uppercase", fontWeight: "600", letterSpacing: "0.5px" }}>
+                            Última Actualización de Sub-Sistemas
+                          </span>
+                          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "10px", fontSize: "0.75rem", color: "var(--text-secondary)" }}>
+                            <div>
+                              <span>🏷️ Tarifas y Ofertas:</span> <strong style={{ color: "#fff", marginLeft: "4px" }}>{pipelineStatus.timestamps.last_update_prices || "Sin registro"}</strong>
+                            </div>
+                            <div>
+                              <span>👥 Competidores Directos:</span> <strong style={{ color: "#fff", marginLeft: "4px" }}>{pipelineStatus.timestamps.last_update_competitors || "Sin registro"}</strong>
+                            </div>
+                            <div>
+                              <span>📅 Calendarios y Stay limits:</span> <strong style={{ color: "#fff", marginLeft: "4px" }}>{pipelineStatus.timestamps.last_update_availability || "Sin registro"}</strong>
+                            </div>
+                            <div>
+                              <span>⭐ Reseñas y Calificaciones:</span> <strong style={{ color: "#fff", marginLeft: "4px" }}>{pipelineStatus.timestamps.last_update_reviews || "Sin registro"}</strong>
+                            </div>
+                          </div>
+                        </div>
+                      )}
 
                       <div style={{ display: "flex", gap: "10px" }}>
                         <button
