@@ -14,6 +14,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy source code and configuration
 COPY src/ ./src/
 COPY config/ ./config/
+COPY data/ ./data/
 
 # Expose FastAPI port
 EXPOSE 8000
