@@ -1613,7 +1613,7 @@ POR ESTADÍA (${stayN} noches):
                           <h3 style={{ margin: "0 0 10px 0" }}>Límites y Reglas KNN</h3>
                           <p style={{ fontSize: "0.8rem", color: "var(--text-secondary)", lineHeight: "1.5" }}>
                             La watchlist de competidores directos se calcula aplicando una métrica de distancia euclidiana ponderada:<br/>
-                            • <strong>Distancia Geográfica (Haversine):</strong> 35% de peso (radio límite de 5km).<br/>
+                            • <strong>Distancia Geográfica (Haversine):</strong> 35% de peso (radio límite de 1.5km).<br/>
                             • <strong>Coincidencia de Amenities:</strong> 35% de peso (Piscina, Gimnasio, Jacuzzi, Cochera, Aire acondicionado).<br/>
                             • <strong>Capacidad de Huéspedes:</strong> 20% de peso (máximo +/- 2 huéspedes de diferencia).<br/>
                             • <strong>Cantidad de Baños:</strong> 10% de peso.<br/>

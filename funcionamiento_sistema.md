@@ -63,7 +63,7 @@ Donde los pesos y distancias normalizadas se definen como:
 
 | Parámetro | Peso ($w$) | Explicación / Normalización |
 | :--- | :---: | :--- |
-| **Ubicación ($D_{dist}$)** | **0.35** | Distancia Haversine (km) dividida por 5.0 (máx 5km). |
+| **Ubicación ($D_{dist}$)** | **0.35** | Distancia Haversine (km) dividida por 1.5 (máx 1.5km). |
 | **Amenities ($D_{am}$)** | **0.35** | Mismatch de servicios clave (Piscina, Gimnasio, Jacuzzi, Cochera, AC). |
 | **Huéspedes ($D_{accom}$)** | **0.20** | Diferencia de capacidad dividida por 6.0. |
 | **Baños ($D_{bath}$)** | **0.10** | Diferencia de baños dividida por 2.0. |

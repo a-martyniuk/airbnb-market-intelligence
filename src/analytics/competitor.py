@@ -103,8 +103,11 @@ class CompetitorAnalyzer:
                 target['latitude'], target['longitude'],
                 row['latitude'], row['longitude']
             )
-            # Normalize geo distance: bound to [0, 5km] and scale to [0, 1]
-            norm_dist = min(geo_dist / 5.0, 1.0)
+            # Hard filter: limit radius of 1.5km
+            if geo_dist > 1.5:
+                continue
+            # Normalize geo distance: bound to [0, 1.5km] and scale to [0, 1]
+            norm_dist = min(geo_dist / 1.5, 1.0)
 
             # 2. Bedrooms differences
             bed_diff = abs(target['bedrooms'] - row['bedrooms'])
