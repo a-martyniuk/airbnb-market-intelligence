@@ -1284,7 +1284,7 @@ POR ESTADÍA (${stayN} noches):
                                 </h4>
                                 <div style={{ display: "flex", justifyContent: "space-between", marginTop: "4px", fontSize: "0.72rem", color: "var(--text-secondary)" }}>
                                   <span>{c.neighborhood} • {c.geo_distance_km} km</span>
-                                  <span style={{ color: "var(--accent-gold)" }}>⭐ {c.rating ? c.rating.toFixed(2) : "4.9"} ({c.reviews_count || 12} reviews)</span>
+                                  <span style={{ color: "var(--accent-gold)" }}>⭐ {c.rating ? c.rating.toFixed(2) : "4.9"} ({c.reviews_count ?? 0} reseñas)</span>
                                 </div>
                               </div>
 
