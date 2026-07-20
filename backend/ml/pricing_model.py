@@ -8,8 +8,8 @@ from datetime import datetime, date, timedelta
 from typing import List, Dict, Any, Tuple
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.preprocessing import LabelEncoder
-from src.utils.db import get_connection
-from src.analytics.competitor import CompetitorAnalyzer
+from backend.utils.db import get_connection
+from backend.analytics.competitor import CompetitorAnalyzer
 
 logger = logging.getLogger(__name__)
 
@@ -88,7 +88,7 @@ class DynamicPricingModel:
             else:
                 return default_val
 
-    def train_model(self, db_path: str = "data/airbnb_intelligence.db") -> bool:
+    def train_model(self, db_path: str = "database/airbnb_intelligence.db") -> bool:
         """
         Loads historical snapshot data from the database and trains the ML Pricing Model.
         Compares RandomForest and GradientBoosting regressors, choosing the best on MAE.
@@ -124,7 +124,7 @@ class DynamicPricingModel:
                 return False
 
             # Feature Engineering
-            from src.utils.holidays import is_argentine_holiday
+            from backend.utils.holidays import is_argentine_holiday
             df['snapshot_date'] = pd.to_datetime(df['snapshot_date'])
             df['month'] = df['snapshot_date'].dt.month
             df['day_of_week'] = df['snapshot_date'].dt.dayofweek
@@ -237,7 +237,7 @@ class DynamicPricingModel:
         finally:
             conn.close()
 
-    def recommend_price(self, listing_id: str, target_date: date, db_path: str = "data/airbnb_intelligence.db") -> Tuple[float, float, Dict[str, Any]]:
+    def recommend_price(self, listing_id: str, target_date: date, db_path: str = "database/airbnb_intelligence.db") -> Tuple[float, float, Dict[str, Any]]:
         """
         Recommends a price for a target listing on a specific check-in date.
         Combines ML prediction with dynamic rules (lead time, competitors, seasonality).
@@ -285,7 +285,7 @@ class DynamicPricingModel:
         conn.close()
 
         # Build feature variables
-        from src.utils.holidays import is_argentine_holiday
+        from backend.utils.holidays import is_argentine_holiday
         today = date.today()
         lead_time = (target_date - today).days
         month = target_date.month
@@ -451,7 +451,7 @@ class DynamicPricingModel:
 
         return recommended_price, confidence_score, features_used
 
-    def generate_and_save_recommendations(self, listing_id: str, days: int = 30, db_path: str = "data/airbnb_intelligence.db"):
+    def generate_and_save_recommendations(self, listing_id: str, days: int = 30, db_path: str = "database/airbnb_intelligence.db"):
         """
         Generates price recommendations for the next N days and stores them in SQLite.
         """

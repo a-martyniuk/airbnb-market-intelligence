@@ -6,7 +6,7 @@ competitor_analysis:
     bedrooms: 0.2
     distance: 0.5
 database:
-  db_path: data/airbnb_intelligence.db
+  db_path: database/airbnb_intelligence.db
 market:
   buenos_aires:
     center_lat: -34.5861

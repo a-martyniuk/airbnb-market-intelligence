@@ -32,14 +32,14 @@ jobs:
 
       - name: Run Scraper & ETL Pipeline
         env:
-          DATABASE_PATH: data/airbnb_intelligence.db
-        run: python -m src.etl.run_daily_pipeline
+          DATABASE_PATH: database/airbnb_intelligence.db
+        run: python -m backend.etl.run_daily_pipeline
 
       - name: Commit updated SQLite database
         run: |
           git config --global user.name "GitHub Action Bot"
           git config --global user.email "actions@github.com"
-          git add data/airbnb_intelligence.db
+          git add database/airbnb_intelligence.db
           # Only commit and push if there are changes
           if git diff --staged --quiet; then
             echo "No database updates detected."

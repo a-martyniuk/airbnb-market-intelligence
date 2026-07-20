@@ -2,11 +2,11 @@ import os
 import json
 import logging
 from datetime import datetime
-from src.utils.db import get_connection
-from src.scraper.scheduler import ScrapingScheduler
-from src.etl.pipeline import ETLPipeline
-from src.ml.pricing_model import DynamicPricingModel
-from src.analytics.competitor import CompetitorAnalyzer
+from backend.utils.db import get_connection
+from backend.scraper.scheduler import ScrapingScheduler
+from backend.etl.pipeline import ETLPipeline
+from backend.ml.pricing_model import DynamicPricingModel
+from backend.analytics.competitor import CompetitorAnalyzer
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
 logger = logging.getLogger(__name__)
@@ -30,7 +30,7 @@ def set_pipeline_status_time(db_path: str, key: str):
 def main():
     logger.info("Starting Daily AirMarket AI Pipeline Run...")
     
-    db_path = os.getenv("DATABASE_PATH", "data/airbnb_intelligence.db")
+    db_path = os.getenv("DATABASE_PATH", "database/airbnb_intelligence.db")
     settings_file = "config/target_settings.json"
     
     target_id = None

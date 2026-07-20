@@ -17,12 +17,12 @@ venv/
 ENV/
 
 # Database and Raw Data files (local SQLite DB and scraped cache shouldn't be pushed to Git)
-data/*.db
-data/*.sqlite
-data/*.sqlite3
-!data/airbnb_intelligence.db
-data/raw/
-data/raw_temp/
+database/*.db
+database/*.sqlite
+database/*.sqlite3
+!database/airbnb_intelligence.db
+database/raw/
+database/raw_temp/
 !data/.gitkeep
 
 # IDEs

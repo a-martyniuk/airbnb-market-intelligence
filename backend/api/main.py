@@ -17,17 +17,17 @@ if os.path.exists(".env"):
                 key, val = line.split("=", 1)
                 os.environ[key.strip()] = val.strip()
 
-from src.utils.db import get_connection, init_db
-from src.scraper.scheduler import ScrapingScheduler
-from src.etl.pipeline import ETLPipeline
-from src.ml.pricing_model import DynamicPricingModel
-from src.analytics.competitor import CompetitorAnalyzer
+from backend.utils.db import get_connection, init_db
+from backend.scraper.scheduler import ScrapingScheduler
+from backend.etl.pipeline import ETLPipeline
+from backend.ml.pricing_model import DynamicPricingModel
+from backend.analytics.competitor import CompetitorAnalyzer
 
 # Setup logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-DB_PATH = os.getenv("DATABASE_PATH", "data/airbnb_intelligence.db")
+DB_PATH = os.getenv("DATABASE_PATH", "database/airbnb_intelligence.db")
 # Ensure data directory exists if it's a nested path
 db_dir = os.path.dirname(DB_PATH)
 if db_dir:
@@ -44,9 +44,9 @@ def run_pipeline_scheduler():
         time.sleep(300)
         try:
             logger.info("Background Scheduler: Automatic daily scrape sequence triggered...")
-            from src.scraper.scheduler import ScrapingScheduler
-            from src.etl.pipeline import ETLPipeline
-            from src.ml.pricing_model import DynamicPricingModel
+            from backend.scraper.scheduler import ScrapingScheduler
+            from backend.etl.pipeline import ETLPipeline
+            from backend.ml.pricing_model import DynamicPricingModel
             
             scheduler = ScrapingScheduler()
             raw_path = scheduler.run_daily_scrape()
@@ -240,7 +240,7 @@ def bg_run_incremental_scrape(mode: str = "total"):
         
         # Synchronize updated database and target settings back to GitHub
         try:
-            from src.utils.git_db import sync_to_github
+            from backend.utils.git_db import sync_to_github
             sync_to_github([DB_PATH, "config/target_settings.json"])
         except Exception as sync_err:
             logger.error(f"Failed to sync database to GitHub in background task: {str(sync_err)}")
@@ -789,7 +789,7 @@ def update_pricing_rules(payload: RulesUpdate, background_tasks: BackgroundTasks
             pricing_engine.generate_and_save_recommendations(l_id, days=30, db_path=DB_PATH)
             
         # Sync updated config and database to GitHub
-        from src.utils.git_db import sync_to_github
+        from backend.utils.git_db import sync_to_github
         background_tasks.add_task(sync_to_github, [DB_PATH, "config/settings.yaml"])
         
         return {"status": "success", "message": "Pricing rules updated and database price recommendations recalculated!"}
@@ -831,7 +831,7 @@ def save_price_override(listing_id: str, payload: OverridePayload, background_ta
         """, (payload.price, json.dumps(features_dict), listing_id, payload.date))
         conn.commit()
         # Sync updated database to GitHub
-        from src.utils.git_db import sync_to_github
+        from backend.utils.git_db import sync_to_github
         background_tasks.add_task(sync_to_github, [DB_PATH])
         
         return {"status": "success", "message": f"Saved manual price override of ${payload.price} for {payload.date}."}
@@ -873,7 +873,7 @@ def reset_price_override(listing_id: str, payload: ResetPayload, background_task
             """, (original_price, json.dumps(features_dict), listing_id, payload.date))
             conn.commit()
             # Sync updated database to GitHub
-            from src.utils.git_db import sync_to_github
+            from backend.utils.git_db import sync_to_github
             background_tasks.add_task(sync_to_github, [DB_PATH])
             
             return {"status": "success", "message": f"Reset price to AI recommended rate of ${original_price:.2f}."}
@@ -1388,7 +1388,7 @@ def save_target_listing_settings(payload: Dict[str, Any], background_tasks: Back
             set_pipeline_status_time("last_update_competitors")
             
             # Retrain models
-            from src.ml.pricing_model import DynamicPricingModel
+            from backend.ml.pricing_model import DynamicPricingModel
             pricing_engine = DynamicPricingModel()
             pricing_engine.train_model(DB_PATH)
             pricing_engine.generate_and_save_recommendations(str(listing_id), days=30, db_path=DB_PATH)
@@ -1402,7 +1402,7 @@ def save_target_listing_settings(payload: Dict[str, Any], background_tasks: Back
             background_tasks.add_task(bg_run_incremental_scrape, "total")
             message = "Target listing saved and total market scrape initiated."
         # Sync local target_settings.json to GitHub immediately
-        from src.utils.git_db import sync_to_github
+        from backend.utils.git_db import sync_to_github
         background_tasks.add_task(sync_to_github, [DB_PATH, "config/target_settings.json"])
         
         return {"status": "success", "message": message}

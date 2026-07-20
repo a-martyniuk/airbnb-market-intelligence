@@ -5,7 +5,7 @@ from datetime import datetime
 
 logger = logging.getLogger(__name__)
 
-def get_connection(db_path="data/airbnb_intelligence.db"):
+def get_connection(db_path="database/airbnb_intelligence.db"):
     """
     Establishes a connection to the SQLite database.
     Ensures parent directories exist and enables foreign key constraints.
@@ -16,7 +16,7 @@ def get_connection(db_path="data/airbnb_intelligence.db"):
     conn.row_factory = sqlite3.Row
     return conn
 
-def init_db(db_path="data/airbnb_intelligence.db"):
+def init_db(db_path="database/airbnb_intelligence.db"):
     """
     Initializes the database schema if it doesn't already exist.
     """

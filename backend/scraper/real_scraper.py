@@ -5,7 +5,7 @@ import logging
 import re
 from bs4 import BeautifulSoup
 from typing import List, Dict, Any
-from src.scraper.base import BaseAirbnbScraper
+from backend.scraper.base import BaseAirbnbScraper
 
 logger = logging.getLogger(__name__)
 

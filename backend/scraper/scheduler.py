@@ -4,7 +4,7 @@ import json
 import logging
 from datetime import datetime
 from typing import Dict, Any, List
-from src.scraper.real_scraper import RealAirbnbScraper
+from backend.scraper.real_scraper import RealAirbnbScraper
 
 logger = logging.getLogger(__name__)
 
@@ -47,7 +47,7 @@ class ScrapingScheduler:
             
             # Load watchlist and target listing IDs to ensure they are always scraped
             watchlist_ids = []
-            db_path = "data/airbnb_intelligence.db"
+            db_path = "database/airbnb_intelligence.db"
             if os.path.exists(db_path):
                 import sqlite3
                 try:

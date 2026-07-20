@@ -4,7 +4,7 @@ import logging
 import sqlite3
 from datetime import datetime, timedelta
 from typing import Dict, Any, List
-from src.utils.db import get_connection, init_db
+from backend.utils.db import get_connection, init_db
 
 logger = logging.getLogger(__name__)
 
@@ -15,7 +15,7 @@ class ETLPipeline:
     Implements Calendar Delta Tracking to detect bookings and records booking events.
     """
 
-    def __init__(self, db_path: str = "data/airbnb_intelligence.db"):
+    def __init__(self, db_path: str = "database/airbnb_intelligence.db"):
         self.db_path = db_path
         # Ensure database is initialized
         init_db(self.db_path)
@@ -214,7 +214,7 @@ if __name__ == "__main__":
     pipeline = ETLPipeline()
     # Test on existing output if applicable
     import glob
-    files = glob.glob("data/raw/*/*.json")
+    files = glob.glob("database/raw/*/*.json")
     if files:
         pipeline.process_raw_file(files[0])
     else:

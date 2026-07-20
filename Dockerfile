@@ -21,7 +21,7 @@ EXPOSE 8000
 
 # Set environment variables
 ENV PYTHONUNBUFFERED=1
-ENV DATABASE_PATH=/app/data/airbnb_intelligence.db
+ENV DATABASE_PATH=/app/database/airbnb_intelligence.db
 
 # Launch FastAPI app using shell form to resolve $PORT dynamically
-CMD uvicorn src.api.main:app --host 0.0.0.0 --port ${PORT:-8000}
+CMD uvicorn backend.api.main:app --host 0.0.0.0 --port ${PORT:-8000}

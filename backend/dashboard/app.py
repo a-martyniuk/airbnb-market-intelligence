@@ -14,13 +14,13 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 # Absolute paths or relative package paths
-from src.utils.db import get_connection, init_db
-from src.scraper.scheduler import ScrapingScheduler
-from src.etl.pipeline import ETLPipeline
-from src.ml.pricing_model import DynamicPricingModel
-from src.analytics.competitor import CompetitorAnalyzer
-from src.dashboard.styles import inject_styles, render_kpi_card, render_glass_card
-from src.dashboard.charts import (
+from backend.utils.db import get_connection, init_db
+from backend.scraper.scheduler import ScrapingScheduler
+from backend.etl.pipeline import ETLPipeline
+from backend.ml.pricing_model import DynamicPricingModel
+from backend.analytics.competitor import CompetitorAnalyzer
+from backend.dashboard.styles import inject_styles, render_kpi_card, render_glass_card
+from backend.dashboard.charts import (
     create_listings_map,
     create_price_distribution_chart,
     create_price_trend_chart,
@@ -40,7 +40,7 @@ st.set_page_config(
 inject_styles()
 
 # DB Configuration
-DB_PATH = "data/airbnb_intelligence.db"
+DB_PATH = "database/airbnb_intelligence.db"
 init_db(DB_PATH)
 
 def check_db_empty() -> bool:
@@ -452,7 +452,7 @@ else:
             st.markdown("#### ETL Pipeline Architecture")
             st.markdown(
                 """
-                - **Raw Files Directory**: `data/raw/YYYY-MM-DD/` contains raw scraped payloads.
+                - **Raw Files Directory**: `database/raw/YYYY-MM-DD/` contains raw scraped payloads.
                 - **Relational Storage**: SQLite database handles transaction logs and provides analytic indexing.
                 - **Calendar Delta Ingestion**:
                   $$\\Delta_{Calendar} = \\text{Calendar}(T-1, D)_{Available=1} \\cap \\text{Calendar}(T, D)_{Available=0}$$

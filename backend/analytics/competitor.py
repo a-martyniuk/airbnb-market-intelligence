@@ -4,7 +4,7 @@ import numpy as np
 import yaml
 import json
 from typing import List, Dict, Any
-from src.utils.db import get_connection
+from backend.utils.db import get_connection
 
 class CompetitorAnalyzer:
     """
@@ -40,7 +40,7 @@ class CompetitorAnalyzer:
         r = 6371.0 # Radius of earth in kilometers
         return c * r
 
-    def find_competitors(self, target_listing_id: str, db_path: str = "data/airbnb_intelligence.db") -> List[Dict[str, Any]]:
+    def find_competitors(self, target_listing_id: str, db_path: str = "database/airbnb_intelligence.db") -> List[Dict[str, Any]]:
         """
         Calculates and returns the top k competitor listings for a target listing.
         """
