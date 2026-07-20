@@ -178,6 +178,7 @@ function Tooltip({ text, children }) {
 
 export default function UnifiedDashboard() {
   const [activeView, setActiveView] = useState("dashboard");
+  const [propertySubTab, setPropertySubTab] = useState("sync");
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(true);
   const [showNotifications, setShowNotifications] = useState(false);
@@ -713,12 +714,8 @@ POR ESTADÍA (${stayN} noches):
       { id: "calendario", label: "Calendario Tarifario", icon: CalendarDays }
     ],
     "CONFIGURACIÓN DE PROPIEDAD": [
-      { id: "overview", label: "Vista General", icon: Home },
-      { id: "amenities", label: "Gestor de Amenities", icon: CheckSquare },
-      { id: "features", label: "Características Físicas", icon: SlidersHorizontal },
-      { id: "location", label: "Ubicación y Fotos", icon: Map },
-      { id: "pricing_rules", label: "Reglas de Tarifas", icon: Sliders },
-      { id: "competitor_engine", label: "Motor de Competidores", icon: Compass }
+      { id: "property_profile", label: "Mi Propiedad", icon: Home },
+      { id: "pricing_rules", label: "Reglas de Tarifas", icon: Sliders }
     ],
     "SISTEMA Y AUDITORÍA": [
       { id: "historicos", label: "Análisis Histórico", icon: History },
@@ -1454,526 +1451,597 @@ POR ESTADÍA (${stayN} noches):
                   </div>
                 );
 
-              case "overview":
+              case "property_profile":
                 return (
                   <div className="view-fade-in" style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
-                    <div className="glass-card" style={{ display: "flex", gap: "25px", flexWrap: "wrap" }}>
-                      <div style={{ width: "240px", height: "160px", borderRadius: "10px", overflow: "hidden" }}>
-                        <img 
-                          src={targetDetails?.picture_url || "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=400&q=80"} 
-                          alt="Tu propiedad"
-                          style={{ width: "100%", height: "100%", objectFit: "cover" }}
-                        />
-                      </div>
-                      <div style={{ flex: 1, display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
-                        <div>
-                          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline" }}>
-                            <h2 style={{ margin: 0, color: "#fff", fontSize: "1.3rem" }}>{targetDetails?.title || "Propiedad sin título"}</h2>
-                            <span style={{ fontSize: "0.7rem", color: "var(--accent-gold)", border: "1px solid rgba(212,175,55,0.2)", padding: "2px 8px", borderRadius: "20px" }}>
-                              {targetDetails?.host_is_superhost ? "Host Superhost" : "Host Estándar"}
-                            </span>
-                          </div>
-                          <p style={{ margin: "5px 0 15px 0", fontSize: "0.82rem", color: "var(--text-secondary)" }}>
-                            {targetDetails?.neighborhood || "Barrio no configurado"} • {targetDetails?.listing_id}
+                    
+                    {/* Sub-tab navigation */}
+                    <div className="glass-card" style={{ padding: "12px 20px", display: "flex", gap: "10px", alignItems: "center", flexWrap: "wrap" }}>
+                      <span style={{ fontSize: "0.85rem", fontWeight: "bold", color: "#fff", marginRight: "15px" }}>Mi Propiedad:</span>
+                      {[
+                        { id: "sync", label: "🔗 Conexión Airbnb" },
+                        { id: "specs", label: "📋 Ficha Técnica & Mapa" },
+                        { id: "amenities", label: "✨ Amenities" }
+                      ].map(sub => (
+                        <button
+                          key={sub.id}
+                          onClick={() => setPropertySubTab(sub.id)}
+                          style={{
+                            border: "none",
+                            padding: "6px 14px",
+                            borderRadius: "20px",
+                            fontSize: "0.78rem",
+                            fontWeight: "bold",
+                            cursor: "pointer",
+                            backgroundColor: propertySubTab === sub.id ? "var(--accent-gold)" : "rgba(255,255,255,0.03)",
+                            color: propertySubTab === sub.id ? "#050609" : "var(--text-secondary)",
+                            transition: "all 0.15s ease"
+                          }}
+                        >
+                          {sub.label}
+                        </button>
+                      ))}
+                      <span style={{ marginLeft: "auto", fontSize: "0.72rem", color: autoSaveStatus === "saved" ? "var(--accent-emerald)" : "var(--accent-gold)" }}>
+                        ● {autoSaveStatus === "saving" ? "Guardando..." : "Autoguardado al día"}
+                      </span>
+                    </div>
+
+                    {/* Sub-tab content */}
+                    {propertySubTab === "sync" && (
+                      <div className="view-fade-in" style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
+                        
+                        {/* Target Property URL Input */}
+                        <div className="glass-card">
+                          <h3 style={{ margin: "0 0 15px 0" }}>Configuración de Propiedad Objetivo</h3>
+                          <form onSubmit={handleConfigureTargetUrl} style={{ display: "flex", gap: "10px", alignItems: "center" }}>
+                            <input
+                              type="text"
+                              className="text-input"
+                              style={{ marginBottom: 0, flex: 1, padding: "8px 12px", borderRadius: "6px" }}
+                              placeholder="Ingresa la URL de la propiedad de Airbnb que deseas monitorear..."
+                              value={targetUrlInput}
+                              onChange={(e) => setTargetUrlInput(e.target.value)}
+                            />
+                            <button
+                              type="submit"
+                              className="vercel-btn"
+                              disabled={resolvingTarget}
+                              style={{ padding: "9px 18px", fontSize: "0.8rem", flexShrink: 0 }}
+                            >
+                              {resolvingTarget ? "Resolviendo..." : "Configurar"}
+                            </button>
+                          </form>
+                          <p style={{ margin: "6px 0 0 0", fontSize: "0.72rem", color: "var(--text-secondary)" }}>
+                            Ejemplo: https://www.airbnb.com.ar/rooms/1126744888258385312
                           </p>
                         </div>
-                        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(100px, 1fr))", gap: "10px", borderTop: "1px solid rgba(255,255,255,0.06)", paddingTop: "15px" }}>
-                          <div>
-                            <span style={{ fontSize: "0.65rem", color: "var(--text-secondary)" }}>DORMITORIOS</span>
-                            <div style={{ fontSize: "1.1rem", color: "#fff", fontWeight: "bold" }}>{targetDetails?.bedrooms || 1}</div>
-                          </div>
-                          <div>
-                            <span style={{ fontSize: "0.65rem", color: "var(--text-secondary)" }}>BAÑOS</span>
-                            <div style={{ fontSize: "1.1rem", color: "#fff", fontWeight: "bold" }}>{targetDetails?.bathrooms || 1.0}</div>
-                          </div>
-                          <div>
-                            <span style={{ fontSize: "0.65rem", color: "var(--text-secondary)" }}>HUÉSPEDES</span>
-                            <div style={{ fontSize: "1.1rem", color: "#fff", fontWeight: "bold" }}>{targetDetails?.accommodates || 2}</div>
-                          </div>
-                          <div>
-                            <span style={{ fontSize: "0.65rem", color: "var(--text-secondary)" }}>PRECIO BASE</span>
-                            <div style={{ fontSize: "1.1rem", color: "#fff", fontWeight: "bold" }}>${targetDetails?.price || 90} USD</div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
 
-                    <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "20px" }}>
-                      <div className="glass-card">
-                        <h3 style={{ margin: "0 0 10px 0" }}>Configuración Rápida</h3>
-                        <p style={{ fontSize: "0.8rem", color: "var(--text-secondary)", lineHeight: "1.5" }}>
-                          La ficha técnica y los amenities cargados en este panel sirven como base de datos centralizada. La similitud KNN con tus 15 competidores directos se calcula contrastando directamente estos atributos.
-                        </p>
-                        <div style={{ display: "flex", gap: "10px", marginTop: "15px" }}>
-                          <button onClick={() => setActiveView("features")} className="vercel-btn" style={{ fontSize: "0.78rem" }}>Editar Características</button>
-                          <button onClick={() => setActiveView("amenities")} className="vercel-btn vercel-btn-secondary" style={{ fontSize: "0.78rem" }}>Gestionar Amenities</button>
-                        </div>
-                      </div>
-                      <div className="glass-card" style={{ display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
-                        <div>
-                          <h3 style={{ margin: "0 0 5px 0" }}>Estado de Sincronización</h3>
-                          <span style={{ fontSize: "0.72rem", color: autoSaveStatus === "saved" ? "var(--accent-emerald)" : "var(--accent-gold)" }}>
-                            ● {autoSaveStatus === "saved" ? "Autoguardado activado y al día" : "Sincronizando cambios..."}
-                          </span>
-                        </div>
-                        <p style={{ fontSize: "0.8rem", color: "var(--text-secondary)", margin: "10px 0 0 0" }}>
-                          Cualquier cambio que realices en las pestañas de PROPERTY SETUP se guardará automáticamente en segundo plano.
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                );
-
-              case "amenities":
-                return (
-                  <div className="view-fade-in" style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
-                    
-                    {/* Amenities Toolbar */}
-                    <div className="glass-card">
-                      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "15px", flexWrap: "wrap", gap: "10px" }}>
-                        <div>
-                          <h3 style={{ margin: 0 }}>Amenities Manager</h3>
-                          <p style={{ margin: 0, fontSize: "0.78rem", color: "var(--text-secondary)" }}>Configura los servicios y comodidades de tu propiedad. Se guardan y aplican automáticamente.</p>
-                        </div>
-                        <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-                          <span style={{ fontSize: "0.75rem", color: autoSaveStatus === "saved" ? "var(--accent-emerald)" : "var(--accent-gold)", display: "flex", alignItems: "center", gap: "4px" }}>
-                            {autoSaveStatus === "saving" && <RefreshCw size={10} className="animate-spin" />}
-                            {autoSaveStatus === "saved" && "✓"}
-                            {autoSaveStatus === "saving" ? "Autoguardando..." : "Cambios guardados"}
-                          </span>
-                        </div>
-                      </div>
-
-                      {/* Search and Category filter pillbar */}
-                      <div style={{ display: "flex", gap: "10px", alignItems: "center", flexWrap: "wrap" }}>
-                        <div style={{ position: "relative", flex: 1, minWidth: "220px" }}>
-                          <Search size={14} style={{ position: "absolute", left: "10px", top: "10px", color: "var(--text-secondary)" }} />
-                          <input
-                            type="text"
-                            className="text-input"
-                            style={{ paddingLeft: "32px", marginBottom: 0, fontSize: "0.8rem" }}
-                            placeholder="Buscar amenities por nombre..."
-                            value={searchQueryAmenities}
-                            onChange={(e) => setSearchQueryAmenities(e.target.value)}
-                          />
-                        </div>
-                        
-                        <select
-                          className="select-input"
-                          style={{ width: "160px", marginBottom: 0, fontSize: "0.8rem" }}
-                          value={selectedCategoryFilter}
-                          onChange={(e) => setSelectedCategoryFilter(e.target.value)}
-                        >
-                          <option value="All">Todas las Categorías</option>
-                          {Object.keys(defaultAmenitiesByCategory).map(cat => (
-                            <option key={cat} value={cat}>{cat}</option>
-                          ))}
-                        </select>
-                      </div>
-                    </div>
-
-                    {/* New Custom Amenity Adder */}
-                    <div className="glass-card">
-                      <h4 style={{ margin: "0 0 10px 0", fontSize: "0.85rem", color: "#fff" }}>Agregar Servicio Personalizado</h4>
-                      <div style={{ display: "flex", gap: "10px" }}>
-                        <input
-                          type="text"
-                          className="text-input"
-                          style={{ marginBottom: 0, fontSize: "0.8rem" }}
-                          placeholder="Nombre del servicio (Ej: Cafetera Nespresso, PlayStation 5...)"
-                          value={newAmenityName}
-                          onChange={(e) => setNewAmenityName(e.target.value)}
-                        />
-                        <select
-                          className="select-input"
-                          style={{ width: "150px", marginBottom: 0, fontSize: "0.8rem" }}
-                          value={newAmenityCategory}
-                          onChange={(e) => setNewAmenityCategory(e.target.value)}
-                        >
-                          {Object.keys(defaultAmenitiesByCategory).map(cat => (
-                            <option key={cat} value={cat}>{cat}</option>
-                          ))}
-                        </select>
-                        <button
-                          onClick={() => {
-                            if (!newAmenityName.trim()) return;
-                            const amenitiesList = targetDetails?.amenities || [];
-                            if (!amenitiesList.includes(newAmenityName.trim())) {
-                              const newList = [...amenitiesList, newAmenityName.trim()];
-                              setTargetDetails({ ...targetDetails, amenities: newList });
-                            }
-                            setNewAmenityName("");
-                          }}
-                          className="vercel-btn"
-                          style={{ width: "auto", padding: "0 20px" }}
-                        >
-                          Añadir
-                        </button>
-                      </div>
-                    </div>
-
-                    {/* Categorized Grid View */}
-                    <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
-                      {Object.keys(defaultAmenitiesByCategory)
-                        .filter(cat => selectedCategoryFilter === "All" || selectedCategoryFilter === cat)
-                        .map(cat => {
-                          const amenitiesInCat = getFilteredAmenities().filter(am => {
-                            // Check if it belongs to default list of category or custom matched list
-                            if (defaultAmenitiesByCategory[cat].includes(am)) return true;
-                            // Otherwise fallback to grouping general custom ones in General
-                            return cat === "General" && !Object.values(defaultAmenitiesByCategory).some(l => l.includes(am));
-                          });
-
-                          if (amenitiesInCat.length === 0 && searchQueryAmenities) return null;
-
-                          return (
-                            <div key={cat} className="glass-card" style={{ margin: 0, padding: "20px" }}>
-                              <h4 style={{ margin: "0 0 12px 0", color: "var(--accent-gold)", fontSize: "0.88rem", borderBottom: "1px solid rgba(255,255,255,0.05)", paddingBottom: "6px" }}>
-                                {cat}
-                              </h4>
-                              <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(200px, 1fr))", gap: "10px" }}>
-                                {amenitiesInCat.map(am => {
-                                  const isChecked = targetDetails?.amenities?.includes(am);
-                                  return (
-                                    <label
-                                      key={am}
-                                      style={{
-                                        display: "flex",
-                                        alignItems: "center",
-                                        justifyContent: "space-between",
-                                        padding: "8px 12px",
-                                        borderRadius: "6px",
-                                        backgroundColor: isChecked ? "rgba(212,175,55,0.03)" : "rgba(255,255,255,0.01)",
-                                        border: isChecked ? "1px solid rgba(212,175,55,0.2)" : "1px solid rgba(255,255,255,0.04)",
-                                        cursor: "pointer",
-                                        fontSize: "0.78rem",
-                                        color: isChecked ? "#fff" : "var(--text-secondary)"
-                                      }}
-                                    >
-                                      <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-                                        <input
-                                          type="checkbox"
-                                          checked={isChecked}
-                                          onChange={(e) => {
-                                            const amenitiesList = targetDetails?.amenities || [];
-                                            let newList = [...amenitiesList];
-                                            if (e.target.checked) {
-                                              if (!newList.includes(am)) newList.push(am);
-                                            } else {
-                                              newList = newList.filter(x => x !== am);
-                                            }
-                                            setTargetDetails({ ...targetDetails, amenities: newList });
-                                          }}
-                                          style={{ accentColor: "var(--accent-gold)" }}
-                                        />
-                                        <span>{am}</span>
-                                      </div>
-                                      
-                                      {/* Delete button if custom */}
-                                      {!defaultAmenitiesByCategory[cat].includes(am) && (
-                                        <button
-                                          onClick={(e) => {
-                                            e.preventDefault();
-                                            const amenitiesList = targetDetails?.amenities || [];
-                                            const newList = amenitiesList.filter(x => x !== am);
-                                            setTargetDetails({ ...targetDetails, amenities: newList });
-                                          }}
-                                          style={{ border: "none", background: "none", color: "var(--accent-coral)", cursor: "pointer", fontSize: "0.95rem" }}
-                                        >
-                                          ×
-                                        </button>
-                                      )}
-                                    </label>
-                                  );
-                                })}
-                              </div>
-                            </div>
-                          );
-                        })}
-                    </div>
-
-                  </div>
-                );
-
-              case "features":
-                return (
-                  <div className="view-fade-in" style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
-                    
-                    {/* Database properties spreadsheet editor (Airtable / Notion style) */}
-                    <div className="glass-card">
-                      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "15px" }}>
-                        <div>
-                          <h3 style={{ margin: 0 }}>Base de Datos de Características</h3>
-                          <p style={{ margin: 0, fontSize: "0.78rem", color: "var(--text-secondary)" }}>Edita las características físicas y políticas del alojamiento. Las modificaciones se auto-guardan.</p>
-                        </div>
-                        <span style={{ fontSize: "0.75rem", color: autoSaveStatus === "saved" ? "var(--accent-emerald)" : "var(--accent-gold)" }}>
-                          ● {autoSaveStatus === "saving" ? "Guardando..." : "Autoguardado activo"}
-                        </span>
-                      </div>
-
-                      {targetDetails ? (
-                        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "25px" }}>
-                          
-                          {/* Left Column: physical specs */}
-                          <div style={{ display: "flex", flexDirection: "column", gap: "15px" }}>
-                            <h4 style={{ margin: 0, fontSize: "0.85rem", color: "var(--accent-gold)", borderBottom: "1px solid rgba(255,255,255,0.06)", paddingBottom: "6px" }}>
-                              Especificaciones Físicas
-                            </h4>
+                        {/* Resolved Target Details summary */}
+                        {targetDetails && (
+                          <div className="glass-card" style={{ borderLeft: "4px solid var(--accent-gold)", animation: "fadeIn 0.2s ease" }}>
+                            <h3 style={{ margin: "0 0 15px 0", color: "#fff", display: "flex", alignItems: "center", gap: "8px" }}>
+                              <span style={{ display: "inline-block", width: "8px", height: "8px", borderRadius: "50%", backgroundColor: "var(--accent-emerald)" }}></span>
+                              Propiedad Objetivo Cargada
+                            </h3>
                             
-                            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px" }}>
-                              <div>
-                                <label style={{ fontSize: "0.72rem", color: "var(--text-secondary)" }}>Tipo de Propiedad</label>
-                                <select
-                                  className="select-input"
-                                  style={{ width: "100%", fontSize: "0.8rem" }}
-                                  value={targetDetails.property_type || "Apartment"}
-                                  onChange={(e) => setTargetDetails({ ...targetDetails, property_type: e.target.value })}
-                                >
-                                  <option value="Apartment">Apartamento / Loft</option>
-                                  <option value="House">Casa</option>
-                                  <option value="Condo">Condominio</option>
-                                  <option value="Serviced apartment">Apartamento Turístico</option>
-                                </select>
-                              </div>
+                            <div style={{ display: "flex", gap: "20px", flexWrap: "wrap", alignItems: "flex-start" }}>
+                              {targetDetails.picture_url && (
+                                <div style={{ width: "160px", height: "110px", borderRadius: "8px", overflow: "hidden", border: "1px solid rgba(255,255,255,0.06)" }}>
+                                  <img src={targetDetails.picture_url} alt="Portada" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                                </div>
+                              )}
                               
-                              <div>
-                                <label style={{ fontSize: "0.72rem", color: "var(--text-secondary)" }}>Tipo de Habitación</label>
-                                <select
-                                  className="select-input"
-                                  style={{ width: "100%", fontSize: "0.8rem" }}
-                                  value={targetDetails.room_type || "Entire home/apt"}
-                                  onChange={(e) => setTargetDetails({ ...targetDetails, room_type: e.target.value })}
-                                >
-                                  <option value="Entire home/apt">Alojamiento Entero</option>
-                                  <option value="Private room">Habitación Privada</option>
-                                  <option value="Shared room">Habitación Compartida</option>
-                                </select>
-                              </div>
-
-                              <div>
-                                <label style={{ fontSize: "0.72rem", color: "var(--text-secondary)" }}>Metros Cuadrados (m²)</label>
-                                <input
-                                  type="number"
-                                  className="text-input"
-                                  style={{ fontSize: "0.8rem" }}
-                                  value={targetDetails.square_meters || 45}
-                                  onChange={(e) => setTargetDetails({ ...targetDetails, square_meters: parseInt(e.target.value) || 0 })}
-                                />
-                              </div>
-
-                              <div>
-                                <label style={{ fontSize: "0.72rem", color: "var(--text-secondary)" }}>Número de Camas</label>
-                                <input
-                                  type="number"
-                                  className="text-input"
-                                  style={{ fontSize: "0.8rem" }}
-                                  value={targetDetails.beds || 1}
-                                  onChange={(e) => setTargetDetails({ ...targetDetails, beds: parseInt(e.target.value) || 1 })}
-                                />
-                              </div>
-
-                              <div>
-                                <label style={{ fontSize: "0.72rem", color: "var(--text-secondary)" }}>Piso / Altura</label>
-                                <input
-                                  type="number"
-                                  className="text-input"
-                                  style={{ fontSize: "0.8rem" }}
-                                  value={targetDetails.floor || 2}
-                                  onChange={(e) => setTargetDetails({ ...targetDetails, floor: parseInt(e.target.value) || 0 })}
-                                />
-                              </div>
-
-                              <div>
-                                <label style={{ fontSize: "0.72rem", color: "var(--text-secondary)" }}>Velocidad Internet (Mbps)</label>
-                                <input
-                                  type="number"
-                                  className="text-input"
-                                  style={{ fontSize: "0.8rem" }}
-                                  value={targetDetails.internet_speed || 100}
-                                  onChange={(e) => setTargetDetails({ ...targetDetails, internet_speed: parseInt(e.target.value) || 0 })}
-                                />
+                              <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: "10px" }}>
+                                <div>
+                                  <strong style={{ fontSize: "1rem", color: "#fff", display: "block" }}>{targetDetails.title}</strong>
+                                  <span style={{ fontSize: "0.75rem", color: "var(--text-secondary)" }}>ID de Airbnb: <code>{targetDetails.listing_id}</code></span>
+                                </div>
+                                
+                                <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(90px, 1fr))", gap: "10px", backgroundColor: "rgba(255,255,255,0.02)", padding: "10px 14px", borderRadius: "8px", border: "1px solid rgba(255,255,255,0.04)" }}>
+                                  <div>
+                                    <span style={{ fontSize: "0.6rem", color: "var(--text-secondary)", display: "block", textTransform: "uppercase" }}>Dormitorios</span>
+                                    <strong style={{ color: "#fff", fontSize: "0.9rem" }}>{targetDetails.bedrooms || 0}</strong>
+                                  </div>
+                                  <div>
+                                    <span style={{ fontSize: "0.6rem", color: "var(--text-secondary)", display: "block", textTransform: "uppercase" }}>Baños</span>
+                                    <strong style={{ color: "#fff", fontSize: "0.9rem" }}>{targetDetails.bathrooms || 0}</strong>
+                                  </div>
+                                  <div>
+                                    <span style={{ fontSize: "0.6rem", color: "var(--text-secondary)", display: "block", textTransform: "uppercase" }}>Huéspedes</span>
+                                    <strong style={{ color: "#fff", fontSize: "0.9rem" }}>{targetDetails.accommodates || 0}</strong>
+                                  </div>
+                                  <div>
+                                    <span style={{ fontSize: "0.6rem", color: "var(--text-secondary)", display: "block", textTransform: "uppercase" }}>Tarifa Base</span>
+                                    <strong style={{ color: "var(--accent-gold)", fontSize: "0.9rem" }}>${targetDetails.price || 0} USD</strong>
+                                  </div>
+                                </div>
                               </div>
                             </div>
 
-                            {/* Boolean specs */}
-                            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "10px", marginTop: "5px" }}>
-                              {[
-                                { key: "has_elevator", label: "Tiene Elevador / Ascensor" },
-                                { key: "has_balcony", label: "Tiene Balcón" },
-                                { key: "has_parking", label: "Tiene Cochera incluida" },
-                                { key: "has_workspace", label: "Espacio de Trabajo Dedicado" }
-                              ].map(item => (
-                                <label key={item.key} style={{ display: "flex", alignItems: "center", gap: "8px", fontSize: "0.78rem", color: "var(--text-secondary)", cursor: "pointer" }}>
+                            {/* Detected amenities list */}
+                            {targetDetails.amenities && targetDetails.amenities.length > 0 && (
+                              <div style={{ marginTop: "18px" }}>
+                                <span style={{ fontSize: "0.72rem", color: "var(--text-secondary)", display: "block", marginBottom: "8px", textTransform: "uppercase", fontWeight: "600", letterSpacing: "0.5px" }}>
+                                  Amenities Detectados:
+                                </span>
+                                <div style={{ display: "flex", flexWrap: "wrap", gap: "6px" }}>
+                                  {targetDetails.amenities.map((am, idx) => (
+                                    <span key={idx} style={{ fontSize: "0.72rem", color: "#fff", backgroundColor: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.1)", padding: "2px 8px", borderRadius: "4px" }}>
+                                      ✓ {am}
+                                    </span>
+                                  ))}
+                                </div>
+                              </div>
+                            )}
+
+                            <div style={{ marginTop: "18px", borderTop: "1px solid rgba(255,255,255,0.06)", paddingTop: "15px", display: "flex", gap: "10px" }}>
+                              <button onClick={() => setPropertySubTab("specs")} className="vercel-btn" style={{ fontSize: "0.75rem", padding: "6px 14px", width: "auto" }}>
+                                Ver Ficha Técnica
+                              </button>
+                              <button onClick={() => setPropertySubTab("amenities")} className="vercel-btn vercel-btn-secondary" style={{ fontSize: "0.75rem", padding: "6px 14px", width: "auto" }}>
+                                Ajustar Amenities
+                              </button>
+                            </div>
+                          </div>
+                        )}
+
+                        {/* KNN thresholds explanation */}
+                        <div className="glass-card">
+                          <h3 style={{ margin: "0 0 10px 0" }}>Límites y Reglas KNN</h3>
+                          <p style={{ fontSize: "0.8rem", color: "var(--text-secondary)", lineHeight: "1.5" }}>
+                            La watchlist de competidores directos se calcula aplicando una métrica de distancia euclidiana ponderada:<br/>
+                            • <strong>Distancia Geográfica (Haversine):</strong> 35% de peso (radio límite de 5km).<br/>
+                            • <strong>Coincidencia de Amenities:</strong> 35% de peso (Piscina, Gimnasio, Jacuzzi, Cochera, Aire acondicionado).<br/>
+                            • <strong>Capacidad de Huéspedes:</strong> 20% de peso (máximo +/- 2 huéspedes de diferencia).<br/>
+                            • <strong>Cantidad de Baños:</strong> 10% de peso.<br/>
+                            • <strong>Hard Constraint:</strong> Mismo número exacto de dormitorios.
+                          </p>
+                        </div>
+                      </div>
+                    )}
+
+                    {propertySubTab === "specs" && (
+                      <div className="view-fade-in" style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
+                        
+                        {/* Database properties editor */}
+                        <div className="glass-card">
+                          <h3 style={{ margin: "0 0 15px 0" }}>Ficha Técnica del Alojamiento</h3>
+                          {targetDetails ? (
+                            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "25px" }}>
+                              
+                              {/* Left Column: physical specs */}
+                              <div style={{ display: "flex", flexDirection: "column", gap: "15px" }}>
+                                <h4 style={{ margin: 0, fontSize: "0.85rem", color: "var(--accent-gold)", borderBottom: "1px solid rgba(255,255,255,0.06)", paddingBottom: "6px" }}>
+                                  Especificaciones Físicas
+                                </h4>
+                                
+                                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px" }}>
+                                  <div>
+                                    <label style={{ fontSize: "0.72rem", color: "var(--text-secondary)" }}>Tipo de Propiedad</label>
+                                    <select
+                                      className="select-input"
+                                      style={{ width: "100%", fontSize: "0.8rem" }}
+                                      value={targetDetails.property_type || "Apartment"}
+                                      onChange={(e) => setTargetDetails({ ...targetDetails, property_type: e.target.value })}
+                                    >
+                                      <option value="Apartment">Apartamento / Loft</option>
+                                      <option value="House">Casa</option>
+                                      <option value="Condo">Condominio</option>
+                                      <option value="Serviced apartment">Apartamento Turístico</option>
+                                    </select>
+                                  </div>
+                                  
+                                  <div>
+                                    <label style={{ fontSize: "0.72rem", color: "var(--text-secondary)" }}>Tipo de Habitación</label>
+                                    <select
+                                      className="select-input"
+                                      style={{ width: "100%", fontSize: "0.8rem" }}
+                                      value={targetDetails.room_type || "Entire home/apt"}
+                                      onChange={(e) => setTargetDetails({ ...targetDetails, room_type: e.target.value })}
+                                    >
+                                      <option value="Entire home/apt">Alojamiento Entero</option>
+                                      <option value="Private room">Habitación Privada</option>
+                                      <option value="Shared room">Habitación Compartida</option>
+                                    </select>
+                                  </div>
+
+                                  <div>
+                                    <label style={{ fontSize: "0.72rem", color: "var(--text-secondary)" }}>Dormitorios</label>
+                                    <input
+                                      type="number"
+                                      className="text-input"
+                                      style={{ fontSize: "0.8rem" }}
+                                      value={targetDetails.bedrooms || 1}
+                                      onChange={(e) => setTargetDetails({ ...targetDetails, bedrooms: parseInt(e.target.value) || 1 })}
+                                    />
+                                  </div>
+
+                                  <div>
+                                    <label style={{ fontSize: "0.72rem", color: "var(--text-secondary)" }}>Baños</label>
+                                    <input
+                                      type="number"
+                                      step="0.5"
+                                      className="text-input"
+                                      style={{ fontSize: "0.8rem" }}
+                                      value={targetDetails.bathrooms || 1}
+                                      onChange={(e) => setTargetDetails({ ...targetDetails, bathrooms: parseFloat(e.target.value) || 1 })}
+                                    />
+                                  </div>
+
+                                  <div>
+                                    <label style={{ fontSize: "0.72rem", color: "var(--text-secondary)" }}>Huéspedes</label>
+                                    <input
+                                      type="number"
+                                      className="text-input"
+                                      style={{ fontSize: "0.8rem" }}
+                                      value={targetDetails.accommodates || 2}
+                                      onChange={(e) => setTargetDetails({ ...targetDetails, accommodates: parseInt(e.target.value) || 2 })}
+                                    />
+                                  </div>
+
+                                  <div>
+                                    <label style={{ fontSize: "0.72rem", color: "var(--text-secondary)" }}>Precio Base (USD)</label>
+                                    <input
+                                      type="number"
+                                      className="text-input"
+                                      style={{ fontSize: "0.8rem" }}
+                                      value={targetDetails.price || 90}
+                                      onChange={(e) => setTargetDetails({ ...targetDetails, price: parseFloat(e.target.value) || 90 })}
+                                    />
+                                  </div>
+
+                                  <div>
+                                    <label style={{ fontSize: "0.72rem", color: "var(--text-secondary)" }}>Metros Cuadrados (m²)</label>
+                                    <input
+                                      type="number"
+                                      className="text-input"
+                                      style={{ fontSize: "0.8rem" }}
+                                      value={targetDetails.square_meters || 45}
+                                      onChange={(e) => setTargetDetails({ ...targetDetails, square_meters: parseInt(e.target.value) || 0 })}
+                                    />
+                                  </div>
+
+                                  <div>
+                                    <label style={{ fontSize: "0.72rem", color: "var(--text-secondary)" }}>Número de Camas</label>
+                                    <input
+                                      type="number"
+                                      className="text-input"
+                                      style={{ fontSize: "0.8rem" }}
+                                      value={targetDetails.beds || 1}
+                                      onChange={(e) => setTargetDetails({ ...targetDetails, beds: parseInt(e.target.value) || 1 })}
+                                    />
+                                  </div>
+                                </div>
+
+                                {/* Boolean specs */}
+                                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "10px", marginTop: "5px" }}>
+                                  {[
+                                    { key: "has_elevator", label: "Tiene Elevador / Ascensor" },
+                                    { key: "has_balcony", label: "Tiene Balcón" },
+                                    { key: "has_parking", label: "Tiene Cochera incluida" },
+                                    { key: "has_workspace", label: "Espacio de Trabajo Dedicado" }
+                                  ].map(item => (
+                                    <label key={item.key} style={{ display: "flex", alignItems: "center", gap: "8px", fontSize: "0.78rem", color: "var(--text-secondary)", cursor: "pointer" }}>
+                                      <input
+                                        type="checkbox"
+                                        checked={!!targetDetails[item.key]}
+                                        onChange={(e) => setTargetDetails({ ...targetDetails, [item.key]: e.target.checked })}
+                                        style={{ accentColor: "var(--accent-gold)" }}
+                                      />
+                                      {item.label}
+                                    </label>
+                                  ))}
+                                </div>
+                              </div>
+
+                              {/* Right Column: Policies & Logistics */}
+                              <div style={{ display: "flex", flexDirection: "column", gap: "15px" }}>
+                                <h4 style={{ margin: 0, fontSize: "0.85rem", color: "var(--accent-gold)", borderBottom: "1px solid rgba(255,255,255,0.06)", paddingBottom: "6px" }}>
+                                  Políticas, Reglas y Estadía
+                                </h4>
+
+                                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px" }}>
+                                  <div>
+                                    <label style={{ fontSize: "0.72rem", color: "var(--text-secondary)" }}>Mínimo de Noches</label>
+                                    <input
+                                      type="number"
+                                      className="text-input"
+                                      style={{ fontSize: "0.8rem" }}
+                                      value={targetDetails.minimum_nights || 2}
+                                      onChange={(e) => setTargetDetails({ ...targetDetails, minimum_nights: parseInt(e.target.value) || 1 })}
+                                    />
+                                  </div>
+
+                                  <div>
+                                    <label style={{ fontSize: "0.72rem", color: "var(--text-secondary)" }}>Máximo de Noches</label>
+                                    <input
+                                      type="number"
+                                      className="text-input"
+                                      style={{ fontSize: "0.8rem" }}
+                                      value={targetDetails.maximum_nights || 365}
+                                      onChange={(e) => setTargetDetails({ ...targetDetails, maximum_nights: parseInt(e.target.value) || 365 })}
+                                    />
+                                  </div>
+
+                                  <div>
+                                    <label style={{ fontSize: "0.72rem", color: "var(--text-secondary)" }}>Horario Check-in</label>
+                                    <input
+                                      type="text"
+                                      className="text-input"
+                                      style={{ fontSize: "0.8rem" }}
+                                      value={targetDetails.check_in_time || "15:00"}
+                                      onChange={(e) => setTargetDetails({ ...targetDetails, check_in_time: e.target.value })}
+                                    />
+                                  </div>
+
+                                  <div>
+                                    <label style={{ fontSize: "0.72rem", color: "var(--text-secondary)" }}>Horario Check-out</label>
+                                    <input
+                                      type="text"
+                                      className="text-input"
+                                      style={{ fontSize: "0.8rem" }}
+                                      value={targetDetails.check_out_time || "11:00"}
+                                      onChange={(e) => setTargetDetails({ ...targetDetails, check_out_time: e.target.value })}
+                                    />
+                                  </div>
+
+                                  <div style={{ gridColumn: "span 2" }}>
+                                    <label style={{ fontSize: "0.72rem", color: "var(--text-secondary)" }}>Política de Cancelación</label>
+                                    <select
+                                      className="select-input"
+                                      style={{ width: "100%", fontSize: "0.8rem" }}
+                                      value={targetDetails.cancellation_policy || "moderate"}
+                                      onChange={(e) => setTargetDetails({ ...targetDetails, cancellation_policy: e.target.value })}
+                                    >
+                                      <option value="flexible">Flexible (Reembolso completo 24h antes)</option>
+                                      <option value="moderate">Moderada (Reembolso completo 5 días antes)</option>
+                                      <option value="strict">Estricta (50% reembolso hasta 1 semana antes)</option>
+                                    </select>
+                                  </div>
+                                </div>
+
+                                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "10px", marginTop: "5px" }}>
+                                  {[
+                                    { key: "pets_allowed", label: "Se aceptan Mascotas" },
+                                    { key: "smoking_allowed", label: "Se permite Fumar" },
+                                    { key: "children_allowed", label: "Apto para Niños" }
+                                  ].map(item => (
+                                    <label key={item.key} style={{ display: "flex", alignItems: "center", gap: "8px", fontSize: "0.78rem", color: "var(--text-secondary)", cursor: "pointer" }}>
+                                      <input
+                                        type="checkbox"
+                                        checked={!!targetDetails[item.key]}
+                                        onChange={(e) => setTargetDetails({ ...targetDetails, [item.key]: e.target.checked })}
+                                        style={{ accentColor: "var(--accent-gold)" }}
+                                      />
+                                      {item.label}
+                                    </label>
+                                  ))}
+                                </div>
+                              </div>
+
+                            </div>
+                          ) : (
+                            <div style={{ color: "var(--text-secondary)", fontSize: "0.8rem", fontStyle: "italic", textAlign: "center", padding: "20px" }}>
+                              Configura la URL de tu propiedad para ver y editar su ficha técnica.
+                            </div>
+                          )}
+                        </div>
+
+                        {/* Location card */}
+                        <div className="glass-card">
+                          <h3 style={{ margin: "0 0 15px 0" }}>Ubicación Geográfica y Portada</h3>
+                          {targetDetails ? (
+                            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "20px" }}>
+                              <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+                                <div>
+                                  <label style={{ fontSize: "0.72rem", color: "var(--text-secondary)" }}>Latitud</label>
                                   <input
-                                    type="checkbox"
-                                    checked={!!targetDetails[item.key]}
-                                    onChange={(e) => setTargetDetails({ ...targetDetails, [item.key]: e.target.checked })}
-                                    style={{ accentColor: "var(--accent-gold)" }}
+                                    type="number"
+                                    step="0.000001"
+                                    className="text-input"
+                                    value={targetDetails.latitude !== undefined ? targetDetails.latitude : -34.5861}
+                                    onChange={(e) => setTargetDetails({ ...targetDetails, latitude: parseFloat(e.target.value) || -34.5861 })}
                                   />
-                                  {item.label}
-                                </label>
-                              ))}
+                                </div>
+                                <div>
+                                  <label style={{ fontSize: "0.72rem", color: "var(--text-secondary)" }}>Longitud</label>
+                                  <input
+                                    type="number"
+                                    step="0.000001"
+                                    className="text-input"
+                                    value={targetDetails.longitude !== undefined ? targetDetails.longitude : -58.4373}
+                                    onChange={(e) => setTargetDetails({ ...targetDetails, longitude: parseFloat(e.target.value) || -58.4373 })}
+                                  />
+                                </div>
+                                <div>
+                                  <label style={{ fontSize: "0.72rem", color: "var(--text-secondary)" }}>URL de la Foto de Portada</label>
+                                  <input
+                                    type="text"
+                                    className="text-input"
+                                    value={targetDetails.picture_url || ""}
+                                    onChange={(e) => setTargetDetails({ ...targetDetails, picture_url: e.target.value })}
+                                  />
+                                </div>
+                              </div>
+                              <div style={{ display: "flex", flexDirection: "column" }}>
+                                <span style={{ fontSize: "0.72rem", color: "var(--text-secondary)", marginBottom: "6px" }}>Vista Previa en Mapa</span>
+                                <div style={{ width: "100%", height: "200px", borderRadius: "8px", overflow: "hidden", border: "1px solid var(--card-border)" }}>
+                                  <LeafletMap
+                                    listings={listings}
+                                    center={[targetDetails.latitude || -34.5861, targetDetails.longitude || -58.4373]}
+                                    targetListingId={targetDetails.listing_id}
+                                    selectedListingId={selectedId}
+                                  />
+                                </div>
+                              </div>
                             </div>
+                          ) : (
+                            <div style={{ color: "var(--text-secondary)", fontSize: "0.8rem", fontStyle: "italic", textAlign: "center" }}>
+                              Configura la URL de tu propiedad para ver la ubicación geográfica.
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    )}
 
+                    {propertySubTab === "amenities" && (
+                      <div className="view-fade-in" style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
+                        
+                        {/* Amenities Toolbar */}
+                        <div className="glass-card">
+                          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "15px", flexWrap: "wrap", gap: "10px" }}>
+                            <div>
+                              <h3 style={{ margin: 0 }}>Gestor de Amenities</h3>
+                              <p style={{ margin: 0, fontSize: "0.78rem", color: "var(--text-secondary)" }}>Configura los servicios y comodidades de tu propiedad. Se guardan y aplican automáticamente.</p>
+                            </div>
                           </div>
 
-                          {/* Right Column: Policies & Logistics */}
-                          <div style={{ display: "flex", flexDirection: "column", gap: "15px" }}>
-                            <h4 style={{ margin: 0, fontSize: "0.85rem", color: "var(--accent-gold)", borderBottom: "1px solid rgba(255,255,255,0.06)", paddingBottom: "6px" }}>
-                              Políticas, Reglas y Estadía
-                            </h4>
-
-                            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px" }}>
-                              <div>
-                                <label style={{ fontSize: "0.72rem", color: "var(--text-secondary)" }}>Mínimo de Noches</label>
-                                <input
-                                  type="number"
-                                  className="text-input"
-                                  style={{ fontSize: "0.8rem" }}
-                                  value={targetDetails.minimum_nights || 2}
-                                  onChange={(e) => setTargetDetails({ ...targetDetails, minimum_nights: parseInt(e.target.value) || 1 })}
-                                />
-                              </div>
-
-                              <div>
-                                <label style={{ fontSize: "0.72rem", color: "var(--text-secondary)" }}>Máximo de Noches</label>
-                                <input
-                                  type="number"
-                                  className="text-input"
-                                  style={{ fontSize: "0.8rem" }}
-                                  value={targetDetails.maximum_nights || 365}
-                                  onChange={(e) => setTargetDetails({ ...targetDetails, maximum_nights: parseInt(e.target.value) || 365 })}
-                                />
-                              </div>
-
-                              <div>
-                                <label style={{ fontSize: "0.72rem", color: "var(--text-secondary)" }}>Horario Check-in</label>
-                                <input
-                                  type="text"
-                                  className="text-input"
-                                  style={{ fontSize: "0.8rem" }}
-                                  value={targetDetails.check_in_time || "15:00"}
-                                  onChange={(e) => setTargetDetails({ ...targetDetails, check_in_time: e.target.value })}
-                                />
-                              </div>
-
-                              <div>
-                                <label style={{ fontSize: "0.72rem", color: "var(--text-secondary)" }}>Horario Check-out</label>
-                                <input
-                                  type="text"
-                                  className="text-input"
-                                  style={{ fontSize: "0.8rem" }}
-                                  value={targetDetails.check_out_time || "11:00"}
-                                  onChange={(e) => setTargetDetails({ ...targetDetails, check_out_time: e.target.value })}
-                                />
-                              </div>
-
-                              <div style={{ gridColumn: "span 2" }}>
-                                <label style={{ fontSize: "0.72rem", color: "var(--text-secondary)" }}>Política de Cancelación</label>
-                                <select
-                                  className="select-input"
-                                  style={{ width: "100%", fontSize: "0.8rem" }}
-                                  value={targetDetails.cancellation_policy || "moderate"}
-                                  onChange={(e) => setTargetDetails({ ...targetDetails, cancellation_policy: e.target.value })}
-                                >
-                                  <option value="flexible">Flexible (Reembolso completo 24h antes)</option>
-                                  <option value="moderate">Moderada (Reembolso completo 5 días antes)</option>
-                                  <option value="strict">Estricta (50% reembolso hasta 1 semana antes)</option>
-                                </select>
-                              </div>
-                            </div>
-
-                            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "10px", marginTop: "5px" }}>
-                              {[
-                                { key: "pets_allowed", label: "Se aceptan Mascotas" },
-                                { key: "smoking_allowed", label: "Se permite Fumar" },
-                                { key: "children_allowed", label: "Apto para Niños" }
-                              ].map(item => (
-                                <label key={item.key} style={{ display: "flex", alignItems: "center", gap: "8px", fontSize: "0.78rem", color: "var(--text-secondary)", cursor: "pointer" }}>
-                                  <input
-                                    type="checkbox"
-                                    checked={!!targetDetails[item.key]}
-                                    onChange={(e) => setTargetDetails({ ...targetDetails, [item.key]: e.target.checked })}
-                                    style={{ accentColor: "var(--accent-gold)" }}
-                                  />
-                                  {item.label}
-                                </label>
-                              ))}
-                            </div>
-
-                          </div>
-
-                        </div>
-                      ) : (
-                        <div style={{ color: "var(--text-secondary)", fontSize: "0.8rem", fontStyle: "italic", textAlign: "center", padding: "20px" }}>
-                          Configura la URL de tu propiedad en la pestaña CONFIGURACIÓN DE PROPIEDAD para ver y editar la base de datos de características.
-                        </div>
-                      )}
-
-                    </div>
-
-                  </div>
-                );
-
-              case "location":
-                return (
-                  <div className="view-fade-in" style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
-                    
-                    {/* Location fields card */}
-                    <div className="glass-card">
-                      <h3 style={{ margin: "0 0 15px 0" }}>Ubicación Geográfica y Fotos</h3>
-                      {targetDetails ? (
-                        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "20px" }}>
-                          <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
-                            <div>
-                              <label style={{ fontSize: "0.72rem", color: "var(--text-secondary)" }}>Latitud</label>
-                              <input
-                                type="number"
-                                step="0.000001"
-                                className="text-input"
-                                value={targetDetails.latitude !== undefined ? targetDetails.latitude : -34.5861}
-                                onChange={(e) => setTargetDetails({ ...targetDetails, latitude: parseFloat(e.target.value) || -34.5861 })}
-                              />
-                            </div>
-                            <div>
-                              <label style={{ fontSize: "0.72rem", color: "var(--text-secondary)" }}>Longitud</label>
-                              <input
-                                type="number"
-                                step="0.000001"
-                                className="text-input"
-                                value={targetDetails.longitude !== undefined ? targetDetails.longitude : -58.4373}
-                                onChange={(e) => setTargetDetails({ ...targetDetails, longitude: parseFloat(e.target.value) || -58.4373 })}
-                              />
-                            </div>
-                            <div>
-                              <label style={{ fontSize: "0.72rem", color: "var(--text-secondary)" }}>URL de la Foto de Portada</label>
+                          {/* Search and Category filter pillbar */}
+                          <div style={{ display: "flex", gap: "10px", alignItems: "center", flexWrap: "wrap" }}>
+                            <div style={{ position: "relative", flex: 1, minWidth: "220px" }}>
+                              <Search size={14} style={{ position: "absolute", left: "10px", top: "10px", color: "var(--text-secondary)" }} />
                               <input
                                 type="text"
                                 className="text-input"
-                                value={targetDetails.picture_url || ""}
-                                onChange={(e) => setTargetDetails({ ...targetDetails, picture_url: e.target.value })}
+                                style={{ paddingLeft: "32px", marginBottom: 0, fontSize: "0.8rem" }}
+                                placeholder="Buscar amenities por nombre..."
+                                value={searchQueryAmenities}
+                                onChange={(e) => setSearchQueryAmenities(e.target.value)}
                               />
                             </div>
-                          </div>
-                          <div style={{ display: "flex", flexDirection: "column" }}>
-                            <span style={{ fontSize: "0.72rem", color: "var(--text-secondary)", marginBottom: "6px" }}>Vista Previa en Mapa</span>
-                            <div style={{ width: "100%", height: "200px", borderRadius: "8px", overflow: "hidden", border: "1px solid var(--card-border)" }}>
-                              <LeafletMap
-                                listings={listings}
-                                center={[targetDetails.latitude || -34.5861, targetDetails.longitude || -58.4373]}
-                                targetListingId={targetDetails.listing_id}
-                                selectedListingId={selectedId}
-                              />
-                            </div>
+                            
+                            <select
+                              className="select-input"
+                              style={{ width: "160px", marginBottom: 0, fontSize: "0.8rem" }}
+                              value={selectedCategoryFilter}
+                              onChange={(e) => setSelectedCategoryFilter(e.target.value)}
+                            >
+                              <option value="All">Todas las Categorías</option>
+                              {Object.keys(defaultAmenitiesByCategory).map(cat => (
+                                <option key={cat} value={cat}>{cat}</option>
+                              ))}
+                            </select>
                           </div>
                         </div>
-                      ) : (
-                        <div style={{ color: "var(--text-secondary)", fontSize: "0.8rem", fontStyle: "italic", textAlign: "center" }}>
-                          Configura la URL de tu propiedad para ver y editar la ubicación.
-                        </div>
-                      )}
-                    </div>
 
+                        {/* New Custom Amenity Adder */}
+                        <div className="glass-card">
+                          <h4 style={{ margin: "0 0 10px 0", fontSize: "0.85rem", color: "#fff" }}>Agregar Servicio Personalizado</h4>
+                          <div style={{ display: "flex", gap: "10px" }}>
+                            <input
+                              type="text"
+                              className="text-input"
+                              style={{ marginBottom: 0, fontSize: "0.8rem" }}
+                              placeholder="Nombre del servicio (Ej: Cafetera Nespresso, PlayStation 5...)"
+                              value={newAmenityName}
+                              onChange={(e) => setNewAmenityName(e.target.value)}
+                            />
+                            <select
+                              className="select-input"
+                              style={{ width: "150px", marginBottom: 0, fontSize: "0.8rem" }}
+                              value={newAmenityCategory}
+                              onChange={(e) => setNewAmenityCategory(e.target.value)}
+                            >
+                              {Object.keys(defaultAmenitiesByCategory).map(cat => (
+                                <option key={cat} value={cat}>{cat}</option>
+                              ))}
+                            </select>
+                            <button
+                              onClick={() => {
+                                if (!newAmenityName.trim()) return;
+                                const amenitiesList = targetDetails?.amenities || [];
+                                if (!amenitiesList.includes(newAmenityName.trim())) {
+                                  const newList = [...amenitiesList, newAmenityName.trim()];
+                                  setTargetDetails({ ...targetDetails, amenities: newList });
+                                }
+                                setNewAmenityName("");
+                              }}
+                              className="vercel-btn"
+                              style={{ width: "auto", padding: "0 20px" }}
+                            >
+                              Añadir
+                            </button>
+                          </div>
+                        </div>
+
+                        {/* Categorized Grid View */}
+                        <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
+                          {Object.keys(defaultAmenitiesByCategory)
+                            .filter(cat => selectedCategoryFilter === "All" || selectedCategoryFilter === cat)
+                            .map(cat => {
+                              const amenitiesInCat = getFilteredAmenities().filter(am => {
+                                if (defaultAmenitiesByCategory[cat].includes(am)) return true;
+                                return cat === "General" && !Object.values(defaultAmenitiesByCategory).some(l => l.includes(am));
+                              });
+
+                              if (amenitiesInCat.length === 0 && searchQueryAmenities) return null;
+
+                              return (
+                                <div key={cat} className="glass-card" style={{ margin: 0, padding: "20px" }}>
+                                  <h4 style={{ margin: "0 0 12px 0", color: "var(--accent-gold)", fontSize: "0.88rem", borderBottom: "1px solid rgba(255,255,255,0.05)", paddingBottom: "6px" }}>
+                                    {cat}
+                                  </h4>
+                                  <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(200px, 1fr))", gap: "10px" }}>
+                                    {amenitiesInCat.map(am => {
+                                      const isChecked = targetDetails?.amenities?.includes(am);
+                                      return (
+                                        <label
+                                          key={am}
+                                          style={{
+                                            display: "flex",
+                                            alignItems: "center",
+                                            justifyContent: "space-between",
+                                            padding: "8px 12px",
+                                            borderRadius: "6px",
+                                            backgroundColor: isChecked ? "rgba(212,175,55,0.03)" : "rgba(255,255,255,0.01)",
+                                            border: isChecked ? "1px solid rgba(212,175,55,0.2)" : "1px solid rgba(255,255,255,0.04)",
+                                            cursor: "pointer",
+                                            fontSize: "0.78rem",
+                                            color: isChecked ? "#fff" : "var(--text-secondary)"
+                                          }}
+                                        >
+                                          <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+                                            <input
+                                              type="checkbox"
+                                              checked={isChecked}
+                                              onChange={(e) => {
+                                                const amenitiesList = targetDetails?.amenities || [];
+                                                let newList = [...amenitiesList];
+                                                if (e.target.checked) {
+                                                  if (!newList.includes(am)) newList.push(am);
+                                                } else {
+                                                  newList = newList.filter(x => x !== am);
+                                                }
+                                                setTargetDetails({ ...targetDetails, amenities: newList });
+                                              }}
+                                              style={{ accentColor: "var(--accent-gold)" }}
+                                            />
+                                            <span>{am}</span>
+                                          </div>
+                                          
+                                          {!defaultAmenitiesByCategory[cat].includes(am) && (
+                                            <button
+                                              onClick={(e) => {
+                                                e.preventDefault();
+                                                const amenitiesList = targetDetails?.amenities || [];
+                                                const newList = amenitiesList.filter(x => x !== am);
+                                                setTargetDetails({ ...targetDetails, amenities: newList });
+                                              }}
+                                              style={{ border: "none", background: "none", color: "var(--accent-coral)", cursor: "pointer", fontSize: "0.95rem" }}
+                                            >
+                                              ×
+                                            </button>
+                                          )}
+                                        </label>
+                                      );
+                                    })}
+                                  </div>
+                                </div>
+                              );
+                            })}
+                        </div>
+                      </div>
+                    )}
                   </div>
                 );
 
