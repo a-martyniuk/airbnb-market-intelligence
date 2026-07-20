@@ -236,6 +236,7 @@ export default function UnifiedDashboard() {
 
   // Autosave status for Property Setup (Notion/Airtable style)
   const [autoSaveStatus, setAutoSaveStatus] = useState("saved"); // "saving", "saved", "error"
+  const [demoMode, setDemoMode] = useState(false);
   const isFirstMount = useRef(true);
   const saveTimeoutRef = useRef(null);
 
@@ -388,6 +389,7 @@ POR ESTADÍA (${stayN} noches):
       const res = await fetch(`${API_BASE}/api/settings/target`);
       if (res.ok) {
         const data = await res.json();
+        setDemoMode(data.demo_mode || false);
         if (data.target_url) {
           setTargetUrlInput(data.target_url);
           setTargetDetails(data.details);
@@ -886,6 +888,23 @@ POR ESTADÍA (${stayN} noches):
               })}
             </div>
           ))}
+          {demoMode && (
+            <div style={{
+              marginTop: "auto",
+              padding: "12px",
+              borderRadius: "8px",
+              border: "1px solid rgba(245, 158, 11, 0.2)",
+              backgroundColor: "rgba(245, 158, 11, 0.05)",
+              color: "#f59e0b",
+              fontSize: "0.75rem",
+              lineHeight: "1.3"
+            }}>
+              <strong>🔓 Modo Demo Activo</strong>
+              <p style={{ margin: "4px 0 0 0", color: "rgba(255,255,255,0.6)", fontSize: "0.68rem" }}>
+                Las modificaciones están deshabilitadas en esta versión de portafolio público para proteger los datos de producción.
+              </p>
+            </div>
+          )}
         </aside>
 
         {/* Right Tab Content Area */}
@@ -1504,8 +1523,8 @@ POR ESTADÍA (${stayN} noches):
                           {sub.label}
                         </button>
                       ))}
-                      <span style={{ marginLeft: "auto", fontSize: "0.72rem", color: autoSaveStatus === "saved" ? "var(--accent-emerald)" : "var(--accent-gold)" }}>
-                        ● {autoSaveStatus === "saving" ? "Guardando..." : "Autoguardado al día"}
+                      <span style={{ marginLeft: "auto", fontSize: "0.72rem", color: demoMode ? "var(--accent-gold)" : autoSaveStatus === "saved" ? "var(--accent-emerald)" : "var(--accent-gold)" }}>
+                        ● {demoMode ? "Modo Demostración (Lectura)" : autoSaveStatus === "saving" ? "Guardando..." : autoSaveStatus === "error" ? "Error al guardar" : "Autoguardado al día"}
                       </span>
                     </div>
 
@@ -2203,13 +2222,13 @@ POR ESTADÍA (${stayN} noches):
                           <span style={{
                             fontSize: "0.72rem",
                             fontWeight: "500",
-                            color: autoSaveStatus === "saving" ? "var(--accent-gold)" : autoSaveStatus === "saved" ? "var(--accent-emerald)" : "var(--text-secondary)",
+                            color: demoMode ? "var(--accent-gold)" : autoSaveStatus === "saving" ? "var(--accent-gold)" : autoSaveStatus === "saved" ? "var(--accent-emerald)" : "var(--text-secondary)",
                             backgroundColor: "rgba(255,255,255,0.02)",
                             padding: "4px 10px",
                             borderRadius: "6px",
                             border: "1px solid var(--card-border)"
                           }}>
-                            {autoSaveStatus === "saving" ? "Guardando..." : autoSaveStatus === "saved" ? "✓ Autoguardado activo" : "Sin guardar"}
+                            {demoMode ? "Modo Demo (Lectura)" : autoSaveStatus === "saving" ? "Guardando..." : autoSaveStatus === "saved" ? "✓ Autoguardado activo" : "Sin guardar"}
                           </span>
                         </div>
 

@@ -18,6 +18,13 @@ if os.path.exists(".env"):
                 os.environ[key.strip()] = val.strip()
 
 from backend.utils.db import get_connection, init_db
+
+def check_demo_mode():
+    if os.getenv("DEMO_MODE", "false").lower() == "true":
+        raise HTTPException(
+            status_code=403,
+            detail="Modo Demostración Activo: Las modificaciones y actualizaciones de configuración están deshabilitadas en la demo pública."
+        )
 from backend.scraper.scheduler import ScrapingScheduler
 from backend.etl.pipeline import ETLPipeline
 from backend.ml.pricing_model import DynamicPricingModel
@@ -317,6 +324,7 @@ class UpdateRequest(BaseModel):
 
 @app.post("/api/pipeline/update")
 def trigger_incremental_update(payload: UpdateRequest, background_tasks: BackgroundTasks):
+    check_demo_mode()
     global pipeline_state
     if pipeline_state["status"] == "running":
         return {"message": "A scrape job is already running.", "status": pipeline_state}
@@ -335,6 +343,7 @@ def trigger_incremental_update(payload: UpdateRequest, background_tasks: Backgro
 
 @app.post("/api/pipeline/hydrate")
 def trigger_live_scrape(background_tasks: BackgroundTasks):
+    check_demo_mode()
     """Legacy endpoint - triggers total run in background."""
     global pipeline_state
     if pipeline_state["status"] == "running":
@@ -753,6 +762,7 @@ class RulesUpdate(BaseModel):
 
 @app.post("/api/settings/rules")
 def update_pricing_rules(payload: RulesUpdate, background_tasks: BackgroundTasks):
+    check_demo_mode()
     """Updates pricing rules in settings.yaml and regenerates recommendations in SQLite."""
     try:
         # 1. Read existing config
@@ -806,6 +816,7 @@ class ResetPayload(BaseModel):
 
 @app.post("/api/listings/{listing_id}/recommendations/override")
 def save_price_override(listing_id: str, payload: OverridePayload, background_tasks: BackgroundTasks):
+    check_demo_mode()
     """Saves a manual price override for a specific listing and date."""
     conn = get_connection(DB_PATH)
     try:
@@ -845,6 +856,7 @@ def save_price_override(listing_id: str, payload: OverridePayload, background_ta
 
 @app.post("/api/listings/{listing_id}/recommendations/reset")
 def reset_price_override(listing_id: str, payload: ResetPayload, background_tasks: BackgroundTasks):
+    check_demo_mode()
     """Resets a manual price override, restoring the original AI recommendation."""
     conn = get_connection(DB_PATH)
     try:
@@ -1032,6 +1044,7 @@ def get_target_listing_settings():
     target_id = settings_data.get("target_id")
     resolved_info = resolve_pricing_configuration(target_id, settings_data)
     settings_data.update(resolved_info)
+    settings_data["demo_mode"] = os.getenv("DEMO_MODE", "false").lower() == "true"
     return settings_data
 
 @app.post("/api/settings/target/resolve")
@@ -1215,6 +1228,7 @@ def resolve_target_listing_url(payload: Dict[str, str]):
 
 @app.post("/api/settings/target/save")
 def save_target_listing_settings(payload: Dict[str, Any], background_tasks: BackgroundTasks):
+    check_demo_mode()
     global pipeline_state
     details = payload.get("details")
     url = payload.get("target_url")
