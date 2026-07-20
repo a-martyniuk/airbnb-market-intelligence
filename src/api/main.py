@@ -1381,7 +1381,7 @@ def save_target_listing_settings(payload: Dict[str, Any], background_tasks: Back
             message = "Target listing saved and total market scrape initiated."
         # Sync local target_settings.json to GitHub immediately
         from src.utils.git_db import sync_to_github
-        background_tasks.add_task(sync_to_github, ["config/target_settings.json"])
+        background_tasks.add_task(sync_to_github, [DB_PATH, "config/target_settings.json"])
         
         return {"status": "success", "message": message}
     except Exception as e:
