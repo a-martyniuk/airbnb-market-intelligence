@@ -61,8 +61,10 @@ def run_pipeline_scheduler():
         except Exception as e:
             logger.error(f"Background Scheduler Error: {str(e)}")
 
-scheduler_thread = threading.Thread(target=run_pipeline_scheduler, daemon=True)
-scheduler_thread.start()
+# Background scheduler disabled to prevent IP blocking on datacenter addresses (Render).
+# All automated scrapes are handled cleanly by GitHub Actions daily.
+# scheduler_thread = threading.Thread(target=run_pipeline_scheduler, daemon=True)
+# scheduler_thread.start()
 
 
 app = FastAPI(
@@ -304,9 +306,9 @@ def get_pipeline_status():
             "last_update_total": status_times.get("last_update_total")
         },
         "scheduler": {
-            "status": "active",
-            "interval_seconds": 300,
-            "next_run_seconds": 300 - int(time.time() % 300)
+            "status": "disabled",
+            "interval_seconds": None,
+            "next_run_seconds": None
         }
     }
 
