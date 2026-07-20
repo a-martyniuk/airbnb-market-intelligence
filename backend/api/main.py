@@ -1039,6 +1039,107 @@ def resolve_pricing_configuration(target_id: str, settings_data: Dict[str, Any])
         "pricing_sources": sources
     }
 
+# ── Diagnostic endpoint ──────────────────────────────────────────────────────
+@app.get("/api/diagnostics/target")
+def diagnostics_target():
+    """
+    Returns a full diagnostic snapshot of what the DB has for the target listing:
+    - target_id and target_url from config
+    - listing_details row (scraped during resolve)
+    - listings_daily rows count + most recent row
+    - pricing resolution chain with sources
+    """
+    settings_file = "config/target_settings.json"
+    settings_data = {"target_url": "", "target_id": "", "details": None}
+    if os.path.exists(settings_file):
+        with open(settings_file, "r", encoding="utf-8") as f:
+            try:
+                settings_data = json.load(f)
+            except Exception:
+                pass
+
+    target_id = settings_data.get("target_id") or ""
+    target_url = settings_data.get("target_url") or ""
+
+    result = {
+        "target_id": target_id,
+        "target_url": target_url,
+        "listing_details": None,
+        "listings_daily_count": 0,
+        "listings_daily_latest": None,
+        "pricing_resolution": None,
+        "warnings": []
+    }
+
+    if not target_id:
+        result["warnings"].append("No target_id configured — run 'Configurar URL' first.")
+        return result
+
+    conn = get_connection(DB_PATH)
+    try:
+        cursor = conn.cursor()
+
+        # 1. listing_details
+        cursor.execute("""
+            SELECT listing_id, title, price, weekend_price,
+                   weekly_discount, monthly_discount, early_bird_discount,
+                   last_minute_discount, cleaning_fee, minimum_stay, maximum_stay,
+                   rating, reviews_count, bedrooms, bathrooms, accommodates
+            FROM listing_details WHERE listing_id = ?
+        """, (target_id,))
+        row = cursor.fetchone()
+        if row:
+            result["listing_details"] = dict(row)
+        else:
+            result["warnings"].append(
+                f"listing_id '{target_id}' NOT found in listing_details. "
+                "The resolve step may not have run yet."
+            )
+
+        # 2. listings_daily count
+        cursor.execute(
+            "SELECT COUNT(*) as cnt FROM listings_daily WHERE listing_id = ?",
+            (target_id,)
+        )
+        cnt_row = cursor.fetchone()
+        result["listings_daily_count"] = cnt_row["cnt"] if cnt_row else 0
+
+        if result["listings_daily_count"] == 0:
+            result["warnings"].append(
+                f"listing_id '{target_id}' has 0 rows in listings_daily. "
+                "Discount fields (weekly/monthly) can only be 'Scraped' if this table has data. "
+                "Run the scraper pipeline so it picks up your target listing."
+            )
+
+        # 3. Most recent listings_daily row
+        cursor.execute("""
+            SELECT snapshot_date, price, weekend_price,
+                   weekly_discount, monthly_discount, early_bird_discount,
+                   last_minute_discount, cleaning_fee, minimum_stay, maximum_stay
+            FROM listings_daily
+            WHERE listing_id = ?
+            ORDER BY snapshot_date DESC LIMIT 1
+        """, (target_id,))
+        daily_row = cursor.fetchone()
+        result["listings_daily_latest"] = dict(daily_row) if daily_row else None
+
+    except Exception as e:
+        result["warnings"].append(f"DB error: {str(e)}")
+    finally:
+        conn.close()
+
+    # 4. Full pricing resolution chain
+    resolved_info = resolve_pricing_configuration(target_id, settings_data)
+    result["pricing_resolution"] = {
+        "scraped_from_listings_daily": resolved_info.get("pricing_scraped"),
+        "manual_overrides": resolved_info.get("pricing_overrides"),
+        "defaults_from_config": resolved_info.get("pricing_defaults"),
+        "resolved_values": resolved_info.get("pricing_resolved"),
+        "sources": resolved_info.get("pricing_sources"),
+    }
+
+    return result
+
 # Settings endpoints for target listing
 @app.get("/api/settings/target")
 def get_target_listing_settings():
