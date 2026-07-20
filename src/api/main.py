@@ -1306,18 +1306,40 @@ def save_target_listing_settings(payload: Dict[str, Any], background_tasks: Back
         today_str = datetime.now().strftime("%Y-%m-%d")
         cursor.execute("""
         INSERT INTO listings_daily (
-            snapshot_date, listing_id, price, rating, reviews_count, estimated_occupancy_rate_30d
-        ) VALUES (?, ?, ?, ?, ?, 0.65)
+            snapshot_date, listing_id, price, rating, reviews_count, estimated_occupancy_rate_30d,
+            weekend_price, weekly_discount, monthly_discount, early_bird_discount, last_minute_discount,
+            cleaning_fee, minimum_stay, maximum_stay, instant_book, cancellation_policy
+        ) VALUES (?, ?, ?, ?, ?, 0.65, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         ON CONFLICT(snapshot_date, listing_id) DO UPDATE SET
             price=excluded.price,
             rating=excluded.rating,
-            reviews_count=excluded.reviews_count
+            reviews_count=excluded.reviews_count,
+            weekend_price=excluded.weekend_price,
+            weekly_discount=excluded.weekly_discount,
+            monthly_discount=excluded.monthly_discount,
+            early_bird_discount=excluded.early_bird_discount,
+            last_minute_discount=excluded.last_minute_discount,
+            cleaning_fee=excluded.cleaning_fee,
+            minimum_stay=excluded.minimum_stay,
+            maximum_stay=excluded.maximum_stay,
+            instant_book=excluded.instant_book,
+            cancellation_policy=excluded.cancellation_policy
         """, (
             today_str,
             str(listing_id),
             float(details.get("price", 105.0)),
             float(details.get("rating", 5.0)),
-            int(details.get("reviews_count", 5))
+            int(details.get("reviews_count", 5)),
+            float(details.get("weekend_price")) if details.get("weekend_price") is not None else None,
+            float(details.get("weekly_discount")) if details.get("weekly_discount") is not None else None,
+            float(details.get("monthly_discount")) if details.get("monthly_discount") is not None else None,
+            float(details.get("early_bird_discount")) if details.get("early_bird_discount") is not None else None,
+            float(details.get("last_minute_discount")) if details.get("last_minute_discount") is not None else None,
+            float(details.get("cleaning_fee")) if details.get("cleaning_fee") is not None else None,
+            int(details.get("minimum_nights")) if details.get("minimum_nights") is not None else (int(details.get("minimum_stay")) if details.get("minimum_stay") is not None else None),
+            int(details.get("maximum_nights")) if details.get("maximum_nights") is not None else (int(details.get("maximum_stay")) if details.get("maximum_stay") is not None else None),
+            int(details.get("instant_book")) if details.get("instant_book") is not None else 1,
+            details.get("cancellation_policy")
         ))
         
         today = datetime.now().date()
