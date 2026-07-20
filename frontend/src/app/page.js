@@ -2392,13 +2392,13 @@ POR ESTADÍA (${stayN} noches):
                     {/* Alerts list */}
                     <div style={{ display: "flex", flexDirection: "column", gap: "15px" }}>
                       
-                      <div className="glass-card" style={{ margin: 0, borderLeft: "4px solid #ef4444", padding: "16px 20px" }}>
+                      <div className="glass-card" style={{ margin: 0, borderLeft: "4px solid var(--accent-gold)", padding: "16px 20px" }}>
                         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "6px" }}>
-                          <strong style={{ color: "#fff", fontSize: "0.85rem" }}>Precio Fuera de Rango (Sobreprecio)</strong>
+                          <strong style={{ color: "#fff", fontSize: "0.85rem" }}>Sobreprecio en Fin de Semana Detectado</strong>
                           <span style={{ fontSize: "0.7rem", color: "var(--text-secondary)" }}>Hace 3 horas</span>
                         </div>
-                        <p style={{ margin: 0, fontSize: "0.8rem", color: "var(--text-secondary)" }}>
-                          Tu tarifa actual publicada de $110 USD está un <strong>18% por encima</strong> del promedio de competidores directos con ocupación para la semana que viene. Conviene ajustar la tarifa a la baja.
+                        <p style={{ margin: 0, fontSize: "0.8rem", color: "var(--text-secondary)", lineHeight: "1.4" }}>
+                          Tu tarifa de fin de semana calculada es de <strong>${Math.round(currentPrice * (parseFloat(weekendPremium) || 1.15))} USD</strong>. Esta tarifa está un <strong>18% por encima</strong> del promedio de competidores directos con ocupación para la semana que viene. Si bien es esperable y correcto aplicar un recargo de fin de semana, te recomendamos monitorear si la conversión disminuye o ajustar el recargo para mantener la competitividad.
                         </p>
                       </div>
 
