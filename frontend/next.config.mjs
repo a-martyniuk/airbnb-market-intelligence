@@ -1,6 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  /* config options here */
+  basePath: '/airmarket',
+  assetPrefix: '/airmarket',
 };
 
 export default nextConfig;
