@@ -82,9 +82,18 @@ app = FastAPI(
     version="1.0.0"
 )
 
-# CORS configuration to enable Next.js frontend calls
-allowed_origins_str = os.getenv("ALLOWED_ORIGINS", "*")
-allowed_origins = [orig.strip().rstrip('/') for orig in allowed_origins_str.split(",") if orig.strip()]
+# CORS — wildcard "*" is incompatible with allow_credentials=True (browsers reject it).
+# Use explicit origins list; extend via ALLOWED_ORIGINS env var.
+_default_origins = [
+    "http://localhost:3000",
+    "http://localhost:3001",
+    "https://airbnb-market-intelligence.vercel.app",
+    "https://www.alexismartyniuk.com.ar",
+    "https://alexismartyniuk.com.ar",
+]
+_extra_str = os.getenv("ALLOWED_ORIGINS", "")
+_extra = [o.strip().rstrip('/') for o in _extra_str.split(",") if o.strip() and o.strip() != "*"]
+allowed_origins = list(set(_default_origins + _extra))
 
 app.add_middleware(
     CORSMiddleware,
