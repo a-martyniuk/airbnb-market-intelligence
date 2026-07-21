@@ -657,16 +657,24 @@ POR ESTADÍA (${stayN} noches):
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ url: targetUrlInput.trim() })
       });
+
+      if (!res.ok) {
+        const errData = await res.json().catch(() => ({}));
+        alert(`Error al resolver URL (${res.status}): ${errData.detail || "Error desconocido"}`);
+        setResolvingTarget(false);
+        return;
+      }
+
       const data = await res.json();
       if (data.details) {
         setTargetDetails(data.details);
         
-        // Save resolved details to database/GitHub immediately
+        // Save resolved details to database immediately
         const saveRes = await fetch(`${API_BASE}/api/settings/target/save`, {
           method: "POST",
           headers: { 
             "Content-Type": "application/json",
-            "X-Admin-Pin": "232323"
+            "X-Admin-Pin": adminPin || "232323"
           },
           body: JSON.stringify({
             target_url: targetUrlInput.trim(),
@@ -679,7 +687,7 @@ POR ESTADÍA (${stayN} noches):
         
         if (!saveRes.ok) {
           const errData = await saveRes.json().catch(() => ({}));
-          alert(errData.detail || "Error al guardar la propiedad.");
+          alert(`Error al guardar (${saveRes.status}): ${errData.detail || "Error desconocido"}`);
           setResolvingTarget(false);
           return;
         }
@@ -698,7 +706,7 @@ POR ESTADÍA (${stayN} noches):
       }
     } catch (err) {
       console.error(err);
-      alert("Error al resolver y guardar la propiedad.");
+      alert(`Error de conexión: ${err.message || "No se pudo conectar con el servidor."}`);
     } finally {
       setResolvingTarget(false);
     }
