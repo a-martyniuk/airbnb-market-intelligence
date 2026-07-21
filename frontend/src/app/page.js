@@ -236,7 +236,7 @@ export default function UnifiedDashboard() {
 
   // Autosave status for Property Setup (Notion/Airtable style)
   const [autoSaveStatus, setAutoSaveStatus] = useState("saved"); // "saving", "saved", "error"
-  const [demoMode, setDemoMode] = useState(false);
+  const [demoMode, setDemoMode] = useState(true); // default true (fail-safe): backend confirms false if not in demo
   const [adminPin, setAdminPin] = useState(() => {
     if (typeof window !== "undefined") {
       return localStorage.getItem("adminPin") || "";
@@ -249,9 +249,14 @@ export default function UnifiedDashboard() {
   const [pinModalError, setPinModalError] = useState("");
 
   const executeProtectedAction = (actionCallback) => {
-    if (!demoMode || adminPin === "232323") {
+    if (!demoMode) {
+      // No demo mode: allow all actions freely
+      actionCallback();
+    } else if (adminPin === "232323") {
+      // Demo mode but already unlocked: execute directly
       actionCallback();
     } else {
+      // Demo mode and locked: show PIN modal
       setPinInputVal("");
       setPinModalError("");
       setPinModalCallback(() => actionCallback);
