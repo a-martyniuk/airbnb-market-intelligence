@@ -57,12 +57,16 @@ When loading listing pages, the data resides in serialized javascript states wit
   `r'"cleaningFee"\s*:\s*(\d+(?:\.\d+)?)'` or `r'"cleaning_fee"\s*:\s*(\d+(?:\.\d+)?)'`
 - **Stay Limits**:
   `r'"minNights"\s*:\s*(\d+)'` or `r'"minimumNights"\s*:\s*(\d+)'`
-- **Weekly Discount**:
-  `r'"weeklyDiscountFactor"\s*:\s*(\d+(?:\.\d+)?)'`
-- **Weekend Price**:
-  `r'"weekendPrice"\s*:\s*(\d+(?:\.\d+)?)'`
+- **Weekly / Monthly Discount Factors**:
+  `r'"weeklyDiscountFactor"\s*:\s*(\d+(?:\.\d+)?)'`, `r'"monthlyDiscountFactor"\s*:\s*(\d+(?:\.\d+)?)'`
+- **Multilingual Reviews & Rating Parsing**:
+  - Rating Regex: `r'([\d.,]+)\s*(?:out of|de)\s*5'`
+  - Reviews Regex: `r'([\d.,]+)\s*(?:review|reviews|reseña|reseñas|evaluación|evaluaciones|comentario|comentarios)'`
+  - Badge *"Nuevo"* / *"New"* Parsing: Detects new listings without reviews and explicitly assigns `reviews_count: 0`, `rating: 5.0` instead of dummy fallback counts.
+- **Client-Side Fast URL Resolution**:
+  - Target URL configuration instantly parses Airbnb Room ID via client-side regex `/\/rooms\/(\d+)/` to avoid timeout delays during manual configuration.
 
-This dual-layer extraction (JSON state parsing + Regex matching fallback) ensures excellent reliability.
+This dual-layer extraction (JSON state parsing + Multilingual Regex matching fallback) ensures excellent reliability.
 
 ---
 

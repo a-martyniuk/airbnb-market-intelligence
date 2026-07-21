@@ -35,12 +35,9 @@ Cuando se ejecuta una actualización de mercado, el sistema realiza los siguient
     $$\text{Dormitorios} \ge 3 \implies \text{Huéspedes de búsqueda} = 6$$
 2.  **Consulta Externa:** Ejecuta peticiones HTTP camufladas (rotando User-Agents) a Airbnb con la estructura:
     `https://www.airbnb.com/s/{neighborhood}-Buenos-Aires/homes?adults={search_adults}`
-3.  **Extracción de Amenities (Heurística):** Dado que Airbnb protege las páginas individuales tras Captchas, el scraper analiza los títulos y textos descriptivos del resultado de búsqueda para detectar equipamientos clave:
-    *   *Pileta/Pool:* Detectado si contiene "pool", "pileta" o "piscina".
-    *   *Cochera/Parking:* Detectado si contiene "parking", "cochera" o "estacionamiento".
-    *   *Lavarropas/Laundry:* Detectado si contiene "laundry", "washer" o "lavarropas".
-    *   *Jacuzzi:* Detectado si contiene "jacuzzi" o "hot tub".
-4.  **Guardado en DB:** Almacena los registros en la tabla `listings` y los precios diarios del mercado en `listings_daily`.
+3.  **Extracción Multilingüe & Reseñas ("Nuevo"):** Parseo inteligente de reseñas y calificaciones soportando español e inglés (*"evaluaciones"*, *"reseñas"*, *"reviews"*), así como detección de la etiqueta **"Nuevo"** para evitar lecturas de reseñas predeterminadas ficticias.
+4.  **Rotación de Headers:** Peticiones HTTP con rotación dinámica de `User-Agent` imitando navegadores modernos para minimizar bloqueos (HTTP 429/403).
+5.  **Guardado en DB:** Almacena los registros en la tabla `listings` y los precios diarios del mercado en `listings_daily`.
 
 ---
 
@@ -73,17 +70,20 @@ Donde los pesos y distancias normalizadas se definen como:
 
 ---
 
-## 3. Motor de Precios Dinámicos (Machine Learning)
+## 3. Motor de Precios Dinámicos (Machine Learning & Descuentos)
 
 El precio sugerido no es estático; se calcula mediante un modelo híbrido "Valor-Mercado":
 
 1.  **Inferencia ML:** El sistema entrena un regresor `RandomForest` sobre los datos de competidores para calcular una valoración del "departamento teórico" en base a sus características físicas y rating. Esto da el **ML Base Price** ($P_{ML}$).
 2.  **Alineación Competitiva:** Se calcula la tarifa promedio del segmento de competidores reales ($P_{comp\_avg}$).
-3.  **Anclaje Híbrido ($P_{anchor}$):** Se define un precio de anclaje que equilibra tu propuesta de valor contra la masa del mercado:
+3.  **Medianas de Descuento de Mercado:** Se calculan las medianas de descuento semanal (`suggested_weekly_discount`) y mensual (`suggested_monthly_discount`) aplicadas por los 15 competidores afines.
+4.  **Calendario Oficial de Feriados:** Integración con la API de ArgentinaDatos para detectar automáticamente feriados nacionales y puentes turísticos en Argentina.
+5.  **Anclaje Híbrido ($P_{anchor}$):** Se define un precio de anclaje que equilibra tu propuesta de valor contra la masa del mercado:
     $$P_{anchor} = 0.6 \cdot P_{ML} + 0.4 \cdot P_{comp\_avg}$$
-4.  **Multiplicadores de Reglas de Negocio:** Sobre el precio de anclaje se aplican factores:
+6.  **Multiplicadores de Reglas de Negocio:** Sobre el precio de anclaje se aplican factores:
     *   **Premio de Fin de Semana:** $+15\%$ (configurable) sobre las noches de Viernes y Sábado.
     *   **Descuento de Temporada Baja:** $-10\%$ durante meses invernales (Junio, Julio, Agosto).
+    *   **Premio de Feriados:** $+20\%$ durante feriados nacionales y fin de semana largo.
     *   **Descuento de Último Minuto:** $-15\%$ si quedan menos de 3 días para la reserva y la ocupación del anfitrión es baja ($<40\%$).
 
 ---

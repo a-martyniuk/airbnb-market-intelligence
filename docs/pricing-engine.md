@@ -34,10 +34,11 @@ graph TD
 The ML pricing model forecasts optimal prices over a 30-day window:
 
 1. **Data Collection**: Retrieves historical daily listing records from the database, calculating baseline occupancy trends and pricing curves.
-2. **Holiday Markups**: Checks if dates match Argentine national holidays, applying a $+20\%$ pricing premium factor.
-3. **k-NN Competitor Bounds**: Restricts price recommendations to remain within the pricing limits of direct competitors in the neighborhood (within $1.5$ km).
-4. **Calculations**:
+3. **Holiday Markups & Calendar**: Checks target dates against the official Argentine holiday calendar (integrated with `api.argentinadatos.com` and 2026/2027 static fallbacks for long weekend bridges), applying a $+20\%$ pricing premium factor.
+4. **Market Competitor Discount Medians**: Computes median weekly (`suggested_weekly_discount`) and monthly (`suggested_monthly_discount`) discount percentages across k-NN competitor properties.
+5. **k-NN Competitor Bounds**: Restricts price recommendations to remain within the pricing limits of direct competitors in the neighborhood (within $1.5$ km).
+6. **Calculations**:
    - Computes daily base recommended prices.
    - Applies weekend markup multiplier ($+15\%$) for Friday and Saturday nights.
    - Adjusts prices based on historical neighborhood occupancy fluctuations.
-5. **Output Persistence**: Commits final 30-day recommended trajectory paths to the `price_recommendations` table.
+7. **Output Persistence**: Commits final 30-day recommended trajectory paths to the `price_recommendations` table.
