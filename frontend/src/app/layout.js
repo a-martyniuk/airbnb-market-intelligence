@@ -1,14 +1,21 @@
 import "./globals.css";
 
 export const metadata = {
-  title: "Airbnb Market Intelligence & Dynamic Pricing Platform",
-  description: "Professional Revenue Management and Dynamic Pricing Platform for Palermo Hollywood short-term rental owners.",
+  title: "AirMarket AI - Revenue Management & Dynamic Pricing Platform",
+  description: "Enterprise Revenue Management and Dynamic Pricing Platform for short-term rental owners.",
+  icons: {
+    icon: "/icon.png",
+    shortcut: "/icon.png",
+    apple: "/icon.png",
+  },
 };
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
+        <link rel="icon" type="image/png" href="/icon.png" />
+        <link rel="apple-touch-icon" href="/icon.png" />
         {/* Leaflet CSS for Dark Themed Maps */}
         <link
           rel="stylesheet"
