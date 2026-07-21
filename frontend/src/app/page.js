@@ -556,11 +556,14 @@ POR ESTADÍA (${stayN} noches):
       const res = await fetch(`${API_BASE}/api/pipeline/status`);
       const statusData = await res.json();
       setPipelineStatus(statusData);
-      if (statusData.hydration_job?.status === "success") {
+      const jobStatus = statusData.hydration_job?.status;
+      if (jobStatus === "running" || jobStatus === "starting") {
+        setHydrating(true);
+      } else {
         setHydrating(false);
-        fetchInitialData();
-      } else if (statusData.hydration_job?.status === "error") {
-        setHydrating(false);
+        if (jobStatus === "success") {
+          fetchInitialData();
+        }
       }
     } catch (e) {
       console.error(e);
