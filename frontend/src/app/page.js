@@ -225,6 +225,12 @@ export default function UnifiedDashboard() {
   const [newAmenityName, setNewAmenityName] = useState("");
   const [newAmenityCategory, setNewAmenityCategory] = useState("General");
 
+  // Competitor filtering state
+  const [compSearchText, setCompSearchText] = useState("");
+  const [compMaxPrice, setCompMaxPrice] = useState(300);
+  const [compMinRating, setCompMinRating] = useState(0);
+  const [compFilterAmenity, setCompFilterAmenity] = useState("All");
+
   // Strategy Simulator Slider State (-30% to +30%)
   const [simulatorPct, setSimulatorPct] = useState(0);
   
@@ -820,6 +826,15 @@ POR ESTADÍA (${stayN} noches):
     fetchInitialData();
   }, []);
 
+  // Keep-alive ping to prevent Render cold-starts (every 3 mins)
+  useEffect(() => {
+    const keepAlive = () => {
+      fetch(`${API_BASE}/api/health`).catch(() => {});
+    };
+    const pingInterval = setInterval(keepAlive, 180000);
+    return () => clearInterval(pingInterval);
+  }, []);
+
   useEffect(() => {
     let interval;
     if (hydrating) {
@@ -1332,7 +1347,28 @@ POR ESTADÍA (${stayN} noches):
                   </div>
                 );
 
-              case "competidores":
+              case "competidores": {
+                const filteredCompetitors = competitors.filter(c => {
+                  const cPrice = c.price || 90.0;
+                  if (cPrice > compMaxPrice) return false;
+                  if (compMinRating === 1 && (c.reviews_count ?? 0) === 0) return false;
+                  if (compMinRating > 1 && (c.rating ?? 0) < compMinRating) return false;
+                  if (compSearchText) {
+                    const q = compSearchText.toLowerCase();
+                    if (!c.title?.toLowerCase().includes(q) && !c.neighborhood?.toLowerCase().includes(q)) return false;
+                  }
+                  if (compFilterAmenity !== "All") {
+                    let compAms = [];
+                    if (Array.isArray(c.amenities)) compAms = c.amenities;
+                    else {
+                      try { compAms = typeof c.amenities === 'string' ? JSON.parse(c.amenities) : []; } catch(e) {}
+                    }
+                    const amSet = new Set(compAms.map(x => x.toLowerCase()));
+                    if (!amSet.has(compFilterAmenity.toLowerCase())) return false;
+                  }
+                  return true;
+                });
+
                 return (
                   <div className="view-fade-in" style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
                     
@@ -1347,19 +1383,97 @@ POR ESTADÍA (${stayN} noches):
                       />
                     </div>
 
+                    {/* Interactive Filter Bar */}
+                    <div className="glass-card" style={{ padding: "16px 20px", display: "flex", flexWrap: "wrap", gap: "15px", alignItems: "center", margin: 0 }}>
+                      <div style={{ flex: "1 1 200px" }}>
+                        <label style={{ fontSize: "0.72rem", color: "var(--text-secondary)", display: "block", marginBottom: "4px" }}>Buscar Competidor</label>
+                        <input
+                          type="text"
+                          placeholder="Nombre o zona..."
+                          className="text-input"
+                          value={compSearchText}
+                          onChange={(e) => setCompSearchText(e.target.value)}
+                          style={{ marginBottom: 0, padding: "6px 12px", fontSize: "0.78rem" }}
+                        />
+                      </div>
+                      <div style={{ flex: "1 1 180px" }}>
+                        <div style={{ display: "flex", justifyContent: "space-between" }}>
+                          <label style={{ fontSize: "0.72rem", color: "var(--text-secondary)" }}>Precio Máx.</label>
+                          <span style={{ fontSize: "0.72rem", color: "var(--accent-gold)", fontWeight: "bold" }}>${compMaxPrice} USD</span>
+                        </div>
+                        <input
+                          type="range"
+                          min="40"
+                          max="400"
+                          step="10"
+                          value={compMaxPrice}
+                          onChange={(e) => setCompMaxPrice(parseInt(e.target.value))}
+                          style={{ width: "100%", accentColor: "var(--accent-gold)", cursor: "pointer" }}
+                        />
+                      </div>
+                      <div style={{ flex: "1 1 150px" }}>
+                        <label style={{ fontSize: "0.72rem", color: "var(--text-secondary)", display: "block", marginBottom: "4px" }}>Amenity Requerida</label>
+                        <select
+                          className="text-input"
+                          value={compFilterAmenity}
+                          onChange={(e) => setCompFilterAmenity(e.target.value)}
+                          style={{ marginBottom: 0, padding: "6px 10px", fontSize: "0.78rem", backgroundColor: "rgba(255,255,255,0.04)" }}
+                        >
+                          <option value="All">Todas las amenities</option>
+                          <option value="Pool">Piscina</option>
+                          <option value="Gym">Gimnasio</option>
+                          <option value="Parking">Cochera</option>
+                          <option value="Air conditioning">Aire Acondicionado</option>
+                          <option value="Jacuzzi">Jacuzzi</option>
+                        </select>
+                      </div>
+                      <div style={{ flex: "1 1 150px" }}>
+                        <label style={{ fontSize: "0.72rem", color: "var(--text-secondary)", display: "block", marginBottom: "4px" }}>Reseñas / Rating</label>
+                        <select
+                          className="text-input"
+                          value={compMinRating}
+                          onChange={(e) => setCompMinRating(parseFloat(e.target.value))}
+                          style={{ marginBottom: 0, padding: "6px 10px", fontSize: "0.78rem", backgroundColor: "rgba(255,255,255,0.04)" }}
+                        >
+                          <option value="0">Todos</option>
+                          <option value="1">Con reseñas (&gt; 0)</option>
+                          <option value="4.5">Rating &ge; 4.5 ⭐</option>
+                          <option value="4.8">Rating &ge; 4.8 ⭐</option>
+                        </select>
+                      </div>
+                      {(compSearchText || compMaxPrice < 300 || compFilterAmenity !== "All" || compMinRating > 0) && (
+                        <button
+                          onClick={() => {
+                            setCompSearchText("");
+                            setCompMaxPrice(300);
+                            setCompFilterAmenity("All");
+                            setCompMinRating(0);
+                          }}
+                          style={{ background: "none", border: "1px solid rgba(255,255,255,0.15)", borderRadius: "6px", color: "var(--accent-coral)", fontSize: "0.72rem", padding: "6px 12px", cursor: "pointer", alignSelf: "flex-end" }}
+                        >
+                          Limpiar filtros
+                        </button>
+                      )}
+                    </div>
+
                     {/* 15 Competitor Cards Grid */}
                     <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline" }}>
-                      <h3 style={{ margin: 0, textTransform: "none" }}>Top 15 Competidores Más Relevantes (k-NN)</h3>
+                      <h3 style={{ margin: 0, textTransform: "none" }}>Competidores Relevantes ({filteredCompetitors.length})</h3>
                       <span style={{ fontSize: "0.75rem", color: "var(--text-secondary)" }}>Haz clic en cualquier tarjeta para ver el desglose completo de amenities y fotos</span>
                     </div>
 
                     <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "20px" }}>
-                      {competitors.slice(0, 15).map(c => {
-                        const scorePct = Math.round((1 - c.similarity_score) * 100);
-                        const badge = getSimilarityBadge(c.similarity_score);
-                        const cPrice = c.price || 90.0;
-                        const cOcc = c.estimated_occupancy_rate_30d || 60.0;
-                        const cRevpar = Math.round(cPrice * cOcc / 100);
+                      {filteredCompetitors.length === 0 ? (
+                        <div style={{ gridColumn: "1 / -1", padding: "30px", textAlign: "center", color: "var(--text-secondary)", backgroundColor: "rgba(255,255,255,0.02)", borderRadius: "12px", border: "1px dashed rgba(255,255,255,0.1)" }}>
+                          No se encontraron competidores con los filtros seleccionados. Proba ajustando el precio o limpiando las amenities.
+                        </div>
+                      ) : (
+                        filteredCompetitors.slice(0, 15).map(c => {
+                          const scorePct = Math.round((1 - c.similarity_score) * 100);
+                          const badge = getSimilarityBadge(c.similarity_score);
+                          const cPrice = c.price || 90.0;
+                          const cOcc = c.estimated_occupancy_rate_30d || 60.0;
+                          const cRevpar = Math.round(cPrice * cOcc / 100);
 
                         // Extract physical amenities differences
                         const targetAms = currentDetails?.amenities || [];
@@ -1484,11 +1598,12 @@ POR ESTADÍA (${stayN} noches):
 
                           </div>
                         );
-                      })}
+                      }))}
                     </div>
 
                   </div>
                 );
+              }
 
               case "calendario":
                 return (
@@ -2850,6 +2965,49 @@ POR ESTADÍA (${stayN} noches):
                 </button>
               </div>
             </form>
+          </div>
+        </div>
+      )}
+
+      {/* ── Live Ingestion Progress Toast ────────────────────────── */}
+      {hydrating && (
+        <div style={{
+          position: "fixed",
+          bottom: "24px",
+          right: "24px",
+          zIndex: 9998,
+          backgroundColor: "rgba(10, 15, 26, 0.95)",
+          backdropFilter: "blur(12px)",
+          border: "1px solid rgba(245, 158, 11, 0.35)",
+          borderRadius: "14px",
+          padding: "16px 20px",
+          boxShadow: "0 10px 30px rgba(0,0,0,0.5)",
+          display: "flex",
+          flexDirection: "column",
+          gap: "10px",
+          width: "330px",
+          animation: "slideUp 0.3s ease-out"
+        }}>
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+            <div style={{ display: "flex", alignItems: "center", gap: "8px", fontWeight: "600", fontSize: "0.85rem", color: "var(--accent-gold)" }}>
+              <RefreshCw className="animate-spin" size={14} />
+              <span>Ingesta de Mercado en Vivo</span>
+            </div>
+            <span style={{ fontSize: "0.78rem", color: "#fff", fontWeight: "bold" }}>
+              {Math.round((pipelineStatus?.hydration_job?.progress || 0.1) * 100)}%
+            </span>
+          </div>
+          <div style={{ fontSize: "0.75rem", color: "rgba(255,255,255,0.7)", lineHeight: "1.3" }}>
+            {pipelineStatus?.hydration_job?.message || "Procesando ingesta y modelo dinámico..."}
+          </div>
+          <div style={{ width: "100%", height: "6px", backgroundColor: "rgba(255,255,255,0.08)", borderRadius: "3px", overflow: "hidden" }}>
+            <div style={{
+              height: "100%",
+              width: `${Math.max(6, Math.round((pipelineStatus?.hydration_job?.progress || 0.1) * 100))}%`,
+              backgroundColor: "var(--accent-gold)",
+              borderRadius: "3px",
+              transition: "width 0.4s ease"
+            }}></div>
           </div>
         </div>
       )}

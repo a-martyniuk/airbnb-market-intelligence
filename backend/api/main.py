@@ -145,6 +145,11 @@ def get_pipeline_status_times() -> Dict[str, str]:
         conn.close()
     return times
 
+@app.get("/api/health")
+def health_check():
+    """Keep-alive ping endpoint to prevent Render cold-starts."""
+    return {"status": "ok", "timestamp": datetime.now().isoformat()}
+
 def bg_run_incremental_scrape(mode: str = "total"):
     global pipeline_state
     pipeline_state["status"] = "running"

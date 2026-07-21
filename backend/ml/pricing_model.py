@@ -428,6 +428,32 @@ class DynamicPricingModel:
         if not self.is_trained:
             confidence_score -= 0.10 # Less confident without trained ML model
 
+        # Compute market competitor discount medians
+        comp_weekly_discounts = []
+        comp_monthly_discounts = []
+        if comp_ids:
+            try:
+                conn_d = get_connection(db_path)
+                placeholders = ",".join("?" for _ in comp_ids)
+                cursor_d = conn_d.cursor()
+                cursor_d.execute(f"""
+                SELECT weekly_discount, monthly_discount
+                FROM listings_daily
+                WHERE listing_id IN ({placeholders})
+                  AND (weekly_discount IS NOT NULL OR monthly_discount IS NOT NULL)
+                """, comp_ids)
+                for r_d in cursor_d.fetchall():
+                    if r_d['weekly_discount'] is not None and r_d['weekly_discount'] > 0:
+                        comp_weekly_discounts.append(r_d['weekly_discount'])
+                    if r_d['monthly_discount'] is not None and r_d['monthly_discount'] > 0:
+                        comp_monthly_discounts.append(r_d['monthly_discount'])
+                conn_d.close()
+            except Exception as e:
+                logger.debug(f"Error fetching competitor discounts: {e}")
+
+        suggested_weekly_discount = round(float(np.median(comp_weekly_discounts)), 1) if comp_weekly_discounts else 10.0
+        suggested_monthly_discount = round(float(np.median(comp_monthly_discounts)), 1) if comp_monthly_discounts else 20.0
+
         features_used = {
             "base_ml_price": round(base_ml_price, 2),
             "competitor_avg_price": round(comp_avg_price, 2) if comp_avg_price else None,
@@ -442,6 +468,8 @@ class DynamicPricingModel:
             "cleaning_fee": resolved_cleaning_fee,
             "weekly_discount": resolved_weekly_discount,
             "monthly_discount": resolved_monthly_discount,
+            "suggested_weekly_discount": suggested_weekly_discount,
+            "suggested_monthly_discount": suggested_monthly_discount,
             "early_bird_discount": resolved_early_bird_discount,
             "last_minute_discount": resolved_last_minute_discount,
             "weekend_multiplier": resolved_weekend_multiplier,

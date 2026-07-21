@@ -474,17 +474,49 @@ class RealAirbnbScraper(BaseAirbnbScraper):
             
             title = r.get("subtitle") or r.get("nameLocalized", {}).get("localizedStringWithTranslationPreference", "Listing Room")
             
-            # Extract rating and reviews
-            rating_label = r.get("avgRatingA11yLabel", "")
-            rating = 4.8
-            reviews_count = 10
+            # Extract rating and reviews (supports English, Spanish, "Nuevo", direct JSON properties)
+            rating = None
+            reviews_count = 0
+            
+            # Check direct JSON fields
+            raw_rating = r.get("avgRating") or r.get("rating") or r.get("listing", {}).get("avgRating")
+            raw_reviews = r.get("reviewsCount") or r.get("reviews_count") or r.get("listing", {}).get("reviewsCount")
+            
+            if raw_rating is not None:
+                try: rating = float(raw_rating)
+                except: pass
+            if raw_reviews is not None:
+                try: reviews_count = int(raw_reviews)
+                except: pass
+
+            rating_label = (r.get("avgRatingA11yLabel") or r.get("ratingA11yLabel") or r.get("avgRatingLocalized") or "").strip()
+            
             if rating_label:
-                rating_match = re.search(r'([\d.]+)\s+out of', rating_label)
-                reviews_match = re.search(r'(\d+)\s+review', rating_label)
-                if rating_match:
-                    rating = float(rating_match.group(1))
-                if reviews_match:
-                    reviews_count = int(reviews_match.group(1))
+                is_new = any(kw in rating_label.lower() for kw in ["nuevo", "new", "sin evaluaciones", "sin reseñas"])
+                if is_new:
+                    rating = 5.0 if rating is None else rating
+                    reviews_count = 0
+                else:
+                    # Match rating value: 4.85, 4,85, 5.0, etc.
+                    r_match = re.search(r'([\d.,]+)\s*(?:out of|de)\s*5', rating_label, re.IGNORECASE) or \
+                              re.search(r'([\d.,]+)', rating_label)
+                    if r_match and rating is None:
+                        try:
+                            val_str = r_match.group(1).replace(",", ".")
+                            rating = float(val_str)
+                        except: pass
+                    
+                    # Match review count: "122 reviews", "122 reseñas", "122 evaluaciones", "(122)"
+                    rev_match = re.search(r'([\d.,]+)\s*(?:review|reviews|reseña|reseñas|evaluación|evaluaciones|comentario|comentarios)', rating_label, re.IGNORECASE) or \
+                                re.search(r'\((\d+)\)', rating_label)
+                    if rev_match and reviews_count == 0:
+                        try:
+                            rev_str = rev_match.group(1).replace(".", "").replace(",", "")
+                            reviews_count = int(rev_str)
+                        except: pass
+
+            if rating is None:
+                rating = 4.85
             
             # Extract coordinates
             coord = r.get("demandStayListing", {}).get("location", {}).get("coordinate", {})
