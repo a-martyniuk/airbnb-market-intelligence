@@ -332,11 +332,11 @@ p {
 }
 
 /* Form and UI Inputs */
-.select-input, .text-input {
+.select-input, .text-input, select {
   width: 100%;
-  background-color: rgba(15, 23, 42, 0.6);
+  background-color: rgba(15, 23, 42, 0.7);
   border: 1px solid var(--card-border);
-  color: var(--text-primary);
+  color: #f8fafc !important;
   padding: 10px 14px;
   border-radius: 8px;
   font-size: 0.88rem;
@@ -346,9 +346,36 @@ p {
   transition: var(--transition-smooth);
 }
 
-.select-input:focus, .text-input:focus {
-  border-color: var(--accent-coral);
-  box-shadow: 0 0 0 2px rgba(255, 90, 95, 0.15);
+.select-input:focus, .text-input:focus, select:focus {
+  border-color: var(--accent-gold);
+  box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.2);
+}
+
+/* Fix Native Select Option Dropdown Colors */
+select option, .select-input option {
+  background-color: #0f172a !important;
+  color: #f8fafc !important;
+  padding: 8px 12px;
+}
+
+select option:hover, select option:focus, select option:checked, .select-input option:checked {
+  background-color: #1e293b !important;
+  color: var(--accent-gold) !important;
+}
+
+.light-theme select, .light-theme .select-input {
+  background-color: #ffffff;
+  color: #0f172a !important;
+}
+
+.light-theme select option, .light-theme .select-input option {
+  background-color: #ffffff !important;
+  color: #0f172a !important;
+}
+
+.light-theme select option:checked, .light-theme .select-input option:checked {
+  background-color: #e2e8f0 !important;
+  color: #0f172a !important;
 }
 
 /* Buttons */

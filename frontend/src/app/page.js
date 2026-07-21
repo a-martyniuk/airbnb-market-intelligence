@@ -1420,7 +1420,7 @@ POR ESTADÍA (${stayN} noches):
                           className="text-input"
                           value={compFilterAmenity}
                           onChange={(e) => setCompFilterAmenity(e.target.value)}
-                          style={{ marginBottom: 0, padding: "6px 10px", fontSize: "0.78rem", backgroundColor: "rgba(255,255,255,0.04)" }}
+                          style={{ marginBottom: 0, padding: "6px 10px", fontSize: "0.78rem", backgroundColor: "rgba(255,255,255,0.06)", color: "#fff" }}
                         >
                           <option value="All">Todas las amenities</option>
                           <option value="Pool">Piscina</option>
@@ -1436,7 +1436,7 @@ POR ESTADÍA (${stayN} noches):
                           className="text-input"
                           value={compMinRating}
                           onChange={(e) => setCompMinRating(parseFloat(e.target.value))}
-                          style={{ marginBottom: 0, padding: "6px 10px", fontSize: "0.78rem", backgroundColor: "rgba(255,255,255,0.04)" }}
+                          style={{ marginBottom: 0, padding: "6px 10px", fontSize: "0.78rem", backgroundColor: "rgba(255,255,255,0.06)", color: "#fff" }}
                         >
                           <option value="0">Todos</option>
                           <option value="1">Con reseñas (&gt; 0)</option>
