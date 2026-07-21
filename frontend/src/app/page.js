@@ -649,61 +649,83 @@ POR ESTADÍA (${stayN} noches):
 
   const handleConfigureTargetUrl = async (e) => {
     if (e) e.preventDefault();
-    if (!targetUrlInput.trim()) return;
+    const url = targetUrlInput.trim();
+    if (!url) return;
     setResolvingTarget(true);
     try {
-      const res = await fetch(`${API_BASE}/api/settings/target/resolve`, {
+      // Extract listing_id directly from URL — no scraping timeout risk
+      const idMatch = url.match(/\/rooms\/(\d+)/i);
+      if (!idMatch) {
+        alert("URL inválida. Debe contener /rooms/XXXXXXXXX");
+        setResolvingTarget(false);
+        return;
+      }
+      const listingId = idMatch[1];
+
+      // Save with basic defaults immediately — details enriched later by pipeline
+      const saveRes = await fetch(`${API_BASE}/api/settings/target/save`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ url: targetUrlInput.trim() })
+        headers: {
+          "Content-Type": "application/json",
+          "X-Admin-Pin": adminPin || "232323"
+        },
+        body: JSON.stringify({
+          target_url: url,
+          target_id: listingId,
+          details: {
+            listing_id: listingId,
+            title: "Mi Propiedad",
+            accommodates: 2,
+            bedrooms: 1,
+            bathrooms: 1.0,
+            latitude: -34.5861,
+            longitude: -58.4373,
+            neighborhood: "Palermo Hollywood",
+            price: 0,
+            rating: 5.0,
+            reviews_count: 0,
+            host_is_superhost: true,
+            amenities: []
+          },
+          pricing_overrides: {},
+          manual_override_flags: {}
+        })
       });
 
-      if (!res.ok) {
-        const errData = await res.json().catch(() => ({}));
-        alert(`Error al resolver URL (${res.status}): ${errData.detail || "Error desconocido"}`);
+      if (!saveRes.ok) {
+        const errData = await saveRes.json().catch(() => ({}));
+        alert(`Error al guardar (${saveRes.status}): ${errData.detail || "Error desconocido"}`);
         setResolvingTarget(false);
         return;
       }
 
-      const data = await res.json();
-      if (data.details) {
-        setTargetDetails(data.details);
-        
-        // Save resolved details to database immediately
-        const saveRes = await fetch(`${API_BASE}/api/settings/target/save`, {
-          method: "POST",
-          headers: { 
-            "Content-Type": "application/json",
-            "X-Admin-Pin": adminPin || "232323"
-          },
-          body: JSON.stringify({
-            target_url: targetUrlInput.trim(),
-            target_id: data.details.listing_id,
-            details: data.details,
-            pricing_overrides: data.details.pricing_overrides || {},
-            manual_override_flags: data.details.manual_override_flags || {}
-          })
-        });
-        
-        if (!saveRes.ok) {
-          const errData = await saveRes.json().catch(() => ({}));
-          alert(`Error al guardar (${saveRes.status}): ${errData.detail || "Error desconocido"}`);
-          setResolvingTarget(false);
-          return;
-        }
+      alert(`Propiedad configurada con ID: ${listingId}\nLos detalles se enriquecerán al ejecutar la ingesta.`);
 
-        await saveRes.json();
-        setHydrating(true);
-        
-        if (data.status === "partial") {
-          alert(`Resolución parcial: ${data.message}`);
-        } else {
-          alert("Propiedad objetivo configurada y guardada con éxito en la base de datos.");
+      // Try to enrich with live scrape in background (optional, may timeout)
+      fetch(`${API_BASE}/api/settings/target/resolve`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ url })
+      }).then(r => r.ok ? r.json() : null).then(data => {
+        if (data?.details) {
+          setTargetDetails(data.details);
+          // Silently re-save with enriched details
+          fetch(`${API_BASE}/api/settings/target/save`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json", "X-Admin-Pin": adminPin || "232323" },
+            body: JSON.stringify({
+              target_url: url,
+              target_id: listingId,
+              details: data.details,
+              pricing_overrides: {},
+              manual_override_flags: {}
+            })
+          }).catch(() => {});
         }
-        fetchInitialData();
-      } else {
-        alert(data.message || "No se pudo resolver la propiedad objetivo.");
-      }
+      }).catch(() => {});
+
+      setHydrating(true);
+      fetchInitialData();
     } catch (err) {
       console.error(err);
       alert(`Error de conexión: ${err.message || "No se pudo conectar con el servidor."}`);
