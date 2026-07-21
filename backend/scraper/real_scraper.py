@@ -492,27 +492,26 @@ class RealAirbnbScraper(BaseAirbnbScraper):
             rating_label = (r.get("avgRatingA11yLabel") or r.get("ratingA11yLabel") or r.get("avgRatingLocalized") or "").strip()
             
             if rating_label:
-                is_new = any(kw in rating_label.lower() for kw in ["nuevo", "new", "sin evaluaciones", "sin reseñas"])
+                is_new = any(kw in rating_label.lower() for kw in ["lugar nuevo", "nuevo para alojarse", "sin evaluaciones", "sin reseñas"]) or rating_label.lower().strip() in ["nuevo", "new"]
                 if is_new:
                     rating = 5.0 if rating is None else rating
                     reviews_count = 0
                 else:
                     # Match rating value: 4.85, 4,85, 5.0, etc.
-                    r_match = re.search(r'([\d.,]+)\s*(?:out of|de)\s*5', rating_label, re.IGNORECASE) or \
-                              re.search(r'([\d.,]+)', rating_label)
+                    r_match = re.search(r'([345][.,]\d+)\s*(?:out of|de)\s*5', rating_label, re.IGNORECASE) or \
+                              re.search(r'([345][.,]\d+)', rating_label)
                     if r_match and rating is None:
                         try:
                             val_str = r_match.group(1).replace(",", ".")
                             rating = float(val_str)
                         except: pass
                     
-                    # Match review count: "122 reviews", "122 reseñas", "122 evaluaciones", "(122)"
-                    rev_match = re.search(r'([\d.,]+)\s*(?:review|reviews|reseña|reseñas|evaluación|evaluaciones|comentario|comentarios)', rating_label, re.IGNORECASE) or \
+                    # Match review count: "122 reviews", "11 evaluaciones", "149 evaluaciones", "(122)"
+                    rev_match = re.search(r'(\d+)\s*(?:review|reviews|rese[nñ]a|rese[nñ]as|evaluaci[oó]n|evaluaci[oó]nes|comentario|comentarios)', rating_label, re.IGNORECASE) or \
                                 re.search(r'\((\d+)\)', rating_label)
                     if rev_match and reviews_count == 0:
                         try:
-                            rev_str = rev_match.group(1).replace(".", "").replace(",", "")
-                            reviews_count = int(rev_str)
+                            reviews_count = int(rev_match.group(1))
                         except: pass
 
             if rating is None:
