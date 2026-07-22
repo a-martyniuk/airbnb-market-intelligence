@@ -502,46 +502,50 @@ POR ESTADÍA (${stayN} noches):
         setHydrating(true);
       }
 
-      if (!statusData.database.is_empty) {
-        const kpiRes = await fetch(`${API_BASE}/api/market/kpis`);
-        const kpiData = await kpiRes.json();
-        setKpis(kpiData);
-
-        const listingsRes = await fetch(`${API_BASE}/api/market/listings`);
-        const listingsData = await listingsRes.json();
-        setListings(listingsData);
-
-        const neighsRes = await fetch(`${API_BASE}/api/market/neighborhoods`);
-        const neighsData = await neighsRes.json();
-        setNeighborhoods(neighsData);
-
-        let targetId = null;
-        try {
-          const targetRes = await fetch(`${API_BASE}/api/settings/target`);
-          if (targetRes.ok) {
-            const targetData = await targetRes.json();
-            if (targetData.target_id) targetId = targetData.target_id;
-          }
-        } catch (targetErr) {
-          console.error("Error fetching target ID:", targetErr);
+      let targetId = null;
+      try {
+        const targetRes = await fetch(`${API_BASE}/api/settings/target`);
+        if (targetRes.ok) {
+          const targetData = await targetRes.json();
+          if (targetData.target_id) targetId = targetData.target_id;
         }
+      } catch (targetErr) {
+        console.error("Error fetching target ID:", targetErr);
+      }
 
-        if (listingsData.length > 0) {
-          const targetL = listingsData.find(l => l.listing_id === targetId) || 
-                          listingsData.find(l => l.title.includes("Córdoba") || l.listing_id === "mock_1001");
-          setSelectedId(targetL ? targetL.listing_id : listingsData[0].listing_id);
-        }
+      const kpiRes = await fetch(`${API_BASE}/api/market/kpis`);
+      const kpiData = await kpiRes.json();
+      setKpis(kpiData);
 
-        const rulesRes = await fetch(`${API_BASE}/api/settings/rules`);
-        if (rulesRes.ok) {
-          const rulesData = await rulesRes.json();
-          setWeekendPremium(rulesData.weekend_premium || 1.15);
-          setHighSeasonPremium(rulesData.high_season_premium || 1.20);
-          setHolidayPremium(rulesData.holiday_premium || 1.20);
-          setLastMinuteDiscount(rulesData.last_minute_discount || 0.85);
-          setCleaningFee(rulesData.cleaning_fee !== undefined ? rulesData.cleaning_fee : 15.0);
-          setAverageStay(rulesData.average_stay_days !== undefined ? rulesData.average_stay_days : 3);
-        }
+      const listingsRes = await fetch(`${API_BASE}/api/market/listings`);
+      const listingsData = await listingsRes.json();
+      setListings(listingsData);
+
+      const neighsRes = await fetch(`${API_BASE}/api/market/neighborhoods`);
+      const neighsData = await neighsRes.json();
+      setNeighborhoods(neighsData);
+
+      const targetL = Array.isArray(listingsData) ? (
+        listingsData.find(l => l.listing_id === targetId) || 
+        listingsData.find(l => l.title?.includes("Córdoba") || l.listing_id === "mock_1001")
+      ) : null;
+      
+      const activeId = targetL ? targetL.listing_id : (targetId || (Array.isArray(listingsData) && listingsData.length > 0 ? listingsData[0].listing_id : null));
+      
+      if (activeId) {
+        setSelectedId(activeId);
+        fetchListingDetails(activeId);
+      }
+
+      const rulesRes = await fetch(`${API_BASE}/api/settings/rules`);
+      if (rulesRes.ok) {
+        const rulesData = await rulesRes.json();
+        setWeekendPremium(rulesData.weekend_premium || 1.15);
+        setHighSeasonPremium(rulesData.high_season_premium || 1.20);
+        setHolidayPremium(rulesData.holiday_premium || 1.20);
+        setLastMinuteDiscount(rulesData.last_minute_discount || 0.85);
+        setCleaningFee(rulesData.cleaning_fee !== undefined ? rulesData.cleaning_fee : 15.0);
+        setAverageStay(rulesData.average_stay_days !== undefined ? rulesData.average_stay_days : 3);
       }
     } catch (e) {
       console.error(e);
