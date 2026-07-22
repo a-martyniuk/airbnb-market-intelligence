@@ -66,7 +66,7 @@ def sync_to_github(file_paths: List[str]) -> bool:
             
             # 3. Create the payload
             payload = {
-                "message": f"chore: sync {os.path.basename(github_path)} from UI [skip ci]",
+                "message": f"chore: sync {os.path.basename(github_path)} from UI",
                 "content": encoded_content
             }
             if sha:
