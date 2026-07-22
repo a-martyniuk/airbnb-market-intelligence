@@ -39,12 +39,13 @@ jobs:
         run: |
           git config --global user.name "GitHub Action Bot"
           git config --global user.email "actions@github.com"
-          git add database/airbnb_intelligence.db
+          cp -f database/airbnb_intelligence.db data/airbnb_intelligence.db 2>/dev/null || true
+          git add database/airbnb_intelligence.db data/airbnb_intelligence.db
           # Only commit and push if there are changes
           if git diff --staged --quiet; then
             echo "No database updates detected."
           else
-            git commit -m "chore: daily database auto-update [skip ci]"
+            git commit -m "chore: daily database auto-update"
             git push origin main
           fi
 
