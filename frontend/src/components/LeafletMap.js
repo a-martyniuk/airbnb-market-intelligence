@@ -51,7 +51,7 @@ export default function LeafletMap({ listings, center, targetListingId, selected
     <MapContainer
       center={center || [-34.5861, -58.4373]}
       zoom={14}
-      scrollWheelZoom={true}
+      scrollWheelZoom={false}
       className="leaflet-container"
     >
       {/* CartoDB Dark Matter Tile Layer (Premium Tokenless Dark Map) */}
