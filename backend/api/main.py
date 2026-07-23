@@ -53,15 +53,19 @@ def auto_seed_target_from_config(target_id: Optional[str] = None):
         cursor.execute("SELECT COUNT(*) FROM listings")
         count = cursor.fetchone()[0]
         
-        # 1. If listings count < 5, seed market instantly from raw JSON snapshot if available
+        # 1. If listings count < 5, seed market instantly from seed JSON if available
         if count < 5:
-            raw_files = sorted(glob.glob("data/raw/**/*.json", recursive=True))
-            if raw_files:
-                latest_raw = raw_files[-1]
-                logger.info(f"Seeding DB from raw snapshot file: {latest_raw}")
+            seed_file = "config/seed_buenos_aires.json"
+            if not os.path.exists(seed_file):
+                raw_files = sorted(glob.glob("data/raw/**/*.json", recursive=True))
+                if raw_files:
+                    seed_file = raw_files[-1]
+            
+            if os.path.exists(seed_file):
+                logger.info(f"Seeding DB from snapshot seed file: {seed_file}")
                 try:
                     etl = ETLPipeline(DB_PATH)
-                    etl.process_raw_file(latest_raw)
+                    etl.process_raw_file(seed_file)
                 except Exception as etl_err:
                     logger.error(f"Error seeding from raw JSON: {etl_err}")
 
