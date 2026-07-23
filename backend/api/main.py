@@ -102,7 +102,10 @@ def auto_seed_target_from_config(target_id: Optional[str] = None):
                         amenities_json,
                         details.get("picture_url")
                     ))
-                    today_str = datetime.now().strftime("%Y-%m-%d")
+                    cursor.execute("SELECT MAX(snapshot_date) FROM listings_daily")
+                    max_snap_row = cursor.fetchone()
+                    today_str = (max_snap_row[0] if max_snap_row and max_snap_row[0] else None) or datetime.now().strftime("%Y-%m-%d")
+                    
                     cursor.execute("""
                     INSERT OR REPLACE INTO listings_daily (
                         snapshot_date, listing_id, price, rating, reviews_count, estimated_occupancy_rate_30d
@@ -115,7 +118,7 @@ def auto_seed_target_from_config(target_id: Optional[str] = None):
                         int(details.get("reviews_count", 0))
                     ))
                     conn.commit()
-                    logger.info(f"Target listing {tid} auto-seeded successfully into DB.")
+                    logger.info(f"Target listing {tid} auto-seeded successfully into DB with snapshot_date={today_str}.")
     except Exception as e:
         logger.error(f"Error auto-seeding target listing: {str(e)}")
     finally:
