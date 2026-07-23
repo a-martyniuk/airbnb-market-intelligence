@@ -43,11 +43,29 @@ if db_dir:
     os.makedirs(db_dir, exist_ok=True)
 init_db(DB_PATH)
 
+import glob
+
 def auto_seed_target_from_config(target_id: Optional[str] = None):
-    """Ensures target listing and config details exist in DB tables."""
+    """Ensures target listing and config details exist in DB tables, and seeds full market from raw JSON if DB is fresh."""
     conn = get_connection(DB_PATH)
     try:
         cursor = conn.cursor()
+        cursor.execute("SELECT COUNT(*) FROM listings")
+        count = cursor.fetchone()[0]
+        
+        # 1. If listings count < 5, seed market instantly from raw JSON snapshot if available
+        if count < 5:
+            raw_files = sorted(glob.glob("data/raw/**/*.json", recursive=True))
+            if raw_files:
+                latest_raw = raw_files[-1]
+                logger.info(f"Seeding DB from raw snapshot file: {latest_raw}")
+                try:
+                    etl = ETLPipeline(DB_PATH)
+                    etl.process_raw_file(latest_raw)
+                except Exception as etl_err:
+                    logger.error(f"Error seeding from raw JSON: {etl_err}")
+
+        # 2. Ensure target listing is explicitly configured
         settings_file = "config/target_settings.json"
         if os.path.exists(settings_file):
             with open(settings_file, "r", encoding="utf-8") as f:
