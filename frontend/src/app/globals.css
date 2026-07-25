@@ -4,8 +4,8 @@
   --bg-primary: #050609;
   --bg-secondary: #0c0e15;
   --bg-sidebar: #030406;
-  --card-bg: rgba(12, 14, 21, 0.65);
-  --card-border: rgba(212, 175, 55, 0.12);
+  --card-bg: rgba(12, 14, 21, 0.72);
+  --card-border: rgba(212, 175, 55, 0.15);
   --text-primary: #f8fafc;
   --text-secondary: #8e9bb0;
   --accent-coral: #ff6b6b;
@@ -38,6 +38,13 @@
   padding: 0;
 }
 
+/* W3C Standard Scrollbar (Modern Web Platform) */
+html {
+  scrollbar-color: rgba(212, 175, 55, 0.35) var(--bg-primary);
+  scrollbar-width: thin;
+  color-scheme: dark light;
+}
+
 body {
   background-color: var(--bg-primary);
   color: var(--text-primary);
@@ -45,9 +52,51 @@ body {
   min-height: 100vh;
   overflow-x: hidden;
   line-height: 1.5;
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
 }
 
-/* Custom Scrollbar */
+/* Typography Line Balance (Modern Web Hallmark) */
+h1, h2, h3, h4, h5, h6, .headline, .card-title {
+  text-wrap: balance;
+}
+
+p, span.description, .subtitle, .card-subtitle {
+  text-wrap: pretty;
+}
+
+/* Modern Form Controls & User Validation (Modern Web Hallmark) */
+input, select, textarea, button {
+  accent-color: var(--accent-gold);
+  font-family: inherit;
+}
+
+input[type="text"], input[type="number"], select, textarea {
+  field-sizing: content;
+}
+
+:user-invalid {
+  border-color: var(--accent-coral) !important;
+  box-shadow: 0 0 10px rgba(255, 107, 107, 0.25) !important;
+}
+
+/* View Transitions API (Chrome / Edge Hallmark) */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.22s;
+  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+::view-transition-old(root) {
+  opacity: 0;
+  transform: translateY(-4px);
+}
+
+::view-transition-new(root) {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Custom Webkit Fallback Scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
@@ -56,11 +105,11 @@ body {
   background: var(--bg-primary);
 }
 ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(212, 175, 55, 0.25);
   border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(212, 175, 55, 0.45);
 }
 
 /* Base Layout Grids */
@@ -801,4 +850,55 @@ details summary::marker {
 @keyframes slideUp {
   from { opacity: 0; transform: translateY(20px) scale(0.97); }
   to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Modern Web Hallmark: CSS @starting-style for smooth dialog/modal entry */
+@starting-style {
+  .modal-overlay-starting {
+    opacity: 0;
+  }
+  .modal-box-starting {
+    opacity: 0;
+    transform: translateY(16px) scale(0.96);
+  }
+}
+
+/* Container Queries for Competitor Cards & Dashboard Metrics */
+.competitors-grid-container {
+  container-type: inline-size;
+  container-name: competitor-grid;
+}
+
+@container competitor-grid (min-width: 500px) {
+  .competitor-card-inner {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+/* Hallmark Status Indicator Ring Pulse */
+.status-indicator-ring {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.status-indicator-ring::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: inherit;
+  opacity: 0.6;
+  animation: ringPulse 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+@keyframes ringPulse {
+  0% { transform: scale(1); opacity: 0.7; }
+  70% { transform: scale(2.2); opacity: 0; }
+  100% { transform: scale(2.2); opacity: 0; }
 }

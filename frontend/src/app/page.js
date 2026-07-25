@@ -185,6 +185,19 @@ export default function UnifiedDashboard() {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCompDetails, setSelectedCompDetails] = useState(null);
 
+  // Modern Web Hallmark: View Transitions API Helper
+  const switchView = (viewId) => {
+    if (typeof document !== "undefined" && document.startViewTransition) {
+      document.startViewTransition(() => {
+        setActiveView(viewId);
+        setSelectedCompDetails(null);
+      });
+    } else {
+      setActiveView(viewId);
+      setSelectedCompDetails(null);
+    }
+  };
+
   // Data States
   const [pipelineStatus, setPipelineStatus] = useState(null);
   const [kpis, setKpis] = useState(null);
@@ -997,8 +1010,8 @@ POR ESTADÍA (${stayN} noches):
 
           {/* Last scraped date / update time */}
           {pipelineStatus?.database?.last_scraped_at && (
-            <div style={{ display: "flex", alignItems: "center", gap: "6px", fontSize: "0.72rem", color: "var(--text-secondary)", backgroundColor: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.05)", padding: "4px 10px", borderRadius: "6px" }}>
-              <span style={{ width: "6px", height: "6px", backgroundColor: "var(--accent-emerald)", borderRadius: "50%", display: "inline-block" }}></span>
+            <div style={{ display: "flex", alignItems: "center", gap: "8px", fontSize: "0.72rem", color: "var(--text-secondary)", backgroundColor: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.05)", padding: "4px 10px", borderRadius: "6px" }}>
+              <span className="status-indicator-ring" style={{ width: "8px", height: "8px", backgroundColor: "var(--accent-emerald)", borderRadius: "50%", display: "inline-block" }}></span>
               <span>Mercado al: {pipelineStatus.database.last_scraped_at}</span>
             </div>
           )}
@@ -1037,10 +1050,7 @@ POR ESTADÍA (${stayN} noches):
                 return (
                   <button
                     key={link.id}
-                    onClick={() => {
-                      setActiveView(link.id);
-                      setSelectedCompDetails(null);
-                    }}
+                    onClick={() => switchView(link.id)}
                     style={{
                       display: "flex",
                       alignItems: "center",
