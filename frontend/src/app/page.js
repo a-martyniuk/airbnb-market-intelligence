@@ -243,6 +243,8 @@ export default function UnifiedDashboard() {
   const [compMaxPrice, setCompMaxPrice] = useState(300);
   const [compMinRating, setCompMinRating] = useState(0);
   const [compFilterAmenity, setCompFilterAmenity] = useState("All");
+  const [compSortBy, setCompSortBy] = useState("similarity");
+  const [compSuperhostOnly, setCompSuperhostOnly] = useState(false);
 
   // Strategy Simulator Slider State (-30% to +30%)
   const [simulatorPct, setSimulatorPct] = useState(0);
@@ -1365,11 +1367,13 @@ POR ESTADÍA (${stayN} noches):
                 );
 
               case "competidores": {
-                const filteredCompetitors = competitors.filter(c => {
+                // Filter competitors
+                let filteredCompetitors = competitors.filter(c => {
                   const cPrice = c.price || 90.0;
                   if (cPrice > compMaxPrice) return false;
                   if (compMinRating === 1 && (c.reviews_count ?? 0) === 0) return false;
                   if (compMinRating > 1 && (c.rating ?? 0) < compMinRating) return false;
+                  if (compSuperhostOnly && !c.host_is_superhost) return false;
                   if (compSearchText) {
                     const q = compSearchText.toLowerCase();
                     if (!c.title?.toLowerCase().includes(q) && !c.neighborhood?.toLowerCase().includes(q)) return false;
@@ -1386,9 +1390,84 @@ POR ESTADÍA (${stayN} noches):
                   return true;
                 });
 
+                // Sort competitors
+                filteredCompetitors.sort((a, b) => {
+                  if (compSortBy === "price_asc") return (a.price || 90) - (b.price || 90);
+                  if (compSortBy === "price_desc") return (b.price || 90) - (a.price || 90);
+                  if (compSortBy === "revpar_desc") {
+                    const revA = (a.price || 90) * (a.estimated_occupancy_rate_30d || 60) / 100;
+                    const revB = (b.price || 90) * (b.estimated_occupancy_rate_30d || 60) / 100;
+                    return revB - revA;
+                  }
+                  if (compSortBy === "occupancy_desc") return (b.estimated_occupancy_rate_30d || 60) - (a.estimated_occupancy_rate_30d || 60);
+                  if (compSortBy === "rating_desc") return (b.rating || 0) - (a.rating || 0);
+                  if (compSortBy === "distance_asc") return (a.geo_distance_km || 0) - (b.geo_distance_km || 0);
+                  return (a.similarity_score || 0) - (b.similarity_score || 0); // Default similarity
+                });
+
+                // Compute Executive Benchmark KPIs for the competitor set
+                const compPrices = competitors.map(c => c.price || 90.0).sort((a, b) => a - b);
+                const medianCompPrice = compPrices.length > 0 ? Math.round(compPrices[Math.floor(compPrices.length / 2)]) : 85;
+                const avgCompPrice = competitors.length > 0 ? Math.round(competitors.reduce((sum, c) => sum + (c.price || 90.0), 0) / competitors.length) : 85;
+                const avgCompOcc = competitors.length > 0 ? Math.round(competitors.reduce((sum, c) => sum + (c.estimated_occupancy_rate_30d || 60.0), 0) / competitors.length) : 65;
+                const avgCompRevpar = Math.round(avgCompPrice * (avgCompOcc / 100));
+                const superhostsCount = competitors.filter(c => c.host_is_superhost).length;
+                const superhostPct = competitors.length > 0 ? Math.round((superhostsCount / competitors.length) * 100) : 60;
+                const myPrice = targetDetails?.price || currentPrice || 90;
+                const priceDiffPct = Math.round(((myPrice - avgCompPrice) / avgCompPrice) * 100);
+
                 return (
                   <div className="view-fade-in" style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
                     
+                    {/* Executive Benchmark Summary Strip */}
+                    <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: "15px" }}>
+                      
+                      <div className="glass-card" style={{ margin: 0, padding: "16px 20px" }}>
+                        <span style={{ fontSize: "0.68rem", color: "var(--text-secondary)", textTransform: "uppercase", letterSpacing: "0.5px" }}>Mediana de Mercado</span>
+                        <div style={{ display: "flex", alignItems: "baseline", gap: "8px", marginTop: "4px" }}>
+                          <span style={{ fontSize: "1.6rem", fontWeight: "bold", color: "#fff" }}>${medianCompPrice} USD</span>
+                          <span style={{ fontSize: "0.72rem", color: "var(--text-secondary)" }}>/noche</span>
+                        </div>
+                        <span style={{ fontSize: "0.72rem", color: priceDiffPct > 0 ? "var(--accent-coral)" : "var(--accent-emerald)" }}>
+                          Tu tarifa (${myPrice}) está {Math.abs(priceDiffPct)}% {priceDiffPct > 0 ? "por encima" : "por debajo"}
+                        </span>
+                      </div>
+
+                      <div className="glass-card" style={{ margin: 0, padding: "16px 20px" }}>
+                        <span style={{ fontSize: "0.68rem", color: "var(--text-secondary)", textTransform: "uppercase", letterSpacing: "0.5px" }}>RevPAR Promedio Set</span>
+                        <div style={{ display: "flex", alignItems: "baseline", gap: "8px", marginTop: "4px" }}>
+                          <span style={{ fontSize: "1.6rem", fontWeight: "bold", color: "var(--accent-emerald)" }}>${avgCompRevpar} USD</span>
+                          <span style={{ fontSize: "0.72rem", color: "var(--text-secondary)" }}>/noche est.</span>
+                        </div>
+                        <span style={{ fontSize: "0.72rem", color: "var(--text-secondary)" }}>
+                          Rendimiento financiero promedio
+                        </span>
+                      </div>
+
+                      <div className="glass-card" style={{ margin: 0, padding: "16px 20px" }}>
+                        <span style={{ fontSize: "0.68rem", color: "var(--text-secondary)", textTransform: "uppercase", letterSpacing: "0.5px" }}>Ocupación Media Set</span>
+                        <div style={{ display: "flex", alignItems: "baseline", gap: "8px", marginTop: "4px" }}>
+                          <span style={{ fontSize: "1.6rem", fontWeight: "bold", color: "var(--accent-cyan)" }}>{avgCompOcc}%</span>
+                          <span style={{ fontSize: "0.72rem", color: "var(--text-secondary)" }}>30 días</span>
+                        </div>
+                        <span style={{ fontSize: "0.72rem", color: "var(--text-secondary)" }}>
+                          Estimada por cambios de calendario
+                        </span>
+                      </div>
+
+                      <div className="glass-card" style={{ margin: 0, padding: "16px 20px" }}>
+                        <span style={{ fontSize: "0.68rem", color: "var(--text-secondary)", textTransform: "uppercase", letterSpacing: "0.5px" }}>% Superhosts en Zona</span>
+                        <div style={{ display: "flex", alignItems: "baseline", gap: "8px", marginTop: "4px" }}>
+                          <span style={{ fontSize: "1.6rem", fontWeight: "bold", color: "var(--accent-gold)" }}>{superhostPct}%</span>
+                          <span style={{ fontSize: "0.72rem", color: "var(--text-secondary)" }}>de la muestra</span>
+                        </div>
+                        <span style={{ fontSize: "0.72rem", color: "var(--text-secondary)" }}>
+                          {superhostsCount} de {competitors.length} anfitriones son Superhost
+                        </span>
+                      </div>
+
+                    </div>
+
                     {/* Leaflet Map Card */}
                     <div className="glass-card" style={{ paddingBottom: 15, margin: 0 }}>
                       <h3 style={{ margin: "0 0 10px 0", textTransform: "none" }}>Distribución y Geolocalización de Competidores</h3>
@@ -1400,9 +1479,10 @@ POR ESTADÍA (${stayN} noches):
                       />
                     </div>
 
-                    {/* Interactive Filter Bar */}
+                    {/* Enhanced Interactive Filter & Controls Bar */}
                     <div className="glass-card" style={{ padding: "16px 20px", display: "flex", flexWrap: "wrap", gap: "15px", alignItems: "center", margin: 0 }}>
-                      <div style={{ flex: "1 1 200px" }}>
+                      
+                      <div style={{ flex: "1 1 180px" }}>
                         <label style={{ fontSize: "0.72rem", color: "var(--text-secondary)", display: "block", marginBottom: "4px" }}>Buscar Competidor</label>
                         <input
                           type="text"
@@ -1413,7 +1493,8 @@ POR ESTADÍA (${stayN} noches):
                           style={{ marginBottom: 0, padding: "6px 12px", fontSize: "0.78rem" }}
                         />
                       </div>
-                      <div style={{ flex: "1 1 180px" }}>
+
+                      <div style={{ flex: "1 1 160px" }}>
                         <div style={{ display: "flex", justifyContent: "space-between" }}>
                           <label style={{ fontSize: "0.72rem", color: "var(--text-secondary)" }}>Precio Máx.</label>
                           <span style={{ fontSize: "0.72rem", color: "var(--accent-gold)", fontWeight: "bold" }}>${compMaxPrice} USD</span>
@@ -1428,7 +1509,8 @@ POR ESTADÍA (${stayN} noches):
                           style={{ width: "100%", accentColor: "var(--accent-gold)", cursor: "pointer" }}
                         />
                       </div>
-                      <div style={{ flex: "1 1 150px" }}>
+
+                      <div style={{ flex: "1 1 140px" }}>
                         <label style={{ fontSize: "0.72rem", color: "var(--text-secondary)", display: "block", marginBottom: "4px" }}>Amenity Requerida</label>
                         <select
                           className="text-input"
@@ -1444,7 +1526,8 @@ POR ESTADÍA (${stayN} noches):
                           <option value="Jacuzzi">Jacuzzi</option>
                         </select>
                       </div>
-                      <div style={{ flex: "1 1 150px" }}>
+
+                      <div style={{ flex: "1 1 130px" }}>
                         <label style={{ fontSize: "0.72rem", color: "var(--text-secondary)", display: "block", marginBottom: "4px" }}>Reseñas / Rating</label>
                         <select
                           className="text-input"
@@ -1458,22 +1541,63 @@ POR ESTADÍA (${stayN} noches):
                           <option value="4.8">Rating &ge; 4.8 ⭐</option>
                         </select>
                       </div>
-                      {(compSearchText || compMaxPrice < 300 || compFilterAmenity !== "All" || compMinRating > 0) && (
-                        <button
-                          onClick={() => {
-                            setCompSearchText("");
-                            setCompMaxPrice(300);
-                            setCompFilterAmenity("All");
-                            setCompMinRating(0);
-                          }}
-                          style={{ background: "none", border: "1px solid rgba(255,255,255,0.15)", borderRadius: "6px", color: "var(--accent-coral)", fontSize: "0.72rem", padding: "6px 12px", cursor: "pointer", alignSelf: "flex-end" }}
+
+                      <div style={{ flex: "1 1 150px" }}>
+                        <label style={{ fontSize: "0.72rem", color: "var(--text-secondary)", display: "block", marginBottom: "4px" }}>Ordenar Por</label>
+                        <select
+                          className="text-input"
+                          value={compSortBy}
+                          onChange={(e) => setCompSortBy(e.target.value)}
+                          style={{ marginBottom: 0, padding: "6px 10px", fontSize: "0.78rem", backgroundColor: "rgba(255,255,255,0.06)", color: "#fff" }}
                         >
-                          Limpiar filtros
+                          <option value="similarity">Similitud (Recomendado)</option>
+                          <option value="price_asc">Precio: Menor a Mayor</option>
+                          <option value="price_desc">Precio: Mayor a Menor</option>
+                          <option value="revpar_desc">RevPAR: Mayor a Menor</option>
+                          <option value="occupancy_desc">Ocupación: Mayor a Menor</option>
+                          <option value="rating_desc">Rating y Reseñas</option>
+                          <option value="distance_asc">Distancia más cercana</option>
+                        </select>
+                      </div>
+
+                      <div style={{ display: "flex", alignItems: "center", gap: "8px", alignSelf: "flex-end", marginBottom: "4px" }}>
+                        <button
+                          onClick={() => setCompSuperhostOnly(!compSuperhostOnly)}
+                          style={{
+                            backgroundColor: compSuperhostOnly ? "rgba(212, 175, 55, 0.2)" : "rgba(255,255,255,0.04)",
+                            border: compSuperhostOnly ? "1px solid var(--accent-gold)" : "1px solid rgba(255,255,255,0.1)",
+                            color: compSuperhostOnly ? "var(--accent-gold)" : "var(--text-secondary)",
+                            fontSize: "0.75rem",
+                            fontWeight: "600",
+                            padding: "6px 12px",
+                            borderRadius: "6px",
+                            cursor: "pointer",
+                            transition: "all 0.2s ease"
+                          }}
+                        >
+                          👑 {compSuperhostOnly ? "Solo Superhosts ✓" : "Filtrar Superhosts"}
                         </button>
-                      )}
+
+                        {(compSearchText || compMaxPrice < 300 || compFilterAmenity !== "All" || compMinRating > 0 || compSuperhostOnly || compSortBy !== "similarity") && (
+                          <button
+                            onClick={() => {
+                              setCompSearchText("");
+                              setCompMaxPrice(300);
+                              setCompFilterAmenity("All");
+                              setCompMinRating(0);
+                              setCompSuperhostOnly(false);
+                              setCompSortBy("similarity");
+                            }}
+                            style={{ background: "none", border: "1px solid rgba(255,255,255,0.15)", borderRadius: "6px", color: "var(--accent-coral)", fontSize: "0.72rem", padding: "6px 12px", cursor: "pointer" }}
+                          >
+                            Limpiar
+                          </button>
+                        )}
+                      </div>
+
                     </div>
 
-                    {/* 15 Competitor Cards Grid */}
+                    {/* Competitor Cards Grid Header */}
                     <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline" }}>
                       <h3 style={{ margin: 0, textTransform: "none" }}>Competidores Relevantes ({filteredCompetitors.length})</h3>
                       <span style={{ fontSize: "0.75rem", color: "var(--text-secondary)" }}>Haz clic en cualquier tarjeta para ver el desglose completo de amenities y fotos</span>
@@ -1482,7 +1606,7 @@ POR ESTADÍA (${stayN} noches):
                     <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "20px" }}>
                       {filteredCompetitors.length === 0 ? (
                         <div style={{ gridColumn: "1 / -1", padding: "30px", textAlign: "center", color: "var(--text-secondary)", backgroundColor: "rgba(255,255,255,0.02)", borderRadius: "12px", border: "1px dashed rgba(255,255,255,0.1)" }}>
-                          No se encontraron competidores con los filtros seleccionados. Proba ajustando el precio o limpiando las amenities.
+                          No se encontraron competidores con los filtros seleccionados. Proba ajustando el precio o limpiando los filtros.
                         </div>
                       ) : (
                         filteredCompetitors.slice(0, 15).map(c => {
@@ -1492,130 +1616,174 @@ POR ESTADÍA (${stayN} noches):
                           const cOcc = c.estimated_occupancy_rate_30d || 60.0;
                           const cRevpar = Math.round(cPrice * cOcc / 100);
 
-                        // Extract physical amenities differences
-                        const targetAms = currentDetails?.amenities || [];
-                        let compAms = [];
-                        if (c.amenities) {
-                          if (Array.isArray(c.amenities)) {
-                            compAms = c.amenities;
-                          } else {
-                            try {
-                              compAms = typeof c.amenities === 'string' ? JSON.parse(c.amenities) : c.amenities;
-                            } catch(e) {
-                              compAms = [];
+                          // Extract physical amenities differences
+                          const targetAms = currentDetails?.amenities || [];
+                          let compAms = [];
+                          if (c.amenities) {
+                            if (Array.isArray(c.amenities)) {
+                              compAms = c.amenities;
+                            } else {
+                              try {
+                                compAms = typeof c.amenities === 'string' ? JSON.parse(c.amenities) : c.amenities;
+                              } catch(e) {
+                                compAms = [];
+                              }
                             }
                           }
-                        }
-                        const targetAmSet = new Set(targetAms.map(x => x.toLowerCase()));
-                        const compAmSet = new Set(compAms.map(x => x.toLowerCase()));
-                        
-                        // te falta (competitor has it, target lacks it)
-                        const keyAms = ["pool", "gym", "jacuzzi", "parking", "air conditioning", "wifi"];
-                        const compHasTargetLacks = keyAms.filter(am => compAmSet.has(am) && !targetAmSet.has(am));
-                        // le falta (target has it, competitor lacks it)
-                        const targetHasCompLacks = keyAms.filter(am => targetAmSet.has(am) && !compAmSet.has(am));
+                          const targetAmSet = new Set(targetAms.map(x => x.toLowerCase()));
+                          const compAmSet = new Set(compAms.map(x => x.toLowerCase()));
+                          
+                          // te falta (competitor has it, target lacks it)
+                          const keyAms = ["pool", "gym", "jacuzzi", "parking", "air conditioning", "wifi"];
+                          const compHasTargetLacks = keyAms.filter(am => compAmSet.has(am) && !targetAmSet.has(am));
+                          // le falta (target has it, competitor lacks it)
+                          const targetHasCompLacks = keyAms.filter(am => targetAmSet.has(am) && !compAmSet.has(am));
 
-                        const translateAmenityKey = (x) => {
-                          switch (x) {
-                            case "pool": return "Piscina";
-                            case "gym": return "Gimnasio";
-                            case "parking": return "Cochera";
-                            case "air conditioning": return "Aire acondicionado";
-                            case "wifi": return "Wifi";
-                            case "jacuzzi": return "Jacuzzi";
-                            default: return x;
-                          }
-                        };
+                          const translateAmenityKey = (x) => {
+                            switch (x) {
+                              case "pool": return "Piscina";
+                              case "gym": return "Gimnasio";
+                              case "parking": return "Cochera";
+                              case "air conditioning": return "Aire acondicionado";
+                              case "wifi": return "Wifi";
+                              case "jacuzzi": return "Jacuzzi";
+                              default: return x;
+                            }
+                          };
 
-                        return (
-                          <div
-                            key={c.listing_id}
-                            className="glass-card hover-glow"
-                            onClick={() => setSelectedCompDetails(c)}
-                            style={{
-                              display: "flex",
-                              flexDirection: "column",
-                              padding: 0,
-                              borderRadius: "14px",
-                              overflow: "hidden",
-                              border: selectedId === c.listing_id ? "2px solid var(--accent-gold)" : "1px solid var(--card-border)",
-                              margin: 0,
-                              cursor: "pointer"
-                            }}
-                          >
-                            {/* Image Header with Badge Overlay */}
-                            <div style={{ width: "100%", height: "130px", overflow: "hidden", position: "relative" }}>
-                              <img
-                                src={c.picture_url || getCompetitorImage(c.listing_id)}
-                                alt={c.title}
-                                style={{ width: "100%", height: "100%", objectFit: "cover" }}
-                              />
-                              <div style={{
-                                position: "absolute",
-                                left: "10px",
-                                top: "10px",
-                                backgroundColor: badge ? badge.bg : "var(--bg-secondary)",
-                                color: badge ? badge.textColor : "#fff",
-                                fontSize: "0.68rem",
-                                fontWeight: "bold",
-                                padding: "3px 8px",
-                                borderRadius: "4px"
-                              }}>
-                                Similitud {scorePct}% ({badge?.text})
+                          const diffVSMyPrice = Math.round(((cPrice - myPrice) / myPrice) * 100);
+
+                          return (
+                            <div
+                              key={c.listing_id}
+                              className="glass-card hover-glow"
+                              onClick={() => setSelectedCompDetails(c)}
+                              style={{
+                                display: "flex",
+                                flexDirection: "column",
+                                padding: 0,
+                                borderRadius: "14px",
+                                overflow: "hidden",
+                                border: selectedId === c.listing_id ? "2px solid var(--accent-gold)" : "1px solid var(--card-border)",
+                                margin: 0,
+                                cursor: "pointer"
+                              }}
+                            >
+                              {/* Image Header with Badge Overlay */}
+                              <div style={{ width: "100%", height: "135px", overflow: "hidden", position: "relative" }}>
+                                <img
+                                  src={c.picture_url || getCompetitorImage(c.listing_id)}
+                                  alt={c.title}
+                                  style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                                />
+                                
+                                {/* Top Badges Overlay */}
+                                <div style={{ position: "absolute", left: "10px", top: "10px", display: "flex", gap: "6px", flexWrap: "wrap" }}>
+                                  <div style={{
+                                    backgroundColor: badge ? badge.bg : "var(--bg-secondary)",
+                                    color: badge ? badge.textColor : "#fff",
+                                    fontSize: "0.68rem",
+                                    fontWeight: "bold",
+                                    padding: "3px 8px",
+                                    borderRadius: "4px"
+                                  }}>
+                                    Similitud {scorePct}% ({badge?.text})
+                                  </div>
+                                  {c.host_is_superhost === 1 && (
+                                    <div style={{
+                                      backgroundColor: "rgba(212, 175, 55, 0.9)",
+                                      color: "#000",
+                                      fontSize: "0.65rem",
+                                      fontWeight: "800",
+                                      padding: "3px 8px",
+                                      borderRadius: "4px"
+                                    }}>
+                                      👑 Superhost
+                                    </div>
+                                  )}
+                                </div>
+
+                                {/* Distance Badge Bottom Right */}
+                                <div style={{
+                                  position: "absolute",
+                                  right: "10px",
+                                  bottom: "10px",
+                                  backgroundColor: "rgba(10, 11, 16, 0.8)",
+                                  backdropFilter: "blur(6px)",
+                                  color: "var(--text-secondary)",
+                                  fontSize: "0.68rem",
+                                  padding: "2px 6px",
+                                  borderRadius: "4px",
+                                  border: "1px solid rgba(255,255,255,0.1)"
+                                }}>
+                                  📍 {c.geo_distance_km ? c.geo_distance_km.toFixed(2) : "0.5"} km
+                                </div>
                               </div>
+
+                              {/* Card Body */}
+                              <div style={{ padding: "15px", display: "flex", flexDirection: "column", gap: "10px", flex: 1 }}>
+                                <div>
+                                  <h4 style={{ margin: 0, fontSize: "0.85rem", color: "#fff", lineHeight: "1.3", height: "34px", overflow: "hidden" }}>
+                                    {c.title}
+                                  </h4>
+                                  
+                                  {/* Physical Capacity Pill */}
+                                  <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginTop: "6px", fontSize: "0.72rem", color: "var(--text-secondary)" }}>
+                                    <span>👥 {c.accommodates || 2} pax · 🛏️ {c.bedrooms || 1} dorm · 🚿 {c.bathrooms || 1} baño</span>
+                                    <span style={{ color: "var(--accent-gold)", fontWeight: "bold" }}>⭐ {c.rating ? c.rating.toFixed(2) : "4.9"} ({c.reviews_count ?? 0})</span>
+                                  </div>
+                                </div>
+
+                                {/* Competitor Key Stats Grid */}
+                                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "8px", borderTop: "1px solid rgba(255,255,255,0.04)", paddingTop: "8px", borderBottom: "1px solid rgba(255,255,255,0.04)", paddingBottom: "8px" }}>
+                                  <div style={{ display: "flex", flexDirection: "column" }}>
+                                    <span style={{ fontSize: "0.62rem", color: "var(--text-secondary)" }}>PRECIO</span>
+                                    <strong style={{ fontSize: "0.88rem", color: "#fff" }}>${Math.round(cPrice)} USD</strong>
+                                  </div>
+                                  <div style={{ display: "flex", flexDirection: "column" }}>
+                                    <span style={{ fontSize: "0.62rem", color: "var(--text-secondary)" }}>OCUPACIÓN</span>
+                                    <strong style={{ fontSize: "0.88rem", color: "var(--accent-cyan)" }}>{Math.round(cOcc)}%</strong>
+                                  </div>
+                                  <div style={{ display: "flex", flexDirection: "column" }}>
+                                    <span style={{ fontSize: "0.62rem", color: "var(--text-secondary)" }}>REVPAR EST.</span>
+                                    <strong style={{ fontSize: "0.88rem", color: "var(--accent-emerald)" }}>${cRevpar} USD</strong>
+                                  </div>
+                                </div>
+
+                                {/* Price Positioning vs Your Property */}
+                                <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", fontSize: "0.72rem" }}>
+                                  <span style={{ color: "var(--text-secondary)" }}>Posición vs tu tarifa:</span>
+                                  <span style={{
+                                    fontWeight: "600",
+                                    color: diffVSMyPrice > 0 ? "var(--accent-coral)" : diffVSMyPrice < 0 ? "var(--accent-emerald)" : "var(--accent-gold)"
+                                  }}>
+                                    {diffVSMyPrice > 0 ? `+${diffVSMyPrice}% más alto` : diffVSMyPrice < 0 ? `${diffVSMyPrice}% más bajo` : "Misma tarifa"}
+                                  </span>
+                                </div>
+
+                                {/* Physical Differences & Missing Amenities */}
+                                <div style={{ display: "flex", flexDirection: "column", gap: "4px", fontSize: "0.72rem" }}>
+                                  {compHasTargetLacks.length > 0 && (
+                                    <div style={{ color: "var(--accent-coral)" }}>
+                                      ⚠️ <strong>Te falta:</strong> {compHasTargetLacks.map(translateAmenityKey).join(", ")}
+                                    </div>
+                                  )}
+                                  {targetHasCompLacks.length > 0 && (
+                                    <div style={{ color: "var(--accent-emerald)" }}>
+                                      ✓ <strong>Ventaja tuya:</strong> {targetHasCompLacks.map(translateAmenityKey).join(", ")}
+                                    </div>
+                                  )}
+                                  {compHasTargetLacks.length === 0 && targetHasCompLacks.length === 0 && (
+                                    <div style={{ color: "var(--text-secondary)", fontStyle: "italic" }}>
+                                      Mismas amenities clave.
+                                    </div>
+                                  )}
+                                </div>
+                              </div>
+
                             </div>
-
-                            {/* Card Body */}
-                            <div style={{ padding: "15px", display: "flex", flexDirection: "column", gap: "10px", flex: 1 }}>
-                              <div>
-                                <h4 style={{ margin: 0, fontSize: "0.85rem", color: "#fff", lineHeight: "1.3", height: "34px", overflow: "hidden" }}>
-                                  {c.title}
-                                </h4>
-                                <div style={{ display: "flex", justifyContent: "space-between", marginTop: "4px", fontSize: "0.72rem", color: "var(--text-secondary)" }}>
-                                  <span>{c.neighborhood} • {c.geo_distance_km} km</span>
-                                  <span style={{ color: "var(--accent-gold)" }}>⭐ {c.rating ? c.rating.toFixed(2) : "4.9"} ({c.reviews_count ?? 0} reseñas)</span>
-                                </div>
-                              </div>
-
-                              {/* Competitor Key Stats Grid */}
-                              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "8px", borderTop: "1px solid rgba(255,255,255,0.04)", paddingTop: "8px", borderBottom: "1px solid rgba(255,255,255,0.04)", paddingBottom: "8px" }}>
-                                <div style={{ display: "flex", flexDirection: "column" }}>
-                                  <span style={{ fontSize: "0.62rem", color: "var(--text-secondary)" }}>PRECIO</span>
-                                  <strong style={{ fontSize: "0.85rem", color: "#fff" }}>${Math.round(cPrice)} USD</strong>
-                                </div>
-                                <div style={{ display: "flex", flexDirection: "column" }}>
-                                  <span style={{ fontSize: "0.62rem", color: "var(--text-secondary)" }}>OCUPACIÓN</span>
-                                  <strong style={{ fontSize: "0.85rem", color: "#fff" }}>{Math.round(cOcc)}%</strong>
-                                </div>
-                                <div style={{ display: "flex", flexDirection: "column" }}>
-                                  <span style={{ fontSize: "0.62rem", color: "var(--text-secondary)" }}>REVPAR EST.</span>
-                                  <strong style={{ fontSize: "0.85rem", color: "#fff" }}>${cRevpar} USD</strong>
-                                </div>
-                              </div>
-
-                              {/* Physical Differences & Missing Amenities */}
-                              <div style={{ display: "flex", flexDirection: "column", gap: "4px", fontSize: "0.72rem" }}>
-                                {compHasTargetLacks.length > 0 && (
-                                  <div style={{ color: "var(--accent-coral)" }}>
-                                    ⚠️ <strong>Te falta:</strong> {compHasTargetLacks.map(translateAmenityKey).join(", ")}
-                                  </div>
-                                )}
-                                {targetHasCompLacks.length > 0 && (
-                                  <div style={{ color: "var(--accent-emerald)" }}>
-                                    ✓ <strong>Ventaja tuya:</strong> {targetHasCompLacks.map(translateAmenityKey).join(", ")}
-                                  </div>
-                                )}
-                                {compHasTargetLacks.length === 0 && targetHasCompLacks.length === 0 && (
-                                  <div style={{ color: "var(--text-secondary)", fontStyle: "italic" }}>
-                                    Mismas amenities clave.
-                                  </div>
-                                )}
-                              </div>
-                            </div>
-
-                          </div>
-                        );
-                      }))}
+                          );
+                        }))}
                     </div>
 
                   </div>
