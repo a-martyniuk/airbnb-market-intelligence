@@ -35,12 +35,16 @@ jobs:
           DATABASE_PATH: database/airbnb_intelligence.db
         run: python -m backend.etl.run_daily_pipeline
 
-      - name: Commit updated SQLite database
+      - name: Commit updated SQLite database & Seed JSON
         run: |
           git config --global user.name "GitHub Action Bot"
           git config --global user.email "actions@github.com"
-          cp -f database/airbnb_intelligence.db data/airbnb_intelligence.db 2>/dev/null || true
-          git add database/airbnb_intelligence.db data/airbnb_intelligence.db
+          # Copy latest raw scrape JSON to config/seed_buenos_aires.json so Render cold-starts with fresh data
+          LATEST_RAW=$(ls -t data/raw/*/scrape_buenos_aires.json 2>/dev/null | head -n 1)
+          if [ -n "$LATEST_RAW" ]; then
+            cp -f "$LATEST_RAW" config/seed_buenos_aires.json
+          fi
+          git add database/airbnb_intelligence.db config/seed_buenos_aires.json data/raw/
           # Only commit and push if there are changes
           if git diff --staged --quiet; then
             echo "No database updates detected."
