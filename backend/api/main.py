@@ -46,30 +46,34 @@ init_db(DB_PATH)
 import glob
 
 def auto_seed_target_from_config(target_id: Optional[str] = None):
-    """Ensures target listing and config details exist in DB tables, and seeds full market from raw JSON if DB is fresh."""
+    """Ensures target listing and config details exist in DB tables, and seeds full market history from raw JSON files if missing."""
     conn = get_connection(DB_PATH)
     try:
         cursor = conn.cursor()
-        cursor.execute("SELECT COUNT(*) FROM listings")
-        count = cursor.fetchone()[0]
+        cursor.execute("SELECT DISTINCT snapshot_date FROM listings_daily")
+        existing_dates = set(r[0] for r in cursor.fetchall())
+        conn.close()
         
-        # 1. If listings count < 5, seed market instantly from seed JSON if available
-        if count < 5:
-            seed_file = "config/seed_buenos_aires.json"
-            if not os.path.exists(seed_file):
-                raw_files = sorted(glob.glob("data/raw/**/*.json", recursive=True))
-                if raw_files:
-                    seed_file = raw_files[-1]
-            
-            if os.path.exists(seed_file):
-                logger.info(f"Seeding DB from snapshot seed file: {seed_file}")
-                try:
-                    etl = ETLPipeline(DB_PATH)
-                    etl.process_raw_file(seed_file)
-                except Exception as etl_err:
-                    logger.error(f"Error seeding from raw JSON: {etl_err}")
+        # 1. Find all raw snapshot JSON files and process any date missing from DB
+        raw_files = sorted(list(set(glob.glob("data/raw/**/*.json", recursive=True) + glob.glob("config/seed*.json"))))
+        
+        etl = ETLPipeline(DB_PATH)
+        for rf in raw_files:
+            if not os.path.exists(rf):
+                continue
+            try:
+                with open(rf, "r", encoding="utf-8") as f:
+                    payload = json.load(f)
+                    file_date = payload.get("metadata", {}).get("date")
+                    if file_date and file_date not in existing_dates:
+                        logger.info(f"Seeding missing historical snapshot date '{file_date}' from: {rf}")
+                        etl.process_raw_file(rf)
+            except Exception as etl_err:
+                logger.error(f"Error processing seed file {rf}: {etl_err}")
 
-        # 2. Ensure target listing is explicitly configured
+        # 2. Re-open connection to ensure target listing is explicitly configured
+        conn = get_connection(DB_PATH)
+        cursor = conn.cursor()
         settings_file = "config/target_settings.json"
         if os.path.exists(settings_file):
             with open(settings_file, "r", encoding="utf-8") as f:
