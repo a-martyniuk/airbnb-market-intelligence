@@ -1868,6 +1868,7 @@ POR ESTADÍA (${stayN} noches):
                         recs={recs}
                         listingId={selectedId}
                         feeStructure={currentDetails?.fee_structure || "simplified"}
+                        onOverrideUpdated={() => fetchListingDetails(selectedId)}
                       />
                     </div>
 

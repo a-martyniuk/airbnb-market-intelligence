@@ -80,8 +80,51 @@ export default function PricingCalendar({ recs, listingId, feeStructure = "simpl
     }
   }, [recs]);
 
+  const [loadingLocal, setLoadingLocal] = useState(false);
+
+  const handleManualFetch = async () => {
+    if (!listingId) return;
+    setLoadingLocal(true);
+    try {
+      const res = await fetch(`${API_BASE}/api/listings/${listingId}/recommendations`);
+      if (res.ok) {
+        const data = await res.json();
+        if (Array.isArray(data) && data.length > 0) {
+          if (onOverrideUpdated) onOverrideUpdated();
+          window.location.reload();
+        }
+      }
+    } catch (e) {
+      console.error(e);
+    } finally {
+      setLoadingLocal(false);
+    }
+  };
+
   if (!recs || recs.length === 0) {
-    return <div style={{ color: "#94a3b8", padding: "40px", textAlign: "center" }}>No hay datos de calendario disponibles.</div>;
+    return (
+      <div style={{ color: "#94a3b8", padding: "40px", textAlign: "center", display: "flex", flexDirection: "column", alignItems: "center", gap: "15px" }}>
+        <p style={{ margin: 0, fontSize: "0.9rem", color: "#e2e8f0" }}>Generando recomendaciones tarifarias dinámicas a 30 días...</p>
+        <button
+          onClick={handleManualFetch}
+          disabled={loadingLocal}
+          style={{
+            padding: "10px 22px",
+            borderRadius: "8px",
+            background: "var(--accent-gold)",
+            color: "#050609",
+            fontWeight: "bold",
+            border: "none",
+            cursor: "pointer",
+            fontSize: "0.85rem",
+            boxShadow: "0 4px 15px rgba(234, 179, 8, 0.3)",
+            opacity: loadingLocal ? 0.7 : 1
+          }}
+        >
+          {loadingLocal ? "Generando Modelo ML de Precios..." : "🔄 Cargar Calendario Tarifario"}
+        </button>
+      </div>
+    );
   }
 
   const parseDateStr = (dateStr) => {
