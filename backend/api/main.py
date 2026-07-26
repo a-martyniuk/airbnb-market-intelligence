@@ -121,8 +121,40 @@ def auto_seed_target_from_config(target_id: Optional[str] = None):
                         float(details.get("rating", 5.0)),
                         int(details.get("reviews_count", 0))
                     ))
+                    # Seed 30-day calendar_snapshots for target listing if missing
+                    base_price = float(details.get("price", 90.0))
+                    today = datetime.now().date()
+                    for i in range(0, 31):
+                        future_date = today + timedelta(days=i)
+                        is_weekend = future_date.weekday() in (4, 5)
+                        c_price = base_price * 1.15 if is_weekend else base_price
+                        cursor.execute("""
+                        INSERT INTO calendar_snapshots (
+                            snapshot_date, listing_id, date, price, available
+                        ) VALUES (?, ?, ?, ?, 1)
+                        ON CONFLICT(snapshot_date, listing_id, date) DO UPDATE SET
+                            price=excluded.price
+                        """, (
+                            today_str,
+                            str(tid),
+                            future_date.strftime("%Y-%m-%d"),
+                            round(c_price, 2)
+                        ))
                     conn.commit()
                     logger.info(f"Target listing {tid} auto-seeded successfully into DB with snapshot_date={today_str}.")
+
+                    # Ensure price_recommendations exist for target listing
+                    try:
+                        cursor.execute("SELECT COUNT(*) FROM price_recommendations WHERE listing_id = ?", (str(tid),))
+                        rec_count = cursor.fetchone()[0]
+                        if rec_count == 0:
+                            from backend.ml.pricing_model import DynamicPricingModel
+                            logger.info(f"Generating price recommendations for target listing {tid}...")
+                            pricing_engine = DynamicPricingModel()
+                            pricing_engine.train_model(DB_PATH)
+                            pricing_engine.generate_and_save_recommendations(str(tid), days=30, db_path=DB_PATH)
+                    except Exception as ml_err:
+                        logger.error(f"Error generating ML recommendations during auto-seed: {ml_err}")
     except Exception as e:
         logger.error(f"Error auto-seeding target listing: {str(e)}")
     finally:
@@ -866,15 +898,27 @@ def get_listing_price_recommendations(listing_id: str):
         except Exception:
             comp_ids = []
             
+        # Check if recommendations exist for listing_id
+        cursor.execute("SELECT COUNT(*) FROM price_recommendations WHERE listing_id = ?", (listing_id,))
+        if cursor.fetchone()[0] == 0:
+            logger.info(f"price_recommendations empty for target {listing_id}. Generating ML recommendations on demand...")
+            try:
+                from backend.ml.pricing_model import DynamicPricingModel
+                pricing_engine = DynamicPricingModel()
+                pricing_engine.train_model(DB_PATH)
+                pricing_engine.generate_and_save_recommendations(str(listing_id), days=30, db_path=DB_PATH)
+            except Exception as gen_err:
+                logger.error(f"Error generating recommendations: {gen_err}")
+
         query = """
         SELECT 
             pr.date, 
             pr.recommended_price, 
             pr.confidence_score, 
             pr.features, 
-            cs.price as current_price
+            COALESCE(cs.price, pr.recommended_price) as current_price
         FROM price_recommendations pr
-        JOIN calendar_snapshots cs ON pr.listing_id = cs.listing_id 
+        LEFT JOIN calendar_snapshots cs ON pr.listing_id = cs.listing_id 
             AND pr.date = cs.date 
             AND cs.snapshot_date = (SELECT MAX(snapshot_date) FROM calendar_snapshots WHERE listing_id = pr.listing_id)
         WHERE pr.listing_id = ?
