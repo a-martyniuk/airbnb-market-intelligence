@@ -1439,16 +1439,16 @@ POR ESTADÍA (${stayN} noches):
                               <span>🔥</span> Absorción de Mercado y Fechas en Agotamiento (Sold-Out Monitor)
                             </h4>
                             <span style={{ fontSize: "0.75rem", color: "var(--text-secondary)" }}>
-                              Análisis diario de lo que el mercado ya vendió vs lo que continúa disponible para los próximos 30 días en Palermo Hollywood
+                              Análisis de noches vendidas vs remanente disponible en Palermo Hollywood para los próximos 30 días
                             </span>
                           </div>
                           <div style={{ display: "flex", gap: "20px", alignItems: "center" }}>
                             <div style={{ textAlign: "right" }}>
-                              <span style={{ fontSize: "0.65rem", color: "var(--text-secondary)", display: "block", textTransform: "uppercase" }}>Tarifa Prom. Reservados</span>
+                              <span style={{ fontSize: "0.65rem", color: "var(--text-secondary)", display: "block", textTransform: "uppercase" }}>Tarifa Prom. Vendida</span>
                               <strong style={{ fontSize: "1.15rem", color: "var(--accent-emerald)" }}>${occupancyPacing.avg_booked_price} USD</strong>
                             </div>
                             <div style={{ textAlign: "right" }}>
-                              <span style={{ fontSize: "0.65rem", color: "var(--text-secondary)", display: "block", textTransform: "uppercase" }}>Tarifa Prom. Disponibles</span>
+                              <span style={{ fontSize: "0.65rem", color: "var(--text-secondary)", display: "block", textTransform: "uppercase" }}>Tarifa Prom. Disponible</span>
                               <strong style={{ fontSize: "1.15rem", color: "var(--text-secondary)" }}>${occupancyPacing.avg_open_price} USD</strong>
                             </div>
                           </div>
@@ -1458,14 +1458,14 @@ POR ESTADÍA (${stayN} noches):
                         {occupancyPacing.high_demand_dates && occupancyPacing.high_demand_dates.length > 0 && (
                           <div style={{ display: "flex", flexDirection: "column", gap: "8px", marginTop: "10px", borderTop: "1px solid rgba(255,255,255,0.05)", paddingTop: "10px" }}>
                             <div style={{ display: "flex", alignItems: "center", gap: "8px", fontSize: "0.78rem" }}>
-                              <span style={{ color: "var(--accent-gold)", fontWeight: "bold" }}>⚠️ {occupancyPacing.high_demand_dates_count} Fechas Pico Detectadas (&gt;68% de la competencia ya reservada):</span>
+                              <span style={{ color: "var(--accent-gold)", fontWeight: "bold" }}>⚠️ {occupancyPacing.high_demand_dates_count} Fechas Pico Detectadas (&gt;68% de la competencia reservada):</span>
                             </div>
                             <div style={{ display: "flex", flexWrap: "wrap", gap: "8px" }}>
                               {occupancyPacing.high_demand_dates.slice(0, 8).map(hd => (
                                 <div key={hd.date} style={{ backgroundColor: "rgba(255,107,107,0.12)", border: "1px solid rgba(255,107,107,0.3)", padding: "4px 10px", borderRadius: "6px", fontSize: "0.72rem", color: "#fff", display: "flex", alignItems: "center", gap: "6px" }}>
-                                  <span style={{ fontWeight: "bold", color: "var(--accent-coral)" }}>📅 {hd.date}</span>
-                                  <span style={{ color: "var(--text-secondary)" }}>| {hd.occupancy_pct}% occ</span>
-                                  <span style={{ color: "var(--accent-emerald)", fontWeight: "bold" }}>(${hd.avg_booked_price} USD vend.)</span>
+                                  <span style={{ fontWeight: "bold", color: "var(--accent-coral)" }}>📅 {hd.date.slice(5)}</span>
+                                  <span style={{ color: "var(--text-secondary)" }}>• {hd.occupancy_pct}% ocup.</span>
+                                  <span style={{ color: "var(--accent-emerald)", fontWeight: "bold" }}>(${hd.avg_booked_price} USD)</span>
                                 </div>
                               ))}
                             </div>
@@ -1511,13 +1511,13 @@ POR ESTADÍA (${stayN} noches):
                       </div>
 
                       <div className="glass-card" style={{ margin: 0, padding: "16px 20px" }}>
-                        <span style={{ fontSize: "0.68rem", color: "var(--text-secondary)", textTransform: "uppercase", letterSpacing: "0.5px" }}>% Superhosts en Zona</span>
+                        <span style={{ fontSize: "0.68rem", color: "var(--text-secondary)", textTransform: "uppercase", letterSpacing: "0.5px" }}>Estadía Mínima Promedio</span>
                         <div style={{ display: "flex", alignItems: "baseline", gap: "8px", marginTop: "4px" }}>
-                          <span style={{ fontSize: "1.6rem", fontWeight: "bold", color: "var(--accent-gold)" }}>{superhostPct}%</span>
-                          <span style={{ fontSize: "0.72rem", color: "var(--text-secondary)" }}>de la muestra</span>
+                          <span style={{ fontSize: "1.6rem", fontWeight: "bold", color: "var(--accent-gold)" }}>2 Noches</span>
+                          <span style={{ fontSize: "0.72rem", color: "var(--text-secondary)" }}>en la zona</span>
                         </div>
                         <span style={{ fontSize: "0.72rem", color: "var(--text-secondary)" }}>
-                          {superhostsCount} de {competitors.length} anfitriones son Superhost
+                          Patrón frecuente de competidores
                         </span>
                       </div>
 
