@@ -245,6 +245,7 @@ export default function UnifiedDashboard() {
   const [compFilterAmenity, setCompFilterAmenity] = useState("All");
   const [compSortBy, setCompSortBy] = useState("similarity");
   const [compSuperhostOnly, setCompSuperhostOnly] = useState(false);
+  const [occupancyPacing, setOccupancyPacing] = useState(null);
 
   // Strategy Simulator Slider State (-30% to +30%)
   const [simulatorPct, setSimulatorPct] = useState(0);
@@ -539,6 +540,16 @@ POR ESTADÍA (${stayN} noches):
       const neighsRes = await fetch(`${API_BASE}/api/market/neighborhoods`);
       const neighsData = await neighsRes.json();
       setNeighborhoods(neighsData);
+
+      try {
+        const pacingRes = await fetch(`${API_BASE}/api/market/occupancy-pacing`);
+        if (pacingRes.ok) {
+          const pacingData = await pacingRes.json();
+          setOccupancyPacing(pacingData);
+        }
+      } catch (pacingErr) {
+        console.error("Error fetching occupancy pacing:", pacingErr);
+      }
 
       const targetL = Array.isArray(listingsData) ? (
         listingsData.find(l => l.listing_id === targetId) || 
@@ -1419,6 +1430,50 @@ POR ESTADÍA (${stayN} noches):
                 return (
                   <div className="view-fade-in" style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
                     
+                    {/* Market Absorption & Sold-Out Fechas Pico Banner */}
+                    {occupancyPacing && (
+                      <div className="glass-card" style={{ padding: "18px 22px", margin: 0, borderLeft: "4px solid var(--accent-cyan)" }}>
+                        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "12px", flexWrap: "wrap", gap: "10px" }}>
+                          <div>
+                            <h4 style={{ margin: 0, fontSize: "0.95rem", color: "#fff", display: "flex", alignItems: "center", gap: "8px" }}>
+                              <span>🔥</span> Absorción de Mercado y Fechas en Agotamiento (Sold-Out Monitor)
+                            </h4>
+                            <span style={{ fontSize: "0.75rem", color: "var(--text-secondary)" }}>
+                              Análisis diario de lo que el mercado ya vendió vs lo que continúa disponible para los próximos 30 días en Palermo Hollywood
+                            </span>
+                          </div>
+                          <div style={{ display: "flex", gap: "20px", alignItems: "center" }}>
+                            <div style={{ textAlign: "right" }}>
+                              <span style={{ fontSize: "0.65rem", color: "var(--text-secondary)", display: "block", textTransform: "uppercase" }}>Tarifa Prom. Reservados</span>
+                              <strong style={{ fontSize: "1.15rem", color: "var(--accent-emerald)" }}>${occupancyPacing.avg_booked_price} USD</strong>
+                            </div>
+                            <div style={{ textAlign: "right" }}>
+                              <span style={{ fontSize: "0.65rem", color: "var(--text-secondary)", display: "block", textTransform: "uppercase" }}>Tarifa Prom. Disponibles</span>
+                              <strong style={{ fontSize: "1.15rem", color: "var(--text-secondary)" }}>${occupancyPacing.avg_open_price} USD</strong>
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* High demand dates highlight pills */}
+                        {occupancyPacing.high_demand_dates && occupancyPacing.high_demand_dates.length > 0 && (
+                          <div style={{ display: "flex", flexDirection: "column", gap: "8px", marginTop: "10px", borderTop: "1px solid rgba(255,255,255,0.05)", paddingTop: "10px" }}>
+                            <div style={{ display: "flex", alignItems: "center", gap: "8px", fontSize: "0.78rem" }}>
+                              <span style={{ color: "var(--accent-gold)", fontWeight: "bold" }}>⚠️ {occupancyPacing.high_demand_dates_count} Fechas Pico Detectadas (&gt;68% de la competencia ya reservada):</span>
+                            </div>
+                            <div style={{ display: "flex", flexWrap: "wrap", gap: "8px" }}>
+                              {occupancyPacing.high_demand_dates.slice(0, 8).map(hd => (
+                                <div key={hd.date} style={{ backgroundColor: "rgba(255,107,107,0.12)", border: "1px solid rgba(255,107,107,0.3)", padding: "4px 10px", borderRadius: "6px", fontSize: "0.72rem", color: "#fff", display: "flex", alignItems: "center", gap: "6px" }}>
+                                  <span style={{ fontWeight: "bold", color: "var(--accent-coral)" }}>📅 {hd.date}</span>
+                                  <span style={{ color: "var(--text-secondary)" }}>| {hd.occupancy_pct}% occ</span>
+                                  <span style={{ color: "var(--accent-emerald)", fontWeight: "bold" }}>(${hd.avg_booked_price} USD vend.)</span>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    )}
+
                     {/* Executive Benchmark Summary Strip */}
                     <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: "15px" }}>
                       
@@ -3036,6 +3091,47 @@ POR ESTADÍA (${stayN} noches):
                   <span>Reserva Inmediata: {selectedCompDetails.instant_book === true ? "Habilitado" : selectedCompDetails.instant_book === false ? "Deshabilitado" : "N/E"}</span>
                 </div>
               </div>
+
+              {/* Mini-Calendario de Disponibilidad a 30 Días */}
+              {Array.isArray(selectedCompDetails.calendar) && selectedCompDetails.calendar.length > 0 && (
+                <div style={{ background: "rgba(255,255,255,0.01)", border: "1px solid rgba(255,255,255,0.05)", borderRadius: "8px", padding: "12px 15px", display: "flex", flexDirection: "column", gap: "8px" }}>
+                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                    <span style={{ fontSize: "0.75rem", textTransform: "uppercase", fontWeight: "600", color: "#fff" }}>Calendario de Disponibilidad (30 Días)</span>
+                    <span style={{ fontSize: "0.72rem", color: "var(--accent-coral)", fontWeight: "bold" }}>
+                      🔴 {selectedCompDetails.booked_days_count || 0} de {selectedCompDetails.total_days_count || 30} n. reservadas ({selectedCompDetails.occupancy_30d_pct}% occ)
+                    </span>
+                  </div>
+                  
+                  <div style={{ display: "grid", gridTemplateColumns: "repeat(7, 1fr)", gap: "4px", marginTop: "4px" }}>
+                    {selectedCompDetails.calendar.slice(0, 28).map((dayItem, dIdx) => (
+                      <div
+                        key={dIdx}
+                        title={`${dayItem.date}: ${dayItem.available === 0 ? "RESERVADO / OCUPADO" : "DISPONIBLE"} ($${Math.round(dayItem.price)} USD)`}
+                        style={{
+                          height: "36px",
+                          borderRadius: "6px",
+                          backgroundColor: dayItem.available === 0 ? "rgba(255, 107, 107, 0.2)" : "rgba(16, 185, 129, 0.15)",
+                          border: dayItem.available === 0 ? "1px solid rgba(255, 107, 107, 0.4)" : "1px solid rgba(16, 185, 129, 0.3)",
+                          display: "flex",
+                          flexDirection: "column",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          fontSize: "0.6rem",
+                          color: dayItem.available === 0 ? "var(--accent-coral)" : "var(--accent-emerald)",
+                          cursor: "pointer"
+                        }}
+                      >
+                        <span style={{ fontSize: "0.58rem", opacity: 0.8 }}>{dayItem.date.slice(8)}</span>
+                        <strong style={{ fontSize: "0.62rem" }}>{dayItem.available === 0 ? "🔴" : `$${Math.round(dayItem.price)}`}</strong>
+                      </div>
+                    ))}
+                  </div>
+                  <div style={{ display: "flex", justifyContent: "space-between", fontSize: "0.68rem", color: "var(--text-secondary)", marginTop: "4px" }}>
+                    <span>🔴 Reservada por huésped</span>
+                    <span>🟢 Noche disponible ($ USD)</span>
+                  </div>
+                </div>
+              )}
 
               <div>
                 <strong>Amenities detectados por el Scraper:</strong>

@@ -178,9 +178,33 @@ class CompetitorAnalyzer:
 
         # Sort by similarity score ascending
         competitor_scores.sort(key=lambda x: x['similarity_score'])
+        top_comps = competitor_scores[:self.k_neighbors]
         
-        # Return top k neighbors
-        return competitor_scores[:self.k_neighbors]
+        # Attach 30-day calendar availability snapshot for each competitor
+        try:
+            cursor = conn.cursor()
+            for c in top_comps:
+                cid = c['listing_id']
+                cursor.execute("""
+                SELECT date, price, available
+                FROM calendar_snapshots
+                WHERE listing_id = ? AND snapshot_date = (SELECT MAX(snapshot_date) FROM calendar_snapshots WHERE listing_id = ?)
+                ORDER BY date ASC
+                LIMIT 30
+                """, (cid, cid))
+                cal_rows = cursor.fetchall()
+                c_calendar = [{"date": r[0], "price": float(r[1] or c['price']), "available": int(r[2])} for r in cal_rows]
+                booked_count = sum(1 for r in c_calendar if r['available'] == 0)
+                total_count = len(c_calendar)
+                
+                c['calendar'] = c_calendar
+                c['booked_days_count'] = booked_count
+                c['total_days_count'] = total_count
+                c['occupancy_30d_pct'] = round((booked_count / total_count * 100), 1) if total_count > 0 else c['estimated_occupancy_rate_30d']
+        except Exception as cal_err:
+            pass
+
+        return top_comps
 
 if __name__ == "__main__":
     analyzer = CompetitorAnalyzer()

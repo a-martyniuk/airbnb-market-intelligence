@@ -647,6 +647,100 @@ def get_market_history(neighborhood: str = "Palermo Hollywood"):
     finally:
         conn.close()
 
+@app.get("/api/market/occupancy-pacing")
+def get_occupancy_pacing(neighborhood: str = "Palermo Hollywood"):
+    """
+    Analyzes upcoming 30-day competitor calendar availability,
+    comparing booked (available=0) vs available (available=1) prices and identifying high-occupancy peak dates.
+    """
+    conn = get_connection(DB_PATH)
+    try:
+        cursor = conn.cursor()
+        
+        cursor.execute("SELECT MAX(snapshot_date) FROM calendar_snapshots")
+        max_snap_row = cursor.fetchone()
+        max_snap = max_snap_row[0] if max_snap_row and max_snap_row[0] else datetime.now().strftime("%Y-%m-%d")
+        
+        cursor.execute("""
+        SELECT 
+            cs.date,
+            COUNT(DISTINCT cs.listing_id) as total_listings,
+            SUM(CASE WHEN cs.available = 0 THEN 1 ELSE 0 END) as booked_listings,
+            ROUND(CAST(SUM(CASE WHEN cs.available = 0 THEN 1 ELSE 0 END) AS FLOAT) / COUNT(*) * 100, 1) as occupancy_pct,
+            AVG(CASE WHEN cs.available = 0 THEN cs.price ELSE NULL END) as avg_booked_price,
+            AVG(CASE WHEN cs.available = 1 THEN cs.price ELSE NULL END) as avg_open_price,
+            AVG(cs.price) as avg_total_price
+        FROM calendar_snapshots cs
+        JOIN listings l ON cs.listing_id = l.listing_id
+        WHERE cs.snapshot_date = ? AND l.neighborhood = ?
+        GROUP BY cs.date
+        HAVING total_listings > 0
+        ORDER BY cs.date ASC
+        LIMIT 30
+        """, (max_snap, neighborhood))
+        
+        rows = cursor.fetchall()
+        
+        daily_pacing = []
+        high_demand_dates = []
+        total_booked_sum = 0
+        total_listings_sum = 0
+        booked_prices = []
+        open_prices = []
+        
+        for r in rows:
+            d_date, total_l, booked_l, occ_pct, booked_p, open_p, total_p = r
+            occ_pct = occ_pct or 0.0
+            booked_p = round(booked_p or 0.0, 2)
+            open_p = round(open_p or 0.0, 2)
+            total_p = round(total_p or 0.0, 2)
+            
+            total_booked_sum += booked_l
+            total_listings_sum += total_l
+            if booked_p > 0: booked_prices.append(booked_p)
+            if open_p > 0: open_prices.append(open_p)
+            
+            is_peak = occ_pct >= 68.0
+            if is_peak:
+                high_demand_dates.append({
+                    "date": d_date,
+                    "occupancy_pct": occ_pct,
+                    "avg_booked_price": booked_p,
+                    "avg_open_price": open_p
+                })
+                
+            daily_pacing.append({
+                "date": d_date,
+                "total_listings": total_l,
+                "booked_listings": booked_l,
+                "occupancy_pct": occ_pct,
+                "avg_booked_price": booked_p,
+                "avg_open_price": open_p,
+                "avg_total_price": total_p,
+                "is_peak": is_peak
+            })
+            
+        avg_booked = round(sum(booked_prices) / len(booked_prices), 2) if booked_prices else 85.0
+        avg_open = round(sum(open_prices) / len(open_prices), 2) if open_prices else 85.0
+        overall_occ = round((total_booked_sum / total_listings_sum) * 100, 1) if total_listings_sum > 0 else 65.0
+        diff_pct = round(((avg_booked - avg_open) / (avg_open or 1.0)) * 100, 1)
+        
+        return {
+            "snapshot_date": max_snap,
+            "overall_occupancy_pct": overall_occ,
+            "avg_booked_price": avg_booked,
+            "avg_open_price": avg_open,
+            "price_diff_pct": diff_pct,
+            "high_demand_dates_count": len(high_demand_dates),
+            "high_demand_dates": high_demand_dates,
+            "daily_pacing": daily_pacing
+        }
+    except Exception as e:
+        logger.error(f"Error in get_occupancy_pacing: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+    finally:
+        conn.close()
+
 @app.get("/api/listings/{listing_id}")
 def get_listing_details(listing_id: str):
     """Retrieves specific listing parameters, booking statistics, and historical performance."""
