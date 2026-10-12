@@ -1,369 +1,12 @@
 {
   "metadata": {
     "city": "Buenos Aires",
-    "date": "2026-10-11",
+    "date": "2026-10-12",
     "count": 40,
     "mock_mode": false,
-    "timestamp": "2026-10-11T11:10:32.996772"
+    "timestamp": "2026-10-12T12:41:43.571661"
   },
   "results": [
-    {
-      "listing": {
-        "listing_id": "1756624552319072711",
-        "title": "Pool and BBQ in Palermo Soho",
-        "property_type": "Apartment",
-        "room_type": "Entire home/apt",
-        "accommodates": 2,
-        "bedrooms": 1,
-        "bathrooms": 1.0,
-        "latitude": -34.587,
-        "longitude": -58.4334,
-        "neighborhood": "Palermo Hollywood",
-        "rating": 5.0,
-        "reviews_count": 17,
-        "host_id": "host_1756624552319072711",
-        "host_name": "Host",
-        "host_is_superhost": 0,
-        "amenities": [
-          "Wifi",
-          "Air conditioning",
-          "Cocina",
-          "Pool"
-        ],
-        "picture_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-1756624552319072711/original/76ba1d4f-9b5f-409a-bd80-64ff37970c61.jpeg"
-      },
-      "calendar": [
-        {
-          "date": "2026-10-12",
-          "price": 63.72,
-          "available": 0
-        },
-        {
-          "date": "2026-10-13",
-          "price": 63.72,
-          "available": 0
-        },
-        {
-          "date": "2026-10-14",
-          "price": 63.72,
-          "available": 1
-        },
-        {
-          "date": "2026-10-15",
-          "price": 63.72,
-          "available": 0
-        },
-        {
-          "date": "2026-10-16",
-          "price": 73.28,
-          "available": 0
-        },
-        {
-          "date": "2026-10-17",
-          "price": 73.28,
-          "available": 0
-        },
-        {
-          "date": "2026-10-18",
-          "price": 63.72,
-          "available": 0
-        },
-        {
-          "date": "2026-10-19",
-          "price": 63.72,
-          "available": 1
-        },
-        {
-          "date": "2026-10-20",
-          "price": 63.72,
-          "available": 0
-        },
-        {
-          "date": "2026-10-21",
-          "price": 63.72,
-          "available": 0
-        },
-        {
-          "date": "2026-10-22",
-          "price": 63.72,
-          "available": 0
-        },
-        {
-          "date": "2026-10-23",
-          "price": 73.28,
-          "available": 1
-        },
-        {
-          "date": "2026-10-24",
-          "price": 73.28,
-          "available": 1
-        },
-        {
-          "date": "2026-10-25",
-          "price": 63.72,
-          "available": 0
-        },
-        {
-          "date": "2026-10-26",
-          "price": 63.72,
-          "available": 1
-        },
-        {
-          "date": "2026-10-27",
-          "price": 63.72,
-          "available": 0
-        },
-        {
-          "date": "2026-10-28",
-          "price": 63.72,
-          "available": 0
-        },
-        {
-          "date": "2026-10-29",
-          "price": 63.72,
-          "available": 0
-        },
-        {
-          "date": "2026-10-30",
-          "price": 73.28,
-          "available": 1
-        },
-        {
-          "date": "2026-10-31",
-          "price": 73.28,
-          "available": 1
-        },
-        {
-          "date": "2026-11-01",
-          "price": 63.72,
-          "available": 1
-        },
-        {
-          "date": "2026-11-02",
-          "price": 63.72,
-          "available": 0
-        },
-        {
-          "date": "2026-11-03",
-          "price": 63.72,
-          "available": 1
-        },
-        {
-          "date": "2026-11-04",
-          "price": 63.72,
-          "available": 1
-        },
-        {
-          "date": "2026-11-05",
-          "price": 63.72,
-          "available": 0
-        },
-        {
-          "date": "2026-11-06",
-          "price": 73.28,
-          "available": 1
-        },
-        {
-          "date": "2026-11-07",
-          "price": 73.28,
-          "available": 0
-        },
-        {
-          "date": "2026-11-08",
-          "price": 63.72,
-          "available": 0
-        },
-        {
-          "date": "2026-11-09",
-          "price": 63.72,
-          "available": 1
-        },
-        {
-          "date": "2026-11-10",
-          "price": 63.72,
-          "available": 1
-        }
-      ],
-      "scraped_at": "2026-10-11T11:10:18.139666"
-    },
-    {
-      "listing": {
-        "listing_id": "961376865102340462",
-        "title": "Private terrace with panoramic views, Palermo Hollywood",
-        "property_type": "Apartment",
-        "room_type": "Entire home/apt",
-        "accommodates": 2,
-        "bedrooms": 1,
-        "bathrooms": 1.0,
-        "latitude": -34.582,
-        "longitude": -58.4419,
-        "neighborhood": "Palermo Hollywood",
-        "rating": 4.95,
-        "reviews_count": 80,
-        "host_id": "host_961376865102340462",
-        "host_name": "Host",
-        "host_is_superhost": 0,
-        "amenities": [
-          "Wifi",
-          "Air conditioning",
-          "Cocina"
-        ],
-        "picture_url": "https://a0.muscache.com/im/pictures/miso/Hosting-961376865102340462/original/0a6eb846-0dd3-497f-a126-1d1a4e8df1eb.jpeg"
-      },
-      "calendar": [
-        {
-          "date": "2026-10-12",
-          "price": 62.4,
-          "available": 0
-        },
-        {
-          "date": "2026-10-13",
-          "price": 62.4,
-          "available": 0
-        },
-        {
-          "date": "2026-10-14",
-          "price": 62.4,
-          "available": 0
-        },
-        {
-          "date": "2026-10-15",
-          "price": 62.4,
-          "available": 0
-        },
-        {
-          "date": "2026-10-16",
-          "price": 71.76,
-          "available": 0
-        },
-        {
-          "date": "2026-10-17",
-          "price": 71.76,
-          "available": 0
-        },
-        {
-          "date": "2026-10-18",
-          "price": 62.4,
-          "available": 1
-        },
-        {
-          "date": "2026-10-19",
-          "price": 62.4,
-          "available": 0
-        },
-        {
-          "date": "2026-10-20",
-          "price": 62.4,
-          "available": 1
-        },
-        {
-          "date": "2026-10-21",
-          "price": 62.4,
-          "available": 1
-        },
-        {
-          "date": "2026-10-22",
-          "price": 62.4,
-          "available": 0
-        },
-        {
-          "date": "2026-10-23",
-          "price": 71.76,
-          "available": 0
-        },
-        {
-          "date": "2026-10-24",
-          "price": 71.76,
-          "available": 0
-        },
-        {
-          "date": "2026-10-25",
-          "price": 62.4,
-          "available": 0
-        },
-        {
-          "date": "2026-10-26",
-          "price": 62.4,
-          "available": 0
-        },
-        {
-          "date": "2026-10-27",
-          "price": 62.4,
-          "available": 1
-        },
-        {
-          "date": "2026-10-28",
-          "price": 62.4,
-          "available": 0
-        },
-        {
-          "date": "2026-10-29",
-          "price": 62.4,
-          "available": 1
-        },
-        {
-          "date": "2026-10-30",
-          "price": 71.76,
-          "available": 0
-        },
-        {
-          "date": "2026-10-31",
-          "price": 71.76,
-          "available": 0
-        },
-        {
-          "date": "2026-11-01",
-          "price": 62.4,
-          "available": 0
-        },
-        {
-          "date": "2026-11-02",
-          "price": 62.4,
-          "available": 0
-        },
-        {
-          "date": "2026-11-03",
-          "price": 62.4,
-          "available": 1
-        },
-        {
-          "date": "2026-11-04",
-          "price": 62.4,
-          "available": 0
-        },
-        {
-          "date": "2026-11-05",
-          "price": 62.4,
-          "available": 0
-        },
-        {
-          "date": "2026-11-06",
-          "price": 71.76,
-          "available": 0
-        },
-        {
-          "date": "2026-11-07",
-          "price": 71.76,
-          "available": 1
-        },
-        {
-          "date": "2026-11-08",
-          "price": 62.4,
-          "available": 1
-        },
-        {
-          "date": "2026-11-09",
-          "price": 62.4,
-          "available": 1
-        },
-        {
-          "date": "2026-11-10",
-          "price": 62.4,
-          "available": 0
-        }
-      ],
-      "scraped_at": "2026-10-11T11:10:18.139891"
-    },
     {
       "listing": {
         "listing_id": "1341510528713415777",
@@ -391,335 +34,157 @@
       },
       "calendar": [
         {
-          "date": "2026-10-12",
-          "price": 148.8,
-          "available": 0
-        },
-        {
           "date": "2026-10-13",
-          "price": 148.8,
+          "price": 149.0,
           "available": 0
         },
         {
           "date": "2026-10-14",
-          "price": 148.8,
+          "price": 149.0,
           "available": 0
         },
         {
           "date": "2026-10-15",
-          "price": 148.8,
+          "price": 149.0,
           "available": 0
         },
         {
           "date": "2026-10-16",
-          "price": 171.12,
-          "available": 1
-        },
-        {
-          "date": "2026-10-17",
-          "price": 171.12,
-          "available": 0
-        },
-        {
-          "date": "2026-10-18",
-          "price": 148.8,
-          "available": 0
-        },
-        {
-          "date": "2026-10-19",
-          "price": 148.8,
-          "available": 1
-        },
-        {
-          "date": "2026-10-20",
-          "price": 148.8,
-          "available": 1
-        },
-        {
-          "date": "2026-10-21",
-          "price": 148.8,
-          "available": 1
-        },
-        {
-          "date": "2026-10-22",
-          "price": 148.8,
-          "available": 0
-        },
-        {
-          "date": "2026-10-23",
-          "price": 171.12,
-          "available": 0
-        },
-        {
-          "date": "2026-10-24",
-          "price": 171.12,
-          "available": 0
-        },
-        {
-          "date": "2026-10-25",
-          "price": 148.8,
-          "available": 0
-        },
-        {
-          "date": "2026-10-26",
-          "price": 148.8,
-          "available": 0
-        },
-        {
-          "date": "2026-10-27",
-          "price": 148.8,
-          "available": 0
-        },
-        {
-          "date": "2026-10-28",
-          "price": 148.8,
-          "available": 1
-        },
-        {
-          "date": "2026-10-29",
-          "price": 148.8,
-          "available": 1
-        },
-        {
-          "date": "2026-10-30",
-          "price": 171.12,
-          "available": 1
-        },
-        {
-          "date": "2026-10-31",
-          "price": 171.12,
-          "available": 0
-        },
-        {
-          "date": "2026-11-01",
-          "price": 148.8,
-          "available": 1
-        },
-        {
-          "date": "2026-11-02",
-          "price": 148.8,
-          "available": 1
-        },
-        {
-          "date": "2026-11-03",
-          "price": 148.8,
-          "available": 0
-        },
-        {
-          "date": "2026-11-04",
-          "price": 148.8,
-          "available": 0
-        },
-        {
-          "date": "2026-11-05",
-          "price": 148.8,
-          "available": 0
-        },
-        {
-          "date": "2026-11-06",
-          "price": 171.12,
-          "available": 0
-        },
-        {
-          "date": "2026-11-07",
-          "price": 171.12,
-          "available": 1
-        },
-        {
-          "date": "2026-11-08",
-          "price": 148.8,
-          "available": 1
-        },
-        {
-          "date": "2026-11-09",
-          "price": 148.8,
-          "available": 0
-        },
-        {
-          "date": "2026-11-10",
-          "price": 148.8,
-          "available": 1
-        }
-      ],
-      "scraped_at": "2026-10-11T11:10:18.140124"
-    },
-    {
-      "listing": {
-        "listing_id": "1332652249326015668",
-        "title": "Brand-new with a balcony city view",
-        "property_type": "Apartment",
-        "room_type": "Entire home/apt",
-        "accommodates": 4,
-        "bedrooms": 1,
-        "bathrooms": 1.0,
-        "latitude": -34.5855,
-        "longitude": -58.4431,
-        "neighborhood": "Palermo Hollywood",
-        "rating": 5.0,
-        "reviews_count": 88,
-        "host_id": "host_1332652249326015668",
-        "host_name": "Host",
-        "host_is_superhost": 0,
-        "amenities": [
-          "Wifi",
-          "Air conditioning",
-          "Cocina"
-        ],
-        "picture_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-1332652249326015668/original/78b4264d-a057-47cf-b56d-11c26d2e91fa.jpeg"
-      },
-      "calendar": [
-        {
-          "date": "2026-10-12",
-          "price": 67.6,
-          "available": 0
-        },
-        {
-          "date": "2026-10-13",
-          "price": 67.6,
-          "available": 1
-        },
-        {
-          "date": "2026-10-14",
-          "price": 67.6,
-          "available": 0
-        },
-        {
-          "date": "2026-10-15",
-          "price": 67.6,
-          "available": 1
-        },
-        {
-          "date": "2026-10-16",
-          "price": 77.74,
+          "price": 171.35,
           "available": 0
         },
         {
           "date": "2026-10-17",
-          "price": 77.74,
+          "price": 171.35,
           "available": 1
         },
         {
           "date": "2026-10-18",
-          "price": 67.6,
-          "available": 1
+          "price": 149.0,
+          "available": 0
         },
         {
           "date": "2026-10-19",
-          "price": 67.6,
+          "price": 149.0,
           "available": 0
         },
         {
           "date": "2026-10-20",
-          "price": 67.6,
+          "price": 149.0,
           "available": 1
         },
         {
           "date": "2026-10-21",
-          "price": 67.6,
-          "available": 0
+          "price": 149.0,
+          "available": 1
         },
         {
           "date": "2026-10-22",
-          "price": 67.6,
+          "price": 149.0,
           "available": 1
         },
         {
           "date": "2026-10-23",
-          "price": 77.74,
-          "available": 1
+          "price": 171.35,
+          "available": 0
         },
         {
           "date": "2026-10-24",
-          "price": 77.74,
+          "price": 171.35,
           "available": 0
         },
         {
           "date": "2026-10-25",
-          "price": 67.6,
-          "available": 1
+          "price": 149.0,
+          "available": 0
         },
         {
           "date": "2026-10-26",
-          "price": 67.6,
-          "available": 1
+          "price": 149.0,
+          "available": 0
         },
         {
           "date": "2026-10-27",
-          "price": 67.6,
-          "available": 1
+          "price": 149.0,
+          "available": 0
         },
         {
           "date": "2026-10-28",
-          "price": 67.6,
+          "price": 149.0,
           "available": 0
         },
         {
           "date": "2026-10-29",
-          "price": 67.6,
-          "available": 0
+          "price": 149.0,
+          "available": 1
         },
         {
           "date": "2026-10-30",
-          "price": 77.74,
-          "available": 0
+          "price": 171.35,
+          "available": 1
         },
         {
           "date": "2026-10-31",
-          "price": 77.74,
+          "price": 171.35,
           "available": 1
         },
         {
           "date": "2026-11-01",
-          "price": 67.6,
+          "price": 149.0,
           "available": 0
         },
         {
           "date": "2026-11-02",
-          "price": 67.6,
-          "available": 0
+          "price": 149.0,
+          "available": 1
         },
         {
           "date": "2026-11-03",
-          "price": 67.6,
-          "available": 0
+          "price": 149.0,
+          "available": 1
         },
         {
           "date": "2026-11-04",
-          "price": 67.6,
+          "price": 149.0,
           "available": 0
         },
         {
           "date": "2026-11-05",
-          "price": 67.6,
-          "available": 1
+          "price": 149.0,
+          "available": 0
         },
         {
           "date": "2026-11-06",
-          "price": 77.74,
-          "available": 1
+          "price": 171.35,
+          "available": 0
         },
         {
           "date": "2026-11-07",
-          "price": 77.74,
-          "available": 1
+          "price": 171.35,
+          "available": 0
         },
         {
           "date": "2026-11-08",
-          "price": 67.6,
-          "available": 0
+          "price": 149.0,
+          "available": 1
         },
         {
           "date": "2026-11-09",
-          "price": 67.6,
-          "available": 0
+          "price": 149.0,
+          "available": 1
         },
         {
           "date": "2026-11-10",
-          "price": 67.6,
+          "price": 149.0,
           "available": 0
+        },
+        {
+          "date": "2026-11-11",
+          "price": 149.0,
+          "available": 1
         }
       ],
-      "scraped_at": "2026-10-11T11:10:18.140373"
+      "scraped_at": "2026-10-12T12:41:25.973167"
     },
     {
       "listing": {
@@ -747,14 +212,9 @@
       },
       "calendar": [
         {
-          "date": "2026-10-12",
-          "price": 113.4,
-          "available": 0
-        },
-        {
           "date": "2026-10-13",
           "price": 113.4,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-10-14",
@@ -764,7 +224,7 @@
         {
           "date": "2026-10-15",
           "price": 113.4,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-10-16",
@@ -794,37 +254,37 @@
         {
           "date": "2026-10-21",
           "price": 113.4,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-10-22",
           "price": 113.4,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-10-23",
           "price": 130.41,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-10-24",
           "price": 130.41,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-10-25",
           "price": 113.4,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-10-26",
           "price": 113.4,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-10-27",
           "price": 113.4,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-10-28",
@@ -834,27 +294,27 @@
         {
           "date": "2026-10-29",
           "price": 113.4,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-10-30",
           "price": 130.41,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-10-31",
           "price": 130.41,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-11-01",
           "price": 113.4,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-11-02",
           "price": 113.4,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-11-03",
@@ -869,7 +329,7 @@
         {
           "date": "2026-11-05",
           "price": 113.4,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-11-06",
@@ -879,7 +339,7 @@
         {
           "date": "2026-11-07",
           "price": 130.41,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-11-08",
@@ -895,25 +355,386 @@
           "date": "2026-11-10",
           "price": 113.4,
           "available": 0
+        },
+        {
+          "date": "2026-11-11",
+          "price": 113.4,
+          "available": 0
         }
       ],
-      "scraped_at": "2026-10-11T11:10:18.140623"
+      "scraped_at": "2026-10-12T12:41:25.973584"
     },
     {
       "listing": {
-        "listing_id": "1605256098021594346",
-        "title": "Two-story with rooftop pool views",
+        "listing_id": "1711269128107850679",
+        "title": "Panoramic view with sauna in Palermo Hollywood",
+        "property_type": "Apartment",
+        "room_type": "Entire home/apt",
+        "accommodates": 2,
+        "bedrooms": 1,
+        "bathrooms": 1.0,
+        "latitude": -34.583,
+        "longitude": -58.4331,
+        "neighborhood": "Palermo Hollywood",
+        "rating": 5.0,
+        "reviews_count": 6,
+        "host_id": "host_1711269128107850679",
+        "host_name": "Host",
+        "host_is_superhost": 0,
+        "amenities": [
+          "Wifi",
+          "Air conditioning",
+          "Cocina"
+        ],
+        "picture_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-1711269128107850679/original/19194fd4-3da3-4d81-a707-aa882915cea0.jpeg"
+      },
+      "calendar": [
+        {
+          "date": "2026-10-13",
+          "price": 144.8,
+          "available": 0
+        },
+        {
+          "date": "2026-10-14",
+          "price": 144.8,
+          "available": 0
+        },
+        {
+          "date": "2026-10-15",
+          "price": 144.8,
+          "available": 1
+        },
+        {
+          "date": "2026-10-16",
+          "price": 166.52,
+          "available": 0
+        },
+        {
+          "date": "2026-10-17",
+          "price": 166.52,
+          "available": 0
+        },
+        {
+          "date": "2026-10-18",
+          "price": 144.8,
+          "available": 1
+        },
+        {
+          "date": "2026-10-19",
+          "price": 144.8,
+          "available": 0
+        },
+        {
+          "date": "2026-10-20",
+          "price": 144.8,
+          "available": 0
+        },
+        {
+          "date": "2026-10-21",
+          "price": 144.8,
+          "available": 1
+        },
+        {
+          "date": "2026-10-22",
+          "price": 144.8,
+          "available": 1
+        },
+        {
+          "date": "2026-10-23",
+          "price": 166.52,
+          "available": 0
+        },
+        {
+          "date": "2026-10-24",
+          "price": 166.52,
+          "available": 0
+        },
+        {
+          "date": "2026-10-25",
+          "price": 144.8,
+          "available": 1
+        },
+        {
+          "date": "2026-10-26",
+          "price": 144.8,
+          "available": 0
+        },
+        {
+          "date": "2026-10-27",
+          "price": 144.8,
+          "available": 0
+        },
+        {
+          "date": "2026-10-28",
+          "price": 144.8,
+          "available": 0
+        },
+        {
+          "date": "2026-10-29",
+          "price": 144.8,
+          "available": 1
+        },
+        {
+          "date": "2026-10-30",
+          "price": 166.52,
+          "available": 1
+        },
+        {
+          "date": "2026-10-31",
+          "price": 166.52,
+          "available": 0
+        },
+        {
+          "date": "2026-11-01",
+          "price": 144.8,
+          "available": 0
+        },
+        {
+          "date": "2026-11-02",
+          "price": 144.8,
+          "available": 0
+        },
+        {
+          "date": "2026-11-03",
+          "price": 144.8,
+          "available": 1
+        },
+        {
+          "date": "2026-11-04",
+          "price": 144.8,
+          "available": 0
+        },
+        {
+          "date": "2026-11-05",
+          "price": 144.8,
+          "available": 1
+        },
+        {
+          "date": "2026-11-06",
+          "price": 166.52,
+          "available": 1
+        },
+        {
+          "date": "2026-11-07",
+          "price": 166.52,
+          "available": 0
+        },
+        {
+          "date": "2026-11-08",
+          "price": 144.8,
+          "available": 0
+        },
+        {
+          "date": "2026-11-09",
+          "price": 144.8,
+          "available": 1
+        },
+        {
+          "date": "2026-11-10",
+          "price": 144.8,
+          "available": 0
+        },
+        {
+          "date": "2026-11-11",
+          "price": 144.8,
+          "available": 0
+        }
+      ],
+      "scraped_at": "2026-10-12T12:41:25.974015"
+    },
+    {
+      "listing": {
+        "listing_id": "1498807142354633877",
+        "title": "Large private terrace in Palermo Soho",
+        "property_type": "Apartment",
+        "room_type": "Entire home/apt",
+        "accommodates": 2,
+        "bedrooms": 1,
+        "bathrooms": 1.0,
+        "latitude": -34.5853,
+        "longitude": -58.4285,
+        "neighborhood": "Palermo Hollywood",
+        "rating": 4.96,
+        "reviews_count": 57,
+        "host_id": "host_1498807142354633877",
+        "host_name": "Host",
+        "host_is_superhost": 0,
+        "amenities": [
+          "Wifi",
+          "Air conditioning",
+          "Cocina"
+        ],
+        "picture_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-1498807142354633877/original/438eda2f-fb92-4601-8fd0-68f5729a6222.jpeg"
+      },
+      "calendar": [
+        {
+          "date": "2026-10-13",
+          "price": 60.0,
+          "available": 1
+        },
+        {
+          "date": "2026-10-14",
+          "price": 60.0,
+          "available": 0
+        },
+        {
+          "date": "2026-10-15",
+          "price": 60.0,
+          "available": 0
+        },
+        {
+          "date": "2026-10-16",
+          "price": 69.0,
+          "available": 0
+        },
+        {
+          "date": "2026-10-17",
+          "price": 69.0,
+          "available": 0
+        },
+        {
+          "date": "2026-10-18",
+          "price": 60.0,
+          "available": 0
+        },
+        {
+          "date": "2026-10-19",
+          "price": 60.0,
+          "available": 0
+        },
+        {
+          "date": "2026-10-20",
+          "price": 60.0,
+          "available": 1
+        },
+        {
+          "date": "2026-10-21",
+          "price": 60.0,
+          "available": 1
+        },
+        {
+          "date": "2026-10-22",
+          "price": 60.0,
+          "available": 0
+        },
+        {
+          "date": "2026-10-23",
+          "price": 69.0,
+          "available": 0
+        },
+        {
+          "date": "2026-10-24",
+          "price": 69.0,
+          "available": 1
+        },
+        {
+          "date": "2026-10-25",
+          "price": 60.0,
+          "available": 1
+        },
+        {
+          "date": "2026-10-26",
+          "price": 60.0,
+          "available": 1
+        },
+        {
+          "date": "2026-10-27",
+          "price": 60.0,
+          "available": 0
+        },
+        {
+          "date": "2026-10-28",
+          "price": 60.0,
+          "available": 0
+        },
+        {
+          "date": "2026-10-29",
+          "price": 60.0,
+          "available": 0
+        },
+        {
+          "date": "2026-10-30",
+          "price": 69.0,
+          "available": 1
+        },
+        {
+          "date": "2026-10-31",
+          "price": 69.0,
+          "available": 1
+        },
+        {
+          "date": "2026-11-01",
+          "price": 60.0,
+          "available": 1
+        },
+        {
+          "date": "2026-11-02",
+          "price": 60.0,
+          "available": 1
+        },
+        {
+          "date": "2026-11-03",
+          "price": 60.0,
+          "available": 0
+        },
+        {
+          "date": "2026-11-04",
+          "price": 60.0,
+          "available": 0
+        },
+        {
+          "date": "2026-11-05",
+          "price": 60.0,
+          "available": 0
+        },
+        {
+          "date": "2026-11-06",
+          "price": 69.0,
+          "available": 0
+        },
+        {
+          "date": "2026-11-07",
+          "price": 69.0,
+          "available": 0
+        },
+        {
+          "date": "2026-11-08",
+          "price": 60.0,
+          "available": 0
+        },
+        {
+          "date": "2026-11-09",
+          "price": 60.0,
+          "available": 1
+        },
+        {
+          "date": "2026-11-10",
+          "price": 60.0,
+          "available": 1
+        },
+        {
+          "date": "2026-11-11",
+          "price": 60.0,
+          "available": 1
+        }
+      ],
+      "scraped_at": "2026-10-12T12:41:25.974434"
+    },
+    {
+      "listing": {
+        "listing_id": "1744762378600072538",
+        "title": "Panoramic views from the rooftop pool",
         "property_type": "Apartment",
         "room_type": "Entire home/apt",
         "accommodates": 2,
         "bedrooms": 1,
         "bathrooms": 1.5,
-        "latitude": -34.58133,
-        "longitude": -58.43479,
+        "latitude": -34.5822,
+        "longitude": -58.4337,
         "neighborhood": "Palermo Hollywood",
-        "rating": 4.96,
-        "reviews_count": 45,
-        "host_id": "host_1605256098021594346",
+        "rating": 5.0,
+        "reviews_count": 11,
+        "host_id": "host_1744762378600072538",
         "host_name": "Host",
         "host_is_superhost": 0,
         "amenities": [
@@ -922,177 +743,177 @@
           "Cocina",
           "Pool"
         ],
-        "picture_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-1605256098021594346/original/dbbf50d2-3979-476a-a05c-257aa59b2c2f.jpeg"
+        "picture_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-1744762378600072538/original/01da0d67-edf7-49a3-92fc-c9e1f5632e64.jpeg"
       },
       "calendar": [
         {
-          "date": "2026-10-12",
-          "price": 218.83,
-          "available": 0
-        },
-        {
           "date": "2026-10-13",
-          "price": 218.83,
+          "price": 224.66,
           "available": 0
         },
         {
           "date": "2026-10-14",
-          "price": 218.83,
-          "available": 0
+          "price": 224.66,
+          "available": 1
         },
         {
           "date": "2026-10-15",
-          "price": 218.83,
+          "price": 224.66,
           "available": 0
         },
         {
           "date": "2026-10-16",
-          "price": 251.65,
+          "price": 258.36,
           "available": 0
         },
         {
           "date": "2026-10-17",
-          "price": 251.65,
+          "price": 258.36,
           "available": 0
         },
         {
           "date": "2026-10-18",
-          "price": 218.83,
+          "price": 224.66,
           "available": 0
         },
         {
           "date": "2026-10-19",
-          "price": 218.83,
+          "price": 224.66,
           "available": 0
         },
         {
           "date": "2026-10-20",
-          "price": 218.83,
+          "price": 224.66,
           "available": 1
         },
         {
           "date": "2026-10-21",
-          "price": 218.83,
+          "price": 224.66,
           "available": 1
         },
         {
           "date": "2026-10-22",
-          "price": 218.83,
-          "available": 1
-        },
-        {
-          "date": "2026-10-23",
-          "price": 251.65,
-          "available": 1
-        },
-        {
-          "date": "2026-10-24",
-          "price": 251.65,
+          "price": 224.66,
           "available": 0
         },
         {
+          "date": "2026-10-23",
+          "price": 258.36,
+          "available": 0
+        },
+        {
+          "date": "2026-10-24",
+          "price": 258.36,
+          "available": 1
+        },
+        {
           "date": "2026-10-25",
-          "price": 218.83,
+          "price": 224.66,
           "available": 0
         },
         {
           "date": "2026-10-26",
-          "price": 218.83,
-          "available": 1
-        },
-        {
-          "date": "2026-10-27",
-          "price": 218.83,
+          "price": 224.66,
           "available": 0
         },
         {
+          "date": "2026-10-27",
+          "price": 224.66,
+          "available": 1
+        },
+        {
           "date": "2026-10-28",
-          "price": 218.83,
+          "price": 224.66,
           "available": 0
         },
         {
           "date": "2026-10-29",
-          "price": 218.83,
-          "available": 1
-        },
-        {
-          "date": "2026-10-30",
-          "price": 251.65,
+          "price": 224.66,
           "available": 0
         },
         {
-          "date": "2026-10-31",
-          "price": 251.65,
+          "date": "2026-10-30",
+          "price": 258.36,
           "available": 1
         },
         {
+          "date": "2026-10-31",
+          "price": 258.36,
+          "available": 0
+        },
+        {
           "date": "2026-11-01",
-          "price": 218.83,
+          "price": 224.66,
           "available": 1
         },
         {
           "date": "2026-11-02",
-          "price": 218.83,
-          "available": 0
+          "price": 224.66,
+          "available": 1
         },
         {
           "date": "2026-11-03",
-          "price": 218.83,
+          "price": 224.66,
           "available": 1
         },
         {
           "date": "2026-11-04",
-          "price": 218.83,
+          "price": 224.66,
           "available": 1
         },
         {
           "date": "2026-11-05",
-          "price": 218.83,
+          "price": 224.66,
           "available": 0
         },
         {
           "date": "2026-11-06",
-          "price": 251.65,
+          "price": 258.36,
           "available": 0
         },
         {
           "date": "2026-11-07",
-          "price": 251.65,
+          "price": 258.36,
           "available": 0
         },
         {
           "date": "2026-11-08",
-          "price": 218.83,
+          "price": 224.66,
           "available": 0
         },
         {
           "date": "2026-11-09",
-          "price": 218.83,
-          "available": 1
+          "price": 224.66,
+          "available": 0
         },
         {
           "date": "2026-11-10",
-          "price": 218.83,
-          "available": 1
+          "price": 224.66,
+          "available": 0
+        },
+        {
+          "date": "2026-11-11",
+          "price": 224.66,
+          "available": 0
         }
       ],
-      "scraped_at": "2026-10-11T11:10:18.140876"
+      "scraped_at": "2026-10-12T12:41:25.974827"
     },
     {
       "listing": {
-        "listing_id": "1547860309486117560",
-        "title": "Rooftop pool and a private balcony",
+        "listing_id": "1774928395814307007",
+        "title": "Modern Palermo apartment with pool and balcony",
         "property_type": "Apartment",
         "room_type": "Entire home/apt",
-        "accommodates": 4,
+        "accommodates": 2,
         "bedrooms": 1,
         "bathrooms": 1.0,
-        "latitude": -34.5795,
-        "longitude": -58.4284,
+        "latitude": -34.58097,
+        "longitude": -58.43496,
         "neighborhood": "Palermo Hollywood",
-        "rating": 4.98,
-        "reviews_count": 60,
-        "host_id": "host_1547860309486117560",
+        "rating": 4.85,
+        "reviews_count": 0,
+        "host_id": "host_1774928395814307007",
         "host_name": "Host",
         "host_is_superhost": 0,
         "amenities": [
@@ -1101,161 +922,340 @@
           "Cocina",
           "Pool"
         ],
-        "picture_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-1547860309486117560/original/e57a36a5-9ed6-4d9c-a1f4-910186b6efc5.jpeg"
+        "picture_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-1774928395814307007/original/b626fdda-f730-490f-b830-c6ab5c9d75d8.jpeg"
       },
       "calendar": [
         {
-          "date": "2026-10-12",
-          "price": 72.0,
+          "date": "2026-10-13",
+          "price": 83.84,
           "available": 1
         },
         {
-          "date": "2026-10-13",
-          "price": 72.0,
-          "available": 0
-        },
-        {
           "date": "2026-10-14",
-          "price": 72.0,
+          "price": 83.84,
           "available": 0
         },
         {
           "date": "2026-10-15",
-          "price": 72.0,
+          "price": 83.84,
           "available": 1
         },
         {
           "date": "2026-10-16",
-          "price": 82.8,
+          "price": 96.42,
           "available": 1
         },
         {
           "date": "2026-10-17",
-          "price": 82.8,
-          "available": 1
+          "price": 96.42,
+          "available": 0
         },
         {
           "date": "2026-10-18",
-          "price": 72.0,
+          "price": 83.84,
           "available": 1
         },
         {
           "date": "2026-10-19",
-          "price": 72.0,
+          "price": 83.84,
           "available": 1
         },
         {
           "date": "2026-10-20",
-          "price": 72.0,
-          "available": 1
+          "price": 83.84,
+          "available": 0
         },
         {
           "date": "2026-10-21",
-          "price": 72.0,
+          "price": 83.84,
           "available": 0
         },
         {
           "date": "2026-10-22",
-          "price": 72.0,
-          "available": 0
+          "price": 83.84,
+          "available": 1
         },
         {
           "date": "2026-10-23",
-          "price": 82.8,
+          "price": 96.42,
           "available": 1
         },
         {
           "date": "2026-10-24",
-          "price": 82.8,
+          "price": 96.42,
           "available": 0
         },
         {
           "date": "2026-10-25",
-          "price": 72.0,
+          "price": 83.84,
           "available": 0
         },
         {
           "date": "2026-10-26",
-          "price": 72.0,
+          "price": 83.84,
           "available": 0
         },
         {
           "date": "2026-10-27",
-          "price": 72.0,
+          "price": 83.84,
           "available": 0
         },
         {
           "date": "2026-10-28",
-          "price": 72.0,
-          "available": 0
-        },
-        {
-          "date": "2026-10-29",
-          "price": 72.0,
+          "price": 83.84,
           "available": 1
         },
         {
-          "date": "2026-10-30",
-          "price": 82.8,
+          "date": "2026-10-29",
+          "price": 83.84,
           "available": 0
         },
         {
+          "date": "2026-10-30",
+          "price": 96.42,
+          "available": 1
+        },
+        {
           "date": "2026-10-31",
-          "price": 82.8,
+          "price": 96.42,
           "available": 0
         },
         {
           "date": "2026-11-01",
-          "price": 72.0,
-          "available": 0
+          "price": 83.84,
+          "available": 1
         },
         {
           "date": "2026-11-02",
-          "price": 72.0,
-          "available": 0
+          "price": 83.84,
+          "available": 1
         },
         {
           "date": "2026-11-03",
-          "price": 72.0,
+          "price": 83.84,
           "available": 0
         },
         {
           "date": "2026-11-04",
-          "price": 72.0,
+          "price": 83.84,
           "available": 0
         },
         {
           "date": "2026-11-05",
-          "price": 72.0,
-          "available": 1
+          "price": 83.84,
+          "available": 0
         },
         {
           "date": "2026-11-06",
-          "price": 82.8,
+          "price": 96.42,
           "available": 0
         },
         {
           "date": "2026-11-07",
-          "price": 82.8,
+          "price": 96.42,
           "available": 0
         },
         {
           "date": "2026-11-08",
-          "price": 72.0,
+          "price": 83.84,
           "available": 0
         },
         {
           "date": "2026-11-09",
-          "price": 72.0,
-          "available": 1
+          "price": 83.84,
+          "available": 0
         },
         {
           "date": "2026-11-10",
-          "price": 72.0,
+          "price": 83.84,
           "available": 0
+        },
+        {
+          "date": "2026-11-11",
+          "price": 83.84,
+          "available": 1
         }
       ],
-      "scraped_at": "2026-10-11T11:10:18.141144"
+      "scraped_at": "2026-10-12T12:41:25.975256"
+    },
+    {
+      "listing": {
+        "listing_id": "1157451076144368939",
+        "title": "Palermo Hollywood pad with a pool",
+        "property_type": "Apartment",
+        "room_type": "Entire home/apt",
+        "accommodates": 2,
+        "bedrooms": 1,
+        "bathrooms": 1.0,
+        "latitude": -34.5813,
+        "longitude": -58.4334,
+        "neighborhood": "Palermo Hollywood",
+        "rating": 5.0,
+        "reviews_count": 4,
+        "host_id": "host_1157451076144368939",
+        "host_name": "Host",
+        "host_is_superhost": 0,
+        "amenities": [
+          "Wifi",
+          "Air conditioning",
+          "Cocina",
+          "Pool"
+        ],
+        "picture_url": "https://a0.muscache.com/im/pictures/miso/Hosting-1157451076144368939/original/b37b8c1e-2189-475b-ad56-f4558111f83f.jpeg"
+      },
+      "calendar": [
+        {
+          "date": "2026-10-13",
+          "price": 52.02,
+          "available": 1
+        },
+        {
+          "date": "2026-10-14",
+          "price": 52.02,
+          "available": 1
+        },
+        {
+          "date": "2026-10-15",
+          "price": 52.02,
+          "available": 0
+        },
+        {
+          "date": "2026-10-16",
+          "price": 59.82,
+          "available": 0
+        },
+        {
+          "date": "2026-10-17",
+          "price": 59.82,
+          "available": 1
+        },
+        {
+          "date": "2026-10-18",
+          "price": 52.02,
+          "available": 1
+        },
+        {
+          "date": "2026-10-19",
+          "price": 52.02,
+          "available": 0
+        },
+        {
+          "date": "2026-10-20",
+          "price": 52.02,
+          "available": 0
+        },
+        {
+          "date": "2026-10-21",
+          "price": 52.02,
+          "available": 1
+        },
+        {
+          "date": "2026-10-22",
+          "price": 52.02,
+          "available": 1
+        },
+        {
+          "date": "2026-10-23",
+          "price": 59.82,
+          "available": 0
+        },
+        {
+          "date": "2026-10-24",
+          "price": 59.82,
+          "available": 0
+        },
+        {
+          "date": "2026-10-25",
+          "price": 52.02,
+          "available": 0
+        },
+        {
+          "date": "2026-10-26",
+          "price": 52.02,
+          "available": 1
+        },
+        {
+          "date": "2026-10-27",
+          "price": 52.02,
+          "available": 1
+        },
+        {
+          "date": "2026-10-28",
+          "price": 52.02,
+          "available": 0
+        },
+        {
+          "date": "2026-10-29",
+          "price": 52.02,
+          "available": 0
+        },
+        {
+          "date": "2026-10-30",
+          "price": 59.82,
+          "available": 1
+        },
+        {
+          "date": "2026-10-31",
+          "price": 59.82,
+          "available": 1
+        },
+        {
+          "date": "2026-11-01",
+          "price": 52.02,
+          "available": 0
+        },
+        {
+          "date": "2026-11-02",
+          "price": 52.02,
+          "available": 0
+        },
+        {
+          "date": "2026-11-03",
+          "price": 52.02,
+          "available": 0
+        },
+        {
+          "date": "2026-11-04",
+          "price": 52.02,
+          "available": 0
+        },
+        {
+          "date": "2026-11-05",
+          "price": 52.02,
+          "available": 0
+        },
+        {
+          "date": "2026-11-06",
+          "price": 59.82,
+          "available": 0
+        },
+        {
+          "date": "2026-11-07",
+          "price": 59.82,
+          "available": 0
+        },
+        {
+          "date": "2026-11-08",
+          "price": 52.02,
+          "available": 1
+        },
+        {
+          "date": "2026-11-09",
+          "price": 52.02,
+          "available": 0
+        },
+        {
+          "date": "2026-11-10",
+          "price": 52.02,
+          "available": 1
+        },
+        {
+          "date": "2026-11-11",
+          "price": 52.02,
+          "available": 1
+        }
+      ],
+      "scraped_at": "2026-10-12T12:41:25.975660"
     },
     {
       "listing": {
@@ -1283,29 +1283,24 @@
       },
       "calendar": [
         {
-          "date": "2026-10-12",
-          "price": 111.4,
-          "available": 1
-        },
-        {
           "date": "2026-10-13",
           "price": 111.4,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-10-14",
           "price": 111.4,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-10-15",
           "price": 111.4,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-10-16",
           "price": 128.11,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-10-17",
@@ -1320,17 +1315,17 @@
         {
           "date": "2026-10-19",
           "price": 111.4,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-10-20",
           "price": 111.4,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-10-21",
           "price": 111.4,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-10-22",
@@ -1345,7 +1340,7 @@
         {
           "date": "2026-10-24",
           "price": 128.11,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-10-25",
@@ -1355,7 +1350,7 @@
         {
           "date": "2026-10-26",
           "price": 111.4,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-10-27",
@@ -1365,17 +1360,17 @@
         {
           "date": "2026-10-28",
           "price": 111.4,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-10-29",
           "price": 111.4,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-10-30",
           "price": 128.11,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-10-31",
@@ -1385,7 +1380,7 @@
         {
           "date": "2026-11-01",
           "price": 111.4,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-11-02",
@@ -1400,12 +1395,12 @@
         {
           "date": "2026-11-04",
           "price": 111.4,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-11-05",
           "price": 111.4,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-11-06",
@@ -1430,10 +1425,909 @@
         {
           "date": "2026-11-10",
           "price": 111.4,
+          "available": 0
+        },
+        {
+          "date": "2026-11-11",
+          "price": 111.4,
           "available": 1
         }
       ],
-      "scraped_at": "2026-10-11T11:10:18.141399"
+      "scraped_at": "2026-10-12T12:41:25.976095"
+    },
+    {
+      "listing": {
+        "listing_id": "1756624552319072711",
+        "title": "Pool and BBQ in Palermo Soho",
+        "property_type": "Apartment",
+        "room_type": "Entire home/apt",
+        "accommodates": 2,
+        "bedrooms": 1,
+        "bathrooms": 1.0,
+        "latitude": -34.587,
+        "longitude": -58.4334,
+        "neighborhood": "Palermo Hollywood",
+        "rating": 5.0,
+        "reviews_count": 18,
+        "host_id": "host_1756624552319072711",
+        "host_name": "Host",
+        "host_is_superhost": 0,
+        "amenities": [
+          "Wifi",
+          "Air conditioning",
+          "Cocina",
+          "Pool"
+        ],
+        "picture_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-1756624552319072711/original/76ba1d4f-9b5f-409a-bd80-64ff37970c61.jpeg"
+      },
+      "calendar": [
+        {
+          "date": "2026-10-13",
+          "price": 63.72,
+          "available": 0
+        },
+        {
+          "date": "2026-10-14",
+          "price": 63.72,
+          "available": 0
+        },
+        {
+          "date": "2026-10-15",
+          "price": 63.72,
+          "available": 1
+        },
+        {
+          "date": "2026-10-16",
+          "price": 73.28,
+          "available": 0
+        },
+        {
+          "date": "2026-10-17",
+          "price": 73.28,
+          "available": 0
+        },
+        {
+          "date": "2026-10-18",
+          "price": 63.72,
+          "available": 0
+        },
+        {
+          "date": "2026-10-19",
+          "price": 63.72,
+          "available": 0
+        },
+        {
+          "date": "2026-10-20",
+          "price": 63.72,
+          "available": 1
+        },
+        {
+          "date": "2026-10-21",
+          "price": 63.72,
+          "available": 0
+        },
+        {
+          "date": "2026-10-22",
+          "price": 63.72,
+          "available": 0
+        },
+        {
+          "date": "2026-10-23",
+          "price": 73.28,
+          "available": 0
+        },
+        {
+          "date": "2026-10-24",
+          "price": 73.28,
+          "available": 1
+        },
+        {
+          "date": "2026-10-25",
+          "price": 63.72,
+          "available": 1
+        },
+        {
+          "date": "2026-10-26",
+          "price": 63.72,
+          "available": 0
+        },
+        {
+          "date": "2026-10-27",
+          "price": 63.72,
+          "available": 1
+        },
+        {
+          "date": "2026-10-28",
+          "price": 63.72,
+          "available": 0
+        },
+        {
+          "date": "2026-10-29",
+          "price": 63.72,
+          "available": 0
+        },
+        {
+          "date": "2026-10-30",
+          "price": 73.28,
+          "available": 0
+        },
+        {
+          "date": "2026-10-31",
+          "price": 73.28,
+          "available": 1
+        },
+        {
+          "date": "2026-11-01",
+          "price": 63.72,
+          "available": 1
+        },
+        {
+          "date": "2026-11-02",
+          "price": 63.72,
+          "available": 1
+        },
+        {
+          "date": "2026-11-03",
+          "price": 63.72,
+          "available": 0
+        },
+        {
+          "date": "2026-11-04",
+          "price": 63.72,
+          "available": 1
+        },
+        {
+          "date": "2026-11-05",
+          "price": 63.72,
+          "available": 1
+        },
+        {
+          "date": "2026-11-06",
+          "price": 73.28,
+          "available": 0
+        },
+        {
+          "date": "2026-11-07",
+          "price": 73.28,
+          "available": 1
+        },
+        {
+          "date": "2026-11-08",
+          "price": 63.72,
+          "available": 0
+        },
+        {
+          "date": "2026-11-09",
+          "price": 63.72,
+          "available": 0
+        },
+        {
+          "date": "2026-11-10",
+          "price": 63.72,
+          "available": 1
+        },
+        {
+          "date": "2026-11-11",
+          "price": 63.72,
+          "available": 1
+        }
+      ],
+      "scraped_at": "2026-10-12T12:41:25.976669"
+    },
+    {
+      "listing": {
+        "listing_id": "1782036686562161531",
+        "title": "Pool, balcony, and complimentary wine",
+        "property_type": "Apartment",
+        "room_type": "Entire home/apt",
+        "accommodates": 4,
+        "bedrooms": 1,
+        "bathrooms": 1.0,
+        "latitude": -34.5793,
+        "longitude": -58.4315,
+        "neighborhood": "Palermo Hollywood",
+        "rating": 4.85,
+        "reviews_count": 0,
+        "host_id": "host_1782036686562161531",
+        "host_name": "Host",
+        "host_is_superhost": 0,
+        "amenities": [
+          "Wifi",
+          "Air conditioning",
+          "Cocina",
+          "Pool"
+        ],
+        "picture_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-1782036686562161531/original/7bc534fe-c72c-4a0f-bedb-baf34e0ac603.jpeg"
+      },
+      "calendar": [
+        {
+          "date": "2026-10-13",
+          "price": 66.08,
+          "available": 1
+        },
+        {
+          "date": "2026-10-14",
+          "price": 66.08,
+          "available": 0
+        },
+        {
+          "date": "2026-10-15",
+          "price": 66.08,
+          "available": 0
+        },
+        {
+          "date": "2026-10-16",
+          "price": 75.99,
+          "available": 0
+        },
+        {
+          "date": "2026-10-17",
+          "price": 75.99,
+          "available": 1
+        },
+        {
+          "date": "2026-10-18",
+          "price": 66.08,
+          "available": 1
+        },
+        {
+          "date": "2026-10-19",
+          "price": 66.08,
+          "available": 0
+        },
+        {
+          "date": "2026-10-20",
+          "price": 66.08,
+          "available": 0
+        },
+        {
+          "date": "2026-10-21",
+          "price": 66.08,
+          "available": 0
+        },
+        {
+          "date": "2026-10-22",
+          "price": 66.08,
+          "available": 1
+        },
+        {
+          "date": "2026-10-23",
+          "price": 75.99,
+          "available": 0
+        },
+        {
+          "date": "2026-10-24",
+          "price": 75.99,
+          "available": 0
+        },
+        {
+          "date": "2026-10-25",
+          "price": 66.08,
+          "available": 0
+        },
+        {
+          "date": "2026-10-26",
+          "price": 66.08,
+          "available": 0
+        },
+        {
+          "date": "2026-10-27",
+          "price": 66.08,
+          "available": 0
+        },
+        {
+          "date": "2026-10-28",
+          "price": 66.08,
+          "available": 0
+        },
+        {
+          "date": "2026-10-29",
+          "price": 66.08,
+          "available": 0
+        },
+        {
+          "date": "2026-10-30",
+          "price": 75.99,
+          "available": 0
+        },
+        {
+          "date": "2026-10-31",
+          "price": 75.99,
+          "available": 0
+        },
+        {
+          "date": "2026-11-01",
+          "price": 66.08,
+          "available": 0
+        },
+        {
+          "date": "2026-11-02",
+          "price": 66.08,
+          "available": 1
+        },
+        {
+          "date": "2026-11-03",
+          "price": 66.08,
+          "available": 0
+        },
+        {
+          "date": "2026-11-04",
+          "price": 66.08,
+          "available": 1
+        },
+        {
+          "date": "2026-11-05",
+          "price": 66.08,
+          "available": 0
+        },
+        {
+          "date": "2026-11-06",
+          "price": 75.99,
+          "available": 0
+        },
+        {
+          "date": "2026-11-07",
+          "price": 75.99,
+          "available": 0
+        },
+        {
+          "date": "2026-11-08",
+          "price": 66.08,
+          "available": 1
+        },
+        {
+          "date": "2026-11-09",
+          "price": 66.08,
+          "available": 0
+        },
+        {
+          "date": "2026-11-10",
+          "price": 66.08,
+          "available": 0
+        },
+        {
+          "date": "2026-11-11",
+          "price": 66.08,
+          "available": 0
+        }
+      ],
+      "scraped_at": "2026-10-12T12:41:25.977141"
+    },
+    {
+      "listing": {
+        "listing_id": "595445707703014127",
+        "title": "Balcony with seating in Palermo Hollywood",
+        "property_type": "Apartment",
+        "room_type": "Entire home/apt",
+        "accommodates": 2,
+        "bedrooms": 1,
+        "bathrooms": 1.0,
+        "latitude": -34.58105,
+        "longitude": -58.43026,
+        "neighborhood": "Palermo Hollywood",
+        "rating": 4.96,
+        "reviews_count": 170,
+        "host_id": "host_595445707703014127",
+        "host_name": "Host",
+        "host_is_superhost": 0,
+        "amenities": [
+          "Wifi",
+          "Air conditioning",
+          "Cocina"
+        ],
+        "picture_url": "https://a0.muscache.com/im/pictures/miso/Hosting-595445707703014127/original/69ab82eb-2cf6-49df-a77f-8a7cf085f766.jpeg"
+      },
+      "calendar": [
+        {
+          "date": "2026-10-13",
+          "price": 39.6,
+          "available": 0
+        },
+        {
+          "date": "2026-10-14",
+          "price": 39.6,
+          "available": 0
+        },
+        {
+          "date": "2026-10-15",
+          "price": 39.6,
+          "available": 0
+        },
+        {
+          "date": "2026-10-16",
+          "price": 45.54,
+          "available": 0
+        },
+        {
+          "date": "2026-10-17",
+          "price": 45.54,
+          "available": 0
+        },
+        {
+          "date": "2026-10-18",
+          "price": 39.6,
+          "available": 0
+        },
+        {
+          "date": "2026-10-19",
+          "price": 39.6,
+          "available": 0
+        },
+        {
+          "date": "2026-10-20",
+          "price": 39.6,
+          "available": 0
+        },
+        {
+          "date": "2026-10-21",
+          "price": 39.6,
+          "available": 1
+        },
+        {
+          "date": "2026-10-22",
+          "price": 39.6,
+          "available": 0
+        },
+        {
+          "date": "2026-10-23",
+          "price": 45.54,
+          "available": 1
+        },
+        {
+          "date": "2026-10-24",
+          "price": 45.54,
+          "available": 0
+        },
+        {
+          "date": "2026-10-25",
+          "price": 39.6,
+          "available": 0
+        },
+        {
+          "date": "2026-10-26",
+          "price": 39.6,
+          "available": 1
+        },
+        {
+          "date": "2026-10-27",
+          "price": 39.6,
+          "available": 0
+        },
+        {
+          "date": "2026-10-28",
+          "price": 39.6,
+          "available": 1
+        },
+        {
+          "date": "2026-10-29",
+          "price": 39.6,
+          "available": 0
+        },
+        {
+          "date": "2026-10-30",
+          "price": 45.54,
+          "available": 1
+        },
+        {
+          "date": "2026-10-31",
+          "price": 45.54,
+          "available": 0
+        },
+        {
+          "date": "2026-11-01",
+          "price": 39.6,
+          "available": 0
+        },
+        {
+          "date": "2026-11-02",
+          "price": 39.6,
+          "available": 0
+        },
+        {
+          "date": "2026-11-03",
+          "price": 39.6,
+          "available": 1
+        },
+        {
+          "date": "2026-11-04",
+          "price": 39.6,
+          "available": 0
+        },
+        {
+          "date": "2026-11-05",
+          "price": 39.6,
+          "available": 0
+        },
+        {
+          "date": "2026-11-06",
+          "price": 45.54,
+          "available": 0
+        },
+        {
+          "date": "2026-11-07",
+          "price": 45.54,
+          "available": 0
+        },
+        {
+          "date": "2026-11-08",
+          "price": 39.6,
+          "available": 1
+        },
+        {
+          "date": "2026-11-09",
+          "price": 39.6,
+          "available": 1
+        },
+        {
+          "date": "2026-11-10",
+          "price": 39.6,
+          "available": 0
+        },
+        {
+          "date": "2026-11-11",
+          "price": 39.6,
+          "available": 1
+        }
+      ],
+      "scraped_at": "2026-10-12T12:41:25.977545"
+    },
+    {
+      "listing": {
+        "listing_id": "1775589907579059930",
+        "title": "Large balcony in Palermo Hollywood",
+        "property_type": "Apartment",
+        "room_type": "Entire home/apt",
+        "accommodates": 2,
+        "bedrooms": 1,
+        "bathrooms": 2.0,
+        "latitude": -34.5768,
+        "longitude": -58.434,
+        "neighborhood": "Palermo Hollywood",
+        "rating": 5.0,
+        "reviews_count": 3,
+        "host_id": "host_1775589907579059930",
+        "host_name": "Host",
+        "host_is_superhost": 0,
+        "amenities": [
+          "Wifi",
+          "Air conditioning",
+          "Cocina"
+        ],
+        "picture_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-1775589907579059930/original/7c732b4a-4365-4f09-982d-a5327a329982.jpeg"
+      },
+      "calendar": [
+        {
+          "date": "2026-10-13",
+          "price": 66.56,
+          "available": 1
+        },
+        {
+          "date": "2026-10-14",
+          "price": 66.56,
+          "available": 1
+        },
+        {
+          "date": "2026-10-15",
+          "price": 66.56,
+          "available": 0
+        },
+        {
+          "date": "2026-10-16",
+          "price": 76.54,
+          "available": 0
+        },
+        {
+          "date": "2026-10-17",
+          "price": 76.54,
+          "available": 1
+        },
+        {
+          "date": "2026-10-18",
+          "price": 66.56,
+          "available": 0
+        },
+        {
+          "date": "2026-10-19",
+          "price": 66.56,
+          "available": 0
+        },
+        {
+          "date": "2026-10-20",
+          "price": 66.56,
+          "available": 0
+        },
+        {
+          "date": "2026-10-21",
+          "price": 66.56,
+          "available": 0
+        },
+        {
+          "date": "2026-10-22",
+          "price": 66.56,
+          "available": 0
+        },
+        {
+          "date": "2026-10-23",
+          "price": 76.54,
+          "available": 0
+        },
+        {
+          "date": "2026-10-24",
+          "price": 76.54,
+          "available": 1
+        },
+        {
+          "date": "2026-10-25",
+          "price": 66.56,
+          "available": 1
+        },
+        {
+          "date": "2026-10-26",
+          "price": 66.56,
+          "available": 1
+        },
+        {
+          "date": "2026-10-27",
+          "price": 66.56,
+          "available": 0
+        },
+        {
+          "date": "2026-10-28",
+          "price": 66.56,
+          "available": 0
+        },
+        {
+          "date": "2026-10-29",
+          "price": 66.56,
+          "available": 0
+        },
+        {
+          "date": "2026-10-30",
+          "price": 76.54,
+          "available": 1
+        },
+        {
+          "date": "2026-10-31",
+          "price": 76.54,
+          "available": 0
+        },
+        {
+          "date": "2026-11-01",
+          "price": 66.56,
+          "available": 1
+        },
+        {
+          "date": "2026-11-02",
+          "price": 66.56,
+          "available": 0
+        },
+        {
+          "date": "2026-11-03",
+          "price": 66.56,
+          "available": 1
+        },
+        {
+          "date": "2026-11-04",
+          "price": 66.56,
+          "available": 0
+        },
+        {
+          "date": "2026-11-05",
+          "price": 66.56,
+          "available": 1
+        },
+        {
+          "date": "2026-11-06",
+          "price": 76.54,
+          "available": 1
+        },
+        {
+          "date": "2026-11-07",
+          "price": 76.54,
+          "available": 0
+        },
+        {
+          "date": "2026-11-08",
+          "price": 66.56,
+          "available": 0
+        },
+        {
+          "date": "2026-11-09",
+          "price": 66.56,
+          "available": 1
+        },
+        {
+          "date": "2026-11-10",
+          "price": 66.56,
+          "available": 1
+        },
+        {
+          "date": "2026-11-11",
+          "price": 66.56,
+          "available": 0
+        }
+      ],
+      "scraped_at": "2026-10-12T12:41:25.977937"
+    },
+    {
+      "listing": {
+        "listing_id": "1655183239856640679",
+        "title": "Jacuzzi, rooftop pool, and radiant heating",
+        "property_type": "Apartment",
+        "room_type": "Entire home/apt",
+        "accommodates": 4,
+        "bedrooms": 1,
+        "bathrooms": 1.0,
+        "latitude": -34.5795,
+        "longitude": -58.4285,
+        "neighborhood": "Palermo Hollywood",
+        "rating": 4.92,
+        "reviews_count": 36,
+        "host_id": "host_1655183239856640679",
+        "host_name": "Host",
+        "host_is_superhost": 0,
+        "amenities": [
+          "Wifi",
+          "Air conditioning",
+          "Cocina",
+          "Pool",
+          "Jacuzzi"
+        ],
+        "picture_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-1655183239856640679/original/3273f258-5ad7-4ab2-83e8-4e7cb988ce18.png"
+      },
+      "calendar": [
+        {
+          "date": "2026-10-13",
+          "price": 67.8,
+          "available": 0
+        },
+        {
+          "date": "2026-10-14",
+          "price": 67.8,
+          "available": 0
+        },
+        {
+          "date": "2026-10-15",
+          "price": 67.8,
+          "available": 0
+        },
+        {
+          "date": "2026-10-16",
+          "price": 77.97,
+          "available": 0
+        },
+        {
+          "date": "2026-10-17",
+          "price": 77.97,
+          "available": 0
+        },
+        {
+          "date": "2026-10-18",
+          "price": 67.8,
+          "available": 1
+        },
+        {
+          "date": "2026-10-19",
+          "price": 67.8,
+          "available": 1
+        },
+        {
+          "date": "2026-10-20",
+          "price": 67.8,
+          "available": 1
+        },
+        {
+          "date": "2026-10-21",
+          "price": 67.8,
+          "available": 1
+        },
+        {
+          "date": "2026-10-22",
+          "price": 67.8,
+          "available": 1
+        },
+        {
+          "date": "2026-10-23",
+          "price": 77.97,
+          "available": 0
+        },
+        {
+          "date": "2026-10-24",
+          "price": 77.97,
+          "available": 0
+        },
+        {
+          "date": "2026-10-25",
+          "price": 67.8,
+          "available": 0
+        },
+        {
+          "date": "2026-10-26",
+          "price": 67.8,
+          "available": 0
+        },
+        {
+          "date": "2026-10-27",
+          "price": 67.8,
+          "available": 1
+        },
+        {
+          "date": "2026-10-28",
+          "price": 67.8,
+          "available": 0
+        },
+        {
+          "date": "2026-10-29",
+          "price": 67.8,
+          "available": 1
+        },
+        {
+          "date": "2026-10-30",
+          "price": 77.97,
+          "available": 0
+        },
+        {
+          "date": "2026-10-31",
+          "price": 77.97,
+          "available": 1
+        },
+        {
+          "date": "2026-11-01",
+          "price": 67.8,
+          "available": 0
+        },
+        {
+          "date": "2026-11-02",
+          "price": 67.8,
+          "available": 1
+        },
+        {
+          "date": "2026-11-03",
+          "price": 67.8,
+          "available": 0
+        },
+        {
+          "date": "2026-11-04",
+          "price": 67.8,
+          "available": 0
+        },
+        {
+          "date": "2026-11-05",
+          "price": 67.8,
+          "available": 0
+        },
+        {
+          "date": "2026-11-06",
+          "price": 77.97,
+          "available": 1
+        },
+        {
+          "date": "2026-11-07",
+          "price": 77.97,
+          "available": 1
+        },
+        {
+          "date": "2026-11-08",
+          "price": 67.8,
+          "available": 0
+        },
+        {
+          "date": "2026-11-09",
+          "price": 67.8,
+          "available": 0
+        },
+        {
+          "date": "2026-11-10",
+          "price": 67.8,
+          "available": 1
+        },
+        {
+          "date": "2026-11-11",
+          "price": 67.8,
+          "available": 0
+        }
+      ],
+      "scraped_at": "2026-10-12T12:41:25.978365"
     },
     {
       "listing": {
@@ -1462,19 +2356,14 @@
       },
       "calendar": [
         {
-          "date": "2026-10-12",
-          "price": 77.0,
-          "available": 0
-        },
-        {
           "date": "2026-10-13",
           "price": 77.0,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-10-14",
           "price": 77.0,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-10-15",
@@ -1484,7 +2373,7 @@
         {
           "date": "2026-10-16",
           "price": 88.55,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-10-17",
@@ -1494,17 +2383,17 @@
         {
           "date": "2026-10-18",
           "price": 77.0,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-10-19",
           "price": 77.0,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-10-20",
           "price": 77.0,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-10-21",
@@ -1519,12 +2408,12 @@
         {
           "date": "2026-10-23",
           "price": 88.55,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-10-24",
           "price": 88.55,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-10-25",
@@ -1534,12 +2423,12 @@
         {
           "date": "2026-10-26",
           "price": 77.0,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-10-27",
           "price": 77.0,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-10-28",
@@ -1564,12 +2453,12 @@
         {
           "date": "2026-11-01",
           "price": 77.0,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-11-02",
           "price": 77.0,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-11-03",
@@ -1589,403 +2478,51 @@
         {
           "date": "2026-11-06",
           "price": 88.55,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-11-07",
           "price": 88.55,
-          "available": 0
-        },
-        {
-          "date": "2026-11-08",
-          "price": 77.0,
-          "available": 1
-        },
-        {
-          "date": "2026-11-09",
-          "price": 77.0,
-          "available": 0
-        },
-        {
-          "date": "2026-11-10",
-          "price": 77.0,
-          "available": 1
-        }
-      ],
-      "scraped_at": "2026-10-11T11:10:18.141655"
-    },
-    {
-      "listing": {
-        "listing_id": "1662428554511601974",
-        "title": "Pool and Palermo Hollywood’s best dining nearby",
-        "property_type": "Apartment",
-        "room_type": "Entire home/apt",
-        "accommodates": 2,
-        "bedrooms": 1,
-        "bathrooms": 1.0,
-        "latitude": -34.57828,
-        "longitude": -58.43912,
-        "neighborhood": "Palermo Hollywood",
-        "rating": 5.0,
-        "reviews_count": 21,
-        "host_id": "host_1662428554511601974",
-        "host_name": "Host",
-        "host_is_superhost": 0,
-        "amenities": [
-          "Wifi",
-          "Air conditioning",
-          "Cocina",
-          "Pool"
-        ],
-        "picture_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-1662428554511601974/original/c2fa1f8d-28fe-4b5f-8ea4-1e1ff87434b0.jpeg"
-      },
-      "calendar": [
-        {
-          "date": "2026-10-12",
-          "price": 63.75,
-          "available": 1
-        },
-        {
-          "date": "2026-10-13",
-          "price": 63.75,
-          "available": 0
-        },
-        {
-          "date": "2026-10-14",
-          "price": 63.75,
-          "available": 1
-        },
-        {
-          "date": "2026-10-15",
-          "price": 63.75,
-          "available": 0
-        },
-        {
-          "date": "2026-10-16",
-          "price": 73.31,
-          "available": 0
-        },
-        {
-          "date": "2026-10-17",
-          "price": 73.31,
-          "available": 0
-        },
-        {
-          "date": "2026-10-18",
-          "price": 63.75,
-          "available": 0
-        },
-        {
-          "date": "2026-10-19",
-          "price": 63.75,
-          "available": 0
-        },
-        {
-          "date": "2026-10-20",
-          "price": 63.75,
-          "available": 0
-        },
-        {
-          "date": "2026-10-21",
-          "price": 63.75,
-          "available": 0
-        },
-        {
-          "date": "2026-10-22",
-          "price": 63.75,
-          "available": 0
-        },
-        {
-          "date": "2026-10-23",
-          "price": 73.31,
-          "available": 1
-        },
-        {
-          "date": "2026-10-24",
-          "price": 73.31,
-          "available": 1
-        },
-        {
-          "date": "2026-10-25",
-          "price": 63.75,
-          "available": 0
-        },
-        {
-          "date": "2026-10-26",
-          "price": 63.75,
-          "available": 1
-        },
-        {
-          "date": "2026-10-27",
-          "price": 63.75,
-          "available": 1
-        },
-        {
-          "date": "2026-10-28",
-          "price": 63.75,
-          "available": 0
-        },
-        {
-          "date": "2026-10-29",
-          "price": 63.75,
-          "available": 0
-        },
-        {
-          "date": "2026-10-30",
-          "price": 73.31,
-          "available": 0
-        },
-        {
-          "date": "2026-10-31",
-          "price": 73.31,
-          "available": 1
-        },
-        {
-          "date": "2026-11-01",
-          "price": 63.75,
-          "available": 0
-        },
-        {
-          "date": "2026-11-02",
-          "price": 63.75,
-          "available": 0
-        },
-        {
-          "date": "2026-11-03",
-          "price": 63.75,
-          "available": 0
-        },
-        {
-          "date": "2026-11-04",
-          "price": 63.75,
-          "available": 0
-        },
-        {
-          "date": "2026-11-05",
-          "price": 63.75,
-          "available": 0
-        },
-        {
-          "date": "2026-11-06",
-          "price": 73.31,
-          "available": 0
-        },
-        {
-          "date": "2026-11-07",
-          "price": 73.31,
           "available": 1
         },
         {
           "date": "2026-11-08",
-          "price": 63.75,
+          "price": 77.0,
           "available": 0
         },
         {
           "date": "2026-11-09",
-          "price": 63.75,
+          "price": 77.0,
           "available": 1
         },
         {
           "date": "2026-11-10",
-          "price": 63.75,
+          "price": 77.0,
+          "available": 0
+        },
+        {
+          "date": "2026-11-11",
+          "price": 77.0,
           "available": 1
         }
       ],
-      "scraped_at": "2026-10-11T11:10:18.141911"
+      "scraped_at": "2026-10-12T12:41:25.978765"
     },
     {
       "listing": {
-        "listing_id": "1711246888364969652",
-        "title": "Modern fifth-floor flat in Palermo Hollywood",
-        "property_type": "Apartment",
-        "room_type": "Entire home/apt",
-        "accommodates": 2,
-        "bedrooms": 1,
-        "bathrooms": 2.0,
-        "latitude": -34.5778,
-        "longitude": -58.4388,
-        "neighborhood": "Palermo Hollywood",
-        "rating": 5.0,
-        "reviews_count": 24,
-        "host_id": "host_1711246888364969652",
-        "host_name": "Host",
-        "host_is_superhost": 0,
-        "amenities": [
-          "Wifi",
-          "Air conditioning",
-          "Cocina"
-        ],
-        "picture_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-1711246888364969652/original/3b5c3983-a363-4a42-a90b-629ce9e647b5.png"
-      },
-      "calendar": [
-        {
-          "date": "2026-10-12",
-          "price": 75.0,
-          "available": 0
-        },
-        {
-          "date": "2026-10-13",
-          "price": 75.0,
-          "available": 0
-        },
-        {
-          "date": "2026-10-14",
-          "price": 75.0,
-          "available": 0
-        },
-        {
-          "date": "2026-10-15",
-          "price": 75.0,
-          "available": 0
-        },
-        {
-          "date": "2026-10-16",
-          "price": 86.25,
-          "available": 0
-        },
-        {
-          "date": "2026-10-17",
-          "price": 86.25,
-          "available": 0
-        },
-        {
-          "date": "2026-10-18",
-          "price": 75.0,
-          "available": 0
-        },
-        {
-          "date": "2026-10-19",
-          "price": 75.0,
-          "available": 1
-        },
-        {
-          "date": "2026-10-20",
-          "price": 75.0,
-          "available": 0
-        },
-        {
-          "date": "2026-10-21",
-          "price": 75.0,
-          "available": 1
-        },
-        {
-          "date": "2026-10-22",
-          "price": 75.0,
-          "available": 1
-        },
-        {
-          "date": "2026-10-23",
-          "price": 86.25,
-          "available": 0
-        },
-        {
-          "date": "2026-10-24",
-          "price": 86.25,
-          "available": 0
-        },
-        {
-          "date": "2026-10-25",
-          "price": 75.0,
-          "available": 0
-        },
-        {
-          "date": "2026-10-26",
-          "price": 75.0,
-          "available": 0
-        },
-        {
-          "date": "2026-10-27",
-          "price": 75.0,
-          "available": 1
-        },
-        {
-          "date": "2026-10-28",
-          "price": 75.0,
-          "available": 0
-        },
-        {
-          "date": "2026-10-29",
-          "price": 75.0,
-          "available": 0
-        },
-        {
-          "date": "2026-10-30",
-          "price": 86.25,
-          "available": 0
-        },
-        {
-          "date": "2026-10-31",
-          "price": 86.25,
-          "available": 1
-        },
-        {
-          "date": "2026-11-01",
-          "price": 75.0,
-          "available": 1
-        },
-        {
-          "date": "2026-11-02",
-          "price": 75.0,
-          "available": 0
-        },
-        {
-          "date": "2026-11-03",
-          "price": 75.0,
-          "available": 0
-        },
-        {
-          "date": "2026-11-04",
-          "price": 75.0,
-          "available": 0
-        },
-        {
-          "date": "2026-11-05",
-          "price": 75.0,
-          "available": 1
-        },
-        {
-          "date": "2026-11-06",
-          "price": 86.25,
-          "available": 0
-        },
-        {
-          "date": "2026-11-07",
-          "price": 86.25,
-          "available": 0
-        },
-        {
-          "date": "2026-11-08",
-          "price": 75.0,
-          "available": 0
-        },
-        {
-          "date": "2026-11-09",
-          "price": 75.0,
-          "available": 0
-        },
-        {
-          "date": "2026-11-10",
-          "price": 75.0,
-          "available": 1
-        }
-      ],
-      "scraped_at": "2026-10-11T11:10:18.142172"
-    },
-    {
-      "listing": {
-        "listing_id": "27807271",
-        "title": "Rooftop pool with views, parking included",
+        "listing_id": "1049266651811918921",
+        "title": "Pool, sauna, and jacuzzi in Palermo Hollywood",
         "property_type": "Apartment",
         "room_type": "Entire home/apt",
         "accommodates": 4,
         "bedrooms": 1,
         "bathrooms": 1.0,
-        "latitude": -34.5778,
-        "longitude": -58.4381,
+        "latitude": -34.5775,
+        "longitude": -58.4392,
         "neighborhood": "Palermo Hollywood",
-        "rating": 4.95,
-        "reviews_count": 252,
-        "host_id": "host_27807271",
+        "rating": 4.98,
+        "reviews_count": 81,
+        "host_id": "host_1049266651811918921",
         "host_name": "Host",
         "host_is_superhost": 0,
         "amenities": [
@@ -1993,179 +2530,179 @@
           "Air conditioning",
           "Cocina",
           "Pool",
-          "Parking"
+          "Jacuzzi"
         ],
-        "picture_url": "https://a0.muscache.com/im/pictures/airflow/Hosting-27807271/original/11391337-5622-442c-826d-82be1694a846.jpg"
+        "picture_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-1049266651811918921/original/da935836-720c-4ede-9ef7-304473fa805c.jpeg"
       },
       "calendar": [
         {
-          "date": "2026-10-12",
-          "price": 110.0,
-          "available": 0
-        },
-        {
           "date": "2026-10-13",
-          "price": 110.0,
+          "price": 112.2,
           "available": 0
         },
         {
           "date": "2026-10-14",
-          "price": 110.0,
+          "price": 112.2,
           "available": 0
         },
         {
           "date": "2026-10-15",
-          "price": 110.0,
-          "available": 0
+          "price": 112.2,
+          "available": 1
         },
         {
           "date": "2026-10-16",
-          "price": 126.5,
+          "price": 129.03,
           "available": 1
         },
         {
           "date": "2026-10-17",
-          "price": 126.5,
+          "price": 129.03,
           "available": 0
         },
         {
           "date": "2026-10-18",
-          "price": 110.0,
+          "price": 112.2,
           "available": 1
         },
         {
           "date": "2026-10-19",
-          "price": 110.0,
+          "price": 112.2,
           "available": 0
         },
         {
           "date": "2026-10-20",
-          "price": 110.0,
-          "available": 0
+          "price": 112.2,
+          "available": 1
         },
         {
           "date": "2026-10-21",
-          "price": 110.0,
+          "price": 112.2,
           "available": 0
         },
         {
           "date": "2026-10-22",
-          "price": 110.0,
+          "price": 112.2,
           "available": 0
         },
         {
           "date": "2026-10-23",
-          "price": 126.5,
-          "available": 0
+          "price": 129.03,
+          "available": 1
         },
         {
           "date": "2026-10-24",
-          "price": 126.5,
+          "price": 129.03,
           "available": 0
         },
         {
           "date": "2026-10-25",
-          "price": 110.0,
-          "available": 1
+          "price": 112.2,
+          "available": 0
         },
         {
           "date": "2026-10-26",
-          "price": 110.0,
+          "price": 112.2,
           "available": 0
         },
         {
           "date": "2026-10-27",
-          "price": 110.0,
-          "available": 1
+          "price": 112.2,
+          "available": 0
         },
         {
           "date": "2026-10-28",
-          "price": 110.0,
+          "price": 112.2,
           "available": 0
         },
         {
           "date": "2026-10-29",
-          "price": 110.0,
-          "available": 1
+          "price": 112.2,
+          "available": 0
         },
         {
           "date": "2026-10-30",
-          "price": 126.5,
+          "price": 129.03,
           "available": 0
         },
         {
           "date": "2026-10-31",
-          "price": 126.5,
+          "price": 129.03,
           "available": 1
         },
         {
           "date": "2026-11-01",
-          "price": 110.0,
+          "price": 112.2,
           "available": 1
         },
         {
           "date": "2026-11-02",
-          "price": 110.0,
-          "available": 0
+          "price": 112.2,
+          "available": 1
         },
         {
           "date": "2026-11-03",
-          "price": 110.0,
+          "price": 112.2,
           "available": 0
         },
         {
           "date": "2026-11-04",
-          "price": 110.0,
+          "price": 112.2,
           "available": 0
         },
         {
           "date": "2026-11-05",
-          "price": 110.0,
-          "available": 1
+          "price": 112.2,
+          "available": 0
         },
         {
           "date": "2026-11-06",
-          "price": 126.5,
-          "available": 1
+          "price": 129.03,
+          "available": 0
         },
         {
           "date": "2026-11-07",
-          "price": 126.5,
-          "available": 0
+          "price": 129.03,
+          "available": 1
         },
         {
           "date": "2026-11-08",
-          "price": 110.0,
-          "available": 0
+          "price": 112.2,
+          "available": 1
         },
         {
           "date": "2026-11-09",
-          "price": 110.0,
+          "price": 112.2,
           "available": 0
         },
         {
           "date": "2026-11-10",
-          "price": 110.0,
+          "price": 112.2,
+          "available": 1
+        },
+        {
+          "date": "2026-11-11",
+          "price": 112.2,
           "available": 0
         }
       ],
-      "scraped_at": "2026-10-11T11:10:18.142424"
+      "scraped_at": "2026-10-12T12:41:25.979189"
     },
     {
       "listing": {
-        "listing_id": "1711269128107850679",
-        "title": "Panoramic view with sauna in Palermo Hollywood",
+        "listing_id": "37628814",
+        "title": "Two-story penthouse with stunning views",
         "property_type": "Apartment",
         "room_type": "Entire home/apt",
         "accommodates": 2,
         "bedrooms": 1,
-        "bathrooms": 1.0,
-        "latitude": -34.583,
-        "longitude": -58.4331,
+        "bathrooms": 1.5,
+        "latitude": -34.58093,
+        "longitude": -58.4426,
         "neighborhood": "Palermo Hollywood",
-        "rating": 5.0,
-        "reviews_count": 6,
-        "host_id": "host_1711269128107850679",
+        "rating": 4.99,
+        "reviews_count": 105,
+        "host_id": "host_37628814",
         "host_name": "Host",
         "host_is_superhost": 0,
         "amenities": [
@@ -2173,339 +2710,161 @@
           "Air conditioning",
           "Cocina"
         ],
-        "picture_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-1711269128107850679/original/19194fd4-3da3-4d81-a707-aa882915cea0.jpeg"
+        "picture_url": "https://a0.muscache.com/im/pictures/f70f0898-c458-4eee-93e5-0d332a901ec4.jpg"
       },
       "calendar": [
         {
-          "date": "2026-10-12",
-          "price": 144.8,
-          "available": 0
-        },
-        {
           "date": "2026-10-13",
-          "price": 144.8,
+          "price": 99.4,
           "available": 0
         },
         {
           "date": "2026-10-14",
-          "price": 144.8,
-          "available": 1
-        },
-        {
-          "date": "2026-10-15",
-          "price": 144.8,
-          "available": 0
-        },
-        {
-          "date": "2026-10-16",
-          "price": 166.52,
-          "available": 0
-        },
-        {
-          "date": "2026-10-17",
-          "price": 166.52,
-          "available": 1
-        },
-        {
-          "date": "2026-10-18",
-          "price": 144.8,
-          "available": 0
-        },
-        {
-          "date": "2026-10-19",
-          "price": 144.8,
-          "available": 0
-        },
-        {
-          "date": "2026-10-20",
-          "price": 144.8,
-          "available": 1
-        },
-        {
-          "date": "2026-10-21",
-          "price": 144.8,
-          "available": 1
-        },
-        {
-          "date": "2026-10-22",
-          "price": 144.8,
-          "available": 0
-        },
-        {
-          "date": "2026-10-23",
-          "price": 166.52,
-          "available": 0
-        },
-        {
-          "date": "2026-10-24",
-          "price": 166.52,
-          "available": 1
-        },
-        {
-          "date": "2026-10-25",
-          "price": 144.8,
-          "available": 0
-        },
-        {
-          "date": "2026-10-26",
-          "price": 144.8,
-          "available": 0
-        },
-        {
-          "date": "2026-10-27",
-          "price": 144.8,
-          "available": 0
-        },
-        {
-          "date": "2026-10-28",
-          "price": 144.8,
-          "available": 1
-        },
-        {
-          "date": "2026-10-29",
-          "price": 144.8,
-          "available": 1
-        },
-        {
-          "date": "2026-10-30",
-          "price": 166.52,
-          "available": 0
-        },
-        {
-          "date": "2026-10-31",
-          "price": 166.52,
-          "available": 0
-        },
-        {
-          "date": "2026-11-01",
-          "price": 144.8,
-          "available": 0
-        },
-        {
-          "date": "2026-11-02",
-          "price": 144.8,
-          "available": 1
-        },
-        {
-          "date": "2026-11-03",
-          "price": 144.8,
-          "available": 0
-        },
-        {
-          "date": "2026-11-04",
-          "price": 144.8,
-          "available": 1
-        },
-        {
-          "date": "2026-11-05",
-          "price": 144.8,
-          "available": 1
-        },
-        {
-          "date": "2026-11-06",
-          "price": 166.52,
-          "available": 0
-        },
-        {
-          "date": "2026-11-07",
-          "price": 166.52,
-          "available": 0
-        },
-        {
-          "date": "2026-11-08",
-          "price": 144.8,
-          "available": 1
-        },
-        {
-          "date": "2026-11-09",
-          "price": 144.8,
-          "available": 0
-        },
-        {
-          "date": "2026-11-10",
-          "price": 144.8,
-          "available": 0
-        }
-      ],
-      "scraped_at": "2026-10-11T11:10:18.142676"
-    },
-    {
-      "listing": {
-        "listing_id": "1775589907579059930",
-        "title": "Large balcony in Palermo Hollywood",
-        "property_type": "Apartment",
-        "room_type": "Entire home/apt",
-        "accommodates": 2,
-        "bedrooms": 1,
-        "bathrooms": 2.0,
-        "latitude": -34.5768,
-        "longitude": -58.434,
-        "neighborhood": "Palermo Hollywood",
-        "rating": 5.0,
-        "reviews_count": 3,
-        "host_id": "host_1775589907579059930",
-        "host_name": "Host",
-        "host_is_superhost": 0,
-        "amenities": [
-          "Wifi",
-          "Air conditioning",
-          "Cocina"
-        ],
-        "picture_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-1775589907579059930/original/7c732b4a-4365-4f09-982d-a5327a329982.jpeg"
-      },
-      "calendar": [
-        {
-          "date": "2026-10-12",
-          "price": 66.56,
-          "available": 1
-        },
-        {
-          "date": "2026-10-13",
-          "price": 66.56,
-          "available": 1
-        },
-        {
-          "date": "2026-10-14",
-          "price": 66.56,
+          "price": 99.4,
           "available": 0
         },
         {
           "date": "2026-10-15",
-          "price": 66.56,
+          "price": 99.4,
           "available": 0
         },
         {
           "date": "2026-10-16",
-          "price": 76.54,
+          "price": 114.31,
           "available": 1
         },
         {
           "date": "2026-10-17",
-          "price": 76.54,
-          "available": 0
+          "price": 114.31,
+          "available": 1
         },
         {
           "date": "2026-10-18",
-          "price": 66.56,
-          "available": 0
+          "price": 99.4,
+          "available": 1
         },
         {
           "date": "2026-10-19",
-          "price": 66.56,
+          "price": 99.4,
           "available": 0
         },
         {
           "date": "2026-10-20",
-          "price": 66.56,
+          "price": 99.4,
           "available": 0
         },
         {
           "date": "2026-10-21",
-          "price": 66.56,
+          "price": 99.4,
           "available": 0
         },
         {
           "date": "2026-10-22",
-          "price": 66.56,
+          "price": 99.4,
           "available": 0
         },
         {
           "date": "2026-10-23",
-          "price": 76.54,
+          "price": 114.31,
           "available": 1
         },
         {
           "date": "2026-10-24",
-          "price": 76.54,
+          "price": 114.31,
           "available": 1
         },
         {
           "date": "2026-10-25",
-          "price": 66.56,
-          "available": 1
-        },
-        {
-          "date": "2026-10-26",
-          "price": 66.56,
+          "price": 99.4,
           "available": 0
         },
         {
+          "date": "2026-10-26",
+          "price": 99.4,
+          "available": 1
+        },
+        {
           "date": "2026-10-27",
-          "price": 66.56,
+          "price": 99.4,
           "available": 0
         },
         {
           "date": "2026-10-28",
-          "price": 66.56,
-          "available": 0
+          "price": 99.4,
+          "available": 1
         },
         {
           "date": "2026-10-29",
-          "price": 66.56,
+          "price": 99.4,
           "available": 1
         },
         {
           "date": "2026-10-30",
-          "price": 76.54,
+          "price": 114.31,
           "available": 0
         },
         {
           "date": "2026-10-31",
-          "price": 76.54,
+          "price": 114.31,
           "available": 1
         },
         {
           "date": "2026-11-01",
-          "price": 66.56,
+          "price": 99.4,
           "available": 0
         },
         {
           "date": "2026-11-02",
-          "price": 66.56,
+          "price": 99.4,
           "available": 1
         },
         {
           "date": "2026-11-03",
-          "price": 66.56,
+          "price": 99.4,
           "available": 0
         },
         {
           "date": "2026-11-04",
-          "price": 66.56,
+          "price": 99.4,
           "available": 1
         },
         {
           "date": "2026-11-05",
-          "price": 66.56,
-          "available": 1
+          "price": 99.4,
+          "available": 0
         },
         {
           "date": "2026-11-06",
-          "price": 76.54,
+          "price": 114.31,
           "available": 0
         },
         {
           "date": "2026-11-07",
-          "price": 76.54,
+          "price": 114.31,
           "available": 0
         },
         {
           "date": "2026-11-08",
-          "price": 66.56,
+          "price": 99.4,
           "available": 1
         },
         {
           "date": "2026-11-09",
-          "price": 66.56,
-          "available": 1
+          "price": 99.4,
+          "available": 0
         },
         {
           "date": "2026-11-10",
-          "price": 66.56,
+          "price": 99.4,
+          "available": 0
+        },
+        {
+          "date": "2026-11-11",
+          "price": 99.4,
           "available": 0
         }
       ],
-      "scraped_at": "2026-10-11T11:10:18.142930"
+      "scraped_at": "2026-10-12T12:41:25.979595"
     },
     {
       "listing": {
@@ -2520,7 +2879,7 @@
         "longitude": -58.4352,
         "neighborhood": "Palermo Hollywood",
         "rating": 4.97,
-        "reviews_count": 105,
+        "reviews_count": 106,
         "host_id": "host_1615330931512722393",
         "host_name": "Host",
         "host_is_superhost": 0,
@@ -2534,11 +2893,6 @@
       },
       "calendar": [
         {
-          "date": "2026-10-12",
-          "price": 84.8,
-          "available": 0
-        },
-        {
           "date": "2026-10-13",
           "price": 84.8,
           "available": 0
@@ -2556,22 +2910,22 @@
         {
           "date": "2026-10-16",
           "price": 97.52,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-10-17",
           "price": 97.52,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-10-18",
           "price": 84.8,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-10-19",
           "price": 84.8,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-10-20",
@@ -2581,7 +2935,7 @@
         {
           "date": "2026-10-21",
           "price": 84.8,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-10-22",
@@ -2591,17 +2945,17 @@
         {
           "date": "2026-10-23",
           "price": 97.52,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-10-24",
           "price": 97.52,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-10-25",
           "price": 84.8,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-10-26",
@@ -2611,7 +2965,7 @@
         {
           "date": "2026-10-27",
           "price": 84.8,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-10-28",
@@ -2621,7 +2975,7 @@
         {
           "date": "2026-10-29",
           "price": 84.8,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-10-30",
@@ -2631,22 +2985,22 @@
         {
           "date": "2026-10-31",
           "price": 97.52,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-11-01",
           "price": 84.8,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-11-02",
           "price": 84.8,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-11-03",
           "price": 84.8,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-11-04",
@@ -2656,7 +3010,7 @@
         {
           "date": "2026-11-05",
           "price": 84.8,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-11-06",
@@ -2666,12 +3020,12 @@
         {
           "date": "2026-11-07",
           "price": 97.52,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-11-08",
           "price": 84.8,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-11-09",
@@ -2681,205 +3035,210 @@
         {
           "date": "2026-11-10",
           "price": 84.8,
+          "available": 1
+        },
+        {
+          "date": "2026-11-11",
+          "price": 84.8,
           "available": 0
         }
       ],
-      "scraped_at": "2026-10-11T11:10:18.143196"
+      "scraped_at": "2026-10-12T12:41:25.980030"
     },
     {
       "listing": {
-        "listing_id": "1276759607825981458",
-        "title": "6th-floor pool building in Palermo Hollywood",
+        "listing_id": "1414843266587760943",
+        "title": "Pool and a balcony in Palermo Hollywood",
         "property_type": "Apartment",
         "room_type": "Entire home/apt",
-        "accommodates": 2,
+        "accommodates": 4,
+        "bedrooms": 1,
+        "bathrooms": 1.0,
+        "latitude": -34.5838,
+        "longitude": -58.4339,
+        "neighborhood": "Palermo Hollywood",
+        "rating": 4.9,
+        "reviews_count": 71,
+        "host_id": "host_1414843266587760943",
+        "host_name": "Host",
+        "host_is_superhost": 0,
+        "amenities": [
+          "Wifi",
+          "Air conditioning",
+          "Cocina",
+          "Pool"
+        ],
+        "picture_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-1414843266587760943/original/c1e32ca5-c82a-4251-a95e-05c2f6b271e5.jpeg"
+      },
+      "calendar": [
+        {
+          "date": "2026-10-13",
+          "price": 55.0,
+          "available": 1
+        },
+        {
+          "date": "2026-10-14",
+          "price": 55.0,
+          "available": 0
+        },
+        {
+          "date": "2026-10-15",
+          "price": 55.0,
+          "available": 0
+        },
+        {
+          "date": "2026-10-16",
+          "price": 63.25,
+          "available": 0
+        },
+        {
+          "date": "2026-10-17",
+          "price": 63.25,
+          "available": 0
+        },
+        {
+          "date": "2026-10-18",
+          "price": 55.0,
+          "available": 0
+        },
+        {
+          "date": "2026-10-19",
+          "price": 55.0,
+          "available": 1
+        },
+        {
+          "date": "2026-10-20",
+          "price": 55.0,
+          "available": 0
+        },
+        {
+          "date": "2026-10-21",
+          "price": 55.0,
+          "available": 0
+        },
+        {
+          "date": "2026-10-22",
+          "price": 55.0,
+          "available": 1
+        },
+        {
+          "date": "2026-10-23",
+          "price": 63.25,
+          "available": 0
+        },
+        {
+          "date": "2026-10-24",
+          "price": 63.25,
+          "available": 0
+        },
+        {
+          "date": "2026-10-25",
+          "price": 55.0,
+          "available": 0
+        },
+        {
+          "date": "2026-10-26",
+          "price": 55.0,
+          "available": 0
+        },
+        {
+          "date": "2026-10-27",
+          "price": 55.0,
+          "available": 0
+        },
+        {
+          "date": "2026-10-28",
+          "price": 55.0,
+          "available": 0
+        },
+        {
+          "date": "2026-10-29",
+          "price": 55.0,
+          "available": 1
+        },
+        {
+          "date": "2026-10-30",
+          "price": 63.25,
+          "available": 0
+        },
+        {
+          "date": "2026-10-31",
+          "price": 63.25,
+          "available": 0
+        },
+        {
+          "date": "2026-11-01",
+          "price": 55.0,
+          "available": 1
+        },
+        {
+          "date": "2026-11-02",
+          "price": 55.0,
+          "available": 0
+        },
+        {
+          "date": "2026-11-03",
+          "price": 55.0,
+          "available": 0
+        },
+        {
+          "date": "2026-11-04",
+          "price": 55.0,
+          "available": 1
+        },
+        {
+          "date": "2026-11-05",
+          "price": 55.0,
+          "available": 1
+        },
+        {
+          "date": "2026-11-06",
+          "price": 63.25,
+          "available": 0
+        },
+        {
+          "date": "2026-11-07",
+          "price": 63.25,
+          "available": 0
+        },
+        {
+          "date": "2026-11-08",
+          "price": 55.0,
+          "available": 0
+        },
+        {
+          "date": "2026-11-09",
+          "price": 55.0,
+          "available": 0
+        },
+        {
+          "date": "2026-11-10",
+          "price": 55.0,
+          "available": 0
+        },
+        {
+          "date": "2026-11-11",
+          "price": 55.0,
+          "available": 1
+        }
+      ],
+      "scraped_at": "2026-10-12T12:41:25.980441"
+    },
+    {
+      "listing": {
+        "listing_id": "1547860309486117560",
+        "title": "Rooftop pool and a private balcony",
+        "property_type": "Apartment",
+        "room_type": "Entire home/apt",
+        "accommodates": 4,
         "bedrooms": 1,
         "bathrooms": 1.0,
         "latitude": -34.5795,
-        "longitude": -58.4348,
-        "neighborhood": "Palermo Hollywood",
-        "rating": 4.93,
-        "reviews_count": 67,
-        "host_id": "host_1276759607825981458",
-        "host_name": "Host",
-        "host_is_superhost": 0,
-        "amenities": [
-          "Wifi",
-          "Air conditioning",
-          "Cocina",
-          "Pool"
-        ],
-        "picture_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-1276759607825981458/original/32a2ccd8-2152-4cc4-be19-2215c7377ef9.jpeg"
-      },
-      "calendar": [
-        {
-          "date": "2026-10-12",
-          "price": 68.2,
-          "available": 0
-        },
-        {
-          "date": "2026-10-13",
-          "price": 68.2,
-          "available": 0
-        },
-        {
-          "date": "2026-10-14",
-          "price": 68.2,
-          "available": 1
-        },
-        {
-          "date": "2026-10-15",
-          "price": 68.2,
-          "available": 1
-        },
-        {
-          "date": "2026-10-16",
-          "price": 78.43,
-          "available": 0
-        },
-        {
-          "date": "2026-10-17",
-          "price": 78.43,
-          "available": 0
-        },
-        {
-          "date": "2026-10-18",
-          "price": 68.2,
-          "available": 1
-        },
-        {
-          "date": "2026-10-19",
-          "price": 68.2,
-          "available": 0
-        },
-        {
-          "date": "2026-10-20",
-          "price": 68.2,
-          "available": 0
-        },
-        {
-          "date": "2026-10-21",
-          "price": 68.2,
-          "available": 1
-        },
-        {
-          "date": "2026-10-22",
-          "price": 68.2,
-          "available": 0
-        },
-        {
-          "date": "2026-10-23",
-          "price": 78.43,
-          "available": 1
-        },
-        {
-          "date": "2026-10-24",
-          "price": 78.43,
-          "available": 1
-        },
-        {
-          "date": "2026-10-25",
-          "price": 68.2,
-          "available": 0
-        },
-        {
-          "date": "2026-10-26",
-          "price": 68.2,
-          "available": 1
-        },
-        {
-          "date": "2026-10-27",
-          "price": 68.2,
-          "available": 0
-        },
-        {
-          "date": "2026-10-28",
-          "price": 68.2,
-          "available": 1
-        },
-        {
-          "date": "2026-10-29",
-          "price": 68.2,
-          "available": 0
-        },
-        {
-          "date": "2026-10-30",
-          "price": 78.43,
-          "available": 0
-        },
-        {
-          "date": "2026-10-31",
-          "price": 78.43,
-          "available": 0
-        },
-        {
-          "date": "2026-11-01",
-          "price": 68.2,
-          "available": 0
-        },
-        {
-          "date": "2026-11-02",
-          "price": 68.2,
-          "available": 1
-        },
-        {
-          "date": "2026-11-03",
-          "price": 68.2,
-          "available": 0
-        },
-        {
-          "date": "2026-11-04",
-          "price": 68.2,
-          "available": 0
-        },
-        {
-          "date": "2026-11-05",
-          "price": 68.2,
-          "available": 0
-        },
-        {
-          "date": "2026-11-06",
-          "price": 78.43,
-          "available": 1
-        },
-        {
-          "date": "2026-11-07",
-          "price": 78.43,
-          "available": 0
-        },
-        {
-          "date": "2026-11-08",
-          "price": 68.2,
-          "available": 0
-        },
-        {
-          "date": "2026-11-09",
-          "price": 68.2,
-          "available": 1
-        },
-        {
-          "date": "2026-11-10",
-          "price": 68.2,
-          "available": 1
-        }
-      ],
-      "scraped_at": "2026-10-11T11:10:18.143450"
-    },
-    {
-      "listing": {
-        "listing_id": "21504758",
-        "title": "New building with a pool and balcony",
-        "property_type": "Apartment",
-        "room_type": "Entire home/apt",
-        "accommodates": 2,
-        "bedrooms": 1,
-        "bathrooms": 1.0,
-        "latitude": -34.58046,
-        "longitude": -58.43958,
+        "longitude": -58.4284,
         "neighborhood": "Palermo Hollywood",
         "rating": 4.98,
-        "reviews_count": 343,
-        "host_id": "host_21504758",
+        "reviews_count": 61,
+        "host_id": "host_1547860309486117560",
         "host_name": "Host",
         "host_is_superhost": 0,
         "amenities": [
@@ -2888,533 +3247,177 @@
           "Cocina",
           "Pool"
         ],
-        "picture_url": "https://a0.muscache.com/im/pictures/f3ef2a38-a502-4932-914d-215fb77455c2.jpg"
+        "picture_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-1547860309486117560/original/e57a36a5-9ed6-4d9c-a1f4-910186b6efc5.jpeg"
       },
       "calendar": [
         {
-          "date": "2026-10-12",
-          "price": 62.8,
-          "available": 0
-        },
-        {
           "date": "2026-10-13",
-          "price": 62.8,
+          "price": 86.0,
           "available": 1
         },
         {
           "date": "2026-10-14",
-          "price": 62.8,
+          "price": 86.0,
           "available": 0
         },
         {
           "date": "2026-10-15",
-          "price": 62.8,
+          "price": 86.0,
           "available": 0
         },
         {
           "date": "2026-10-16",
-          "price": 72.22,
-          "available": 0
-        },
-        {
-          "date": "2026-10-17",
-          "price": 72.22,
-          "available": 0
-        },
-        {
-          "date": "2026-10-18",
-          "price": 62.8,
-          "available": 1
-        },
-        {
-          "date": "2026-10-19",
-          "price": 62.8,
-          "available": 0
-        },
-        {
-          "date": "2026-10-20",
-          "price": 62.8,
-          "available": 1
-        },
-        {
-          "date": "2026-10-21",
-          "price": 62.8,
-          "available": 0
-        },
-        {
-          "date": "2026-10-22",
-          "price": 62.8,
-          "available": 1
-        },
-        {
-          "date": "2026-10-23",
-          "price": 72.22,
-          "available": 0
-        },
-        {
-          "date": "2026-10-24",
-          "price": 72.22,
-          "available": 1
-        },
-        {
-          "date": "2026-10-25",
-          "price": 62.8,
-          "available": 1
-        },
-        {
-          "date": "2026-10-26",
-          "price": 62.8,
-          "available": 0
-        },
-        {
-          "date": "2026-10-27",
-          "price": 62.8,
-          "available": 1
-        },
-        {
-          "date": "2026-10-28",
-          "price": 62.8,
-          "available": 0
-        },
-        {
-          "date": "2026-10-29",
-          "price": 62.8,
-          "available": 0
-        },
-        {
-          "date": "2026-10-30",
-          "price": 72.22,
-          "available": 0
-        },
-        {
-          "date": "2026-10-31",
-          "price": 72.22,
-          "available": 1
-        },
-        {
-          "date": "2026-11-01",
-          "price": 62.8,
-          "available": 1
-        },
-        {
-          "date": "2026-11-02",
-          "price": 62.8,
-          "available": 1
-        },
-        {
-          "date": "2026-11-03",
-          "price": 62.8,
-          "available": 0
-        },
-        {
-          "date": "2026-11-04",
-          "price": 62.8,
-          "available": 0
-        },
-        {
-          "date": "2026-11-05",
-          "price": 62.8,
-          "available": 0
-        },
-        {
-          "date": "2026-11-06",
-          "price": 72.22,
-          "available": 0
-        },
-        {
-          "date": "2026-11-07",
-          "price": 72.22,
-          "available": 1
-        },
-        {
-          "date": "2026-11-08",
-          "price": 62.8,
-          "available": 0
-        },
-        {
-          "date": "2026-11-09",
-          "price": 62.8,
-          "available": 1
-        },
-        {
-          "date": "2026-11-10",
-          "price": 62.8,
-          "available": 0
-        }
-      ],
-      "scraped_at": "2026-10-11T11:10:18.143709"
-    },
-    {
-      "listing": {
-        "listing_id": "1747369509488486563",
-        "title": "Quiet balcony in Palermo Hollywood",
-        "property_type": "Apartment",
-        "room_type": "Entire home/apt",
-        "accommodates": 2,
-        "bedrooms": 1,
-        "bathrooms": 1.0,
-        "latitude": -34.5792,
-        "longitude": -58.4383,
-        "neighborhood": "Palermo Hollywood",
-        "rating": 5.0,
-        "reviews_count": 19,
-        "host_id": "host_1747369509488486563",
-        "host_name": "Host",
-        "host_is_superhost": 0,
-        "amenities": [
-          "Wifi",
-          "Air conditioning",
-          "Cocina"
-        ],
-        "picture_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-1747369509488486563/original/53b65821-b527-4121-b32f-9763539bfec8.jpeg"
-      },
-      "calendar": [
-        {
-          "date": "2026-10-12",
-          "price": 55.0,
-          "available": 0
-        },
-        {
-          "date": "2026-10-13",
-          "price": 55.0,
-          "available": 1
-        },
-        {
-          "date": "2026-10-14",
-          "price": 55.0,
-          "available": 0
-        },
-        {
-          "date": "2026-10-15",
-          "price": 55.0,
-          "available": 0
-        },
-        {
-          "date": "2026-10-16",
-          "price": 63.25,
+          "price": 98.9,
           "available": 1
         },
         {
           "date": "2026-10-17",
-          "price": 63.25,
-          "available": 0
+          "price": 98.9,
+          "available": 1
         },
         {
           "date": "2026-10-18",
-          "price": 55.0,
+          "price": 86.0,
           "available": 1
         },
         {
           "date": "2026-10-19",
-          "price": 55.0,
-          "available": 0
+          "price": 86.0,
+          "available": 1
         },
         {
           "date": "2026-10-20",
-          "price": 55.0,
-          "available": 0
+          "price": 86.0,
+          "available": 1
         },
         {
           "date": "2026-10-21",
-          "price": 55.0,
-          "available": 0
+          "price": 86.0,
+          "available": 1
         },
         {
           "date": "2026-10-22",
-          "price": 55.0,
-          "available": 1
-        },
-        {
-          "date": "2026-10-23",
-          "price": 63.25,
-          "available": 0
-        },
-        {
-          "date": "2026-10-24",
-          "price": 63.25,
-          "available": 1
-        },
-        {
-          "date": "2026-10-25",
-          "price": 55.0,
-          "available": 1
-        },
-        {
-          "date": "2026-10-26",
-          "price": 55.0,
-          "available": 0
-        },
-        {
-          "date": "2026-10-27",
-          "price": 55.0,
-          "available": 0
-        },
-        {
-          "date": "2026-10-28",
-          "price": 55.0,
-          "available": 0
-        },
-        {
-          "date": "2026-10-29",
-          "price": 55.0,
-          "available": 0
-        },
-        {
-          "date": "2026-10-30",
-          "price": 63.25,
-          "available": 0
-        },
-        {
-          "date": "2026-10-31",
-          "price": 63.25,
-          "available": 1
-        },
-        {
-          "date": "2026-11-01",
-          "price": 55.0,
-          "available": 0
-        },
-        {
-          "date": "2026-11-02",
-          "price": 55.0,
-          "available": 1
-        },
-        {
-          "date": "2026-11-03",
-          "price": 55.0,
-          "available": 1
-        },
-        {
-          "date": "2026-11-04",
-          "price": 55.0,
-          "available": 1
-        },
-        {
-          "date": "2026-11-05",
-          "price": 55.0,
-          "available": 0
-        },
-        {
-          "date": "2026-11-06",
-          "price": 63.25,
-          "available": 1
-        },
-        {
-          "date": "2026-11-07",
-          "price": 63.25,
-          "available": 0
-        },
-        {
-          "date": "2026-11-08",
-          "price": 55.0,
-          "available": 0
-        },
-        {
-          "date": "2026-11-09",
-          "price": 55.0,
-          "available": 0
-        },
-        {
-          "date": "2026-11-10",
-          "price": 55.0,
-          "available": 1
-        }
-      ],
-      "scraped_at": "2026-10-11T11:10:18.144204"
-    },
-    {
-      "listing": {
-        "listing_id": "1464855373224749389",
-        "title": "Modern Palermo apartment near cafés",
-        "property_type": "Apartment",
-        "room_type": "Entire home/apt",
-        "accommodates": 2,
-        "bedrooms": 1,
-        "bathrooms": 1.0,
-        "latitude": -34.5832,
-        "longitude": -58.428,
-        "neighborhood": "Palermo Hollywood",
-        "rating": 5.0,
-        "reviews_count": 45,
-        "host_id": "host_1464855373224749389",
-        "host_name": "Host",
-        "host_is_superhost": 0,
-        "amenities": [
-          "Wifi",
-          "Air conditioning",
-          "Cocina"
-        ],
-        "picture_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-1464855373224749389/original/db7d97fa-9e41-4d49-8ea7-3b0e2c36b9c3.jpeg"
-      },
-      "calendar": [
-        {
-          "date": "2026-10-12",
-          "price": 69.6,
-          "available": 1
-        },
-        {
-          "date": "2026-10-13",
-          "price": 69.6,
-          "available": 0
-        },
-        {
-          "date": "2026-10-14",
-          "price": 69.6,
-          "available": 0
-        },
-        {
-          "date": "2026-10-15",
-          "price": 69.6,
-          "available": 0
-        },
-        {
-          "date": "2026-10-16",
-          "price": 80.04,
-          "available": 0
-        },
-        {
-          "date": "2026-10-17",
-          "price": 80.04,
-          "available": 0
-        },
-        {
-          "date": "2026-10-18",
-          "price": 69.6,
-          "available": 0
-        },
-        {
-          "date": "2026-10-19",
-          "price": 69.6,
-          "available": 0
-        },
-        {
-          "date": "2026-10-20",
-          "price": 69.6,
-          "available": 0
-        },
-        {
-          "date": "2026-10-21",
-          "price": 69.6,
-          "available": 0
-        },
-        {
-          "date": "2026-10-22",
-          "price": 69.6,
+          "price": 86.0,
           "available": 0
         },
         {
           "date": "2026-10-23",
-          "price": 80.04,
+          "price": 98.9,
           "available": 0
         },
         {
           "date": "2026-10-24",
-          "price": 80.04,
-          "available": 0
+          "price": 98.9,
+          "available": 1
         },
         {
           "date": "2026-10-25",
-          "price": 69.6,
-          "available": 1
+          "price": 86.0,
+          "available": 0
         },
         {
           "date": "2026-10-26",
-          "price": 69.6,
-          "available": 1
+          "price": 86.0,
+          "available": 0
         },
         {
           "date": "2026-10-27",
-          "price": 69.6,
-          "available": 1
+          "price": 86.0,
+          "available": 0
         },
         {
           "date": "2026-10-28",
-          "price": 69.6,
+          "price": 86.0,
           "available": 0
         },
         {
           "date": "2026-10-29",
-          "price": 69.6,
+          "price": 86.0,
           "available": 0
         },
         {
           "date": "2026-10-30",
-          "price": 80.04,
+          "price": 98.9,
           "available": 1
         },
         {
           "date": "2026-10-31",
-          "price": 80.04,
-          "available": 1
+          "price": 98.9,
+          "available": 0
         },
         {
           "date": "2026-11-01",
-          "price": 69.6,
-          "available": 1
+          "price": 86.0,
+          "available": 0
         },
         {
           "date": "2026-11-02",
-          "price": 69.6,
+          "price": 86.0,
           "available": 0
         },
         {
           "date": "2026-11-03",
-          "price": 69.6,
-          "available": 1
+          "price": 86.0,
+          "available": 0
         },
         {
           "date": "2026-11-04",
-          "price": 69.6,
+          "price": 86.0,
           "available": 0
         },
         {
           "date": "2026-11-05",
-          "price": 69.6,
-          "available": 1
+          "price": 86.0,
+          "available": 0
         },
         {
           "date": "2026-11-06",
-          "price": 80.04,
+          "price": 98.9,
           "available": 1
         },
         {
           "date": "2026-11-07",
-          "price": 80.04,
+          "price": 98.9,
           "available": 0
         },
         {
           "date": "2026-11-08",
-          "price": 69.6,
+          "price": 86.0,
           "available": 0
         },
         {
           "date": "2026-11-09",
-          "price": 69.6,
-          "available": 1
+          "price": 86.0,
+          "available": 0
         },
         {
           "date": "2026-11-10",
-          "price": 69.6,
+          "price": 86.0,
+          "available": 1
+        },
+        {
+          "date": "2026-11-11",
+          "price": 86.0,
           "available": 0
         }
       ],
-      "scraped_at": "2026-10-11T11:10:18.144820"
+      "scraped_at": "2026-10-12T12:41:25.980858"
     },
     {
       "listing": {
-        "listing_id": "1492880097775236484",
-        "title": "Sunny balcony in Palermo Hollywood",
+        "listing_id": "1387171898836093523",
+        "title": "Industrial-chic loft with city views",
         "property_type": "Apartment",
         "room_type": "Entire home/apt",
         "accommodates": 2,
         "bedrooms": 1,
-        "bathrooms": 1.0,
-        "latitude": -34.5807,
-        "longitude": -58.4402,
+        "bathrooms": 1.5,
+        "latitude": -34.5822,
+        "longitude": -58.4337,
         "neighborhood": "Palermo Hollywood",
         "rating": 4.97,
-        "reviews_count": 68,
-        "host_id": "host_1492880097775236484",
+        "reviews_count": 58,
+        "host_id": "host_1387171898836093523",
         "host_name": "Host",
         "host_is_superhost": 0,
         "amenities": [
@@ -3422,161 +3425,161 @@
           "Air conditioning",
           "Cocina"
         ],
-        "picture_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-1492880097775236484/original/60ad4fa9-cfd7-4d92-aaca-067930ec6a72.jpeg"
+        "picture_url": "https://a0.muscache.com/im/pictures/airflow/Hosting-1387171898836093523/original/50cd67b4-366e-48b6-af11-0940885fb12d.jpg"
       },
       "calendar": [
         {
-          "date": "2026-10-12",
-          "price": 72.36,
-          "available": 1
-        },
-        {
           "date": "2026-10-13",
-          "price": 72.36,
-          "available": 1
+          "price": 191.2,
+          "available": 0
         },
         {
           "date": "2026-10-14",
-          "price": 72.36,
+          "price": 191.2,
           "available": 0
         },
         {
           "date": "2026-10-15",
-          "price": 72.36,
-          "available": 0
+          "price": 191.2,
+          "available": 1
         },
         {
           "date": "2026-10-16",
-          "price": 83.21,
+          "price": 219.88,
           "available": 0
         },
         {
           "date": "2026-10-17",
-          "price": 83.21,
-          "available": 0
-        },
-        {
-          "date": "2026-10-18",
-          "price": 72.36,
+          "price": 219.88,
           "available": 1
         },
         {
+          "date": "2026-10-18",
+          "price": 191.2,
+          "available": 0
+        },
+        {
           "date": "2026-10-19",
-          "price": 72.36,
+          "price": 191.2,
           "available": 0
         },
         {
           "date": "2026-10-20",
-          "price": 72.36,
+          "price": 191.2,
           "available": 0
         },
         {
           "date": "2026-10-21",
-          "price": 72.36,
+          "price": 191.2,
           "available": 1
         },
         {
           "date": "2026-10-22",
-          "price": 72.36,
+          "price": 191.2,
           "available": 1
         },
         {
           "date": "2026-10-23",
-          "price": 83.21,
-          "available": 0
+          "price": 219.88,
+          "available": 1
         },
         {
           "date": "2026-10-24",
-          "price": 83.21,
+          "price": 219.88,
           "available": 0
         },
         {
           "date": "2026-10-25",
-          "price": 72.36,
+          "price": 191.2,
           "available": 0
         },
         {
           "date": "2026-10-26",
-          "price": 72.36,
-          "available": 0
-        },
-        {
-          "date": "2026-10-27",
-          "price": 72.36,
+          "price": 191.2,
           "available": 1
         },
         {
+          "date": "2026-10-27",
+          "price": 191.2,
+          "available": 0
+        },
+        {
           "date": "2026-10-28",
-          "price": 72.36,
+          "price": 191.2,
           "available": 1
         },
         {
           "date": "2026-10-29",
-          "price": 72.36,
-          "available": 1
+          "price": 191.2,
+          "available": 0
         },
         {
           "date": "2026-10-30",
-          "price": 83.21,
-          "available": 1
+          "price": 219.88,
+          "available": 0
         },
         {
           "date": "2026-10-31",
-          "price": 83.21,
+          "price": 219.88,
           "available": 0
         },
         {
           "date": "2026-11-01",
-          "price": 72.36,
+          "price": 191.2,
           "available": 0
         },
         {
           "date": "2026-11-02",
-          "price": 72.36,
+          "price": 191.2,
           "available": 0
         },
         {
           "date": "2026-11-03",
-          "price": 72.36,
+          "price": 191.2,
           "available": 0
         },
         {
           "date": "2026-11-04",
-          "price": 72.36,
+          "price": 191.2,
           "available": 0
         },
         {
           "date": "2026-11-05",
-          "price": 72.36,
-          "available": 1
+          "price": 191.2,
+          "available": 0
         },
         {
           "date": "2026-11-06",
-          "price": 83.21,
-          "available": 1
+          "price": 219.88,
+          "available": 0
         },
         {
           "date": "2026-11-07",
-          "price": 83.21,
+          "price": 219.88,
           "available": 0
         },
         {
           "date": "2026-11-08",
-          "price": 72.36,
-          "available": 1
+          "price": 191.2,
+          "available": 0
         },
         {
           "date": "2026-11-09",
-          "price": 72.36,
-          "available": 0
+          "price": 191.2,
+          "available": 1
         },
         {
           "date": "2026-11-10",
-          "price": 72.36,
+          "price": 191.2,
           "available": 0
+        },
+        {
+          "date": "2026-11-11",
+          "price": 191.2,
+          "available": 1
         }
       ],
-      "scraped_at": "2026-10-11T11:10:18.145478"
+      "scraped_at": "2026-10-12T12:41:25.981299"
     },
     {
       "listing": {
@@ -3618,11 +3621,6 @@
       },
       "calendar": [
         {
-          "date": "2026-10-12",
-          "price": 89.8,
-          "available": 0
-        },
-        {
           "date": "2026-10-13",
           "price": 89.8,
           "available": 0
@@ -3630,32 +3628,32 @@
         {
           "date": "2026-10-14",
           "price": 89.8,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-10-15",
           "price": 89.8,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-10-16",
           "price": 103.27,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-10-17",
           "price": 103.27,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-10-18",
           "price": 89.8,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-10-19",
           "price": 89.8,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-10-20",
@@ -3675,7 +3673,7 @@
         {
           "date": "2026-10-23",
           "price": 103.27,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-10-24",
@@ -3685,7 +3683,7 @@
         {
           "date": "2026-10-25",
           "price": 89.8,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-10-26",
@@ -3695,12 +3693,12 @@
         {
           "date": "2026-10-27",
           "price": 89.8,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-10-28",
           "price": 89.8,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-10-29",
@@ -3725,12 +3723,12 @@
         {
           "date": "2026-11-02",
           "price": 89.8,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-11-03",
           "price": 89.8,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-11-04",
@@ -3755,20 +3753,216 @@
         {
           "date": "2026-11-08",
           "price": 89.8,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-11-09",
           "price": 89.8,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-11-10",
           "price": 89.8,
           "available": 0
+        },
+        {
+          "date": "2026-11-11",
+          "price": 89.8,
+          "available": 0
         }
       ],
-      "scraped_at": "2026-10-11T11:10:19.025153"
+      "scraped_at": "2026-10-12T12:41:26.920513"
+    },
+    {
+      "listing": {
+        "listing_id": "1332652249326015668",
+        "title": "Studio in Palermo 1 or 2 beds",
+        "property_type": "Apartment",
+        "room_type": "Entire home/apt",
+        "accommodates": 2,
+        "bedrooms": 1,
+        "bathrooms": 1.0,
+        "latitude": -34.5861,
+        "longitude": -58.4373,
+        "neighborhood": "Palermo Hollywood",
+        "rating": 5.0,
+        "reviews_count": 0,
+        "host_id": "host_1332652249326015668",
+        "host_name": "Host",
+        "host_is_superhost": 1,
+        "amenities": [
+          "Wifi",
+          "Air conditioning",
+          "Cocina",
+          "Lavarropas",
+          "Gym",
+          "Check-in autónomo"
+        ],
+        "picture_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-1332652249326015668/original/78b4264d-a057-47cf-b56d-11c26d2e91fa.jpeg?im_w=720&width=720&quality=70&auto=webp",
+        "weekend_price": null,
+        "weekly_discount": null,
+        "monthly_discount": null,
+        "early_bird_discount": null,
+        "last_minute_discount": null,
+        "cleaning_fee": null,
+        "minimum_stay": null,
+        "maximum_stay": null,
+        "instant_book": null,
+        "cancellation_policy": null
+      },
+      "calendar": [
+        {
+          "date": "2026-10-13",
+          "price": 96.0,
+          "available": 0
+        },
+        {
+          "date": "2026-10-14",
+          "price": 96.0,
+          "available": 1
+        },
+        {
+          "date": "2026-10-15",
+          "price": 96.0,
+          "available": 0
+        },
+        {
+          "date": "2026-10-16",
+          "price": 110.4,
+          "available": 1
+        },
+        {
+          "date": "2026-10-17",
+          "price": 110.4,
+          "available": 0
+        },
+        {
+          "date": "2026-10-18",
+          "price": 96.0,
+          "available": 1
+        },
+        {
+          "date": "2026-10-19",
+          "price": 96.0,
+          "available": 1
+        },
+        {
+          "date": "2026-10-20",
+          "price": 96.0,
+          "available": 0
+        },
+        {
+          "date": "2026-10-21",
+          "price": 96.0,
+          "available": 1
+        },
+        {
+          "date": "2026-10-22",
+          "price": 96.0,
+          "available": 0
+        },
+        {
+          "date": "2026-10-23",
+          "price": 110.4,
+          "available": 1
+        },
+        {
+          "date": "2026-10-24",
+          "price": 110.4,
+          "available": 1
+        },
+        {
+          "date": "2026-10-25",
+          "price": 96.0,
+          "available": 0
+        },
+        {
+          "date": "2026-10-26",
+          "price": 96.0,
+          "available": 1
+        },
+        {
+          "date": "2026-10-27",
+          "price": 96.0,
+          "available": 1
+        },
+        {
+          "date": "2026-10-28",
+          "price": 96.0,
+          "available": 1
+        },
+        {
+          "date": "2026-10-29",
+          "price": 96.0,
+          "available": 0
+        },
+        {
+          "date": "2026-10-30",
+          "price": 110.4,
+          "available": 0
+        },
+        {
+          "date": "2026-10-31",
+          "price": 110.4,
+          "available": 0
+        },
+        {
+          "date": "2026-11-01",
+          "price": 96.0,
+          "available": 1
+        },
+        {
+          "date": "2026-11-02",
+          "price": 96.0,
+          "available": 0
+        },
+        {
+          "date": "2026-11-03",
+          "price": 96.0,
+          "available": 0
+        },
+        {
+          "date": "2026-11-04",
+          "price": 96.0,
+          "available": 0
+        },
+        {
+          "date": "2026-11-05",
+          "price": 96.0,
+          "available": 0
+        },
+        {
+          "date": "2026-11-06",
+          "price": 110.4,
+          "available": 1
+        },
+        {
+          "date": "2026-11-07",
+          "price": 110.4,
+          "available": 1
+        },
+        {
+          "date": "2026-11-08",
+          "price": 96.0,
+          "available": 1
+        },
+        {
+          "date": "2026-11-09",
+          "price": 96.0,
+          "available": 0
+        },
+        {
+          "date": "2026-11-10",
+          "price": 96.0,
+          "available": 0
+        },
+        {
+          "date": "2026-11-11",
+          "price": 96.0,
+          "available": 0
+        }
+      ],
+      "scraped_at": "2026-10-12T12:41:27.745579"
     },
     {
       "listing": {
@@ -3811,11 +4005,6 @@
       },
       "calendar": [
         {
-          "date": "2026-10-12",
-          "price": 81.8,
-          "available": 0
-        },
-        {
           "date": "2026-10-13",
           "price": 81.8,
           "available": 0
@@ -3828,22 +4017,22 @@
         {
           "date": "2026-10-15",
           "price": 81.8,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-10-16",
           "price": 94.07,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-10-17",
           "price": 94.07,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-10-18",
           "price": 81.8,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-10-19",
@@ -3868,7 +4057,7 @@
         {
           "date": "2026-10-23",
           "price": 94.07,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-10-24",
@@ -3878,7 +4067,7 @@
         {
           "date": "2026-10-25",
           "price": 81.8,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-10-26",
@@ -3888,7 +4077,7 @@
         {
           "date": "2026-10-27",
           "price": 81.8,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-10-28",
@@ -3898,7 +4087,7 @@
         {
           "date": "2026-10-29",
           "price": 81.8,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-10-30",
@@ -3933,7 +4122,7 @@
         {
           "date": "2026-11-05",
           "price": 81.8,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-11-06",
@@ -3948,7 +4137,7 @@
         {
           "date": "2026-11-08",
           "price": 81.8,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-11-09",
@@ -3958,10 +4147,15 @@
         {
           "date": "2026-11-10",
           "price": 81.8,
+          "available": 0
+        },
+        {
+          "date": "2026-11-11",
+          "price": 81.8,
           "available": 1
         }
       ],
-      "scraped_at": "2026-10-11T11:10:19.611113"
+      "scraped_at": "2026-10-12T12:41:28.535440"
     },
     {
       "listing": {
@@ -4004,11 +4198,6 @@
       },
       "calendar": [
         {
-          "date": "2026-10-12",
-          "price": 91.0,
-          "available": 0
-        },
-        {
           "date": "2026-10-13",
           "price": 91.0,
           "available": 0
@@ -4021,7 +4210,7 @@
         {
           "date": "2026-10-15",
           "price": 91.0,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-10-16",
@@ -4031,7 +4220,7 @@
         {
           "date": "2026-10-17",
           "price": 104.65,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-10-18",
@@ -4051,12 +4240,12 @@
         {
           "date": "2026-10-21",
           "price": 91.0,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-10-22",
           "price": 91.0,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-10-23",
@@ -4066,17 +4255,17 @@
         {
           "date": "2026-10-24",
           "price": 104.65,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-10-25",
           "price": 91.0,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-10-26",
           "price": 91.0,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-10-27",
@@ -4086,12 +4275,12 @@
         {
           "date": "2026-10-28",
           "price": 91.0,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-10-29",
           "price": 91.0,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-10-30",
@@ -4106,17 +4295,17 @@
         {
           "date": "2026-11-01",
           "price": 91.0,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-11-02",
           "price": 91.0,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-11-03",
           "price": 91.0,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-11-04",
@@ -4126,12 +4315,12 @@
         {
           "date": "2026-11-05",
           "price": 91.0,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-11-06",
           "price": 104.65,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-11-07",
@@ -4151,10 +4340,15 @@
         {
           "date": "2026-11-10",
           "price": 91.0,
+          "available": 0
+        },
+        {
+          "date": "2026-11-11",
+          "price": 91.0,
           "available": 1
         }
       ],
-      "scraped_at": "2026-10-11T11:10:20.168034"
+      "scraped_at": "2026-10-12T12:41:29.326969"
     },
     {
       "listing": {
@@ -4198,11 +4392,6 @@
       },
       "calendar": [
         {
-          "date": "2026-10-12",
-          "price": 61.6,
-          "available": 0
-        },
-        {
           "date": "2026-10-13",
           "price": 61.6,
           "available": 0
@@ -4225,12 +4414,12 @@
         {
           "date": "2026-10-17",
           "price": 70.84,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-10-18",
           "price": 61.6,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-10-19",
@@ -4250,22 +4439,22 @@
         {
           "date": "2026-10-22",
           "price": 61.6,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-10-23",
           "price": 70.84,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-10-24",
           "price": 70.84,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-10-25",
           "price": 61.6,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-10-26",
@@ -4280,12 +4469,12 @@
         {
           "date": "2026-10-28",
           "price": 61.6,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-10-29",
           "price": 61.6,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-10-30",
@@ -4300,7 +4489,7 @@
         {
           "date": "2026-11-01",
           "price": 61.6,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-11-02",
@@ -4310,7 +4499,7 @@
         {
           "date": "2026-11-03",
           "price": 61.6,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-11-04",
@@ -4320,12 +4509,12 @@
         {
           "date": "2026-11-05",
           "price": 61.6,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-11-06",
           "price": 70.84,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-11-07",
@@ -4335,20 +4524,25 @@
         {
           "date": "2026-11-08",
           "price": 61.6,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-11-09",
           "price": 61.6,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-11-10",
           "price": 61.6,
           "available": 0
+        },
+        {
+          "date": "2026-11-11",
+          "price": 61.6,
+          "available": 0
         }
       ],
-      "scraped_at": "2026-10-11T11:10:21.236733"
+      "scraped_at": "2026-10-12T12:41:30.034330"
     },
     {
       "listing": {
@@ -4391,11 +4585,6 @@
       },
       "calendar": [
         {
-          "date": "2026-10-12",
-          "price": 73.9,
-          "available": 1
-        },
-        {
           "date": "2026-10-13",
           "price": 73.9,
           "available": 1
@@ -4403,17 +4592,17 @@
         {
           "date": "2026-10-14",
           "price": 73.9,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-10-15",
           "price": 73.9,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-10-16",
           "price": 84.98,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-10-17",
@@ -4423,12 +4612,12 @@
         {
           "date": "2026-10-18",
           "price": 73.9,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-10-19",
           "price": 73.9,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-10-20",
@@ -4458,7 +4647,7 @@
         {
           "date": "2026-10-25",
           "price": 73.9,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-10-26",
@@ -4478,7 +4667,7 @@
         {
           "date": "2026-10-29",
           "price": 73.9,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-10-30",
@@ -4503,12 +4692,12 @@
         {
           "date": "2026-11-03",
           "price": 73.9,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-11-04",
           "price": 73.9,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-11-05",
@@ -4523,12 +4712,12 @@
         {
           "date": "2026-11-07",
           "price": 84.98,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-11-08",
           "price": 73.9,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-11-09",
@@ -4539,9 +4728,14 @@
           "date": "2026-11-10",
           "price": 73.9,
           "available": 0
+        },
+        {
+          "date": "2026-11-11",
+          "price": 73.9,
+          "available": 0
         }
       ],
-      "scraped_at": "2026-10-11T11:10:21.999171"
+      "scraped_at": "2026-10-12T12:41:30.831885"
     },
     {
       "listing": {
@@ -4566,7 +4760,6 @@
           "Cocina",
           "Lavarropas",
           "Pool",
-          "Gym",
           "Workspace",
           "Check-in autónomo"
         ],
@@ -4583,11 +4776,6 @@
         "cancellation_policy": null
       },
       "calendar": [
-        {
-          "date": "2026-10-12",
-          "price": 73.0,
-          "available": 1
-        },
         {
           "date": "2026-10-13",
           "price": 73.0,
@@ -4606,12 +4794,12 @@
         {
           "date": "2026-10-16",
           "price": 83.95,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-10-17",
           "price": 83.95,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-10-18",
@@ -4631,27 +4819,27 @@
         {
           "date": "2026-10-21",
           "price": 73.0,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-10-22",
           "price": 73.0,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-10-23",
           "price": 83.95,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-10-24",
           "price": 83.95,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-10-25",
           "price": 73.0,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-10-26",
@@ -4666,12 +4854,12 @@
         {
           "date": "2026-10-28",
           "price": 73.0,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-10-29",
           "price": 73.0,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-10-30",
@@ -4686,17 +4874,17 @@
         {
           "date": "2026-11-01",
           "price": 73.0,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-11-02",
           "price": 73.0,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-11-03",
           "price": 73.0,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-11-04",
@@ -4706,7 +4894,7 @@
         {
           "date": "2026-11-05",
           "price": 73.0,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-11-06",
@@ -4732,9 +4920,14 @@
           "date": "2026-11-10",
           "price": 73.0,
           "available": 0
+        },
+        {
+          "date": "2026-11-11",
+          "price": 73.0,
+          "available": 0
         }
       ],
-      "scraped_at": "2026-10-11T11:10:22.676017"
+      "scraped_at": "2026-10-12T12:41:31.623043"
     },
     {
       "listing": {
@@ -4776,29 +4969,24 @@
       },
       "calendar": [
         {
-          "date": "2026-10-12",
-          "price": 91.0,
-          "available": 0
-        },
-        {
           "date": "2026-10-13",
           "price": 91.0,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-10-14",
           "price": 91.0,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-10-15",
           "price": 91.0,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-10-16",
           "price": 104.65,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-10-17",
@@ -4818,12 +5006,12 @@
         {
           "date": "2026-10-20",
           "price": 91.0,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-10-21",
           "price": 91.0,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-10-22",
@@ -4833,7 +5021,7 @@
         {
           "date": "2026-10-23",
           "price": 104.65,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-10-24",
@@ -4843,7 +5031,7 @@
         {
           "date": "2026-10-25",
           "price": 91.0,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-10-26",
@@ -4858,17 +5046,17 @@
         {
           "date": "2026-10-28",
           "price": 91.0,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-10-29",
           "price": 91.0,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-10-30",
           "price": 104.65,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-10-31",
@@ -4878,7 +5066,7 @@
         {
           "date": "2026-11-01",
           "price": 91.0,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-11-02",
@@ -4888,12 +5076,12 @@
         {
           "date": "2026-11-03",
           "price": 91.0,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-11-04",
           "price": 91.0,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-11-05",
@@ -4903,12 +5091,12 @@
         {
           "date": "2026-11-06",
           "price": 104.65,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-11-07",
           "price": 104.65,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-11-08",
@@ -4923,10 +5111,15 @@
         {
           "date": "2026-11-10",
           "price": 91.0,
+          "available": 0
+        },
+        {
+          "date": "2026-11-11",
+          "price": 91.0,
           "available": 1
         }
       ],
-      "scraped_at": "2026-10-11T11:10:23.238213"
+      "scraped_at": "2026-10-12T12:41:32.356635"
     },
     {
       "listing": {
@@ -4940,7 +5133,7 @@
         "latitude": -34.5861,
         "longitude": -58.4373,
         "neighborhood": "Palermo Hollywood",
-        "rating": 4.76,
+        "rating": 4.74,
         "reviews_count": 0,
         "host_id": "host_1722069862587817902",
         "host_name": "Host",
@@ -4969,351 +5162,157 @@
       },
       "calendar": [
         {
-          "date": "2026-10-12",
-          "price": 68.6,
-          "available": 1
-        },
-        {
           "date": "2026-10-13",
-          "price": 68.6,
+          "price": 68.4,
           "available": 1
         },
         {
           "date": "2026-10-14",
-          "price": 68.6,
-          "available": 0
+          "price": 68.4,
+          "available": 1
         },
         {
           "date": "2026-10-15",
-          "price": 68.6,
+          "price": 68.4,
           "available": 0
         },
         {
           "date": "2026-10-16",
-          "price": 78.89,
+          "price": 78.66,
           "available": 0
         },
         {
           "date": "2026-10-17",
-          "price": 78.89,
+          "price": 78.66,
           "available": 0
         },
         {
           "date": "2026-10-18",
-          "price": 68.6,
+          "price": 68.4,
           "available": 0
         },
         {
           "date": "2026-10-19",
-          "price": 68.6,
+          "price": 68.4,
           "available": 0
         },
         {
           "date": "2026-10-20",
-          "price": 68.6,
+          "price": 68.4,
           "available": 0
         },
         {
           "date": "2026-10-21",
-          "price": 68.6,
+          "price": 68.4,
           "available": 0
         },
         {
           "date": "2026-10-22",
-          "price": 68.6,
+          "price": 68.4,
           "available": 0
         },
         {
           "date": "2026-10-23",
-          "price": 78.89,
-          "available": 1
-        },
-        {
-          "date": "2026-10-24",
-          "price": 78.89,
-          "available": 0
-        },
-        {
-          "date": "2026-10-25",
-          "price": 68.6,
-          "available": 1
-        },
-        {
-          "date": "2026-10-26",
-          "price": 68.6,
-          "available": 0
-        },
-        {
-          "date": "2026-10-27",
-          "price": 68.6,
-          "available": 0
-        },
-        {
-          "date": "2026-10-28",
-          "price": 68.6,
-          "available": 1
-        },
-        {
-          "date": "2026-10-29",
-          "price": 68.6,
-          "available": 0
-        },
-        {
-          "date": "2026-10-30",
-          "price": 78.89,
-          "available": 1
-        },
-        {
-          "date": "2026-10-31",
-          "price": 78.89,
-          "available": 0
-        },
-        {
-          "date": "2026-11-01",
-          "price": 68.6,
-          "available": 0
-        },
-        {
-          "date": "2026-11-02",
-          "price": 68.6,
-          "available": 0
-        },
-        {
-          "date": "2026-11-03",
-          "price": 68.6,
-          "available": 0
-        },
-        {
-          "date": "2026-11-04",
-          "price": 68.6,
-          "available": 0
-        },
-        {
-          "date": "2026-11-05",
-          "price": 68.6,
-          "available": 0
-        },
-        {
-          "date": "2026-11-06",
-          "price": 78.89,
-          "available": 0
-        },
-        {
-          "date": "2026-11-07",
-          "price": 78.89,
-          "available": 1
-        },
-        {
-          "date": "2026-11-08",
-          "price": 68.6,
-          "available": 1
-        },
-        {
-          "date": "2026-11-09",
-          "price": 68.6,
-          "available": 0
-        },
-        {
-          "date": "2026-11-10",
-          "price": 68.6,
-          "available": 1
-        }
-      ],
-      "scraped_at": "2026-10-11T11:10:23.894029"
-    },
-    {
-      "listing": {
-        "listing_id": "1727515916812869428",
-        "title": "Studio Boutique Premium | Palermo Soho-Pileta&Gym-",
-        "property_type": "Apartment",
-        "room_type": "Entire home/apt",
-        "accommodates": 2,
-        "bedrooms": 1,
-        "bathrooms": 1.0,
-        "latitude": -34.5861,
-        "longitude": -58.4373,
-        "neighborhood": "Palermo Hollywood",
-        "rating": 4.92,
-        "reviews_count": 0,
-        "host_id": "host_1727515916812869428",
-        "host_name": "Host",
-        "host_is_superhost": 1,
-        "amenities": [
-          "Wifi",
-          "Air conditioning",
-          "Cocina",
-          "Lavarropas",
-          "Parking",
-          "Pool",
-          "Gym",
-          "Workspace",
-          "Check-in autónomo"
-        ],
-        "picture_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-1727515916812869428/original/7eb2705d-255e-49fb-bb4c-93590b50eb08.png?im_w=720&width=720&quality=70&auto=webp",
-        "weekend_price": null,
-        "weekly_discount": null,
-        "monthly_discount": null,
-        "early_bird_discount": null,
-        "last_minute_discount": null,
-        "cleaning_fee": null,
-        "minimum_stay": null,
-        "maximum_stay": null,
-        "instant_book": null,
-        "cancellation_policy": null
-      },
-      "calendar": [
-        {
-          "date": "2026-10-12",
-          "price": 72.2,
-          "available": 0
-        },
-        {
-          "date": "2026-10-13",
-          "price": 72.2,
-          "available": 0
-        },
-        {
-          "date": "2026-10-14",
-          "price": 72.2,
-          "available": 0
-        },
-        {
-          "date": "2026-10-15",
-          "price": 72.2,
-          "available": 0
-        },
-        {
-          "date": "2026-10-16",
-          "price": 83.03,
-          "available": 0
-        },
-        {
-          "date": "2026-10-17",
-          "price": 83.03,
-          "available": 0
-        },
-        {
-          "date": "2026-10-18",
-          "price": 72.2,
-          "available": 1
-        },
-        {
-          "date": "2026-10-19",
-          "price": 72.2,
-          "available": 1
-        },
-        {
-          "date": "2026-10-20",
-          "price": 72.2,
-          "available": 1
-        },
-        {
-          "date": "2026-10-21",
-          "price": 72.2,
-          "available": 0
-        },
-        {
-          "date": "2026-10-22",
-          "price": 72.2,
-          "available": 0
-        },
-        {
-          "date": "2026-10-23",
-          "price": 83.03,
+          "price": 78.66,
           "available": 0
         },
         {
           "date": "2026-10-24",
-          "price": 83.03,
+          "price": 78.66,
           "available": 1
         },
         {
           "date": "2026-10-25",
-          "price": 72.2,
+          "price": 68.4,
           "available": 0
         },
         {
           "date": "2026-10-26",
-          "price": 72.2,
+          "price": 68.4,
           "available": 1
         },
         {
           "date": "2026-10-27",
-          "price": 72.2,
-          "available": 1
-        },
-        {
-          "date": "2026-10-28",
-          "price": 72.2,
-          "available": 1
-        },
-        {
-          "date": "2026-10-29",
-          "price": 72.2,
+          "price": 68.4,
           "available": 0
         },
         {
+          "date": "2026-10-28",
+          "price": 68.4,
+          "available": 0
+        },
+        {
+          "date": "2026-10-29",
+          "price": 68.4,
+          "available": 1
+        },
+        {
           "date": "2026-10-30",
-          "price": 83.03,
+          "price": 78.66,
           "available": 0
         },
         {
           "date": "2026-10-31",
-          "price": 83.03,
-          "available": 0
+          "price": 78.66,
+          "available": 1
         },
         {
           "date": "2026-11-01",
-          "price": 72.2,
+          "price": 68.4,
           "available": 0
         },
         {
           "date": "2026-11-02",
-          "price": 72.2,
+          "price": 68.4,
           "available": 0
         },
         {
           "date": "2026-11-03",
-          "price": 72.2,
+          "price": 68.4,
           "available": 0
         },
         {
           "date": "2026-11-04",
-          "price": 72.2,
+          "price": 68.4,
           "available": 0
         },
         {
           "date": "2026-11-05",
-          "price": 72.2,
+          "price": 68.4,
           "available": 0
         },
         {
           "date": "2026-11-06",
-          "price": 83.03,
+          "price": 78.66,
           "available": 0
         },
         {
           "date": "2026-11-07",
-          "price": 83.03,
+          "price": 78.66,
           "available": 0
         },
         {
           "date": "2026-11-08",
-          "price": 72.2,
-          "available": 0
+          "price": 68.4,
+          "available": 1
         },
         {
           "date": "2026-11-09",
-          "price": 72.2,
+          "price": 68.4,
           "available": 1
         },
         {
           "date": "2026-11-10",
-          "price": 72.2,
+          "price": 68.4,
           "available": 0
+        },
+        {
+          "date": "2026-11-11",
+          "price": 68.4,
+          "available": 1
         }
       ],
-      "scraped_at": "2026-10-11T11:10:24.484000"
+      "scraped_at": "2026-10-12T12:41:33.284437"
     },
     {
       "listing": {
@@ -5355,24 +5354,19 @@
       },
       "calendar": [
         {
-          "date": "2026-10-12",
-          "price": 103.0,
-          "available": 0
-        },
-        {
           "date": "2026-10-13",
           "price": 103.0,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-10-14",
           "price": 103.0,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-10-15",
           "price": 103.0,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-10-16",
@@ -5382,7 +5376,7 @@
         {
           "date": "2026-10-17",
           "price": 118.45,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-10-18",
@@ -5402,12 +5396,12 @@
         {
           "date": "2026-10-21",
           "price": 103.0,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-10-22",
           "price": 103.0,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-10-23",
@@ -5437,7 +5431,7 @@
         {
           "date": "2026-10-28",
           "price": 103.0,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-10-29",
@@ -5452,7 +5446,7 @@
         {
           "date": "2026-10-31",
           "price": 118.45,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-11-01",
@@ -5462,12 +5456,12 @@
         {
           "date": "2026-11-02",
           "price": 103.0,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-11-03",
           "price": 103.0,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-11-04",
@@ -5482,17 +5476,17 @@
         {
           "date": "2026-11-06",
           "price": 118.45,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-11-07",
           "price": 118.45,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-11-08",
           "price": 103.0,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-11-09",
@@ -5502,10 +5496,15 @@
         {
           "date": "2026-11-10",
           "price": 103.0,
+          "available": 1
+        },
+        {
+          "date": "2026-11-11",
+          "price": 103.0,
           "available": 0
         }
       ],
-      "scraped_at": "2026-10-11T11:10:25.115376"
+      "scraped_at": "2026-10-12T12:41:34.440923"
     },
     {
       "listing": {
@@ -5549,11 +5548,6 @@
       },
       "calendar": [
         {
-          "date": "2026-10-12",
-          "price": 66.2,
-          "available": 0
-        },
-        {
           "date": "2026-10-13",
           "price": 66.2,
           "available": 0
@@ -5566,12 +5560,12 @@
         {
           "date": "2026-10-15",
           "price": 66.2,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-10-16",
           "price": 76.13,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-10-17",
@@ -5596,7 +5590,7 @@
         {
           "date": "2026-10-21",
           "price": 66.2,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-10-22",
@@ -5606,7 +5600,7 @@
         {
           "date": "2026-10-23",
           "price": 76.13,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-10-24",
@@ -5626,7 +5620,7 @@
         {
           "date": "2026-10-27",
           "price": 66.2,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-10-28",
@@ -5636,37 +5630,37 @@
         {
           "date": "2026-10-29",
           "price": 66.2,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-10-30",
           "price": 76.13,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-10-31",
           "price": 76.13,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-11-01",
           "price": 66.2,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-11-02",
           "price": 66.2,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-11-03",
           "price": 66.2,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-11-04",
           "price": 66.2,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-11-05",
@@ -5676,7 +5670,7 @@
         {
           "date": "2026-11-06",
           "price": 76.13,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-11-07",
@@ -5686,7 +5680,7 @@
         {
           "date": "2026-11-08",
           "price": 66.2,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-11-09",
@@ -5696,10 +5690,15 @@
         {
           "date": "2026-11-10",
           "price": 66.2,
+          "available": 0
+        },
+        {
+          "date": "2026-11-11",
+          "price": 66.2,
           "available": 1
         }
       ],
-      "scraped_at": "2026-10-11T11:10:26.171861"
+      "scraped_at": "2026-10-12T12:41:35.768898"
     },
     {
       "listing": {
@@ -5741,11 +5740,6 @@
       },
       "calendar": [
         {
-          "date": "2026-10-12",
-          "price": 69.2,
-          "available": 0
-        },
-        {
           "date": "2026-10-13",
           "price": 69.2,
           "available": 0
@@ -5793,7 +5787,7 @@
         {
           "date": "2026-10-22",
           "price": 69.2,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-10-23",
@@ -5803,7 +5797,7 @@
         {
           "date": "2026-10-24",
           "price": 79.58,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-10-25",
@@ -5873,12 +5867,12 @@
         {
           "date": "2026-11-07",
           "price": 79.58,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-11-08",
           "price": 69.2,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-11-09",
@@ -5888,10 +5882,15 @@
         {
           "date": "2026-11-10",
           "price": 69.2,
+          "available": 0
+        },
+        {
+          "date": "2026-11-11",
+          "price": 69.2,
           "available": 1
         }
       ],
-      "scraped_at": "2026-10-11T11:10:27.306447"
+      "scraped_at": "2026-10-12T12:41:36.830614"
     },
     {
       "listing": {
@@ -5934,29 +5933,24 @@
       },
       "calendar": [
         {
-          "date": "2026-10-12",
-          "price": 64.9,
-          "available": 0
-        },
-        {
           "date": "2026-10-13",
           "price": 64.9,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-10-14",
           "price": 64.9,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-10-15",
           "price": 64.9,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-10-16",
           "price": 74.64,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-10-17",
@@ -5966,17 +5960,17 @@
         {
           "date": "2026-10-18",
           "price": 64.9,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-10-19",
           "price": 64.9,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-10-20",
           "price": 64.9,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-10-21",
@@ -5996,17 +5990,17 @@
         {
           "date": "2026-10-24",
           "price": 74.64,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-10-25",
           "price": 64.9,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-10-26",
           "price": 64.9,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-10-27",
@@ -6016,7 +6010,7 @@
         {
           "date": "2026-10-28",
           "price": 64.9,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-10-29",
@@ -6026,17 +6020,17 @@
         {
           "date": "2026-10-30",
           "price": 74.64,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-10-31",
           "price": 74.64,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-11-01",
           "price": 64.9,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-11-02",
@@ -6066,7 +6060,7 @@
         {
           "date": "2026-11-07",
           "price": 74.64,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-11-08",
@@ -6076,15 +6070,20 @@
         {
           "date": "2026-11-09",
           "price": 64.9,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-11-10",
           "price": 64.9,
           "available": 0
+        },
+        {
+          "date": "2026-11-11",
+          "price": 64.9,
+          "available": 0
         }
       ],
-      "scraped_at": "2026-10-11T11:10:27.935626"
+      "scraped_at": "2026-10-12T12:41:37.752271"
     },
     {
       "listing": {
@@ -6127,14 +6126,9 @@
       },
       "calendar": [
         {
-          "date": "2026-10-12",
-          "price": 98.0,
-          "available": 1
-        },
-        {
           "date": "2026-10-13",
           "price": 98.0,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-10-14",
@@ -6144,17 +6138,17 @@
         {
           "date": "2026-10-15",
           "price": 98.0,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-10-16",
           "price": 112.7,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-10-17",
           "price": 112.7,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-10-18",
@@ -6164,7 +6158,7 @@
         {
           "date": "2026-10-19",
           "price": 98.0,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-10-20",
@@ -6174,22 +6168,22 @@
         {
           "date": "2026-10-21",
           "price": 98.0,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-10-22",
           "price": 98.0,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-10-23",
           "price": 112.7,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-10-24",
           "price": 112.7,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-10-25",
@@ -6199,7 +6193,7 @@
         {
           "date": "2026-10-26",
           "price": 98.0,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-10-27",
@@ -6209,7 +6203,7 @@
         {
           "date": "2026-10-28",
           "price": 98.0,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-10-29",
@@ -6219,7 +6213,7 @@
         {
           "date": "2026-10-30",
           "price": 112.7,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-10-31",
@@ -6234,17 +6228,17 @@
         {
           "date": "2026-11-02",
           "price": 98.0,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-11-03",
           "price": 98.0,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-11-04",
           "price": 98.0,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-11-05",
@@ -6274,10 +6268,15 @@
         {
           "date": "2026-11-10",
           "price": 98.0,
+          "available": 0
+        },
+        {
+          "date": "2026-11-11",
+          "price": 98.0,
           "available": 1
         }
       ],
-      "scraped_at": "2026-10-11T11:10:28.627535"
+      "scraped_at": "2026-10-12T12:41:38.874332"
     },
     {
       "listing": {
@@ -6320,11 +6319,6 @@
       },
       "calendar": [
         {
-          "date": "2026-10-12",
-          "price": 79.3,
-          "available": 0
-        },
-        {
           "date": "2026-10-13",
           "price": 79.3,
           "available": 0
@@ -6332,17 +6326,17 @@
         {
           "date": "2026-10-14",
           "price": 79.3,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-10-15",
           "price": 79.3,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-10-16",
           "price": 91.19,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-10-17",
@@ -6352,7 +6346,7 @@
         {
           "date": "2026-10-18",
           "price": 79.3,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-10-19",
@@ -6377,7 +6371,7 @@
         {
           "date": "2026-10-23",
           "price": 91.19,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-10-24",
@@ -6397,7 +6391,7 @@
         {
           "date": "2026-10-27",
           "price": 79.3,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-10-28",
@@ -6412,12 +6406,12 @@
         {
           "date": "2026-10-30",
           "price": 91.19,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-10-31",
           "price": 91.19,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-11-01",
@@ -6427,32 +6421,32 @@
         {
           "date": "2026-11-02",
           "price": 79.3,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-11-03",
           "price": 79.3,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-11-04",
           "price": 79.3,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-11-05",
           "price": 79.3,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-11-06",
           "price": 91.19,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-11-07",
           "price": 91.19,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-11-08",
@@ -6462,15 +6456,20 @@
         {
           "date": "2026-11-09",
           "price": 79.3,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-11-10",
           "price": 79.3,
           "available": 1
+        },
+        {
+          "date": "2026-11-11",
+          "price": 79.3,
+          "available": 1
         }
       ],
-      "scraped_at": "2026-10-11T11:10:29.680217"
+      "scraped_at": "2026-10-12T12:41:39.667773"
     },
     {
       "listing": {
@@ -6513,11 +6512,6 @@
       },
       "calendar": [
         {
-          "date": "2026-10-12",
-          "price": 101.8,
-          "available": 0
-        },
-        {
           "date": "2026-10-13",
           "price": 101.8,
           "available": 0
@@ -6550,17 +6544,17 @@
         {
           "date": "2026-10-19",
           "price": 101.8,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-10-20",
           "price": 101.8,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-10-21",
           "price": 101.8,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-10-22",
@@ -6580,12 +6574,12 @@
         {
           "date": "2026-10-25",
           "price": 101.8,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-10-26",
           "price": 101.8,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-10-27",
@@ -6600,7 +6594,7 @@
         {
           "date": "2026-10-29",
           "price": 101.8,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-10-30",
@@ -6615,17 +6609,17 @@
         {
           "date": "2026-11-01",
           "price": 101.8,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-11-02",
           "price": 101.8,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-11-03",
           "price": 101.8,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-11-04",
@@ -6635,7 +6629,7 @@
         {
           "date": "2026-11-05",
           "price": 101.8,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-11-06",
@@ -6645,25 +6639,30 @@
         {
           "date": "2026-11-07",
           "price": 117.07,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-11-08",
           "price": 101.8,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-11-09",
           "price": 101.8,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-11-10",
           "price": 101.8,
+          "available": 1
+        },
+        {
+          "date": "2026-11-11",
+          "price": 101.8,
           "available": 0
         }
       ],
-      "scraped_at": "2026-10-11T11:10:30.539457"
+      "scraped_at": "2026-10-12T12:41:40.547960"
     },
     {
       "listing": {
@@ -6707,11 +6706,6 @@
       },
       "calendar": [
         {
-          "date": "2026-10-12",
-          "price": 97.9,
-          "available": 0
-        },
-        {
           "date": "2026-10-13",
           "price": 97.9,
           "available": 0
@@ -6744,27 +6738,27 @@
         {
           "date": "2026-10-19",
           "price": 97.9,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-10-20",
           "price": 97.9,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-10-21",
           "price": 97.9,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-10-22",
           "price": 97.9,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-10-23",
           "price": 112.58,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-10-24",
@@ -6794,7 +6788,7 @@
         {
           "date": "2026-10-29",
           "price": 97.9,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-10-30",
@@ -6804,7 +6798,7 @@
         {
           "date": "2026-10-31",
           "price": 112.58,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-11-01",
@@ -6814,22 +6808,22 @@
         {
           "date": "2026-11-02",
           "price": 97.9,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-11-03",
           "price": 97.9,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-11-04",
           "price": 97.9,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-11-05",
           "price": 97.9,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-11-06",
@@ -6839,7 +6833,7 @@
         {
           "date": "2026-11-07",
           "price": 112.58,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-11-08",
@@ -6849,15 +6843,20 @@
         {
           "date": "2026-11-09",
           "price": 97.9,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-11-10",
           "price": 97.9,
           "available": 1
+        },
+        {
+          "date": "2026-11-11",
+          "price": 97.9,
+          "available": 1
         }
       ],
-      "scraped_at": "2026-10-11T11:10:31.146592"
+      "scraped_at": "2026-10-12T12:41:41.290517"
     },
     {
       "listing": {
@@ -6901,24 +6900,19 @@
       },
       "calendar": [
         {
-          "date": "2026-10-12",
-          "price": 78.5,
-          "available": 0
-        },
-        {
           "date": "2026-10-13",
           "price": 78.5,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-10-14",
           "price": 78.5,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-10-15",
           "price": 78.5,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-10-16",
@@ -6928,17 +6922,17 @@
         {
           "date": "2026-10-17",
           "price": 90.27,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-10-18",
           "price": 78.5,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-10-19",
           "price": 78.5,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-10-20",
@@ -6958,17 +6952,17 @@
         {
           "date": "2026-10-23",
           "price": 90.27,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-10-24",
           "price": 90.27,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-10-25",
           "price": 78.5,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-10-26",
@@ -6983,7 +6977,7 @@
         {
           "date": "2026-10-28",
           "price": 78.5,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-10-29",
@@ -6998,32 +6992,32 @@
         {
           "date": "2026-10-31",
           "price": 90.27,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-11-01",
           "price": 78.5,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-11-02",
           "price": 78.5,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-11-03",
           "price": 78.5,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-11-04",
           "price": 78.5,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-11-05",
           "price": 78.5,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-11-06",
@@ -7033,12 +7027,12 @@
         {
           "date": "2026-11-07",
           "price": 90.27,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-11-08",
           "price": 78.5,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-11-09",
@@ -7049,9 +7043,14 @@
           "date": "2026-11-10",
           "price": 78.5,
           "available": 0
+        },
+        {
+          "date": "2026-11-11",
+          "price": 78.5,
+          "available": 0
         }
       ],
-      "scraped_at": "2026-10-11T11:10:31.919714"
+      "scraped_at": "2026-10-12T12:41:41.958926"
     },
     {
       "listing": {
@@ -7095,24 +7094,19 @@
       },
       "calendar": [
         {
-          "date": "2026-10-12",
-          "price": 69.9,
-          "available": 0
-        },
-        {
           "date": "2026-10-13",
           "price": 69.9,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-10-14",
           "price": 69.9,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-10-15",
           "price": 69.9,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-10-16",
@@ -7127,17 +7121,17 @@
         {
           "date": "2026-10-18",
           "price": 69.9,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-10-19",
           "price": 69.9,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-10-20",
           "price": 69.9,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-10-21",
@@ -7152,17 +7146,17 @@
         {
           "date": "2026-10-23",
           "price": 80.39,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-10-24",
           "price": 80.39,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-10-25",
           "price": 69.9,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-10-26",
@@ -7177,7 +7171,7 @@
         {
           "date": "2026-10-28",
           "price": 69.9,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-10-29",
@@ -7192,12 +7186,12 @@
         {
           "date": "2026-10-31",
           "price": 80.39,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-11-01",
           "price": 69.9,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-11-02",
@@ -7207,12 +7201,12 @@
         {
           "date": "2026-11-03",
           "price": 69.9,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-11-04",
           "price": 69.9,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-11-05",
@@ -7222,12 +7216,12 @@
         {
           "date": "2026-11-06",
           "price": 80.39,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-11-07",
           "price": 80.39,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-11-08",
@@ -7243,9 +7237,14 @@
           "date": "2026-11-10",
           "price": 69.9,
           "available": 0
+        },
+        {
+          "date": "2026-11-11",
+          "price": 69.9,
+          "available": 0
         }
       ],
-      "scraped_at": "2026-10-11T11:10:32.462574"
+      "scraped_at": "2026-10-12T12:41:42.618207"
     },
     {
       "listing": {
@@ -7287,24 +7286,19 @@
       },
       "calendar": [
         {
-          "date": "2026-10-12",
-          "price": 90.0,
-          "available": 1
-        },
-        {
           "date": "2026-10-13",
           "price": 90.0,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-10-14",
           "price": 90.0,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-10-15",
           "price": 90.0,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-10-16",
@@ -7339,12 +7333,12 @@
         {
           "date": "2026-10-22",
           "price": 90.0,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-10-23",
           "price": 103.5,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-10-24",
@@ -7379,12 +7373,12 @@
         {
           "date": "2026-10-30",
           "price": 103.5,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-10-31",
           "price": 103.5,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-11-01",
@@ -7394,17 +7388,17 @@
         {
           "date": "2026-11-02",
           "price": 90.0,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-11-03",
           "price": 90.0,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-11-04",
           "price": 90.0,
-          "available": 1
+          "available": 0
         },
         {
           "date": "2026-11-05",
@@ -7419,7 +7413,7 @@
         {
           "date": "2026-11-07",
           "price": 103.5,
-          "available": 0
+          "available": 1
         },
         {
           "date": "2026-11-08",
@@ -7434,10 +7428,15 @@
         {
           "date": "2026-11-10",
           "price": 90.0,
+          "available": 0
+        },
+        {
+          "date": "2026-11-11",
+          "price": 90.0,
           "available": 1
         }
       ],
-      "scraped_at": "2026-10-11T11:10:32.996615"
+      "scraped_at": "2026-10-12T12:41:43.571545"
     }
   ]
 }
