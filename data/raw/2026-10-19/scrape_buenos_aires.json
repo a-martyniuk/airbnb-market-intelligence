@@ -1,0 +1,7248 @@
+{
+  "metadata": {
+    "city": "Buenos Aires",
+    "date": "2026-10-19",
+    "count": 39,
+    "mock_mode": false,
+    "timestamp": "2026-10-19T10:28:12.182495"
+  },
+  "results": [
+    {
+      "listing": {
+        "listing_id": "1780595537250246099",
+        "title": "Industrial style in Palermo Soho, with a private balcony and a workspace",
+        "property_type": "Apartment",
+        "room_type": "Entire home/apt",
+        "accommodates": 4,
+        "bedrooms": 1,
+        "bathrooms": 1.5,
+        "latitude": -34.5873,
+        "longitude": -58.434,
+        "neighborhood": "Palermo Hollywood",
+        "rating": 4.85,
+        "reviews_count": 0,
+        "host_id": "host_1780595537250246099",
+        "host_name": "Host",
+        "host_is_superhost": 0,
+        "amenities": [
+          "Wifi",
+          "Air conditioning",
+          "Cocina"
+        ],
+        "picture_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-1780595537250246099/original/0703170c-66f5-4ebc-849a-b84c734555cc.jpeg"
+      },
+      "calendar": [
+        {
+          "date": "2026-10-20",
+          "price": 129.0,
+          "available": 0
+        },
+        {
+          "date": "2026-10-21",
+          "price": 129.0,
+          "available": 1
+        },
+        {
+          "date": "2026-10-22",
+          "price": 129.0,
+          "available": 0
+        },
+        {
+          "date": "2026-10-23",
+          "price": 148.35,
+          "available": 0
+        },
+        {
+          "date": "2026-10-24",
+          "price": 148.35,
+          "available": 0
+        },
+        {
+          "date": "2026-10-25",
+          "price": 129.0,
+          "available": 0
+        },
+        {
+          "date": "2026-10-26",
+          "price": 129.0,
+          "available": 0
+        },
+        {
+          "date": "2026-10-27",
+          "price": 129.0,
+          "available": 1
+        },
+        {
+          "date": "2026-10-28",
+          "price": 129.0,
+          "available": 1
+        },
+        {
+          "date": "2026-10-29",
+          "price": 129.0,
+          "available": 0
+        },
+        {
+          "date": "2026-10-30",
+          "price": 148.35,
+          "available": 0
+        },
+        {
+          "date": "2026-10-31",
+          "price": 148.35,
+          "available": 0
+        },
+        {
+          "date": "2026-11-01",
+          "price": 129.0,
+          "available": 1
+        },
+        {
+          "date": "2026-11-02",
+          "price": 129.0,
+          "available": 0
+        },
+        {
+          "date": "2026-11-03",
+          "price": 129.0,
+          "available": 1
+        },
+        {
+          "date": "2026-11-04",
+          "price": 129.0,
+          "available": 1
+        },
+        {
+          "date": "2026-11-05",
+          "price": 129.0,
+          "available": 0
+        },
+        {
+          "date": "2026-11-06",
+          "price": 148.35,
+          "available": 0
+        },
+        {
+          "date": "2026-11-07",
+          "price": 148.35,
+          "available": 1
+        },
+        {
+          "date": "2026-11-08",
+          "price": 129.0,
+          "available": 1
+        },
+        {
+          "date": "2026-11-09",
+          "price": 129.0,
+          "available": 1
+        },
+        {
+          "date": "2026-11-10",
+          "price": 129.0,
+          "available": 0
+        },
+        {
+          "date": "2026-11-11",
+          "price": 129.0,
+          "available": 0
+        },
+        {
+          "date": "2026-11-12",
+          "price": 129.0,
+          "available": 0
+        },
+        {
+          "date": "2026-11-13",
+          "price": 148.35,
+          "available": 0
+        },
+        {
+          "date": "2026-11-14",
+          "price": 148.35,
+          "available": 0
+        },
+        {
+          "date": "2026-11-15",
+          "price": 129.0,
+          "available": 1
+        },
+        {
+          "date": "2026-11-16",
+          "price": 129.0,
+          "available": 0
+        },
+        {
+          "date": "2026-11-17",
+          "price": 129.0,
+          "available": 1
+        },
+        {
+          "date": "2026-11-18",
+          "price": 129.0,
+          "available": 1
+        }
+      ],
+      "scraped_at": "2026-10-19T10:27:59.862321"
+    },
+    {
+      "listing": {
+        "listing_id": "1782016783916211154",
+        "title": "Bright 46 m² studio with a private balcony, a pool, and a rooftop terrace",
+        "property_type": "Apartment",
+        "room_type": "Entire home/apt",
+        "accommodates": 4,
+        "bedrooms": 1,
+        "bathrooms": 1.0,
+        "latitude": -34.5793,
+        "longitude": -58.4315,
+        "neighborhood": "Palermo Hollywood",
+        "rating": 4.85,
+        "reviews_count": 0,
+        "host_id": "host_1782016783916211154",
+        "host_name": "Host",
+        "host_is_superhost": 0,
+        "amenities": [
+          "Wifi",
+          "Air conditioning",
+          "Cocina",
+          "Pool"
+        ],
+        "picture_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-1782016783916211154/original/4bce0779-5f3a-47a3-a6b8-45df500f7fa2.jpeg"
+      },
+      "calendar": [
+        {
+          "date": "2026-10-20",
+          "price": 67.16,
+          "available": 1
+        },
+        {
+          "date": "2026-10-21",
+          "price": 67.16,
+          "available": 1
+        },
+        {
+          "date": "2026-10-22",
+          "price": 67.16,
+          "available": 0
+        },
+        {
+          "date": "2026-10-23",
+          "price": 77.23,
+          "available": 0
+        },
+        {
+          "date": "2026-10-24",
+          "price": 77.23,
+          "available": 1
+        },
+        {
+          "date": "2026-10-25",
+          "price": 67.16,
+          "available": 1
+        },
+        {
+          "date": "2026-10-26",
+          "price": 67.16,
+          "available": 1
+        },
+        {
+          "date": "2026-10-27",
+          "price": 67.16,
+          "available": 1
+        },
+        {
+          "date": "2026-10-28",
+          "price": 67.16,
+          "available": 0
+        },
+        {
+          "date": "2026-10-29",
+          "price": 67.16,
+          "available": 0
+        },
+        {
+          "date": "2026-10-30",
+          "price": 77.23,
+          "available": 0
+        },
+        {
+          "date": "2026-10-31",
+          "price": 77.23,
+          "available": 0
+        },
+        {
+          "date": "2026-11-01",
+          "price": 67.16,
+          "available": 0
+        },
+        {
+          "date": "2026-11-02",
+          "price": 67.16,
+          "available": 0
+        },
+        {
+          "date": "2026-11-03",
+          "price": 67.16,
+          "available": 0
+        },
+        {
+          "date": "2026-11-04",
+          "price": 67.16,
+          "available": 0
+        },
+        {
+          "date": "2026-11-05",
+          "price": 67.16,
+          "available": 0
+        },
+        {
+          "date": "2026-11-06",
+          "price": 77.23,
+          "available": 0
+        },
+        {
+          "date": "2026-11-07",
+          "price": 77.23,
+          "available": 0
+        },
+        {
+          "date": "2026-11-08",
+          "price": 67.16,
+          "available": 0
+        },
+        {
+          "date": "2026-11-09",
+          "price": 67.16,
+          "available": 0
+        },
+        {
+          "date": "2026-11-10",
+          "price": 67.16,
+          "available": 0
+        },
+        {
+          "date": "2026-11-11",
+          "price": 67.16,
+          "available": 1
+        },
+        {
+          "date": "2026-11-12",
+          "price": 67.16,
+          "available": 0
+        },
+        {
+          "date": "2026-11-13",
+          "price": 77.23,
+          "available": 0
+        },
+        {
+          "date": "2026-11-14",
+          "price": 77.23,
+          "available": 0
+        },
+        {
+          "date": "2026-11-15",
+          "price": 67.16,
+          "available": 0
+        },
+        {
+          "date": "2026-11-16",
+          "price": 67.16,
+          "available": 1
+        },
+        {
+          "date": "2026-11-17",
+          "price": 67.16,
+          "available": 0
+        },
+        {
+          "date": "2026-11-18",
+          "price": 67.16,
+          "available": 0
+        }
+      ],
+      "scraped_at": "2026-10-19T10:27:59.862768"
+    },
+    {
+      "listing": {
+        "listing_id": "1323280168120596931",
+        "title": "Vibrant Palermo Hollywood stay with a balcony, a Nespresso machine, and a workspace",
+        "property_type": "Apartment",
+        "room_type": "Entire home/apt",
+        "accommodates": 4,
+        "bedrooms": 1,
+        "bathrooms": 1.0,
+        "latitude": -34.57912,
+        "longitude": -58.43065,
+        "neighborhood": "Palermo Hollywood",
+        "rating": 5.0,
+        "reviews_count": 70,
+        "host_id": "host_1323280168120596931",
+        "host_name": "Host",
+        "host_is_superhost": 0,
+        "amenities": [
+          "Wifi",
+          "Air conditioning",
+          "Cocina"
+        ],
+        "picture_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-1323280168120596931/original/421b09f3-5e6c-4c20-b97f-3f2847e0601f.jpeg"
+      },
+      "calendar": [
+        {
+          "date": "2026-10-20",
+          "price": 101.96,
+          "available": 0
+        },
+        {
+          "date": "2026-10-21",
+          "price": 101.96,
+          "available": 1
+        },
+        {
+          "date": "2026-10-22",
+          "price": 101.96,
+          "available": 1
+        },
+        {
+          "date": "2026-10-23",
+          "price": 117.25,
+          "available": 0
+        },
+        {
+          "date": "2026-10-24",
+          "price": 117.25,
+          "available": 0
+        },
+        {
+          "date": "2026-10-25",
+          "price": 101.96,
+          "available": 0
+        },
+        {
+          "date": "2026-10-26",
+          "price": 101.96,
+          "available": 0
+        },
+        {
+          "date": "2026-10-27",
+          "price": 101.96,
+          "available": 0
+        },
+        {
+          "date": "2026-10-28",
+          "price": 101.96,
+          "available": 0
+        },
+        {
+          "date": "2026-10-29",
+          "price": 101.96,
+          "available": 0
+        },
+        {
+          "date": "2026-10-30",
+          "price": 117.25,
+          "available": 0
+        },
+        {
+          "date": "2026-10-31",
+          "price": 117.25,
+          "available": 0
+        },
+        {
+          "date": "2026-11-01",
+          "price": 101.96,
+          "available": 1
+        },
+        {
+          "date": "2026-11-02",
+          "price": 101.96,
+          "available": 0
+        },
+        {
+          "date": "2026-11-03",
+          "price": 101.96,
+          "available": 0
+        },
+        {
+          "date": "2026-11-04",
+          "price": 101.96,
+          "available": 0
+        },
+        {
+          "date": "2026-11-05",
+          "price": 101.96,
+          "available": 0
+        },
+        {
+          "date": "2026-11-06",
+          "price": 117.25,
+          "available": 1
+        },
+        {
+          "date": "2026-11-07",
+          "price": 117.25,
+          "available": 1
+        },
+        {
+          "date": "2026-11-08",
+          "price": 101.96,
+          "available": 1
+        },
+        {
+          "date": "2026-11-09",
+          "price": 101.96,
+          "available": 0
+        },
+        {
+          "date": "2026-11-10",
+          "price": 101.96,
+          "available": 0
+        },
+        {
+          "date": "2026-11-11",
+          "price": 101.96,
+          "available": 0
+        },
+        {
+          "date": "2026-11-12",
+          "price": 101.96,
+          "available": 0
+        },
+        {
+          "date": "2026-11-13",
+          "price": 117.25,
+          "available": 1
+        },
+        {
+          "date": "2026-11-14",
+          "price": 117.25,
+          "available": 1
+        },
+        {
+          "date": "2026-11-15",
+          "price": 101.96,
+          "available": 0
+        },
+        {
+          "date": "2026-11-16",
+          "price": 101.96,
+          "available": 0
+        },
+        {
+          "date": "2026-11-17",
+          "price": 101.96,
+          "available": 1
+        },
+        {
+          "date": "2026-11-18",
+          "price": 101.96,
+          "available": 0
+        }
+      ],
+      "scraped_at": "2026-10-19T10:27:59.863253"
+    },
+    {
+      "listing": {
+        "listing_id": "1555388247458461313",
+        "title": "Quiet, elegant oasis with a balcony terrace and beautiful sunset views",
+        "property_type": "Apartment",
+        "room_type": "Entire home/apt",
+        "accommodates": 2,
+        "bedrooms": 1,
+        "bathrooms": 1.0,
+        "latitude": -34.57881,
+        "longitude": -58.4327,
+        "neighborhood": "Palermo Hollywood",
+        "rating": 4.99,
+        "reviews_count": 115,
+        "host_id": "host_1555388247458461313",
+        "host_name": "Host",
+        "host_is_superhost": 0,
+        "amenities": [
+          "Wifi",
+          "Air conditioning",
+          "Cocina"
+        ],
+        "picture_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-1555388247458461313/original/55a98b04-8e4c-4d7c-9b73-b987b70c8bb7.jpeg"
+      },
+      "calendar": [
+        {
+          "date": "2026-10-20",
+          "price": 86.0,
+          "available": 1
+        },
+        {
+          "date": "2026-10-21",
+          "price": 86.0,
+          "available": 1
+        },
+        {
+          "date": "2026-10-22",
+          "price": 86.0,
+          "available": 0
+        },
+        {
+          "date": "2026-10-23",
+          "price": 98.9,
+          "available": 0
+        },
+        {
+          "date": "2026-10-24",
+          "price": 98.9,
+          "available": 0
+        },
+        {
+          "date": "2026-10-25",
+          "price": 86.0,
+          "available": 1
+        },
+        {
+          "date": "2026-10-26",
+          "price": 86.0,
+          "available": 1
+        },
+        {
+          "date": "2026-10-27",
+          "price": 86.0,
+          "available": 0
+        },
+        {
+          "date": "2026-10-28",
+          "price": 86.0,
+          "available": 0
+        },
+        {
+          "date": "2026-10-29",
+          "price": 86.0,
+          "available": 0
+        },
+        {
+          "date": "2026-10-30",
+          "price": 98.9,
+          "available": 0
+        },
+        {
+          "date": "2026-10-31",
+          "price": 98.9,
+          "available": 0
+        },
+        {
+          "date": "2026-11-01",
+          "price": 86.0,
+          "available": 1
+        },
+        {
+          "date": "2026-11-02",
+          "price": 86.0,
+          "available": 1
+        },
+        {
+          "date": "2026-11-03",
+          "price": 86.0,
+          "available": 1
+        },
+        {
+          "date": "2026-11-04",
+          "price": 86.0,
+          "available": 1
+        },
+        {
+          "date": "2026-11-05",
+          "price": 86.0,
+          "available": 0
+        },
+        {
+          "date": "2026-11-06",
+          "price": 98.9,
+          "available": 1
+        },
+        {
+          "date": "2026-11-07",
+          "price": 98.9,
+          "available": 0
+        },
+        {
+          "date": "2026-11-08",
+          "price": 86.0,
+          "available": 0
+        },
+        {
+          "date": "2026-11-09",
+          "price": 86.0,
+          "available": 1
+        },
+        {
+          "date": "2026-11-10",
+          "price": 86.0,
+          "available": 1
+        },
+        {
+          "date": "2026-11-11",
+          "price": 86.0,
+          "available": 1
+        },
+        {
+          "date": "2026-11-12",
+          "price": 86.0,
+          "available": 0
+        },
+        {
+          "date": "2026-11-13",
+          "price": 98.9,
+          "available": 0
+        },
+        {
+          "date": "2026-11-14",
+          "price": 98.9,
+          "available": 1
+        },
+        {
+          "date": "2026-11-15",
+          "price": 86.0,
+          "available": 0
+        },
+        {
+          "date": "2026-11-16",
+          "price": 86.0,
+          "available": 0
+        },
+        {
+          "date": "2026-11-17",
+          "price": 86.0,
+          "available": 0
+        },
+        {
+          "date": "2026-11-18",
+          "price": 86.0,
+          "available": 1
+        }
+      ],
+      "scraped_at": "2026-10-19T10:27:59.863657"
+    },
+    {
+      "listing": {
+        "listing_id": "1711246888364969652",
+        "title": "Fifth-floor front in Palermo Hollywood, with a private balcony and a private entrance",
+        "property_type": "Apartment",
+        "room_type": "Entire home/apt",
+        "accommodates": 2,
+        "bedrooms": 1,
+        "bathrooms": 2.0,
+        "latitude": -34.5778,
+        "longitude": -58.4388,
+        "neighborhood": "Palermo Hollywood",
+        "rating": 5.0,
+        "reviews_count": 26,
+        "host_id": "host_1711246888364969652",
+        "host_name": "Host",
+        "host_is_superhost": 0,
+        "amenities": [
+          "Wifi",
+          "Air conditioning",
+          "Cocina"
+        ],
+        "picture_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-1711246888364969652/original/3b5c3983-a363-4a42-a90b-629ce9e647b5.png"
+      },
+      "calendar": [
+        {
+          "date": "2026-10-20",
+          "price": 75.0,
+          "available": 0
+        },
+        {
+          "date": "2026-10-21",
+          "price": 75.0,
+          "available": 0
+        },
+        {
+          "date": "2026-10-22",
+          "price": 75.0,
+          "available": 0
+        },
+        {
+          "date": "2026-10-23",
+          "price": 86.25,
+          "available": 0
+        },
+        {
+          "date": "2026-10-24",
+          "price": 86.25,
+          "available": 0
+        },
+        {
+          "date": "2026-10-25",
+          "price": 75.0,
+          "available": 0
+        },
+        {
+          "date": "2026-10-26",
+          "price": 75.0,
+          "available": 0
+        },
+        {
+          "date": "2026-10-27",
+          "price": 75.0,
+          "available": 1
+        },
+        {
+          "date": "2026-10-28",
+          "price": 75.0,
+          "available": 0
+        },
+        {
+          "date": "2026-10-29",
+          "price": 75.0,
+          "available": 1
+        },
+        {
+          "date": "2026-10-30",
+          "price": 86.25,
+          "available": 1
+        },
+        {
+          "date": "2026-10-31",
+          "price": 86.25,
+          "available": 0
+        },
+        {
+          "date": "2026-11-01",
+          "price": 75.0,
+          "available": 0
+        },
+        {
+          "date": "2026-11-02",
+          "price": 75.0,
+          "available": 0
+        },
+        {
+          "date": "2026-11-03",
+          "price": 75.0,
+          "available": 0
+        },
+        {
+          "date": "2026-11-04",
+          "price": 75.0,
+          "available": 1
+        },
+        {
+          "date": "2026-11-05",
+          "price": 75.0,
+          "available": 0
+        },
+        {
+          "date": "2026-11-06",
+          "price": 86.25,
+          "available": 0
+        },
+        {
+          "date": "2026-11-07",
+          "price": 86.25,
+          "available": 0
+        },
+        {
+          "date": "2026-11-08",
+          "price": 75.0,
+          "available": 1
+        },
+        {
+          "date": "2026-11-09",
+          "price": 75.0,
+          "available": 1
+        },
+        {
+          "date": "2026-11-10",
+          "price": 75.0,
+          "available": 0
+        },
+        {
+          "date": "2026-11-11",
+          "price": 75.0,
+          "available": 0
+        },
+        {
+          "date": "2026-11-12",
+          "price": 75.0,
+          "available": 0
+        },
+        {
+          "date": "2026-11-13",
+          "price": 86.25,
+          "available": 1
+        },
+        {
+          "date": "2026-11-14",
+          "price": 86.25,
+          "available": 0
+        },
+        {
+          "date": "2026-11-15",
+          "price": 75.0,
+          "available": 0
+        },
+        {
+          "date": "2026-11-16",
+          "price": 75.0,
+          "available": 0
+        },
+        {
+          "date": "2026-11-17",
+          "price": 75.0,
+          "available": 0
+        },
+        {
+          "date": "2026-11-18",
+          "price": 75.0,
+          "available": 1
+        }
+      ],
+      "scraped_at": "2026-10-19T10:27:59.864081"
+    },
+    {
+      "listing": {
+        "listing_id": "1675407650367888280",
+        "title": "Modern design in Palermo Hollywood, with a private balcony and A/C",
+        "property_type": "Apartment",
+        "room_type": "Entire home/apt",
+        "accommodates": 4,
+        "bedrooms": 1,
+        "bathrooms": 1.0,
+        "latitude": -34.58186,
+        "longitude": -58.43543,
+        "neighborhood": "Palermo Hollywood",
+        "rating": 4.92,
+        "reviews_count": 24,
+        "host_id": "host_1675407650367888280",
+        "host_name": "Host",
+        "host_is_superhost": 0,
+        "amenities": [
+          "Wifi",
+          "Air conditioning",
+          "Cocina"
+        ],
+        "picture_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-1675407650367888280/original/edbe5805-0153-4ced-ad8e-3502860172bb.jpeg"
+      },
+      "calendar": [
+        {
+          "date": "2026-10-20",
+          "price": 106.8,
+          "available": 1
+        },
+        {
+          "date": "2026-10-21",
+          "price": 106.8,
+          "available": 0
+        },
+        {
+          "date": "2026-10-22",
+          "price": 106.8,
+          "available": 1
+        },
+        {
+          "date": "2026-10-23",
+          "price": 122.82,
+          "available": 1
+        },
+        {
+          "date": "2026-10-24",
+          "price": 122.82,
+          "available": 1
+        },
+        {
+          "date": "2026-10-25",
+          "price": 106.8,
+          "available": 0
+        },
+        {
+          "date": "2026-10-26",
+          "price": 106.8,
+          "available": 0
+        },
+        {
+          "date": "2026-10-27",
+          "price": 106.8,
+          "available": 1
+        },
+        {
+          "date": "2026-10-28",
+          "price": 106.8,
+          "available": 0
+        },
+        {
+          "date": "2026-10-29",
+          "price": 106.8,
+          "available": 1
+        },
+        {
+          "date": "2026-10-30",
+          "price": 122.82,
+          "available": 1
+        },
+        {
+          "date": "2026-10-31",
+          "price": 122.82,
+          "available": 1
+        },
+        {
+          "date": "2026-11-01",
+          "price": 106.8,
+          "available": 1
+        },
+        {
+          "date": "2026-11-02",
+          "price": 106.8,
+          "available": 0
+        },
+        {
+          "date": "2026-11-03",
+          "price": 106.8,
+          "available": 0
+        },
+        {
+          "date": "2026-11-04",
+          "price": 106.8,
+          "available": 0
+        },
+        {
+          "date": "2026-11-05",
+          "price": 106.8,
+          "available": 1
+        },
+        {
+          "date": "2026-11-06",
+          "price": 122.82,
+          "available": 1
+        },
+        {
+          "date": "2026-11-07",
+          "price": 122.82,
+          "available": 1
+        },
+        {
+          "date": "2026-11-08",
+          "price": 106.8,
+          "available": 0
+        },
+        {
+          "date": "2026-11-09",
+          "price": 106.8,
+          "available": 0
+        },
+        {
+          "date": "2026-11-10",
+          "price": 106.8,
+          "available": 1
+        },
+        {
+          "date": "2026-11-11",
+          "price": 106.8,
+          "available": 0
+        },
+        {
+          "date": "2026-11-12",
+          "price": 106.8,
+          "available": 0
+        },
+        {
+          "date": "2026-11-13",
+          "price": 122.82,
+          "available": 0
+        },
+        {
+          "date": "2026-11-14",
+          "price": 122.82,
+          "available": 0
+        },
+        {
+          "date": "2026-11-15",
+          "price": 106.8,
+          "available": 0
+        },
+        {
+          "date": "2026-11-16",
+          "price": 106.8,
+          "available": 1
+        },
+        {
+          "date": "2026-11-17",
+          "price": 106.8,
+          "available": 0
+        },
+        {
+          "date": "2026-11-18",
+          "price": 106.8,
+          "available": 0
+        }
+      ],
+      "scraped_at": "2026-10-19T10:27:59.864516"
+    },
+    {
+      "listing": {
+        "listing_id": "39894510",
+        "title": "16th-floor city views, with a pool, a hot tub, a sauna, and a balcony",
+        "property_type": "Apartment",
+        "room_type": "Entire home/apt",
+        "accommodates": 2,
+        "bedrooms": 1,
+        "bathrooms": 1.5,
+        "latitude": -34.58207,
+        "longitude": -58.43344,
+        "neighborhood": "Palermo Hollywood",
+        "rating": 4.93,
+        "reviews_count": 105,
+        "host_id": "host_39894510",
+        "host_name": "Host",
+        "host_is_superhost": 0,
+        "amenities": [
+          "Wifi",
+          "Air conditioning",
+          "Cocina",
+          "Pool",
+          "Jacuzzi"
+        ],
+        "picture_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6Mzk4OTQ1MTA%3D/original/edba6726-b2ff-40d4-892d-d262aa111f32.jpeg"
+      },
+      "calendar": [
+        {
+          "date": "2026-10-20",
+          "price": 113.4,
+          "available": 0
+        },
+        {
+          "date": "2026-10-21",
+          "price": 113.4,
+          "available": 1
+        },
+        {
+          "date": "2026-10-22",
+          "price": 113.4,
+          "available": 1
+        },
+        {
+          "date": "2026-10-23",
+          "price": 130.41,
+          "available": 0
+        },
+        {
+          "date": "2026-10-24",
+          "price": 130.41,
+          "available": 0
+        },
+        {
+          "date": "2026-10-25",
+          "price": 113.4,
+          "available": 0
+        },
+        {
+          "date": "2026-10-26",
+          "price": 113.4,
+          "available": 0
+        },
+        {
+          "date": "2026-10-27",
+          "price": 113.4,
+          "available": 0
+        },
+        {
+          "date": "2026-10-28",
+          "price": 113.4,
+          "available": 0
+        },
+        {
+          "date": "2026-10-29",
+          "price": 113.4,
+          "available": 1
+        },
+        {
+          "date": "2026-10-30",
+          "price": 130.41,
+          "available": 0
+        },
+        {
+          "date": "2026-10-31",
+          "price": 130.41,
+          "available": 1
+        },
+        {
+          "date": "2026-11-01",
+          "price": 113.4,
+          "available": 0
+        },
+        {
+          "date": "2026-11-02",
+          "price": 113.4,
+          "available": 1
+        },
+        {
+          "date": "2026-11-03",
+          "price": 113.4,
+          "available": 0
+        },
+        {
+          "date": "2026-11-04",
+          "price": 113.4,
+          "available": 1
+        },
+        {
+          "date": "2026-11-05",
+          "price": 113.4,
+          "available": 1
+        },
+        {
+          "date": "2026-11-06",
+          "price": 130.41,
+          "available": 0
+        },
+        {
+          "date": "2026-11-07",
+          "price": 130.41,
+          "available": 1
+        },
+        {
+          "date": "2026-11-08",
+          "price": 113.4,
+          "available": 0
+        },
+        {
+          "date": "2026-11-09",
+          "price": 113.4,
+          "available": 1
+        },
+        {
+          "date": "2026-11-10",
+          "price": 113.4,
+          "available": 0
+        },
+        {
+          "date": "2026-11-11",
+          "price": 113.4,
+          "available": 0
+        },
+        {
+          "date": "2026-11-12",
+          "price": 113.4,
+          "available": 0
+        },
+        {
+          "date": "2026-11-13",
+          "price": 130.41,
+          "available": 1
+        },
+        {
+          "date": "2026-11-14",
+          "price": 130.41,
+          "available": 1
+        },
+        {
+          "date": "2026-11-15",
+          "price": 113.4,
+          "available": 0
+        },
+        {
+          "date": "2026-11-16",
+          "price": 113.4,
+          "available": 0
+        },
+        {
+          "date": "2026-11-17",
+          "price": 113.4,
+          "available": 0
+        },
+        {
+          "date": "2026-11-18",
+          "price": 113.4,
+          "available": 0
+        }
+      ],
+      "scraped_at": "2026-10-19T10:27:59.865002"
+    },
+    {
+      "listing": {
+        "listing_id": "1341510528713415777",
+        "title": "Glass ceiling and city views in Palermo Hollywood, with a private balcony and 2 shared pools",
+        "property_type": "Apartment",
+        "room_type": "Entire home/apt",
+        "accommodates": 4,
+        "bedrooms": 1,
+        "bathrooms": 1.5,
+        "latitude": -34.58178,
+        "longitude": -58.43255,
+        "neighborhood": "Palermo Hollywood",
+        "rating": 4.98,
+        "reviews_count": 54,
+        "host_id": "host_1341510528713415777",
+        "host_name": "Host",
+        "host_is_superhost": 0,
+        "amenities": [
+          "Wifi",
+          "Air conditioning",
+          "Cocina",
+          "Pool"
+        ],
+        "picture_url": "https://a0.muscache.com/im/pictures/airflow/Hosting-1341510528713415777/original/cb950912-316c-452e-ac2f-f5af9bc47611.jpg"
+      },
+      "calendar": [
+        {
+          "date": "2026-10-20",
+          "price": 156.6,
+          "available": 0
+        },
+        {
+          "date": "2026-10-21",
+          "price": 156.6,
+          "available": 0
+        },
+        {
+          "date": "2026-10-22",
+          "price": 156.6,
+          "available": 0
+        },
+        {
+          "date": "2026-10-23",
+          "price": 180.09,
+          "available": 0
+        },
+        {
+          "date": "2026-10-24",
+          "price": 180.09,
+          "available": 1
+        },
+        {
+          "date": "2026-10-25",
+          "price": 156.6,
+          "available": 0
+        },
+        {
+          "date": "2026-10-26",
+          "price": 156.6,
+          "available": 0
+        },
+        {
+          "date": "2026-10-27",
+          "price": 156.6,
+          "available": 1
+        },
+        {
+          "date": "2026-10-28",
+          "price": 156.6,
+          "available": 1
+        },
+        {
+          "date": "2026-10-29",
+          "price": 156.6,
+          "available": 1
+        },
+        {
+          "date": "2026-10-30",
+          "price": 180.09,
+          "available": 0
+        },
+        {
+          "date": "2026-10-31",
+          "price": 180.09,
+          "available": 0
+        },
+        {
+          "date": "2026-11-01",
+          "price": 156.6,
+          "available": 0
+        },
+        {
+          "date": "2026-11-02",
+          "price": 156.6,
+          "available": 0
+        },
+        {
+          "date": "2026-11-03",
+          "price": 156.6,
+          "available": 0
+        },
+        {
+          "date": "2026-11-04",
+          "price": 156.6,
+          "available": 0
+        },
+        {
+          "date": "2026-11-05",
+          "price": 156.6,
+          "available": 1
+        },
+        {
+          "date": "2026-11-06",
+          "price": 180.09,
+          "available": 1
+        },
+        {
+          "date": "2026-11-07",
+          "price": 180.09,
+          "available": 1
+        },
+        {
+          "date": "2026-11-08",
+          "price": 156.6,
+          "available": 0
+        },
+        {
+          "date": "2026-11-09",
+          "price": 156.6,
+          "available": 1
+        },
+        {
+          "date": "2026-11-10",
+          "price": 156.6,
+          "available": 1
+        },
+        {
+          "date": "2026-11-11",
+          "price": 156.6,
+          "available": 0
+        },
+        {
+          "date": "2026-11-12",
+          "price": 156.6,
+          "available": 0
+        },
+        {
+          "date": "2026-11-13",
+          "price": 180.09,
+          "available": 0
+        },
+        {
+          "date": "2026-11-14",
+          "price": 180.09,
+          "available": 0
+        },
+        {
+          "date": "2026-11-15",
+          "price": 156.6,
+          "available": 1
+        },
+        {
+          "date": "2026-11-16",
+          "price": 156.6,
+          "available": 1
+        },
+        {
+          "date": "2026-11-17",
+          "price": 156.6,
+          "available": 0
+        },
+        {
+          "date": "2026-11-18",
+          "price": 156.6,
+          "available": 1
+        }
+      ],
+      "scraped_at": "2026-10-19T10:27:59.865482"
+    },
+    {
+      "listing": {
+        "listing_id": "1464855373224749389",
+        "title": "Modern and functional in Palermo, with a shared balcony and A/C",
+        "property_type": "Apartment",
+        "room_type": "Entire home/apt",
+        "accommodates": 2,
+        "bedrooms": 1,
+        "bathrooms": 1.0,
+        "latitude": -34.5832,
+        "longitude": -58.428,
+        "neighborhood": "Palermo Hollywood",
+        "rating": 5.0,
+        "reviews_count": 45,
+        "host_id": "host_1464855373224749389",
+        "host_name": "Host",
+        "host_is_superhost": 0,
+        "amenities": [
+          "Wifi",
+          "Air conditioning",
+          "Cocina"
+        ],
+        "picture_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-1464855373224749389/original/db7d97fa-9e41-4d49-8ea7-3b0e2c36b9c3.jpeg"
+      },
+      "calendar": [
+        {
+          "date": "2026-10-20",
+          "price": 69.6,
+          "available": 1
+        },
+        {
+          "date": "2026-10-21",
+          "price": 69.6,
+          "available": 0
+        },
+        {
+          "date": "2026-10-22",
+          "price": 69.6,
+          "available": 0
+        },
+        {
+          "date": "2026-10-23",
+          "price": 80.04,
+          "available": 0
+        },
+        {
+          "date": "2026-10-24",
+          "price": 80.04,
+          "available": 0
+        },
+        {
+          "date": "2026-10-25",
+          "price": 69.6,
+          "available": 0
+        },
+        {
+          "date": "2026-10-26",
+          "price": 69.6,
+          "available": 0
+        },
+        {
+          "date": "2026-10-27",
+          "price": 69.6,
+          "available": 0
+        },
+        {
+          "date": "2026-10-28",
+          "price": 69.6,
+          "available": 0
+        },
+        {
+          "date": "2026-10-29",
+          "price": 69.6,
+          "available": 0
+        },
+        {
+          "date": "2026-10-30",
+          "price": 80.04,
+          "available": 0
+        },
+        {
+          "date": "2026-10-31",
+          "price": 80.04,
+          "available": 0
+        },
+        {
+          "date": "2026-11-01",
+          "price": 69.6,
+          "available": 0
+        },
+        {
+          "date": "2026-11-02",
+          "price": 69.6,
+          "available": 1
+        },
+        {
+          "date": "2026-11-03",
+          "price": 69.6,
+          "available": 1
+        },
+        {
+          "date": "2026-11-04",
+          "price": 69.6,
+          "available": 1
+        },
+        {
+          "date": "2026-11-05",
+          "price": 69.6,
+          "available": 0
+        },
+        {
+          "date": "2026-11-06",
+          "price": 80.04,
+          "available": 0
+        },
+        {
+          "date": "2026-11-07",
+          "price": 80.04,
+          "available": 1
+        },
+        {
+          "date": "2026-11-08",
+          "price": 69.6,
+          "available": 1
+        },
+        {
+          "date": "2026-11-09",
+          "price": 69.6,
+          "available": 1
+        },
+        {
+          "date": "2026-11-10",
+          "price": 69.6,
+          "available": 0
+        },
+        {
+          "date": "2026-11-11",
+          "price": 69.6,
+          "available": 1
+        },
+        {
+          "date": "2026-11-12",
+          "price": 69.6,
+          "available": 0
+        },
+        {
+          "date": "2026-11-13",
+          "price": 80.04,
+          "available": 1
+        },
+        {
+          "date": "2026-11-14",
+          "price": 80.04,
+          "available": 1
+        },
+        {
+          "date": "2026-11-15",
+          "price": 69.6,
+          "available": 0
+        },
+        {
+          "date": "2026-11-16",
+          "price": 69.6,
+          "available": 0
+        },
+        {
+          "date": "2026-11-17",
+          "price": 69.6,
+          "available": 1
+        },
+        {
+          "date": "2026-11-18",
+          "price": 69.6,
+          "available": 0
+        }
+      ],
+      "scraped_at": "2026-10-19T10:27:59.865966"
+    },
+    {
+      "listing": {
+        "listing_id": "1387718323093717323",
+        "title": "Plant-filled balcony in Palermo Soho, with a shared jacuzzi and a rooftop grill",
+        "property_type": "Apartment",
+        "room_type": "Entire home/apt",
+        "accommodates": 2,
+        "bedrooms": 1,
+        "bathrooms": 1.5,
+        "latitude": -34.58537,
+        "longitude": -58.43086,
+        "neighborhood": "Palermo Hollywood",
+        "rating": 5.0,
+        "reviews_count": 56,
+        "host_id": "host_1387718323093717323",
+        "host_name": "Host",
+        "host_is_superhost": 0,
+        "amenities": [
+          "Wifi",
+          "Air conditioning",
+          "Cocina",
+          "Jacuzzi"
+        ],
+        "picture_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-1387718323093717323/original/177afd54-a1ab-4305-8f56-fb8f6a126c72.jpeg"
+      },
+      "calendar": [
+        {
+          "date": "2026-10-20",
+          "price": 133.4,
+          "available": 0
+        },
+        {
+          "date": "2026-10-21",
+          "price": 133.4,
+          "available": 0
+        },
+        {
+          "date": "2026-10-22",
+          "price": 133.4,
+          "available": 0
+        },
+        {
+          "date": "2026-10-23",
+          "price": 153.41,
+          "available": 0
+        },
+        {
+          "date": "2026-10-24",
+          "price": 153.41,
+          "available": 1
+        },
+        {
+          "date": "2026-10-25",
+          "price": 133.4,
+          "available": 0
+        },
+        {
+          "date": "2026-10-26",
+          "price": 133.4,
+          "available": 0
+        },
+        {
+          "date": "2026-10-27",
+          "price": 133.4,
+          "available": 0
+        },
+        {
+          "date": "2026-10-28",
+          "price": 133.4,
+          "available": 0
+        },
+        {
+          "date": "2026-10-29",
+          "price": 133.4,
+          "available": 0
+        },
+        {
+          "date": "2026-10-30",
+          "price": 153.41,
+          "available": 0
+        },
+        {
+          "date": "2026-10-31",
+          "price": 153.41,
+          "available": 0
+        },
+        {
+          "date": "2026-11-01",
+          "price": 133.4,
+          "available": 1
+        },
+        {
+          "date": "2026-11-02",
+          "price": 133.4,
+          "available": 1
+        },
+        {
+          "date": "2026-11-03",
+          "price": 133.4,
+          "available": 0
+        },
+        {
+          "date": "2026-11-04",
+          "price": 133.4,
+          "available": 0
+        },
+        {
+          "date": "2026-11-05",
+          "price": 133.4,
+          "available": 0
+        },
+        {
+          "date": "2026-11-06",
+          "price": 153.41,
+          "available": 1
+        },
+        {
+          "date": "2026-11-07",
+          "price": 153.41,
+          "available": 0
+        },
+        {
+          "date": "2026-11-08",
+          "price": 133.4,
+          "available": 0
+        },
+        {
+          "date": "2026-11-09",
+          "price": 133.4,
+          "available": 1
+        },
+        {
+          "date": "2026-11-10",
+          "price": 133.4,
+          "available": 0
+        },
+        {
+          "date": "2026-11-11",
+          "price": 133.4,
+          "available": 1
+        },
+        {
+          "date": "2026-11-12",
+          "price": 133.4,
+          "available": 1
+        },
+        {
+          "date": "2026-11-13",
+          "price": 153.41,
+          "available": 0
+        },
+        {
+          "date": "2026-11-14",
+          "price": 153.41,
+          "available": 0
+        },
+        {
+          "date": "2026-11-15",
+          "price": 133.4,
+          "available": 0
+        },
+        {
+          "date": "2026-11-16",
+          "price": 133.4,
+          "available": 0
+        },
+        {
+          "date": "2026-11-17",
+          "price": 133.4,
+          "available": 0
+        },
+        {
+          "date": "2026-11-18",
+          "price": 133.4,
+          "available": 0
+        }
+      ],
+      "scraped_at": "2026-10-19T10:27:59.866434"
+    },
+    {
+      "listing": {
+        "listing_id": "1775589907579059930",
+        "title": "Large balcony in Palermo Hollywood, with outdoor seating and a gym",
+        "property_type": "Apartment",
+        "room_type": "Entire home/apt",
+        "accommodates": 2,
+        "bedrooms": 1,
+        "bathrooms": 2.0,
+        "latitude": -34.5768,
+        "longitude": -58.434,
+        "neighborhood": "Palermo Hollywood",
+        "rating": 5.0,
+        "reviews_count": 3,
+        "host_id": "host_1775589907579059930",
+        "host_name": "Host",
+        "host_is_superhost": 0,
+        "amenities": [
+          "Wifi",
+          "Air conditioning",
+          "Cocina",
+          "Gym"
+        ],
+        "picture_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-1775589907579059930/original/7c732b4a-4365-4f09-982d-a5327a329982.jpeg"
+      },
+      "calendar": [
+        {
+          "date": "2026-10-20",
+          "price": 62.46,
+          "available": 1
+        },
+        {
+          "date": "2026-10-21",
+          "price": 62.46,
+          "available": 1
+        },
+        {
+          "date": "2026-10-22",
+          "price": 62.46,
+          "available": 0
+        },
+        {
+          "date": "2026-10-23",
+          "price": 71.83,
+          "available": 0
+        },
+        {
+          "date": "2026-10-24",
+          "price": 71.83,
+          "available": 1
+        },
+        {
+          "date": "2026-10-25",
+          "price": 62.46,
+          "available": 0
+        },
+        {
+          "date": "2026-10-26",
+          "price": 62.46,
+          "available": 0
+        },
+        {
+          "date": "2026-10-27",
+          "price": 62.46,
+          "available": 0
+        },
+        {
+          "date": "2026-10-28",
+          "price": 62.46,
+          "available": 0
+        },
+        {
+          "date": "2026-10-29",
+          "price": 62.46,
+          "available": 0
+        },
+        {
+          "date": "2026-10-30",
+          "price": 71.83,
+          "available": 0
+        },
+        {
+          "date": "2026-10-31",
+          "price": 71.83,
+          "available": 1
+        },
+        {
+          "date": "2026-11-01",
+          "price": 62.46,
+          "available": 1
+        },
+        {
+          "date": "2026-11-02",
+          "price": 62.46,
+          "available": 1
+        },
+        {
+          "date": "2026-11-03",
+          "price": 62.46,
+          "available": 0
+        },
+        {
+          "date": "2026-11-04",
+          "price": 62.46,
+          "available": 0
+        },
+        {
+          "date": "2026-11-05",
+          "price": 62.46,
+          "available": 0
+        },
+        {
+          "date": "2026-11-06",
+          "price": 71.83,
+          "available": 1
+        },
+        {
+          "date": "2026-11-07",
+          "price": 71.83,
+          "available": 0
+        },
+        {
+          "date": "2026-11-08",
+          "price": 62.46,
+          "available": 1
+        },
+        {
+          "date": "2026-11-09",
+          "price": 62.46,
+          "available": 0
+        },
+        {
+          "date": "2026-11-10",
+          "price": 62.46,
+          "available": 1
+        },
+        {
+          "date": "2026-11-11",
+          "price": 62.46,
+          "available": 0
+        },
+        {
+          "date": "2026-11-12",
+          "price": 62.46,
+          "available": 1
+        },
+        {
+          "date": "2026-11-13",
+          "price": 71.83,
+          "available": 1
+        },
+        {
+          "date": "2026-11-14",
+          "price": 71.83,
+          "available": 0
+        },
+        {
+          "date": "2026-11-15",
+          "price": 62.46,
+          "available": 0
+        },
+        {
+          "date": "2026-11-16",
+          "price": 62.46,
+          "available": 1
+        },
+        {
+          "date": "2026-11-17",
+          "price": 62.46,
+          "available": 1
+        },
+        {
+          "date": "2026-11-18",
+          "price": 62.46,
+          "available": 0
+        }
+      ],
+      "scraped_at": "2026-10-19T10:27:59.866923"
+    },
+    {
+      "listing": {
+        "listing_id": "1765498270027578790",
+        "title": "Brand-new in Palermo Hollywood, with a French balcony and a rooftop terrace",
+        "property_type": "Apartment",
+        "room_type": "Entire home/apt",
+        "accommodates": 2,
+        "bedrooms": 1,
+        "bathrooms": 1.0,
+        "latitude": -34.5793,
+        "longitude": -58.4329,
+        "neighborhood": "Palermo Hollywood",
+        "rating": 4.9,
+        "reviews_count": 10,
+        "host_id": "host_1765498270027578790",
+        "host_name": "Host",
+        "host_is_superhost": 0,
+        "amenities": [
+          "Wifi",
+          "Air conditioning",
+          "Cocina"
+        ],
+        "picture_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-1765498270027578790/original/0b463a75-66f5-4297-9753-2a1914cdec74.jpeg"
+      },
+      "calendar": [
+        {
+          "date": "2026-10-20",
+          "price": 61.0,
+          "available": 1
+        },
+        {
+          "date": "2026-10-21",
+          "price": 61.0,
+          "available": 0
+        },
+        {
+          "date": "2026-10-22",
+          "price": 61.0,
+          "available": 1
+        },
+        {
+          "date": "2026-10-23",
+          "price": 70.15,
+          "available": 1
+        },
+        {
+          "date": "2026-10-24",
+          "price": 70.15,
+          "available": 0
+        },
+        {
+          "date": "2026-10-25",
+          "price": 61.0,
+          "available": 0
+        },
+        {
+          "date": "2026-10-26",
+          "price": 61.0,
+          "available": 1
+        },
+        {
+          "date": "2026-10-27",
+          "price": 61.0,
+          "available": 1
+        },
+        {
+          "date": "2026-10-28",
+          "price": 61.0,
+          "available": 1
+        },
+        {
+          "date": "2026-10-29",
+          "price": 61.0,
+          "available": 1
+        },
+        {
+          "date": "2026-10-30",
+          "price": 70.15,
+          "available": 0
+        },
+        {
+          "date": "2026-10-31",
+          "price": 70.15,
+          "available": 0
+        },
+        {
+          "date": "2026-11-01",
+          "price": 61.0,
+          "available": 0
+        },
+        {
+          "date": "2026-11-02",
+          "price": 61.0,
+          "available": 1
+        },
+        {
+          "date": "2026-11-03",
+          "price": 61.0,
+          "available": 0
+        },
+        {
+          "date": "2026-11-04",
+          "price": 61.0,
+          "available": 0
+        },
+        {
+          "date": "2026-11-05",
+          "price": 61.0,
+          "available": 0
+        },
+        {
+          "date": "2026-11-06",
+          "price": 70.15,
+          "available": 0
+        },
+        {
+          "date": "2026-11-07",
+          "price": 70.15,
+          "available": 0
+        },
+        {
+          "date": "2026-11-08",
+          "price": 61.0,
+          "available": 0
+        },
+        {
+          "date": "2026-11-09",
+          "price": 61.0,
+          "available": 1
+        },
+        {
+          "date": "2026-11-10",
+          "price": 61.0,
+          "available": 1
+        },
+        {
+          "date": "2026-11-11",
+          "price": 61.0,
+          "available": 0
+        },
+        {
+          "date": "2026-11-12",
+          "price": 61.0,
+          "available": 1
+        },
+        {
+          "date": "2026-11-13",
+          "price": 70.15,
+          "available": 0
+        },
+        {
+          "date": "2026-11-14",
+          "price": 70.15,
+          "available": 1
+        },
+        {
+          "date": "2026-11-15",
+          "price": 61.0,
+          "available": 0
+        },
+        {
+          "date": "2026-11-16",
+          "price": 61.0,
+          "available": 0
+        },
+        {
+          "date": "2026-11-17",
+          "price": 61.0,
+          "available": 0
+        },
+        {
+          "date": "2026-11-18",
+          "price": 61.0,
+          "available": 1
+        }
+      ],
+      "scraped_at": "2026-10-19T10:27:59.867392"
+    },
+    {
+      "listing": {
+        "listing_id": "1777801890512182309",
+        "title": "Stylish Palermo stay with a pool, a patio, and alfresco dining",
+        "property_type": "Apartment",
+        "room_type": "Entire home/apt",
+        "accommodates": 4,
+        "bedrooms": 1,
+        "bathrooms": 1.0,
+        "latitude": -34.57976,
+        "longitude": -58.42903,
+        "neighborhood": "Palermo Hollywood",
+        "rating": 4.85,
+        "reviews_count": 0,
+        "host_id": "host_1777801890512182309",
+        "host_name": "Host",
+        "host_is_superhost": 1,
+        "amenities": [
+          "Wifi",
+          "Air conditioning",
+          "Cocina",
+          "Pool"
+        ],
+        "picture_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-1777801890512182309/original/650ddcd7-0f3e-42dd-a1cb-bbe517113719.png"
+      },
+      "calendar": [
+        {
+          "date": "2026-10-20",
+          "price": 60.51,
+          "available": 0
+        },
+        {
+          "date": "2026-10-21",
+          "price": 60.51,
+          "available": 0
+        },
+        {
+          "date": "2026-10-22",
+          "price": 60.51,
+          "available": 0
+        },
+        {
+          "date": "2026-10-23",
+          "price": 69.59,
+          "available": 0
+        },
+        {
+          "date": "2026-10-24",
+          "price": 69.59,
+          "available": 0
+        },
+        {
+          "date": "2026-10-25",
+          "price": 60.51,
+          "available": 0
+        },
+        {
+          "date": "2026-10-26",
+          "price": 60.51,
+          "available": 0
+        },
+        {
+          "date": "2026-10-27",
+          "price": 60.51,
+          "available": 0
+        },
+        {
+          "date": "2026-10-28",
+          "price": 60.51,
+          "available": 0
+        },
+        {
+          "date": "2026-10-29",
+          "price": 60.51,
+          "available": 0
+        },
+        {
+          "date": "2026-10-30",
+          "price": 69.59,
+          "available": 0
+        },
+        {
+          "date": "2026-10-31",
+          "price": 69.59,
+          "available": 0
+        },
+        {
+          "date": "2026-11-01",
+          "price": 60.51,
+          "available": 0
+        },
+        {
+          "date": "2026-11-02",
+          "price": 60.51,
+          "available": 1
+        },
+        {
+          "date": "2026-11-03",
+          "price": 60.51,
+          "available": 0
+        },
+        {
+          "date": "2026-11-04",
+          "price": 60.51,
+          "available": 1
+        },
+        {
+          "date": "2026-11-05",
+          "price": 60.51,
+          "available": 1
+        },
+        {
+          "date": "2026-11-06",
+          "price": 69.59,
+          "available": 1
+        },
+        {
+          "date": "2026-11-07",
+          "price": 69.59,
+          "available": 0
+        },
+        {
+          "date": "2026-11-08",
+          "price": 60.51,
+          "available": 1
+        },
+        {
+          "date": "2026-11-09",
+          "price": 60.51,
+          "available": 0
+        },
+        {
+          "date": "2026-11-10",
+          "price": 60.51,
+          "available": 0
+        },
+        {
+          "date": "2026-11-11",
+          "price": 60.51,
+          "available": 1
+        },
+        {
+          "date": "2026-11-12",
+          "price": 60.51,
+          "available": 1
+        },
+        {
+          "date": "2026-11-13",
+          "price": 69.59,
+          "available": 0
+        },
+        {
+          "date": "2026-11-14",
+          "price": 69.59,
+          "available": 0
+        },
+        {
+          "date": "2026-11-15",
+          "price": 60.51,
+          "available": 0
+        },
+        {
+          "date": "2026-11-16",
+          "price": 60.51,
+          "available": 1
+        },
+        {
+          "date": "2026-11-17",
+          "price": 60.51,
+          "available": 0
+        },
+        {
+          "date": "2026-11-18",
+          "price": 60.51,
+          "available": 1
+        }
+      ],
+      "scraped_at": "2026-10-19T10:27:59.867901"
+    },
+    {
+      "listing": {
+        "listing_id": "1734164644128595083",
+        "title": "Brand new in Palermo Soho, with a pool, a balcony, and a private entrance",
+        "property_type": "Apartment",
+        "room_type": "Entire home/apt",
+        "accommodates": 2,
+        "bedrooms": 1,
+        "bathrooms": 1.5,
+        "latitude": -34.5872,
+        "longitude": -58.4336,
+        "neighborhood": "Palermo Hollywood",
+        "rating": 5.0,
+        "reviews_count": 23,
+        "host_id": "host_1734164644128595083",
+        "host_name": "Host",
+        "host_is_superhost": 0,
+        "amenities": [
+          "Wifi",
+          "Air conditioning",
+          "Cocina",
+          "Pool"
+        ],
+        "picture_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-1734164644128595083/original/dd8f2d31-0744-4282-aa03-ba997f1d0899.jpeg"
+      },
+      "calendar": [
+        {
+          "date": "2026-10-20",
+          "price": 78.84,
+          "available": 0
+        },
+        {
+          "date": "2026-10-21",
+          "price": 78.84,
+          "available": 1
+        },
+        {
+          "date": "2026-10-22",
+          "price": 78.84,
+          "available": 0
+        },
+        {
+          "date": "2026-10-23",
+          "price": 90.67,
+          "available": 1
+        },
+        {
+          "date": "2026-10-24",
+          "price": 90.67,
+          "available": 1
+        },
+        {
+          "date": "2026-10-25",
+          "price": 78.84,
+          "available": 0
+        },
+        {
+          "date": "2026-10-26",
+          "price": 78.84,
+          "available": 0
+        },
+        {
+          "date": "2026-10-27",
+          "price": 78.84,
+          "available": 0
+        },
+        {
+          "date": "2026-10-28",
+          "price": 78.84,
+          "available": 0
+        },
+        {
+          "date": "2026-10-29",
+          "price": 78.84,
+          "available": 1
+        },
+        {
+          "date": "2026-10-30",
+          "price": 90.67,
+          "available": 0
+        },
+        {
+          "date": "2026-10-31",
+          "price": 90.67,
+          "available": 0
+        },
+        {
+          "date": "2026-11-01",
+          "price": 78.84,
+          "available": 0
+        },
+        {
+          "date": "2026-11-02",
+          "price": 78.84,
+          "available": 0
+        },
+        {
+          "date": "2026-11-03",
+          "price": 78.84,
+          "available": 0
+        },
+        {
+          "date": "2026-11-04",
+          "price": 78.84,
+          "available": 0
+        },
+        {
+          "date": "2026-11-05",
+          "price": 78.84,
+          "available": 1
+        },
+        {
+          "date": "2026-11-06",
+          "price": 90.67,
+          "available": 1
+        },
+        {
+          "date": "2026-11-07",
+          "price": 90.67,
+          "available": 1
+        },
+        {
+          "date": "2026-11-08",
+          "price": 78.84,
+          "available": 0
+        },
+        {
+          "date": "2026-11-09",
+          "price": 78.84,
+          "available": 0
+        },
+        {
+          "date": "2026-11-10",
+          "price": 78.84,
+          "available": 1
+        },
+        {
+          "date": "2026-11-11",
+          "price": 78.84,
+          "available": 0
+        },
+        {
+          "date": "2026-11-12",
+          "price": 78.84,
+          "available": 0
+        },
+        {
+          "date": "2026-11-13",
+          "price": 90.67,
+          "available": 0
+        },
+        {
+          "date": "2026-11-14",
+          "price": 90.67,
+          "available": 1
+        },
+        {
+          "date": "2026-11-15",
+          "price": 78.84,
+          "available": 0
+        },
+        {
+          "date": "2026-11-16",
+          "price": 78.84,
+          "available": 1
+        },
+        {
+          "date": "2026-11-17",
+          "price": 78.84,
+          "available": 1
+        },
+        {
+          "date": "2026-11-18",
+          "price": 78.84,
+          "available": 0
+        }
+      ],
+      "scraped_at": "2026-10-19T10:27:59.868372"
+    },
+    {
+      "listing": {
+        "listing_id": "1774928395814307007",
+        "title": "Modern and bright in the heart of Palermo, with a balcony and a pool",
+        "property_type": "Apartment",
+        "room_type": "Entire home/apt",
+        "accommodates": 2,
+        "bedrooms": 1,
+        "bathrooms": 1.0,
+        "latitude": -34.58097,
+        "longitude": -58.43496,
+        "neighborhood": "Palermo Hollywood",
+        "rating": 4.85,
+        "reviews_count": 0,
+        "host_id": "host_1774928395814307007",
+        "host_name": "Host",
+        "host_is_superhost": 0,
+        "amenities": [
+          "Wifi",
+          "Air conditioning",
+          "Cocina",
+          "Pool"
+        ],
+        "picture_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-1774928395814307007/original/b626fdda-f730-490f-b830-c6ab5c9d75d8.jpeg"
+      },
+      "calendar": [
+        {
+          "date": "2026-10-20",
+          "price": 83.84,
+          "available": 1
+        },
+        {
+          "date": "2026-10-21",
+          "price": 83.84,
+          "available": 0
+        },
+        {
+          "date": "2026-10-22",
+          "price": 83.84,
+          "available": 1
+        },
+        {
+          "date": "2026-10-23",
+          "price": 96.42,
+          "available": 1
+        },
+        {
+          "date": "2026-10-24",
+          "price": 96.42,
+          "available": 0
+        },
+        {
+          "date": "2026-10-25",
+          "price": 83.84,
+          "available": 1
+        },
+        {
+          "date": "2026-10-26",
+          "price": 83.84,
+          "available": 1
+        },
+        {
+          "date": "2026-10-27",
+          "price": 83.84,
+          "available": 0
+        },
+        {
+          "date": "2026-10-28",
+          "price": 83.84,
+          "available": 0
+        },
+        {
+          "date": "2026-10-29",
+          "price": 83.84,
+          "available": 1
+        },
+        {
+          "date": "2026-10-30",
+          "price": 96.42,
+          "available": 1
+        },
+        {
+          "date": "2026-10-31",
+          "price": 96.42,
+          "available": 0
+        },
+        {
+          "date": "2026-11-01",
+          "price": 83.84,
+          "available": 0
+        },
+        {
+          "date": "2026-11-02",
+          "price": 83.84,
+          "available": 0
+        },
+        {
+          "date": "2026-11-03",
+          "price": 83.84,
+          "available": 0
+        },
+        {
+          "date": "2026-11-04",
+          "price": 83.84,
+          "available": 1
+        },
+        {
+          "date": "2026-11-05",
+          "price": 83.84,
+          "available": 0
+        },
+        {
+          "date": "2026-11-06",
+          "price": 96.42,
+          "available": 1
+        },
+        {
+          "date": "2026-11-07",
+          "price": 96.42,
+          "available": 0
+        },
+        {
+          "date": "2026-11-08",
+          "price": 83.84,
+          "available": 1
+        },
+        {
+          "date": "2026-11-09",
+          "price": 83.84,
+          "available": 1
+        },
+        {
+          "date": "2026-11-10",
+          "price": 83.84,
+          "available": 0
+        },
+        {
+          "date": "2026-11-11",
+          "price": 83.84,
+          "available": 0
+        },
+        {
+          "date": "2026-11-12",
+          "price": 83.84,
+          "available": 0
+        },
+        {
+          "date": "2026-11-13",
+          "price": 96.42,
+          "available": 0
+        },
+        {
+          "date": "2026-11-14",
+          "price": 96.42,
+          "available": 0
+        },
+        {
+          "date": "2026-11-15",
+          "price": 83.84,
+          "available": 0
+        },
+        {
+          "date": "2026-11-16",
+          "price": 83.84,
+          "available": 0
+        },
+        {
+          "date": "2026-11-17",
+          "price": 83.84,
+          "available": 0
+        },
+        {
+          "date": "2026-11-18",
+          "price": 83.84,
+          "available": 1
+        }
+      ],
+      "scraped_at": "2026-10-19T10:27:59.868824"
+    },
+    {
+      "listing": {
+        "listing_id": "1486448213557977052",
+        "title": "Palermo Hollywood, 2 blocks from Avenida Santa Fe, with a balcony and A/C",
+        "property_type": "Apartment",
+        "room_type": "Entire home/apt",
+        "accommodates": 4,
+        "bedrooms": 1,
+        "bathrooms": 1.0,
+        "latitude": -34.5794,
+        "longitude": -58.4334,
+        "neighborhood": "Palermo Hollywood",
+        "rating": 4.94,
+        "reviews_count": 110,
+        "host_id": "host_1486448213557977052",
+        "host_name": "Host",
+        "host_is_superhost": 0,
+        "amenities": [
+          "Wifi",
+          "Air conditioning",
+          "Cocina"
+        ],
+        "picture_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-1486448213557977052/original/cb362104-8dbf-450a-884d-a45f7df6abfc.png"
+      },
+      "calendar": [
+        {
+          "date": "2026-10-20",
+          "price": 73.6,
+          "available": 0
+        },
+        {
+          "date": "2026-10-21",
+          "price": 73.6,
+          "available": 1
+        },
+        {
+          "date": "2026-10-22",
+          "price": 73.6,
+          "available": 0
+        },
+        {
+          "date": "2026-10-23",
+          "price": 84.64,
+          "available": 0
+        },
+        {
+          "date": "2026-10-24",
+          "price": 84.64,
+          "available": 1
+        },
+        {
+          "date": "2026-10-25",
+          "price": 73.6,
+          "available": 1
+        },
+        {
+          "date": "2026-10-26",
+          "price": 73.6,
+          "available": 0
+        },
+        {
+          "date": "2026-10-27",
+          "price": 73.6,
+          "available": 0
+        },
+        {
+          "date": "2026-10-28",
+          "price": 73.6,
+          "available": 0
+        },
+        {
+          "date": "2026-10-29",
+          "price": 73.6,
+          "available": 0
+        },
+        {
+          "date": "2026-10-30",
+          "price": 84.64,
+          "available": 0
+        },
+        {
+          "date": "2026-10-31",
+          "price": 84.64,
+          "available": 1
+        },
+        {
+          "date": "2026-11-01",
+          "price": 73.6,
+          "available": 1
+        },
+        {
+          "date": "2026-11-02",
+          "price": 73.6,
+          "available": 1
+        },
+        {
+          "date": "2026-11-03",
+          "price": 73.6,
+          "available": 0
+        },
+        {
+          "date": "2026-11-04",
+          "price": 73.6,
+          "available": 0
+        },
+        {
+          "date": "2026-11-05",
+          "price": 73.6,
+          "available": 0
+        },
+        {
+          "date": "2026-11-06",
+          "price": 84.64,
+          "available": 1
+        },
+        {
+          "date": "2026-11-07",
+          "price": 84.64,
+          "available": 0
+        },
+        {
+          "date": "2026-11-08",
+          "price": 73.6,
+          "available": 0
+        },
+        {
+          "date": "2026-11-09",
+          "price": 73.6,
+          "available": 1
+        },
+        {
+          "date": "2026-11-10",
+          "price": 73.6,
+          "available": 0
+        },
+        {
+          "date": "2026-11-11",
+          "price": 73.6,
+          "available": 0
+        },
+        {
+          "date": "2026-11-12",
+          "price": 73.6,
+          "available": 0
+        },
+        {
+          "date": "2026-11-13",
+          "price": 84.64,
+          "available": 0
+        },
+        {
+          "date": "2026-11-14",
+          "price": 84.64,
+          "available": 0
+        },
+        {
+          "date": "2026-11-15",
+          "price": 73.6,
+          "available": 0
+        },
+        {
+          "date": "2026-11-16",
+          "price": 73.6,
+          "available": 0
+        },
+        {
+          "date": "2026-11-17",
+          "price": 73.6,
+          "available": 0
+        },
+        {
+          "date": "2026-11-18",
+          "price": 73.6,
+          "available": 0
+        }
+      ],
+      "scraped_at": "2026-10-19T10:27:59.869260"
+    },
+    {
+      "listing": {
+        "listing_id": "1786446761948815621",
+        "title": "5-star apartment with a pool, a full kitchen, and in-unit laundry",
+        "property_type": "Apartment",
+        "room_type": "Entire home/apt",
+        "accommodates": 2,
+        "bedrooms": 1,
+        "bathrooms": 1.0,
+        "latitude": -34.5796,
+        "longitude": -58.4295,
+        "neighborhood": "Palermo Hollywood",
+        "rating": 4.85,
+        "reviews_count": 0,
+        "host_id": "host_1786446761948815621",
+        "host_name": "Host",
+        "host_is_superhost": 1,
+        "amenities": [
+          "Wifi",
+          "Air conditioning",
+          "Cocina",
+          "Pool",
+          "Lavarropas"
+        ],
+        "picture_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-1786446761948815621/original/b42678d0-d8e8-4bfa-8f5e-ceba2b870a7c.jpeg"
+      },
+      "calendar": [
+        {
+          "date": "2026-10-20",
+          "price": 81.78,
+          "available": 0
+        },
+        {
+          "date": "2026-10-21",
+          "price": 81.78,
+          "available": 1
+        },
+        {
+          "date": "2026-10-22",
+          "price": 81.78,
+          "available": 0
+        },
+        {
+          "date": "2026-10-23",
+          "price": 94.05,
+          "available": 0
+        },
+        {
+          "date": "2026-10-24",
+          "price": 94.05,
+          "available": 0
+        },
+        {
+          "date": "2026-10-25",
+          "price": 81.78,
+          "available": 0
+        },
+        {
+          "date": "2026-10-26",
+          "price": 81.78,
+          "available": 0
+        },
+        {
+          "date": "2026-10-27",
+          "price": 81.78,
+          "available": 0
+        },
+        {
+          "date": "2026-10-28",
+          "price": 81.78,
+          "available": 0
+        },
+        {
+          "date": "2026-10-29",
+          "price": 81.78,
+          "available": 0
+        },
+        {
+          "date": "2026-10-30",
+          "price": 94.05,
+          "available": 0
+        },
+        {
+          "date": "2026-10-31",
+          "price": 94.05,
+          "available": 0
+        },
+        {
+          "date": "2026-11-01",
+          "price": 81.78,
+          "available": 0
+        },
+        {
+          "date": "2026-11-02",
+          "price": 81.78,
+          "available": 0
+        },
+        {
+          "date": "2026-11-03",
+          "price": 81.78,
+          "available": 0
+        },
+        {
+          "date": "2026-11-04",
+          "price": 81.78,
+          "available": 0
+        },
+        {
+          "date": "2026-11-05",
+          "price": 81.78,
+          "available": 0
+        },
+        {
+          "date": "2026-11-06",
+          "price": 94.05,
+          "available": 0
+        },
+        {
+          "date": "2026-11-07",
+          "price": 94.05,
+          "available": 0
+        },
+        {
+          "date": "2026-11-08",
+          "price": 81.78,
+          "available": 0
+        },
+        {
+          "date": "2026-11-09",
+          "price": 81.78,
+          "available": 0
+        },
+        {
+          "date": "2026-11-10",
+          "price": 81.78,
+          "available": 0
+        },
+        {
+          "date": "2026-11-11",
+          "price": 81.78,
+          "available": 1
+        },
+        {
+          "date": "2026-11-12",
+          "price": 81.78,
+          "available": 1
+        },
+        {
+          "date": "2026-11-13",
+          "price": 94.05,
+          "available": 0
+        },
+        {
+          "date": "2026-11-14",
+          "price": 94.05,
+          "available": 1
+        },
+        {
+          "date": "2026-11-15",
+          "price": 81.78,
+          "available": 1
+        },
+        {
+          "date": "2026-11-16",
+          "price": 81.78,
+          "available": 0
+        },
+        {
+          "date": "2026-11-17",
+          "price": 81.78,
+          "available": 0
+        },
+        {
+          "date": "2026-11-18",
+          "price": 81.78,
+          "available": 1
+        }
+      ],
+      "scraped_at": "2026-10-19T10:27:59.869670"
+    },
+    {
+      "listing": {
+        "listing_id": "1120333553012763855",
+        "title": "Palermo Hollywood rooftop retreat, with a private terrace, a BBQ area, and a jacuzzi",
+        "property_type": "Apartment",
+        "room_type": "Entire home/apt",
+        "accommodates": 4,
+        "bedrooms": 2,
+        "bathrooms": 1.5,
+        "latitude": -34.582,
+        "longitude": -58.4368,
+        "neighborhood": "Palermo Hollywood",
+        "rating": 4.9,
+        "reviews_count": 83,
+        "host_id": "host_1120333553012763855",
+        "host_name": "Host",
+        "host_is_superhost": 1,
+        "amenities": [
+          "Wifi",
+          "Air conditioning",
+          "Cocina",
+          "Jacuzzi"
+        ],
+        "picture_url": "https://a0.muscache.com/im/pictures/miso/Hosting-1120333553012763855/original/70393147-76c9-41e0-a1a7-38c5680fe93f.jpeg"
+      },
+      "calendar": [
+        {
+          "date": "2026-10-20",
+          "price": 164.0,
+          "available": 0
+        },
+        {
+          "date": "2026-10-21",
+          "price": 164.0,
+          "available": 0
+        },
+        {
+          "date": "2026-10-22",
+          "price": 164.0,
+          "available": 1
+        },
+        {
+          "date": "2026-10-23",
+          "price": 188.6,
+          "available": 1
+        },
+        {
+          "date": "2026-10-24",
+          "price": 188.6,
+          "available": 0
+        },
+        {
+          "date": "2026-10-25",
+          "price": 164.0,
+          "available": 1
+        },
+        {
+          "date": "2026-10-26",
+          "price": 164.0,
+          "available": 1
+        },
+        {
+          "date": "2026-10-27",
+          "price": 164.0,
+          "available": 0
+        },
+        {
+          "date": "2026-10-28",
+          "price": 164.0,
+          "available": 0
+        },
+        {
+          "date": "2026-10-29",
+          "price": 164.0,
+          "available": 1
+        },
+        {
+          "date": "2026-10-30",
+          "price": 188.6,
+          "available": 0
+        },
+        {
+          "date": "2026-10-31",
+          "price": 188.6,
+          "available": 1
+        },
+        {
+          "date": "2026-11-01",
+          "price": 164.0,
+          "available": 0
+        },
+        {
+          "date": "2026-11-02",
+          "price": 164.0,
+          "available": 1
+        },
+        {
+          "date": "2026-11-03",
+          "price": 164.0,
+          "available": 0
+        },
+        {
+          "date": "2026-11-04",
+          "price": 164.0,
+          "available": 0
+        },
+        {
+          "date": "2026-11-05",
+          "price": 164.0,
+          "available": 1
+        },
+        {
+          "date": "2026-11-06",
+          "price": 188.6,
+          "available": 0
+        },
+        {
+          "date": "2026-11-07",
+          "price": 188.6,
+          "available": 0
+        },
+        {
+          "date": "2026-11-08",
+          "price": 164.0,
+          "available": 0
+        },
+        {
+          "date": "2026-11-09",
+          "price": 164.0,
+          "available": 1
+        },
+        {
+          "date": "2026-11-10",
+          "price": 164.0,
+          "available": 0
+        },
+        {
+          "date": "2026-11-11",
+          "price": 164.0,
+          "available": 1
+        },
+        {
+          "date": "2026-11-12",
+          "price": 164.0,
+          "available": 0
+        },
+        {
+          "date": "2026-11-13",
+          "price": 188.6,
+          "available": 0
+        },
+        {
+          "date": "2026-11-14",
+          "price": 188.6,
+          "available": 1
+        },
+        {
+          "date": "2026-11-15",
+          "price": 164.0,
+          "available": 0
+        },
+        {
+          "date": "2026-11-16",
+          "price": 164.0,
+          "available": 0
+        },
+        {
+          "date": "2026-11-17",
+          "price": 164.0,
+          "available": 0
+        },
+        {
+          "date": "2026-11-18",
+          "price": 164.0,
+          "available": 0
+        }
+      ],
+      "scraped_at": "2026-10-19T10:27:59.870075"
+    },
+    {
+      "listing": {
+        "listing_id": "910119857368680472",
+        "title": "Palermo Hollywood balcony, with a private entrance and alfresco dining",
+        "property_type": "Apartment",
+        "room_type": "Entire home/apt",
+        "accommodates": 2,
+        "bedrooms": 1,
+        "bathrooms": 1.0,
+        "latitude": -34.57894,
+        "longitude": -58.4307,
+        "neighborhood": "Palermo Hollywood",
+        "rating": 4.92,
+        "reviews_count": 411,
+        "host_id": "host_910119857368680472",
+        "host_name": "Host",
+        "host_is_superhost": 0,
+        "amenities": [
+          "Wifi",
+          "Air conditioning",
+          "Cocina"
+        ],
+        "picture_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6OTEwMTE5ODU3MzY4NjgwNDcy/original/9dedac33-2a9b-43f6-adf1-6804d1a258d9.jpeg"
+      },
+      "calendar": [
+        {
+          "date": "2026-10-20",
+          "price": 124.8,
+          "available": 1
+        },
+        {
+          "date": "2026-10-21",
+          "price": 124.8,
+          "available": 1
+        },
+        {
+          "date": "2026-10-22",
+          "price": 124.8,
+          "available": 0
+        },
+        {
+          "date": "2026-10-23",
+          "price": 143.52,
+          "available": 0
+        },
+        {
+          "date": "2026-10-24",
+          "price": 143.52,
+          "available": 0
+        },
+        {
+          "date": "2026-10-25",
+          "price": 124.8,
+          "available": 0
+        },
+        {
+          "date": "2026-10-26",
+          "price": 124.8,
+          "available": 1
+        },
+        {
+          "date": "2026-10-27",
+          "price": 124.8,
+          "available": 1
+        },
+        {
+          "date": "2026-10-28",
+          "price": 124.8,
+          "available": 1
+        },
+        {
+          "date": "2026-10-29",
+          "price": 124.8,
+          "available": 0
+        },
+        {
+          "date": "2026-10-30",
+          "price": 143.52,
+          "available": 1
+        },
+        {
+          "date": "2026-10-31",
+          "price": 143.52,
+          "available": 1
+        },
+        {
+          "date": "2026-11-01",
+          "price": 124.8,
+          "available": 1
+        },
+        {
+          "date": "2026-11-02",
+          "price": 124.8,
+          "available": 0
+        },
+        {
+          "date": "2026-11-03",
+          "price": 124.8,
+          "available": 0
+        },
+        {
+          "date": "2026-11-04",
+          "price": 124.8,
+          "available": 1
+        },
+        {
+          "date": "2026-11-05",
+          "price": 124.8,
+          "available": 0
+        },
+        {
+          "date": "2026-11-06",
+          "price": 143.52,
+          "available": 0
+        },
+        {
+          "date": "2026-11-07",
+          "price": 143.52,
+          "available": 0
+        },
+        {
+          "date": "2026-11-08",
+          "price": 124.8,
+          "available": 1
+        },
+        {
+          "date": "2026-11-09",
+          "price": 124.8,
+          "available": 0
+        },
+        {
+          "date": "2026-11-10",
+          "price": 124.8,
+          "available": 0
+        },
+        {
+          "date": "2026-11-11",
+          "price": 124.8,
+          "available": 0
+        },
+        {
+          "date": "2026-11-12",
+          "price": 124.8,
+          "available": 0
+        },
+        {
+          "date": "2026-11-13",
+          "price": 143.52,
+          "available": 0
+        },
+        {
+          "date": "2026-11-14",
+          "price": 143.52,
+          "available": 0
+        },
+        {
+          "date": "2026-11-15",
+          "price": 124.8,
+          "available": 1
+        },
+        {
+          "date": "2026-11-16",
+          "price": 124.8,
+          "available": 0
+        },
+        {
+          "date": "2026-11-17",
+          "price": 124.8,
+          "available": 1
+        },
+        {
+          "date": "2026-11-18",
+          "price": 124.8,
+          "available": 0
+        }
+      ],
+      "scraped_at": "2026-10-19T10:27:59.870469"
+    },
+    {
+      "listing": {
+        "listing_id": "1589977993314811275",
+        "title": "Bright apartment with beautiful views, a private balcony, and free parking",
+        "property_type": "Apartment",
+        "room_type": "Entire home/apt",
+        "accommodates": 2,
+        "bedrooms": 1,
+        "bathrooms": 1.0,
+        "latitude": -34.5812,
+        "longitude": -58.4336,
+        "neighborhood": "Palermo Hollywood",
+        "rating": 4.95,
+        "reviews_count": 64,
+        "host_id": "host_1589977993314811275",
+        "host_name": "Host",
+        "host_is_superhost": 0,
+        "amenities": [
+          "Wifi",
+          "Air conditioning",
+          "Cocina",
+          "Parking"
+        ],
+        "picture_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-1589977993314811275/original/9ba0446b-1833-49ee-8bd4-852a399d6f21.jpeg"
+      },
+      "calendar": [
+        {
+          "date": "2026-10-20",
+          "price": 81.0,
+          "available": 1
+        },
+        {
+          "date": "2026-10-21",
+          "price": 81.0,
+          "available": 1
+        },
+        {
+          "date": "2026-10-22",
+          "price": 81.0,
+          "available": 1
+        },
+        {
+          "date": "2026-10-23",
+          "price": 93.15,
+          "available": 1
+        },
+        {
+          "date": "2026-10-24",
+          "price": 93.15,
+          "available": 1
+        },
+        {
+          "date": "2026-10-25",
+          "price": 81.0,
+          "available": 0
+        },
+        {
+          "date": "2026-10-26",
+          "price": 81.0,
+          "available": 0
+        },
+        {
+          "date": "2026-10-27",
+          "price": 81.0,
+          "available": 1
+        },
+        {
+          "date": "2026-10-28",
+          "price": 81.0,
+          "available": 0
+        },
+        {
+          "date": "2026-10-29",
+          "price": 81.0,
+          "available": 0
+        },
+        {
+          "date": "2026-10-30",
+          "price": 93.15,
+          "available": 0
+        },
+        {
+          "date": "2026-10-31",
+          "price": 93.15,
+          "available": 0
+        },
+        {
+          "date": "2026-11-01",
+          "price": 81.0,
+          "available": 0
+        },
+        {
+          "date": "2026-11-02",
+          "price": 81.0,
+          "available": 1
+        },
+        {
+          "date": "2026-11-03",
+          "price": 81.0,
+          "available": 1
+        },
+        {
+          "date": "2026-11-04",
+          "price": 81.0,
+          "available": 1
+        },
+        {
+          "date": "2026-11-05",
+          "price": 81.0,
+          "available": 1
+        },
+        {
+          "date": "2026-11-06",
+          "price": 93.15,
+          "available": 0
+        },
+        {
+          "date": "2026-11-07",
+          "price": 93.15,
+          "available": 0
+        },
+        {
+          "date": "2026-11-08",
+          "price": 81.0,
+          "available": 0
+        },
+        {
+          "date": "2026-11-09",
+          "price": 81.0,
+          "available": 0
+        },
+        {
+          "date": "2026-11-10",
+          "price": 81.0,
+          "available": 0
+        },
+        {
+          "date": "2026-11-11",
+          "price": 81.0,
+          "available": 0
+        },
+        {
+          "date": "2026-11-12",
+          "price": 81.0,
+          "available": 0
+        },
+        {
+          "date": "2026-11-13",
+          "price": 93.15,
+          "available": 1
+        },
+        {
+          "date": "2026-11-14",
+          "price": 93.15,
+          "available": 0
+        },
+        {
+          "date": "2026-11-15",
+          "price": 81.0,
+          "available": 1
+        },
+        {
+          "date": "2026-11-16",
+          "price": 81.0,
+          "available": 1
+        },
+        {
+          "date": "2026-11-17",
+          "price": 81.0,
+          "available": 1
+        },
+        {
+          "date": "2026-11-18",
+          "price": 81.0,
+          "available": 1
+        }
+      ],
+      "scraped_at": "2026-10-19T10:27:59.870871"
+    },
+    {
+      "listing": {
+        "listing_id": "1060312405367618537",
+        "title": "New apartment with pool, Palermo Hollywood",
+        "property_type": "Apartment",
+        "room_type": "Entire home/apt",
+        "accommodates": 2,
+        "bedrooms": 1,
+        "bathrooms": 1.0,
+        "latitude": -34.5861,
+        "longitude": -58.4373,
+        "neighborhood": "Palermo Hollywood",
+        "rating": 4.98,
+        "reviews_count": 0,
+        "host_id": "host_1060312405367618537",
+        "host_name": "Host",
+        "host_is_superhost": 1,
+        "amenities": [
+          "Wifi",
+          "Air conditioning",
+          "Cocina",
+          "Lavarropas",
+          "Pool",
+          "Gym",
+          "Check-in autónomo"
+        ],
+        "picture_url": "https://a0.muscache.com/im/pictures/miso/Hosting-1060312405367618537/original/764d22c8-d3d4-4191-b06d-943c5c4aeda8.jpeg?im_w=720&width=720&quality=70&auto=webp",
+        "weekend_price": null,
+        "weekly_discount": null,
+        "monthly_discount": null,
+        "early_bird_discount": null,
+        "last_minute_discount": null,
+        "cleaning_fee": null,
+        "minimum_stay": null,
+        "maximum_stay": null,
+        "instant_book": null,
+        "cancellation_policy": null
+      },
+      "calendar": [
+        {
+          "date": "2026-10-20",
+          "price": 89.8,
+          "available": 0
+        },
+        {
+          "date": "2026-10-21",
+          "price": 89.8,
+          "available": 0
+        },
+        {
+          "date": "2026-10-22",
+          "price": 89.8,
+          "available": 1
+        },
+        {
+          "date": "2026-10-23",
+          "price": 103.27,
+          "available": 0
+        },
+        {
+          "date": "2026-10-24",
+          "price": 103.27,
+          "available": 1
+        },
+        {
+          "date": "2026-10-25",
+          "price": 89.8,
+          "available": 0
+        },
+        {
+          "date": "2026-10-26",
+          "price": 89.8,
+          "available": 1
+        },
+        {
+          "date": "2026-10-27",
+          "price": 89.8,
+          "available": 0
+        },
+        {
+          "date": "2026-10-28",
+          "price": 89.8,
+          "available": 0
+        },
+        {
+          "date": "2026-10-29",
+          "price": 89.8,
+          "available": 0
+        },
+        {
+          "date": "2026-10-30",
+          "price": 103.27,
+          "available": 0
+        },
+        {
+          "date": "2026-10-31",
+          "price": 103.27,
+          "available": 1
+        },
+        {
+          "date": "2026-11-01",
+          "price": 89.8,
+          "available": 1
+        },
+        {
+          "date": "2026-11-02",
+          "price": 89.8,
+          "available": 0
+        },
+        {
+          "date": "2026-11-03",
+          "price": 89.8,
+          "available": 0
+        },
+        {
+          "date": "2026-11-04",
+          "price": 89.8,
+          "available": 1
+        },
+        {
+          "date": "2026-11-05",
+          "price": 89.8,
+          "available": 0
+        },
+        {
+          "date": "2026-11-06",
+          "price": 103.27,
+          "available": 0
+        },
+        {
+          "date": "2026-11-07",
+          "price": 103.27,
+          "available": 0
+        },
+        {
+          "date": "2026-11-08",
+          "price": 89.8,
+          "available": 0
+        },
+        {
+          "date": "2026-11-09",
+          "price": 89.8,
+          "available": 0
+        },
+        {
+          "date": "2026-11-10",
+          "price": 89.8,
+          "available": 1
+        },
+        {
+          "date": "2026-11-11",
+          "price": 89.8,
+          "available": 0
+        },
+        {
+          "date": "2026-11-12",
+          "price": 89.8,
+          "available": 0
+        },
+        {
+          "date": "2026-11-13",
+          "price": 103.27,
+          "available": 0
+        },
+        {
+          "date": "2026-11-14",
+          "price": 103.27,
+          "available": 0
+        },
+        {
+          "date": "2026-11-15",
+          "price": 89.8,
+          "available": 0
+        },
+        {
+          "date": "2026-11-16",
+          "price": 89.8,
+          "available": 1
+        },
+        {
+          "date": "2026-11-17",
+          "price": 89.8,
+          "available": 0
+        },
+        {
+          "date": "2026-11-18",
+          "price": 89.8,
+          "available": 0
+        }
+      ],
+      "scraped_at": "2026-10-19T10:28:00.600704"
+    },
+    {
+      "listing": {
+        "listing_id": "1332652249326015668",
+        "title": "Studio in Palermo 1 or 2 beds",
+        "property_type": "Apartment",
+        "room_type": "Entire home/apt",
+        "accommodates": 2,
+        "bedrooms": 1,
+        "bathrooms": 1.0,
+        "latitude": -34.5861,
+        "longitude": -58.4373,
+        "neighborhood": "Palermo Hollywood",
+        "rating": 5.0,
+        "reviews_count": 0,
+        "host_id": "host_1332652249326015668",
+        "host_name": "Host",
+        "host_is_superhost": 1,
+        "amenities": [
+          "Wifi",
+          "Air conditioning",
+          "Cocina",
+          "Lavarropas",
+          "Gym",
+          "Check-in autónomo"
+        ],
+        "picture_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-1332652249326015668/original/78b4264d-a057-47cf-b56d-11c26d2e91fa.jpeg?im_w=720&width=720&quality=70&auto=webp",
+        "weekend_price": null,
+        "weekly_discount": null,
+        "monthly_discount": null,
+        "early_bird_discount": null,
+        "last_minute_discount": null,
+        "cleaning_fee": null,
+        "minimum_stay": null,
+        "maximum_stay": null,
+        "instant_book": null,
+        "cancellation_policy": null
+      },
+      "calendar": [
+        {
+          "date": "2026-10-20",
+          "price": 96.0,
+          "available": 0
+        },
+        {
+          "date": "2026-10-21",
+          "price": 96.0,
+          "available": 1
+        },
+        {
+          "date": "2026-10-22",
+          "price": 96.0,
+          "available": 0
+        },
+        {
+          "date": "2026-10-23",
+          "price": 110.4,
+          "available": 1
+        },
+        {
+          "date": "2026-10-24",
+          "price": 110.4,
+          "available": 0
+        },
+        {
+          "date": "2026-10-25",
+          "price": 96.0,
+          "available": 1
+        },
+        {
+          "date": "2026-10-26",
+          "price": 96.0,
+          "available": 1
+        },
+        {
+          "date": "2026-10-27",
+          "price": 96.0,
+          "available": 0
+        },
+        {
+          "date": "2026-10-28",
+          "price": 96.0,
+          "available": 1
+        },
+        {
+          "date": "2026-10-29",
+          "price": 96.0,
+          "available": 0
+        },
+        {
+          "date": "2026-10-30",
+          "price": 110.4,
+          "available": 1
+        },
+        {
+          "date": "2026-10-31",
+          "price": 110.4,
+          "available": 1
+        },
+        {
+          "date": "2026-11-01",
+          "price": 96.0,
+          "available": 0
+        },
+        {
+          "date": "2026-11-02",
+          "price": 96.0,
+          "available": 1
+        },
+        {
+          "date": "2026-11-03",
+          "price": 96.0,
+          "available": 1
+        },
+        {
+          "date": "2026-11-04",
+          "price": 96.0,
+          "available": 1
+        },
+        {
+          "date": "2026-11-05",
+          "price": 96.0,
+          "available": 0
+        },
+        {
+          "date": "2026-11-06",
+          "price": 110.4,
+          "available": 0
+        },
+        {
+          "date": "2026-11-07",
+          "price": 110.4,
+          "available": 0
+        },
+        {
+          "date": "2026-11-08",
+          "price": 96.0,
+          "available": 1
+        },
+        {
+          "date": "2026-11-09",
+          "price": 96.0,
+          "available": 0
+        },
+        {
+          "date": "2026-11-10",
+          "price": 96.0,
+          "available": 0
+        },
+        {
+          "date": "2026-11-11",
+          "price": 96.0,
+          "available": 0
+        },
+        {
+          "date": "2026-11-12",
+          "price": 96.0,
+          "available": 0
+        },
+        {
+          "date": "2026-11-13",
+          "price": 110.4,
+          "available": 1
+        },
+        {
+          "date": "2026-11-14",
+          "price": 110.4,
+          "available": 1
+        },
+        {
+          "date": "2026-11-15",
+          "price": 96.0,
+          "available": 1
+        },
+        {
+          "date": "2026-11-16",
+          "price": 96.0,
+          "available": 0
+        },
+        {
+          "date": "2026-11-17",
+          "price": 96.0,
+          "available": 0
+        },
+        {
+          "date": "2026-11-18",
+          "price": 96.0,
+          "available": 0
+        }
+      ],
+      "scraped_at": "2026-10-19T10:28:01.209329"
+    },
+    {
+      "listing": {
+        "listing_id": "1339268978869205367",
+        "title": "Palermo Hollywood | Sunset view | Rooftop Pool",
+        "property_type": "Apartment",
+        "room_type": "Entire home/apt",
+        "accommodates": 2,
+        "bedrooms": 1,
+        "bathrooms": 1.0,
+        "latitude": -34.5861,
+        "longitude": -58.4373,
+        "neighborhood": "Palermo Hollywood",
+        "rating": 4.84,
+        "reviews_count": 0,
+        "host_id": "host_1339268978869205367",
+        "host_name": "Host",
+        "host_is_superhost": 1,
+        "amenities": [
+          "Wifi",
+          "Air conditioning",
+          "Cocina",
+          "Lavarropas",
+          "Pool",
+          "Gym",
+          "Workspace",
+          "Check-in autónomo"
+        ],
+        "picture_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-1339268978869205367/original/2bfe221d-62cd-4680-97f6-0e7fd6745419.jpeg?im_w=720&width=720&quality=70&auto=webp",
+        "weekend_price": null,
+        "weekly_discount": null,
+        "monthly_discount": null,
+        "early_bird_discount": null,
+        "last_minute_discount": null,
+        "cleaning_fee": null,
+        "minimum_stay": null,
+        "maximum_stay": null,
+        "instant_book": null,
+        "cancellation_policy": null
+      },
+      "calendar": [
+        {
+          "date": "2026-10-20",
+          "price": 81.4,
+          "available": 0
+        },
+        {
+          "date": "2026-10-21",
+          "price": 81.4,
+          "available": 0
+        },
+        {
+          "date": "2026-10-22",
+          "price": 81.4,
+          "available": 0
+        },
+        {
+          "date": "2026-10-23",
+          "price": 93.61,
+          "available": 1
+        },
+        {
+          "date": "2026-10-24",
+          "price": 93.61,
+          "available": 0
+        },
+        {
+          "date": "2026-10-25",
+          "price": 81.4,
+          "available": 1
+        },
+        {
+          "date": "2026-10-26",
+          "price": 81.4,
+          "available": 0
+        },
+        {
+          "date": "2026-10-27",
+          "price": 81.4,
+          "available": 0
+        },
+        {
+          "date": "2026-10-28",
+          "price": 81.4,
+          "available": 0
+        },
+        {
+          "date": "2026-10-29",
+          "price": 81.4,
+          "available": 0
+        },
+        {
+          "date": "2026-10-30",
+          "price": 93.61,
+          "available": 0
+        },
+        {
+          "date": "2026-10-31",
+          "price": 93.61,
+          "available": 1
+        },
+        {
+          "date": "2026-11-01",
+          "price": 81.4,
+          "available": 1
+        },
+        {
+          "date": "2026-11-02",
+          "price": 81.4,
+          "available": 0
+        },
+        {
+          "date": "2026-11-03",
+          "price": 81.4,
+          "available": 0
+        },
+        {
+          "date": "2026-11-04",
+          "price": 81.4,
+          "available": 1
+        },
+        {
+          "date": "2026-11-05",
+          "price": 81.4,
+          "available": 1
+        },
+        {
+          "date": "2026-11-06",
+          "price": 93.61,
+          "available": 0
+        },
+        {
+          "date": "2026-11-07",
+          "price": 93.61,
+          "available": 0
+        },
+        {
+          "date": "2026-11-08",
+          "price": 81.4,
+          "available": 0
+        },
+        {
+          "date": "2026-11-09",
+          "price": 81.4,
+          "available": 0
+        },
+        {
+          "date": "2026-11-10",
+          "price": 81.4,
+          "available": 0
+        },
+        {
+          "date": "2026-11-11",
+          "price": 81.4,
+          "available": 0
+        },
+        {
+          "date": "2026-11-12",
+          "price": 81.4,
+          "available": 0
+        },
+        {
+          "date": "2026-11-13",
+          "price": 93.61,
+          "available": 1
+        },
+        {
+          "date": "2026-11-14",
+          "price": 93.61,
+          "available": 1
+        },
+        {
+          "date": "2026-11-15",
+          "price": 81.4,
+          "available": 1
+        },
+        {
+          "date": "2026-11-16",
+          "price": 81.4,
+          "available": 0
+        },
+        {
+          "date": "2026-11-17",
+          "price": 81.4,
+          "available": 0
+        },
+        {
+          "date": "2026-11-18",
+          "price": 81.4,
+          "available": 1
+        }
+      ],
+      "scraped_at": "2026-10-19T10:28:01.905515"
+    },
+    {
+      "listing": {
+        "listing_id": "1350636202477210596",
+        "title": "Trendy duplex en Palermo",
+        "property_type": "Apartment",
+        "room_type": "Entire home/apt",
+        "accommodates": 2,
+        "bedrooms": 1,
+        "bathrooms": 1.0,
+        "latitude": -34.5861,
+        "longitude": -58.4373,
+        "neighborhood": "Palermo Hollywood",
+        "rating": 5.0,
+        "reviews_count": 0,
+        "host_id": "host_1350636202477210596",
+        "host_name": "Host",
+        "host_is_superhost": 1,
+        "amenities": [
+          "Wifi",
+          "Air conditioning",
+          "Cocina",
+          "Lavarropas",
+          "Pool",
+          "Gym",
+          "Workspace",
+          "Check-in autónomo"
+        ],
+        "picture_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-1304966746350300861/original/201682e2-fffe-43ee-82ce-4c9c473e2039.jpeg?im_w=720&width=720&quality=70&auto=webp",
+        "weekend_price": null,
+        "weekly_discount": null,
+        "monthly_discount": null,
+        "early_bird_discount": null,
+        "last_minute_discount": null,
+        "cleaning_fee": null,
+        "minimum_stay": null,
+        "maximum_stay": null,
+        "instant_book": null,
+        "cancellation_policy": null
+      },
+      "calendar": [
+        {
+          "date": "2026-10-20",
+          "price": 91.0,
+          "available": 0
+        },
+        {
+          "date": "2026-10-21",
+          "price": 91.0,
+          "available": 0
+        },
+        {
+          "date": "2026-10-22",
+          "price": 91.0,
+          "available": 0
+        },
+        {
+          "date": "2026-10-23",
+          "price": 104.65,
+          "available": 1
+        },
+        {
+          "date": "2026-10-24",
+          "price": 104.65,
+          "available": 1
+        },
+        {
+          "date": "2026-10-25",
+          "price": 91.0,
+          "available": 0
+        },
+        {
+          "date": "2026-10-26",
+          "price": 91.0,
+          "available": 0
+        },
+        {
+          "date": "2026-10-27",
+          "price": 91.0,
+          "available": 0
+        },
+        {
+          "date": "2026-10-28",
+          "price": 91.0,
+          "available": 0
+        },
+        {
+          "date": "2026-10-29",
+          "price": 91.0,
+          "available": 1
+        },
+        {
+          "date": "2026-10-30",
+          "price": 104.65,
+          "available": 0
+        },
+        {
+          "date": "2026-10-31",
+          "price": 104.65,
+          "available": 0
+        },
+        {
+          "date": "2026-11-01",
+          "price": 91.0,
+          "available": 1
+        },
+        {
+          "date": "2026-11-02",
+          "price": 91.0,
+          "available": 0
+        },
+        {
+          "date": "2026-11-03",
+          "price": 91.0,
+          "available": 1
+        },
+        {
+          "date": "2026-11-04",
+          "price": 91.0,
+          "available": 1
+        },
+        {
+          "date": "2026-11-05",
+          "price": 91.0,
+          "available": 0
+        },
+        {
+          "date": "2026-11-06",
+          "price": 104.65,
+          "available": 1
+        },
+        {
+          "date": "2026-11-07",
+          "price": 104.65,
+          "available": 1
+        },
+        {
+          "date": "2026-11-08",
+          "price": 91.0,
+          "available": 1
+        },
+        {
+          "date": "2026-11-09",
+          "price": 91.0,
+          "available": 0
+        },
+        {
+          "date": "2026-11-10",
+          "price": 91.0,
+          "available": 1
+        },
+        {
+          "date": "2026-11-11",
+          "price": 91.0,
+          "available": 0
+        },
+        {
+          "date": "2026-11-12",
+          "price": 91.0,
+          "available": 0
+        },
+        {
+          "date": "2026-11-13",
+          "price": 104.65,
+          "available": 1
+        },
+        {
+          "date": "2026-11-14",
+          "price": 104.65,
+          "available": 0
+        },
+        {
+          "date": "2026-11-15",
+          "price": 91.0,
+          "available": 0
+        },
+        {
+          "date": "2026-11-16",
+          "price": 91.0,
+          "available": 0
+        },
+        {
+          "date": "2026-11-17",
+          "price": 91.0,
+          "available": 0
+        },
+        {
+          "date": "2026-11-18",
+          "price": 91.0,
+          "available": 1
+        }
+      ],
+      "scraped_at": "2026-10-19T10:28:02.437920"
+    },
+    {
+      "listing": {
+        "listing_id": "1414843266587760943",
+        "title": "A&D Palermo Hollywood",
+        "property_type": "Apartment",
+        "room_type": "Entire home/apt",
+        "accommodates": 2,
+        "bedrooms": 1,
+        "bathrooms": 1.0,
+        "latitude": -34.5861,
+        "longitude": -58.4373,
+        "neighborhood": "Palermo Hollywood",
+        "rating": 4.9,
+        "reviews_count": 0,
+        "host_id": "host_1414843266587760943",
+        "host_name": "Host",
+        "host_is_superhost": 1,
+        "amenities": [
+          "Wifi",
+          "Air conditioning",
+          "Cocina",
+          "Lavarropas",
+          "Pool",
+          "Gym",
+          "Workspace",
+          "Check-in autónomo"
+        ],
+        "picture_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-1414843266587760943/original/bce2c351-001d-475d-afb1-696ab5160e9d.jpeg?im_w=720&width=720&quality=70&auto=webp",
+        "weekend_price": null,
+        "weekly_discount": null,
+        "monthly_discount": null,
+        "early_bird_discount": null,
+        "last_minute_discount": null,
+        "cleaning_fee": null,
+        "minimum_stay": null,
+        "maximum_stay": null,
+        "instant_book": null,
+        "cancellation_policy": null
+      },
+      "calendar": [
+        {
+          "date": "2026-10-20",
+          "price": 68.0,
+          "available": 1
+        },
+        {
+          "date": "2026-10-21",
+          "price": 68.0,
+          "available": 0
+        },
+        {
+          "date": "2026-10-22",
+          "price": 68.0,
+          "available": 0
+        },
+        {
+          "date": "2026-10-23",
+          "price": 78.2,
+          "available": 0
+        },
+        {
+          "date": "2026-10-24",
+          "price": 78.2,
+          "available": 0
+        },
+        {
+          "date": "2026-10-25",
+          "price": 68.0,
+          "available": 0
+        },
+        {
+          "date": "2026-10-26",
+          "price": 68.0,
+          "available": 1
+        },
+        {
+          "date": "2026-10-27",
+          "price": 68.0,
+          "available": 0
+        },
+        {
+          "date": "2026-10-28",
+          "price": 68.0,
+          "available": 0
+        },
+        {
+          "date": "2026-10-29",
+          "price": 68.0,
+          "available": 1
+        },
+        {
+          "date": "2026-10-30",
+          "price": 78.2,
+          "available": 0
+        },
+        {
+          "date": "2026-10-31",
+          "price": 78.2,
+          "available": 0
+        },
+        {
+          "date": "2026-11-01",
+          "price": 68.0,
+          "available": 0
+        },
+        {
+          "date": "2026-11-02",
+          "price": 68.0,
+          "available": 0
+        },
+        {
+          "date": "2026-11-03",
+          "price": 68.0,
+          "available": 0
+        },
+        {
+          "date": "2026-11-04",
+          "price": 68.0,
+          "available": 0
+        },
+        {
+          "date": "2026-11-05",
+          "price": 68.0,
+          "available": 1
+        },
+        {
+          "date": "2026-11-06",
+          "price": 78.2,
+          "available": 0
+        },
+        {
+          "date": "2026-11-07",
+          "price": 78.2,
+          "available": 0
+        },
+        {
+          "date": "2026-11-08",
+          "price": 68.0,
+          "available": 1
+        },
+        {
+          "date": "2026-11-09",
+          "price": 68.0,
+          "available": 0
+        },
+        {
+          "date": "2026-11-10",
+          "price": 68.0,
+          "available": 0
+        },
+        {
+          "date": "2026-11-11",
+          "price": 68.0,
+          "available": 1
+        },
+        {
+          "date": "2026-11-12",
+          "price": 68.0,
+          "available": 1
+        },
+        {
+          "date": "2026-11-13",
+          "price": 78.2,
+          "available": 0
+        },
+        {
+          "date": "2026-11-14",
+          "price": 78.2,
+          "available": 0
+        },
+        {
+          "date": "2026-11-15",
+          "price": 68.0,
+          "available": 0
+        },
+        {
+          "date": "2026-11-16",
+          "price": 68.0,
+          "available": 0
+        },
+        {
+          "date": "2026-11-17",
+          "price": 68.0,
+          "available": 0
+        },
+        {
+          "date": "2026-11-18",
+          "price": 68.0,
+          "available": 1
+        }
+      ],
+      "scraped_at": "2026-10-19T10:28:03.063055"
+    },
+    {
+      "listing": {
+        "listing_id": "1533512724989462821",
+        "title": "Boutique Loft • Palermo Hollywood/Soho Aura Suites",
+        "property_type": "Apartment",
+        "room_type": "Entire home/apt",
+        "accommodates": 2,
+        "bedrooms": 1,
+        "bathrooms": 1.0,
+        "latitude": -34.5861,
+        "longitude": -58.4373,
+        "neighborhood": "Palermo Hollywood",
+        "rating": 4.86,
+        "reviews_count": 0,
+        "host_id": "host_1533512724989462821",
+        "host_name": "Host",
+        "host_is_superhost": 1,
+        "amenities": [
+          "Wifi",
+          "Air conditioning",
+          "Cocina",
+          "Lavarropas",
+          "Parking",
+          "Pool",
+          "Gym",
+          "Workspace",
+          "Check-in autónomo"
+        ],
+        "picture_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-1533512724989462821/original/cb6918a4-ccef-43c0-9703-d98097153f80.jpeg?im_w=720&width=720&quality=70&auto=webp",
+        "weekend_price": null,
+        "weekly_discount": null,
+        "monthly_discount": null,
+        "early_bird_discount": null,
+        "last_minute_discount": null,
+        "cleaning_fee": null,
+        "minimum_stay": null,
+        "maximum_stay": null,
+        "instant_book": null,
+        "cancellation_policy": null
+      },
+      "calendar": [
+        {
+          "date": "2026-10-20",
+          "price": 61.6,
+          "available": 0
+        },
+        {
+          "date": "2026-10-21",
+          "price": 61.6,
+          "available": 0
+        },
+        {
+          "date": "2026-10-22",
+          "price": 61.6,
+          "available": 0
+        },
+        {
+          "date": "2026-10-23",
+          "price": 70.84,
+          "available": 0
+        },
+        {
+          "date": "2026-10-24",
+          "price": 70.84,
+          "available": 0
+        },
+        {
+          "date": "2026-10-25",
+          "price": 61.6,
+          "available": 1
+        },
+        {
+          "date": "2026-10-26",
+          "price": 61.6,
+          "available": 0
+        },
+        {
+          "date": "2026-10-27",
+          "price": 61.6,
+          "available": 0
+        },
+        {
+          "date": "2026-10-28",
+          "price": 61.6,
+          "available": 0
+        },
+        {
+          "date": "2026-10-29",
+          "price": 61.6,
+          "available": 0
+        },
+        {
+          "date": "2026-10-30",
+          "price": 70.84,
+          "available": 1
+        },
+        {
+          "date": "2026-10-31",
+          "price": 70.84,
+          "available": 0
+        },
+        {
+          "date": "2026-11-01",
+          "price": 61.6,
+          "available": 1
+        },
+        {
+          "date": "2026-11-02",
+          "price": 61.6,
+          "available": 0
+        },
+        {
+          "date": "2026-11-03",
+          "price": 61.6,
+          "available": 0
+        },
+        {
+          "date": "2026-11-04",
+          "price": 61.6,
+          "available": 0
+        },
+        {
+          "date": "2026-11-05",
+          "price": 61.6,
+          "available": 1
+        },
+        {
+          "date": "2026-11-06",
+          "price": 70.84,
+          "available": 0
+        },
+        {
+          "date": "2026-11-07",
+          "price": 70.84,
+          "available": 0
+        },
+        {
+          "date": "2026-11-08",
+          "price": 61.6,
+          "available": 0
+        },
+        {
+          "date": "2026-11-09",
+          "price": 61.6,
+          "available": 1
+        },
+        {
+          "date": "2026-11-10",
+          "price": 61.6,
+          "available": 1
+        },
+        {
+          "date": "2026-11-11",
+          "price": 61.6,
+          "available": 0
+        },
+        {
+          "date": "2026-11-12",
+          "price": 61.6,
+          "available": 0
+        },
+        {
+          "date": "2026-11-13",
+          "price": 70.84,
+          "available": 1
+        },
+        {
+          "date": "2026-11-14",
+          "price": 70.84,
+          "available": 0
+        },
+        {
+          "date": "2026-11-15",
+          "price": 61.6,
+          "available": 0
+        },
+        {
+          "date": "2026-11-16",
+          "price": 61.6,
+          "available": 1
+        },
+        {
+          "date": "2026-11-17",
+          "price": 61.6,
+          "available": 0
+        },
+        {
+          "date": "2026-11-18",
+          "price": 61.6,
+          "available": 0
+        }
+      ],
+      "scraped_at": "2026-10-19T10:28:03.718143"
+    },
+    {
+      "listing": {
+        "listing_id": "1624670739946294338",
+        "title": "Trendy Family Apt | Palermo Hollywood | Gym & Pool",
+        "property_type": "Apartment",
+        "room_type": "Entire home/apt",
+        "accommodates": 2,
+        "bedrooms": 1,
+        "bathrooms": 1.0,
+        "latitude": -34.5861,
+        "longitude": -58.4373,
+        "neighborhood": "Palermo Hollywood",
+        "rating": 4.99,
+        "reviews_count": 0,
+        "host_id": "host_1624670739946294338",
+        "host_name": "Host",
+        "host_is_superhost": 1,
+        "amenities": [
+          "Wifi",
+          "Air conditioning",
+          "Cocina",
+          "Lavarropas",
+          "Pool",
+          "Gym",
+          "Workspace",
+          "Check-in autónomo"
+        ],
+        "picture_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-1624670739946294338/original/dbdfe67d-bcf1-43b1-abf7-4744d37fbc9a.png?im_w=720&width=720&quality=70&auto=webp",
+        "weekend_price": null,
+        "weekly_discount": null,
+        "monthly_discount": null,
+        "early_bird_discount": null,
+        "last_minute_discount": null,
+        "cleaning_fee": null,
+        "minimum_stay": null,
+        "maximum_stay": null,
+        "instant_book": null,
+        "cancellation_policy": null
+      },
+      "calendar": [
+        {
+          "date": "2026-10-20",
+          "price": 73.9,
+          "available": 1
+        },
+        {
+          "date": "2026-10-21",
+          "price": 73.9,
+          "available": 1
+        },
+        {
+          "date": "2026-10-22",
+          "price": 73.9,
+          "available": 0
+        },
+        {
+          "date": "2026-10-23",
+          "price": 84.98,
+          "available": 1
+        },
+        {
+          "date": "2026-10-24",
+          "price": 84.98,
+          "available": 0
+        },
+        {
+          "date": "2026-10-25",
+          "price": 73.9,
+          "available": 0
+        },
+        {
+          "date": "2026-10-26",
+          "price": 73.9,
+          "available": 1
+        },
+        {
+          "date": "2026-10-27",
+          "price": 73.9,
+          "available": 0
+        },
+        {
+          "date": "2026-10-28",
+          "price": 73.9,
+          "available": 0
+        },
+        {
+          "date": "2026-10-29",
+          "price": 73.9,
+          "available": 0
+        },
+        {
+          "date": "2026-10-30",
+          "price": 84.98,
+          "available": 0
+        },
+        {
+          "date": "2026-10-31",
+          "price": 84.98,
+          "available": 0
+        },
+        {
+          "date": "2026-11-01",
+          "price": 73.9,
+          "available": 0
+        },
+        {
+          "date": "2026-11-02",
+          "price": 73.9,
+          "available": 1
+        },
+        {
+          "date": "2026-11-03",
+          "price": 73.9,
+          "available": 1
+        },
+        {
+          "date": "2026-11-04",
+          "price": 73.9,
+          "available": 1
+        },
+        {
+          "date": "2026-11-05",
+          "price": 73.9,
+          "available": 1
+        },
+        {
+          "date": "2026-11-06",
+          "price": 84.98,
+          "available": 0
+        },
+        {
+          "date": "2026-11-07",
+          "price": 84.98,
+          "available": 0
+        },
+        {
+          "date": "2026-11-08",
+          "price": 73.9,
+          "available": 0
+        },
+        {
+          "date": "2026-11-09",
+          "price": 73.9,
+          "available": 0
+        },
+        {
+          "date": "2026-11-10",
+          "price": 73.9,
+          "available": 0
+        },
+        {
+          "date": "2026-11-11",
+          "price": 73.9,
+          "available": 1
+        },
+        {
+          "date": "2026-11-12",
+          "price": 73.9,
+          "available": 0
+        },
+        {
+          "date": "2026-11-13",
+          "price": 84.98,
+          "available": 0
+        },
+        {
+          "date": "2026-11-14",
+          "price": 84.98,
+          "available": 0
+        },
+        {
+          "date": "2026-11-15",
+          "price": 73.9,
+          "available": 1
+        },
+        {
+          "date": "2026-11-16",
+          "price": 73.9,
+          "available": 0
+        },
+        {
+          "date": "2026-11-17",
+          "price": 73.9,
+          "available": 0
+        },
+        {
+          "date": "2026-11-18",
+          "price": 73.9,
+          "available": 0
+        }
+      ],
+      "scraped_at": "2026-10-19T10:28:04.352401"
+    },
+    {
+      "listing": {
+        "listing_id": "1696119799275478320",
+        "title": "Exclusive loft in Palermo Hollywood",
+        "property_type": "Apartment",
+        "room_type": "Entire home/apt",
+        "accommodates": 2,
+        "bedrooms": 1,
+        "bathrooms": 1.0,
+        "latitude": -34.5861,
+        "longitude": -58.4373,
+        "neighborhood": "Palermo Hollywood",
+        "rating": 4.5,
+        "reviews_count": 0,
+        "host_id": "host_1696119799275478320",
+        "host_name": "Host",
+        "host_is_superhost": 1,
+        "amenities": [
+          "Wifi",
+          "Air conditioning",
+          "Cocina",
+          "Lavarropas",
+          "Pool",
+          "Workspace",
+          "Check-in autónomo"
+        ],
+        "picture_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-1696119799275478320/original/bccea24e-dbb2-4bc3-8536-3aa715885730.jpeg?im_w=720&width=720&quality=70&auto=webp",
+        "weekend_price": null,
+        "weekly_discount": null,
+        "monthly_discount": null,
+        "early_bird_discount": null,
+        "last_minute_discount": null,
+        "cleaning_fee": null,
+        "minimum_stay": null,
+        "maximum_stay": null,
+        "instant_book": null,
+        "cancellation_policy": null
+      },
+      "calendar": [
+        {
+          "date": "2026-10-20",
+          "price": 72.0,
+          "available": 1
+        },
+        {
+          "date": "2026-10-21",
+          "price": 72.0,
+          "available": 1
+        },
+        {
+          "date": "2026-10-22",
+          "price": 72.0,
+          "available": 1
+        },
+        {
+          "date": "2026-10-23",
+          "price": 82.8,
+          "available": 1
+        },
+        {
+          "date": "2026-10-24",
+          "price": 82.8,
+          "available": 0
+        },
+        {
+          "date": "2026-10-25",
+          "price": 72.0,
+          "available": 1
+        },
+        {
+          "date": "2026-10-26",
+          "price": 72.0,
+          "available": 1
+        },
+        {
+          "date": "2026-10-27",
+          "price": 72.0,
+          "available": 1
+        },
+        {
+          "date": "2026-10-28",
+          "price": 72.0,
+          "available": 1
+        },
+        {
+          "date": "2026-10-29",
+          "price": 72.0,
+          "available": 0
+        },
+        {
+          "date": "2026-10-30",
+          "price": 82.8,
+          "available": 1
+        },
+        {
+          "date": "2026-10-31",
+          "price": 82.8,
+          "available": 0
+        },
+        {
+          "date": "2026-11-01",
+          "price": 72.0,
+          "available": 1
+        },
+        {
+          "date": "2026-11-02",
+          "price": 72.0,
+          "available": 0
+        },
+        {
+          "date": "2026-11-03",
+          "price": 72.0,
+          "available": 0
+        },
+        {
+          "date": "2026-11-04",
+          "price": 72.0,
+          "available": 0
+        },
+        {
+          "date": "2026-11-05",
+          "price": 72.0,
+          "available": 1
+        },
+        {
+          "date": "2026-11-06",
+          "price": 82.8,
+          "available": 0
+        },
+        {
+          "date": "2026-11-07",
+          "price": 82.8,
+          "available": 0
+        },
+        {
+          "date": "2026-11-08",
+          "price": 72.0,
+          "available": 0
+        },
+        {
+          "date": "2026-11-09",
+          "price": 72.0,
+          "available": 1
+        },
+        {
+          "date": "2026-11-10",
+          "price": 72.0,
+          "available": 0
+        },
+        {
+          "date": "2026-11-11",
+          "price": 72.0,
+          "available": 1
+        },
+        {
+          "date": "2026-11-12",
+          "price": 72.0,
+          "available": 1
+        },
+        {
+          "date": "2026-11-13",
+          "price": 82.8,
+          "available": 0
+        },
+        {
+          "date": "2026-11-14",
+          "price": 82.8,
+          "available": 0
+        },
+        {
+          "date": "2026-11-15",
+          "price": 72.0,
+          "available": 0
+        },
+        {
+          "date": "2026-11-16",
+          "price": 72.0,
+          "available": 0
+        },
+        {
+          "date": "2026-11-17",
+          "price": 72.0,
+          "available": 0
+        },
+        {
+          "date": "2026-11-18",
+          "price": 72.0,
+          "available": 0
+        }
+      ],
+      "scraped_at": "2026-10-19T10:28:04.872268"
+    },
+    {
+      "listing": {
+        "listing_id": "1711076101708739532",
+        "title": "Cozy studio in Palermo Hollywood",
+        "property_type": "Apartment",
+        "room_type": "Entire home/apt",
+        "accommodates": 2,
+        "bedrooms": 1,
+        "bathrooms": 1.0,
+        "latitude": -34.5861,
+        "longitude": -58.4373,
+        "neighborhood": "Palermo Hollywood",
+        "rating": 5.0,
+        "reviews_count": 0,
+        "host_id": "host_1711076101708739532",
+        "host_name": "Host",
+        "host_is_superhost": 1,
+        "amenities": [
+          "Wifi",
+          "Air conditioning",
+          "Cocina",
+          "Lavarropas",
+          "Pool",
+          "Gym",
+          "Check-in autónomo"
+        ],
+        "picture_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-1711076101708739532/original/8cc0a651-a1d8-4396-8d57-99eab70bbc76.jpeg?im_w=720&width=720&quality=70&auto=webp",
+        "weekend_price": null,
+        "weekly_discount": null,
+        "monthly_discount": null,
+        "early_bird_discount": null,
+        "last_minute_discount": null,
+        "cleaning_fee": null,
+        "minimum_stay": null,
+        "maximum_stay": null,
+        "instant_book": null,
+        "cancellation_policy": null
+      },
+      "calendar": [
+        {
+          "date": "2026-10-20",
+          "price": 91.0,
+          "available": 0
+        },
+        {
+          "date": "2026-10-21",
+          "price": 91.0,
+          "available": 1
+        },
+        {
+          "date": "2026-10-22",
+          "price": 91.0,
+          "available": 0
+        },
+        {
+          "date": "2026-10-23",
+          "price": 104.65,
+          "available": 1
+        },
+        {
+          "date": "2026-10-24",
+          "price": 104.65,
+          "available": 0
+        },
+        {
+          "date": "2026-10-25",
+          "price": 91.0,
+          "available": 0
+        },
+        {
+          "date": "2026-10-26",
+          "price": 91.0,
+          "available": 0
+        },
+        {
+          "date": "2026-10-27",
+          "price": 91.0,
+          "available": 0
+        },
+        {
+          "date": "2026-10-28",
+          "price": 91.0,
+          "available": 1
+        },
+        {
+          "date": "2026-10-29",
+          "price": 91.0,
+          "available": 0
+        },
+        {
+          "date": "2026-10-30",
+          "price": 104.65,
+          "available": 0
+        },
+        {
+          "date": "2026-10-31",
+          "price": 104.65,
+          "available": 1
+        },
+        {
+          "date": "2026-11-01",
+          "price": 91.0,
+          "available": 1
+        },
+        {
+          "date": "2026-11-02",
+          "price": 91.0,
+          "available": 0
+        },
+        {
+          "date": "2026-11-03",
+          "price": 91.0,
+          "available": 0
+        },
+        {
+          "date": "2026-11-04",
+          "price": 91.0,
+          "available": 0
+        },
+        {
+          "date": "2026-11-05",
+          "price": 91.0,
+          "available": 1
+        },
+        {
+          "date": "2026-11-06",
+          "price": 104.65,
+          "available": 0
+        },
+        {
+          "date": "2026-11-07",
+          "price": 104.65,
+          "available": 1
+        },
+        {
+          "date": "2026-11-08",
+          "price": 91.0,
+          "available": 1
+        },
+        {
+          "date": "2026-11-09",
+          "price": 91.0,
+          "available": 0
+        },
+        {
+          "date": "2026-11-10",
+          "price": 91.0,
+          "available": 0
+        },
+        {
+          "date": "2026-11-11",
+          "price": 91.0,
+          "available": 1
+        },
+        {
+          "date": "2026-11-12",
+          "price": 91.0,
+          "available": 0
+        },
+        {
+          "date": "2026-11-13",
+          "price": 104.65,
+          "available": 0
+        },
+        {
+          "date": "2026-11-14",
+          "price": 104.65,
+          "available": 1
+        },
+        {
+          "date": "2026-11-15",
+          "price": 91.0,
+          "available": 0
+        },
+        {
+          "date": "2026-11-16",
+          "price": 91.0,
+          "available": 0
+        },
+        {
+          "date": "2026-11-17",
+          "price": 91.0,
+          "available": 0
+        },
+        {
+          "date": "2026-11-18",
+          "price": 91.0,
+          "available": 1
+        }
+      ],
+      "scraped_at": "2026-10-19T10:28:05.413826"
+    },
+    {
+      "listing": {
+        "listing_id": "1722069862587817902",
+        "title": "Soho Den 1 · 1BR, Sauna + Heated Pool",
+        "property_type": "Apartment",
+        "room_type": "Entire home/apt",
+        "accommodates": 2,
+        "bedrooms": 1,
+        "bathrooms": 1.0,
+        "latitude": -34.5861,
+        "longitude": -58.4373,
+        "neighborhood": "Palermo Hollywood",
+        "rating": 4.76,
+        "reviews_count": 0,
+        "host_id": "host_1722069862587817902",
+        "host_name": "Host",
+        "host_is_superhost": 1,
+        "amenities": [
+          "Wifi",
+          "Air conditioning",
+          "Cocina",
+          "Lavarropas",
+          "Pool",
+          "Gym",
+          "Workspace",
+          "Check-in autónomo"
+        ],
+        "picture_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-1722069862587817902/original/4a2124a7-02ea-47e9-90cf-917742c9ec45.jpeg?im_w=720&width=720&quality=70&auto=webp",
+        "weekend_price": null,
+        "weekly_discount": null,
+        "monthly_discount": null,
+        "early_bird_discount": null,
+        "last_minute_discount": null,
+        "cleaning_fee": null,
+        "minimum_stay": null,
+        "maximum_stay": null,
+        "instant_book": null,
+        "cancellation_policy": null
+      },
+      "calendar": [
+        {
+          "date": "2026-10-20",
+          "price": 68.6,
+          "available": 1
+        },
+        {
+          "date": "2026-10-21",
+          "price": 68.6,
+          "available": 1
+        },
+        {
+          "date": "2026-10-22",
+          "price": 68.6,
+          "available": 0
+        },
+        {
+          "date": "2026-10-23",
+          "price": 78.89,
+          "available": 0
+        },
+        {
+          "date": "2026-10-24",
+          "price": 78.89,
+          "available": 0
+        },
+        {
+          "date": "2026-10-25",
+          "price": 68.6,
+          "available": 0
+        },
+        {
+          "date": "2026-10-26",
+          "price": 68.6,
+          "available": 0
+        },
+        {
+          "date": "2026-10-27",
+          "price": 68.6,
+          "available": 0
+        },
+        {
+          "date": "2026-10-28",
+          "price": 68.6,
+          "available": 0
+        },
+        {
+          "date": "2026-10-29",
+          "price": 68.6,
+          "available": 0
+        },
+        {
+          "date": "2026-10-30",
+          "price": 78.89,
+          "available": 0
+        },
+        {
+          "date": "2026-10-31",
+          "price": 78.89,
+          "available": 1
+        },
+        {
+          "date": "2026-11-01",
+          "price": 68.6,
+          "available": 0
+        },
+        {
+          "date": "2026-11-02",
+          "price": 68.6,
+          "available": 1
+        },
+        {
+          "date": "2026-11-03",
+          "price": 68.6,
+          "available": 0
+        },
+        {
+          "date": "2026-11-04",
+          "price": 68.6,
+          "available": 0
+        },
+        {
+          "date": "2026-11-05",
+          "price": 68.6,
+          "available": 1
+        },
+        {
+          "date": "2026-11-06",
+          "price": 78.89,
+          "available": 0
+        },
+        {
+          "date": "2026-11-07",
+          "price": 78.89,
+          "available": 1
+        },
+        {
+          "date": "2026-11-08",
+          "price": 68.6,
+          "available": 0
+        },
+        {
+          "date": "2026-11-09",
+          "price": 68.6,
+          "available": 0
+        },
+        {
+          "date": "2026-11-10",
+          "price": 68.6,
+          "available": 0
+        },
+        {
+          "date": "2026-11-11",
+          "price": 68.6,
+          "available": 0
+        },
+        {
+          "date": "2026-11-12",
+          "price": 68.6,
+          "available": 0
+        },
+        {
+          "date": "2026-11-13",
+          "price": 78.89,
+          "available": 0
+        },
+        {
+          "date": "2026-11-14",
+          "price": 78.89,
+          "available": 0
+        },
+        {
+          "date": "2026-11-15",
+          "price": 68.6,
+          "available": 1
+        },
+        {
+          "date": "2026-11-16",
+          "price": 68.6,
+          "available": 1
+        },
+        {
+          "date": "2026-11-17",
+          "price": 68.6,
+          "available": 0
+        },
+        {
+          "date": "2026-11-18",
+          "price": 68.6,
+          "available": 1
+        }
+      ],
+      "scraped_at": "2026-10-19T10:28:05.985332"
+    },
+    {
+      "listing": {
+        "listing_id": "36769566",
+        "title": "Design Building 1BR Sunny Home - Laundry and GYM",
+        "property_type": "Apartment",
+        "room_type": "Entire home/apt",
+        "accommodates": 2,
+        "bedrooms": 1,
+        "bathrooms": 1.0,
+        "latitude": -34.5861,
+        "longitude": -58.4373,
+        "neighborhood": "Palermo Hollywood",
+        "rating": 4.92,
+        "reviews_count": 0,
+        "host_id": "host_36769566",
+        "host_name": "Host",
+        "host_is_superhost": 1,
+        "amenities": [
+          "Wifi",
+          "Air conditioning",
+          "Cocina",
+          "Lavarropas",
+          "Pool",
+          "Gym",
+          "Check-in autónomo"
+        ],
+        "picture_url": "https://a0.muscache.com/im/pictures/miso/Hosting-36769566/original/75f78c8f-fe50-44c1-a32c-08bd78a21008.jpeg?im_w=720&width=720&quality=70&auto=webp",
+        "weekend_price": null,
+        "weekly_discount": null,
+        "monthly_discount": null,
+        "early_bird_discount": null,
+        "last_minute_discount": null,
+        "cleaning_fee": null,
+        "minimum_stay": null,
+        "maximum_stay": null,
+        "instant_book": null,
+        "cancellation_policy": null
+      },
+      "calendar": [
+        {
+          "date": "2026-10-20",
+          "price": 69.2,
+          "available": 0
+        },
+        {
+          "date": "2026-10-21",
+          "price": 69.2,
+          "available": 0
+        },
+        {
+          "date": "2026-10-22",
+          "price": 69.2,
+          "available": 0
+        },
+        {
+          "date": "2026-10-23",
+          "price": 79.58,
+          "available": 0
+        },
+        {
+          "date": "2026-10-24",
+          "price": 79.58,
+          "available": 0
+        },
+        {
+          "date": "2026-10-25",
+          "price": 69.2,
+          "available": 0
+        },
+        {
+          "date": "2026-10-26",
+          "price": 69.2,
+          "available": 0
+        },
+        {
+          "date": "2026-10-27",
+          "price": 69.2,
+          "available": 0
+        },
+        {
+          "date": "2026-10-28",
+          "price": 69.2,
+          "available": 0
+        },
+        {
+          "date": "2026-10-29",
+          "price": 69.2,
+          "available": 0
+        },
+        {
+          "date": "2026-10-30",
+          "price": 79.58,
+          "available": 1
+        },
+        {
+          "date": "2026-10-31",
+          "price": 79.58,
+          "available": 1
+        },
+        {
+          "date": "2026-11-01",
+          "price": 69.2,
+          "available": 0
+        },
+        {
+          "date": "2026-11-02",
+          "price": 69.2,
+          "available": 0
+        },
+        {
+          "date": "2026-11-03",
+          "price": 69.2,
+          "available": 0
+        },
+        {
+          "date": "2026-11-04",
+          "price": 69.2,
+          "available": 0
+        },
+        {
+          "date": "2026-11-05",
+          "price": 69.2,
+          "available": 0
+        },
+        {
+          "date": "2026-11-06",
+          "price": 79.58,
+          "available": 0
+        },
+        {
+          "date": "2026-11-07",
+          "price": 79.58,
+          "available": 0
+        },
+        {
+          "date": "2026-11-08",
+          "price": 69.2,
+          "available": 0
+        },
+        {
+          "date": "2026-11-09",
+          "price": 69.2,
+          "available": 0
+        },
+        {
+          "date": "2026-11-10",
+          "price": 69.2,
+          "available": 0
+        },
+        {
+          "date": "2026-11-11",
+          "price": 69.2,
+          "available": 0
+        },
+        {
+          "date": "2026-11-12",
+          "price": 69.2,
+          "available": 0
+        },
+        {
+          "date": "2026-11-13",
+          "price": 79.58,
+          "available": 0
+        },
+        {
+          "date": "2026-11-14",
+          "price": 79.58,
+          "available": 0
+        },
+        {
+          "date": "2026-11-15",
+          "price": 69.2,
+          "available": 1
+        },
+        {
+          "date": "2026-11-16",
+          "price": 69.2,
+          "available": 0
+        },
+        {
+          "date": "2026-11-17",
+          "price": 69.2,
+          "available": 0
+        },
+        {
+          "date": "2026-11-18",
+          "price": 69.2,
+          "available": 1
+        }
+      ],
+      "scraped_at": "2026-10-19T10:28:06.905935"
+    },
+    {
+      "listing": {
+        "listing_id": "38485853",
+        "title": "Palermo Hollywood Home - Design Building with Pool",
+        "property_type": "Apartment",
+        "room_type": "Entire home/apt",
+        "accommodates": 2,
+        "bedrooms": 1,
+        "bathrooms": 1.0,
+        "latitude": -34.5861,
+        "longitude": -58.4373,
+        "neighborhood": "Palermo Hollywood",
+        "rating": 4.88,
+        "reviews_count": 0,
+        "host_id": "host_38485853",
+        "host_name": "Host",
+        "host_is_superhost": 1,
+        "amenities": [
+          "Wifi",
+          "Air conditioning",
+          "Cocina",
+          "Lavarropas",
+          "Pool",
+          "Gym",
+          "Workspace",
+          "Check-in autónomo"
+        ],
+        "picture_url": "https://a0.muscache.com/im/pictures/miso/Hosting-38485853/original/110e8b0c-104a-4dcc-8e71-7fe7da08ca80.jpeg?im_w=720&width=720&quality=70&auto=webp",
+        "weekend_price": null,
+        "weekly_discount": null,
+        "monthly_discount": null,
+        "early_bird_discount": null,
+        "last_minute_discount": null,
+        "cleaning_fee": null,
+        "minimum_stay": null,
+        "maximum_stay": null,
+        "instant_book": null,
+        "cancellation_policy": null
+      },
+      "calendar": [
+        {
+          "date": "2026-10-20",
+          "price": 64.8,
+          "available": 0
+        },
+        {
+          "date": "2026-10-21",
+          "price": 64.8,
+          "available": 1
+        },
+        {
+          "date": "2026-10-22",
+          "price": 64.8,
+          "available": 0
+        },
+        {
+          "date": "2026-10-23",
+          "price": 74.52,
+          "available": 1
+        },
+        {
+          "date": "2026-10-24",
+          "price": 74.52,
+          "available": 0
+        },
+        {
+          "date": "2026-10-25",
+          "price": 64.8,
+          "available": 0
+        },
+        {
+          "date": "2026-10-26",
+          "price": 64.8,
+          "available": 1
+        },
+        {
+          "date": "2026-10-27",
+          "price": 64.8,
+          "available": 0
+        },
+        {
+          "date": "2026-10-28",
+          "price": 64.8,
+          "available": 1
+        },
+        {
+          "date": "2026-10-29",
+          "price": 64.8,
+          "available": 1
+        },
+        {
+          "date": "2026-10-30",
+          "price": 74.52,
+          "available": 1
+        },
+        {
+          "date": "2026-10-31",
+          "price": 74.52,
+          "available": 1
+        },
+        {
+          "date": "2026-11-01",
+          "price": 64.8,
+          "available": 0
+        },
+        {
+          "date": "2026-11-02",
+          "price": 64.8,
+          "available": 1
+        },
+        {
+          "date": "2026-11-03",
+          "price": 64.8,
+          "available": 0
+        },
+        {
+          "date": "2026-11-04",
+          "price": 64.8,
+          "available": 0
+        },
+        {
+          "date": "2026-11-05",
+          "price": 64.8,
+          "available": 1
+        },
+        {
+          "date": "2026-11-06",
+          "price": 74.52,
+          "available": 1
+        },
+        {
+          "date": "2026-11-07",
+          "price": 74.52,
+          "available": 0
+        },
+        {
+          "date": "2026-11-08",
+          "price": 64.8,
+          "available": 1
+        },
+        {
+          "date": "2026-11-09",
+          "price": 64.8,
+          "available": 0
+        },
+        {
+          "date": "2026-11-10",
+          "price": 64.8,
+          "available": 0
+        },
+        {
+          "date": "2026-11-11",
+          "price": 64.8,
+          "available": 0
+        },
+        {
+          "date": "2026-11-12",
+          "price": 64.8,
+          "available": 0
+        },
+        {
+          "date": "2026-11-13",
+          "price": 74.52,
+          "available": 0
+        },
+        {
+          "date": "2026-11-14",
+          "price": 74.52,
+          "available": 0
+        },
+        {
+          "date": "2026-11-15",
+          "price": 64.8,
+          "available": 1
+        },
+        {
+          "date": "2026-11-16",
+          "price": 64.8,
+          "available": 1
+        },
+        {
+          "date": "2026-11-17",
+          "price": 64.8,
+          "available": 0
+        },
+        {
+          "date": "2026-11-18",
+          "price": 64.8,
+          "available": 0
+        }
+      ],
+      "scraped_at": "2026-10-19T10:28:07.517161"
+    },
+    {
+      "listing": {
+        "listing_id": "53271882",
+        "title": "702 PISO ALTO Palermo Hollywood  Pool",
+        "property_type": "Apartment",
+        "room_type": "Entire home/apt",
+        "accommodates": 2,
+        "bedrooms": 1,
+        "bathrooms": 1.0,
+        "latitude": -34.5861,
+        "longitude": -58.4373,
+        "neighborhood": "Palermo Hollywood",
+        "rating": 4.9,
+        "reviews_count": 0,
+        "host_id": "host_53271882",
+        "host_name": "Host",
+        "host_is_superhost": 1,
+        "amenities": [
+          "Wifi",
+          "Air conditioning",
+          "Cocina",
+          "Lavarropas",
+          "Pool",
+          "Gym",
+          "Workspace",
+          "Check-in autónomo"
+        ],
+        "picture_url": "https://a0.muscache.com/im/pictures/miso/Hosting-53271882/original/a500ae32-afa5-4a50-b2fd-5a78d4ae1764.jpeg?im_w=720&width=720&quality=70&auto=webp",
+        "weekend_price": null,
+        "weekly_discount": null,
+        "monthly_discount": null,
+        "early_bird_discount": null,
+        "last_minute_discount": null,
+        "cleaning_fee": null,
+        "minimum_stay": null,
+        "maximum_stay": null,
+        "instant_book": null,
+        "cancellation_policy": null
+      },
+      "calendar": [
+        {
+          "date": "2026-10-20",
+          "price": 98.0,
+          "available": 1
+        },
+        {
+          "date": "2026-10-21",
+          "price": 98.0,
+          "available": 0
+        },
+        {
+          "date": "2026-10-22",
+          "price": 98.0,
+          "available": 0
+        },
+        {
+          "date": "2026-10-23",
+          "price": 112.7,
+          "available": 1
+        },
+        {
+          "date": "2026-10-24",
+          "price": 112.7,
+          "available": 0
+        },
+        {
+          "date": "2026-10-25",
+          "price": 98.0,
+          "available": 1
+        },
+        {
+          "date": "2026-10-26",
+          "price": 98.0,
+          "available": 1
+        },
+        {
+          "date": "2026-10-27",
+          "price": 98.0,
+          "available": 0
+        },
+        {
+          "date": "2026-10-28",
+          "price": 98.0,
+          "available": 0
+        },
+        {
+          "date": "2026-10-29",
+          "price": 98.0,
+          "available": 1
+        },
+        {
+          "date": "2026-10-30",
+          "price": 112.7,
+          "available": 0
+        },
+        {
+          "date": "2026-10-31",
+          "price": 112.7,
+          "available": 1
+        },
+        {
+          "date": "2026-11-01",
+          "price": 98.0,
+          "available": 0
+        },
+        {
+          "date": "2026-11-02",
+          "price": 98.0,
+          "available": 0
+        },
+        {
+          "date": "2026-11-03",
+          "price": 98.0,
+          "available": 1
+        },
+        {
+          "date": "2026-11-04",
+          "price": 98.0,
+          "available": 1
+        },
+        {
+          "date": "2026-11-05",
+          "price": 98.0,
+          "available": 0
+        },
+        {
+          "date": "2026-11-06",
+          "price": 112.7,
+          "available": 0
+        },
+        {
+          "date": "2026-11-07",
+          "price": 112.7,
+          "available": 1
+        },
+        {
+          "date": "2026-11-08",
+          "price": 98.0,
+          "available": 1
+        },
+        {
+          "date": "2026-11-09",
+          "price": 98.0,
+          "available": 1
+        },
+        {
+          "date": "2026-11-10",
+          "price": 98.0,
+          "available": 0
+        },
+        {
+          "date": "2026-11-11",
+          "price": 98.0,
+          "available": 1
+        },
+        {
+          "date": "2026-11-12",
+          "price": 98.0,
+          "available": 0
+        },
+        {
+          "date": "2026-11-13",
+          "price": 112.7,
+          "available": 0
+        },
+        {
+          "date": "2026-11-14",
+          "price": 112.7,
+          "available": 0
+        },
+        {
+          "date": "2026-11-15",
+          "price": 98.0,
+          "available": 0
+        },
+        {
+          "date": "2026-11-16",
+          "price": 98.0,
+          "available": 0
+        },
+        {
+          "date": "2026-11-17",
+          "price": 98.0,
+          "available": 0
+        },
+        {
+          "date": "2026-11-18",
+          "price": 98.0,
+          "available": 1
+        }
+      ],
+      "scraped_at": "2026-10-19T10:28:08.118467"
+    },
+    {
+      "listing": {
+        "listing_id": "595475964843445188",
+        "title": "Beautiful Loft Palermo w/ 2 Pools, Gym, Security",
+        "property_type": "Apartment",
+        "room_type": "Entire home/apt",
+        "accommodates": 2,
+        "bedrooms": 1,
+        "bathrooms": 1.0,
+        "latitude": -34.5861,
+        "longitude": -58.4373,
+        "neighborhood": "Palermo Hollywood",
+        "rating": 4.93,
+        "reviews_count": 0,
+        "host_id": "host_595475964843445188",
+        "host_name": "Host",
+        "host_is_superhost": 1,
+        "amenities": [
+          "Wifi",
+          "Air conditioning",
+          "Cocina",
+          "Lavarropas",
+          "Pool",
+          "Gym",
+          "Workspace",
+          "Check-in autónomo"
+        ],
+        "picture_url": "https://a0.muscache.com/im/pictures/airflow/Hosting-595475964843445188/original/e8c3b013-608a-42e2-8f31-cc290c340fe4.jpg?im_w=720&width=720&quality=70&auto=webp",
+        "weekend_price": null,
+        "weekly_discount": null,
+        "monthly_discount": null,
+        "early_bird_discount": null,
+        "last_minute_discount": null,
+        "cleaning_fee": null,
+        "minimum_stay": null,
+        "maximum_stay": null,
+        "instant_book": null,
+        "cancellation_policy": null
+      },
+      "calendar": [
+        {
+          "date": "2026-10-20",
+          "price": 79.3,
+          "available": 0
+        },
+        {
+          "date": "2026-10-21",
+          "price": 79.3,
+          "available": 0
+        },
+        {
+          "date": "2026-10-22",
+          "price": 79.3,
+          "available": 1
+        },
+        {
+          "date": "2026-10-23",
+          "price": 91.19,
+          "available": 0
+        },
+        {
+          "date": "2026-10-24",
+          "price": 91.19,
+          "available": 1
+        },
+        {
+          "date": "2026-10-25",
+          "price": 79.3,
+          "available": 1
+        },
+        {
+          "date": "2026-10-26",
+          "price": 79.3,
+          "available": 0
+        },
+        {
+          "date": "2026-10-27",
+          "price": 79.3,
+          "available": 0
+        },
+        {
+          "date": "2026-10-28",
+          "price": 79.3,
+          "available": 0
+        },
+        {
+          "date": "2026-10-29",
+          "price": 79.3,
+          "available": 0
+        },
+        {
+          "date": "2026-10-30",
+          "price": 91.19,
+          "available": 0
+        },
+        {
+          "date": "2026-10-31",
+          "price": 91.19,
+          "available": 1
+        },
+        {
+          "date": "2026-11-01",
+          "price": 79.3,
+          "available": 1
+        },
+        {
+          "date": "2026-11-02",
+          "price": 79.3,
+          "available": 1
+        },
+        {
+          "date": "2026-11-03",
+          "price": 79.3,
+          "available": 1
+        },
+        {
+          "date": "2026-11-04",
+          "price": 79.3,
+          "available": 0
+        },
+        {
+          "date": "2026-11-05",
+          "price": 79.3,
+          "available": 0
+        },
+        {
+          "date": "2026-11-06",
+          "price": 91.19,
+          "available": 0
+        },
+        {
+          "date": "2026-11-07",
+          "price": 91.19,
+          "available": 1
+        },
+        {
+          "date": "2026-11-08",
+          "price": 79.3,
+          "available": 0
+        },
+        {
+          "date": "2026-11-09",
+          "price": 79.3,
+          "available": 0
+        },
+        {
+          "date": "2026-11-10",
+          "price": 79.3,
+          "available": 1
+        },
+        {
+          "date": "2026-11-11",
+          "price": 79.3,
+          "available": 0
+        },
+        {
+          "date": "2026-11-12",
+          "price": 79.3,
+          "available": 1
+        },
+        {
+          "date": "2026-11-13",
+          "price": 91.19,
+          "available": 0
+        },
+        {
+          "date": "2026-11-14",
+          "price": 91.19,
+          "available": 1
+        },
+        {
+          "date": "2026-11-15",
+          "price": 79.3,
+          "available": 0
+        },
+        {
+          "date": "2026-11-16",
+          "price": 79.3,
+          "available": 0
+        },
+        {
+          "date": "2026-11-17",
+          "price": 79.3,
+          "available": 1
+        },
+        {
+          "date": "2026-11-18",
+          "price": 79.3,
+          "available": 1
+        }
+      ],
+      "scraped_at": "2026-10-19T10:28:09.226655"
+    },
+    {
+      "listing": {
+        "listing_id": "624565146629172663",
+        "title": "Trendy in Palermo | Awesome Amenities & Location",
+        "property_type": "Apartment",
+        "room_type": "Entire home/apt",
+        "accommodates": 2,
+        "bedrooms": 1,
+        "bathrooms": 1.0,
+        "latitude": -34.5861,
+        "longitude": -58.4373,
+        "neighborhood": "Palermo Hollywood",
+        "rating": 4.88,
+        "reviews_count": 0,
+        "host_id": "host_624565146629172663",
+        "host_name": "Host",
+        "host_is_superhost": 1,
+        "amenities": [
+          "Wifi",
+          "Air conditioning",
+          "Cocina",
+          "Lavarropas",
+          "Pool",
+          "Gym",
+          "Workspace",
+          "Check-in autónomo"
+        ],
+        "picture_url": "https://a0.muscache.com/im/pictures/miso/Hosting-624565146629172663/original/223a9a7a-68cf-4da8-8ec1-a7792ba938a5.jpeg?im_w=720&width=720&quality=70&auto=webp",
+        "weekend_price": null,
+        "weekly_discount": null,
+        "monthly_discount": null,
+        "early_bird_discount": null,
+        "last_minute_discount": null,
+        "cleaning_fee": null,
+        "minimum_stay": null,
+        "maximum_stay": null,
+        "instant_book": null,
+        "cancellation_policy": null
+      },
+      "calendar": [
+        {
+          "date": "2026-10-20",
+          "price": 101.8,
+          "available": 0
+        },
+        {
+          "date": "2026-10-21",
+          "price": 101.8,
+          "available": 0
+        },
+        {
+          "date": "2026-10-22",
+          "price": 101.8,
+          "available": 0
+        },
+        {
+          "date": "2026-10-23",
+          "price": 117.07,
+          "available": 0
+        },
+        {
+          "date": "2026-10-24",
+          "price": 117.07,
+          "available": 0
+        },
+        {
+          "date": "2026-10-25",
+          "price": 101.8,
+          "available": 0
+        },
+        {
+          "date": "2026-10-26",
+          "price": 101.8,
+          "available": 0
+        },
+        {
+          "date": "2026-10-27",
+          "price": 101.8,
+          "available": 1
+        },
+        {
+          "date": "2026-10-28",
+          "price": 101.8,
+          "available": 0
+        },
+        {
+          "date": "2026-10-29",
+          "price": 101.8,
+          "available": 1
+        },
+        {
+          "date": "2026-10-30",
+          "price": 117.07,
+          "available": 1
+        },
+        {
+          "date": "2026-10-31",
+          "price": 117.07,
+          "available": 1
+        },
+        {
+          "date": "2026-11-01",
+          "price": 101.8,
+          "available": 1
+        },
+        {
+          "date": "2026-11-02",
+          "price": 101.8,
+          "available": 0
+        },
+        {
+          "date": "2026-11-03",
+          "price": 101.8,
+          "available": 1
+        },
+        {
+          "date": "2026-11-04",
+          "price": 101.8,
+          "available": 1
+        },
+        {
+          "date": "2026-11-05",
+          "price": 101.8,
+          "available": 1
+        },
+        {
+          "date": "2026-11-06",
+          "price": 117.07,
+          "available": 0
+        },
+        {
+          "date": "2026-11-07",
+          "price": 117.07,
+          "available": 0
+        },
+        {
+          "date": "2026-11-08",
+          "price": 101.8,
+          "available": 0
+        },
+        {
+          "date": "2026-11-09",
+          "price": 101.8,
+          "available": 1
+        },
+        {
+          "date": "2026-11-10",
+          "price": 101.8,
+          "available": 0
+        },
+        {
+          "date": "2026-11-11",
+          "price": 101.8,
+          "available": 1
+        },
+        {
+          "date": "2026-11-12",
+          "price": 101.8,
+          "available": 1
+        },
+        {
+          "date": "2026-11-13",
+          "price": 117.07,
+          "available": 0
+        },
+        {
+          "date": "2026-11-14",
+          "price": 117.07,
+          "available": 0
+        },
+        {
+          "date": "2026-11-15",
+          "price": 101.8,
+          "available": 1
+        },
+        {
+          "date": "2026-11-16",
+          "price": 101.8,
+          "available": 0
+        },
+        {
+          "date": "2026-11-17",
+          "price": 101.8,
+          "available": 1
+        },
+        {
+          "date": "2026-11-18",
+          "price": 101.8,
+          "available": 0
+        }
+      ],
+      "scraped_at": "2026-10-19T10:28:09.944809"
+    },
+    {
+      "listing": {
+        "listing_id": "663585540305255662",
+        "title": "I  Historic & trendy Palermo Apt 1BR w/pool & gym",
+        "property_type": "Apartment",
+        "room_type": "Entire home/apt",
+        "accommodates": 2,
+        "bedrooms": 1,
+        "bathrooms": 1.0,
+        "latitude": -34.5861,
+        "longitude": -58.4373,
+        "neighborhood": "Palermo Hollywood",
+        "rating": 4.99,
+        "reviews_count": 0,
+        "host_id": "host_663585540305255662",
+        "host_name": "Host",
+        "host_is_superhost": 1,
+        "amenities": [
+          "Wifi",
+          "Air conditioning",
+          "Cocina",
+          "Lavarropas",
+          "Pool",
+          "Jacuzzi",
+          "Gym",
+          "Workspace",
+          "Check-in autónomo"
+        ],
+        "picture_url": "https://a0.muscache.com/im/pictures/miso/Hosting-663585540305255662/original/baa6e467-64bb-4522-94e1-b5fe5b2449ac.jpeg?im_w=720&width=720&quality=70&auto=webp",
+        "weekend_price": null,
+        "weekly_discount": null,
+        "monthly_discount": null,
+        "early_bird_discount": null,
+        "last_minute_discount": null,
+        "cleaning_fee": null,
+        "minimum_stay": null,
+        "maximum_stay": null,
+        "instant_book": null,
+        "cancellation_policy": null
+      },
+      "calendar": [
+        {
+          "date": "2026-10-20",
+          "price": 97.9,
+          "available": 0
+        },
+        {
+          "date": "2026-10-21",
+          "price": 97.9,
+          "available": 0
+        },
+        {
+          "date": "2026-10-22",
+          "price": 97.9,
+          "available": 0
+        },
+        {
+          "date": "2026-10-23",
+          "price": 112.58,
+          "available": 0
+        },
+        {
+          "date": "2026-10-24",
+          "price": 112.58,
+          "available": 0
+        },
+        {
+          "date": "2026-10-25",
+          "price": 97.9,
+          "available": 0
+        },
+        {
+          "date": "2026-10-26",
+          "price": 97.9,
+          "available": 0
+        },
+        {
+          "date": "2026-10-27",
+          "price": 97.9,
+          "available": 1
+        },
+        {
+          "date": "2026-10-28",
+          "price": 97.9,
+          "available": 0
+        },
+        {
+          "date": "2026-10-29",
+          "price": 97.9,
+          "available": 1
+        },
+        {
+          "date": "2026-10-30",
+          "price": 112.58,
+          "available": 0
+        },
+        {
+          "date": "2026-10-31",
+          "price": 112.58,
+          "available": 1
+        },
+        {
+          "date": "2026-11-01",
+          "price": 97.9,
+          "available": 1
+        },
+        {
+          "date": "2026-11-02",
+          "price": 97.9,
+          "available": 1
+        },
+        {
+          "date": "2026-11-03",
+          "price": 97.9,
+          "available": 1
+        },
+        {
+          "date": "2026-11-04",
+          "price": 97.9,
+          "available": 1
+        },
+        {
+          "date": "2026-11-05",
+          "price": 97.9,
+          "available": 1
+        },
+        {
+          "date": "2026-11-06",
+          "price": 112.58,
+          "available": 0
+        },
+        {
+          "date": "2026-11-07",
+          "price": 112.58,
+          "available": 0
+        },
+        {
+          "date": "2026-11-08",
+          "price": 97.9,
+          "available": 1
+        },
+        {
+          "date": "2026-11-09",
+          "price": 97.9,
+          "available": 1
+        },
+        {
+          "date": "2026-11-10",
+          "price": 97.9,
+          "available": 0
+        },
+        {
+          "date": "2026-11-11",
+          "price": 97.9,
+          "available": 1
+        },
+        {
+          "date": "2026-11-12",
+          "price": 97.9,
+          "available": 0
+        },
+        {
+          "date": "2026-11-13",
+          "price": 112.58,
+          "available": 1
+        },
+        {
+          "date": "2026-11-14",
+          "price": 112.58,
+          "available": 1
+        },
+        {
+          "date": "2026-11-15",
+          "price": 97.9,
+          "available": 0
+        },
+        {
+          "date": "2026-11-16",
+          "price": 97.9,
+          "available": 0
+        },
+        {
+          "date": "2026-11-17",
+          "price": 97.9,
+          "available": 1
+        },
+        {
+          "date": "2026-11-18",
+          "price": 97.9,
+          "available": 1
+        }
+      ],
+      "scraped_at": "2026-10-19T10:28:10.574896"
+    },
+    {
+      "listing": {
+        "listing_id": "718763686245365984",
+        "title": "Beautiful apartment in the heart of Palermo",
+        "property_type": "Apartment",
+        "room_type": "Entire home/apt",
+        "accommodates": 2,
+        "bedrooms": 1,
+        "bathrooms": 1.0,
+        "latitude": -34.5861,
+        "longitude": -58.4373,
+        "neighborhood": "Palermo Hollywood",
+        "rating": 4.96,
+        "reviews_count": 0,
+        "host_id": "host_718763686245365984",
+        "host_name": "Host",
+        "host_is_superhost": 1,
+        "amenities": [
+          "Wifi",
+          "Air conditioning",
+          "Cocina",
+          "Lavarropas",
+          "Pool",
+          "Jacuzzi",
+          "Gym",
+          "Workspace",
+          "Check-in autónomo"
+        ],
+        "picture_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-718763686245365984/original/214dbb77-a557-4794-847d-a7181e0f2f7d.jpeg?im_w=720&width=720&quality=70&auto=webp",
+        "weekend_price": null,
+        "weekly_discount": null,
+        "monthly_discount": null,
+        "early_bird_discount": null,
+        "last_minute_discount": null,
+        "cleaning_fee": null,
+        "minimum_stay": null,
+        "maximum_stay": null,
+        "instant_book": null,
+        "cancellation_policy": null
+      },
+      "calendar": [
+        {
+          "date": "2026-10-20",
+          "price": 78.6,
+          "available": 0
+        },
+        {
+          "date": "2026-10-21",
+          "price": 78.6,
+          "available": 1
+        },
+        {
+          "date": "2026-10-22",
+          "price": 78.6,
+          "available": 0
+        },
+        {
+          "date": "2026-10-23",
+          "price": 90.39,
+          "available": 1
+        },
+        {
+          "date": "2026-10-24",
+          "price": 90.39,
+          "available": 1
+        },
+        {
+          "date": "2026-10-25",
+          "price": 78.6,
+          "available": 0
+        },
+        {
+          "date": "2026-10-26",
+          "price": 78.6,
+          "available": 1
+        },
+        {
+          "date": "2026-10-27",
+          "price": 78.6,
+          "available": 0
+        },
+        {
+          "date": "2026-10-28",
+          "price": 78.6,
+          "available": 0
+        },
+        {
+          "date": "2026-10-29",
+          "price": 78.6,
+          "available": 0
+        },
+        {
+          "date": "2026-10-30",
+          "price": 90.39,
+          "available": 0
+        },
+        {
+          "date": "2026-10-31",
+          "price": 90.39,
+          "available": 1
+        },
+        {
+          "date": "2026-11-01",
+          "price": 78.6,
+          "available": 0
+        },
+        {
+          "date": "2026-11-02",
+          "price": 78.6,
+          "available": 1
+        },
+        {
+          "date": "2026-11-03",
+          "price": 78.6,
+          "available": 1
+        },
+        {
+          "date": "2026-11-04",
+          "price": 78.6,
+          "available": 1
+        },
+        {
+          "date": "2026-11-05",
+          "price": 78.6,
+          "available": 0
+        },
+        {
+          "date": "2026-11-06",
+          "price": 90.39,
+          "available": 0
+        },
+        {
+          "date": "2026-11-07",
+          "price": 90.39,
+          "available": 0
+        },
+        {
+          "date": "2026-11-08",
+          "price": 78.6,
+          "available": 1
+        },
+        {
+          "date": "2026-11-09",
+          "price": 78.6,
+          "available": 0
+        },
+        {
+          "date": "2026-11-10",
+          "price": 78.6,
+          "available": 1
+        },
+        {
+          "date": "2026-11-11",
+          "price": 78.6,
+          "available": 0
+        },
+        {
+          "date": "2026-11-12",
+          "price": 78.6,
+          "available": 1
+        },
+        {
+          "date": "2026-11-13",
+          "price": 90.39,
+          "available": 0
+        },
+        {
+          "date": "2026-11-14",
+          "price": 90.39,
+          "available": 0
+        },
+        {
+          "date": "2026-11-15",
+          "price": 78.6,
+          "available": 1
+        },
+        {
+          "date": "2026-11-16",
+          "price": 78.6,
+          "available": 0
+        },
+        {
+          "date": "2026-11-17",
+          "price": 78.6,
+          "available": 0
+        },
+        {
+          "date": "2026-11-18",
+          "price": 78.6,
+          "available": 0
+        }
+      ],
+      "scraped_at": "2026-10-19T10:28:11.139835"
+    },
+    {
+      "listing": {
+        "listing_id": "746285672807539181",
+        "title": "II Historic & Trendy Palermo Apt 1BR, w/pool & gym",
+        "property_type": "Apartment",
+        "room_type": "Entire home/apt",
+        "accommodates": 2,
+        "bedrooms": 1,
+        "bathrooms": 1.0,
+        "latitude": -34.5861,
+        "longitude": -58.4373,
+        "neighborhood": "Palermo Hollywood",
+        "rating": 4.99,
+        "reviews_count": 0,
+        "host_id": "host_746285672807539181",
+        "host_name": "Host",
+        "host_is_superhost": 1,
+        "amenities": [
+          "Wifi",
+          "Air conditioning",
+          "Cocina",
+          "Lavarropas",
+          "Pool",
+          "Jacuzzi",
+          "Gym",
+          "Workspace",
+          "Check-in autónomo"
+        ],
+        "picture_url": "https://a0.muscache.com/im/pictures/miso/Hosting-746285672807539181/original/9a7d9a9d-0c4b-403e-a58f-dfd16596c575.jpeg?im_w=720&width=720&quality=70&auto=webp",
+        "weekend_price": null,
+        "weekly_discount": null,
+        "monthly_discount": null,
+        "early_bird_discount": null,
+        "last_minute_discount": null,
+        "cleaning_fee": null,
+        "minimum_stay": null,
+        "maximum_stay": null,
+        "instant_book": null,
+        "cancellation_policy": null
+      },
+      "calendar": [
+        {
+          "date": "2026-10-20",
+          "price": 69.9,
+          "available": 0
+        },
+        {
+          "date": "2026-10-21",
+          "price": 69.9,
+          "available": 1
+        },
+        {
+          "date": "2026-10-22",
+          "price": 69.9,
+          "available": 0
+        },
+        {
+          "date": "2026-10-23",
+          "price": 80.39,
+          "available": 1
+        },
+        {
+          "date": "2026-10-24",
+          "price": 80.39,
+          "available": 1
+        },
+        {
+          "date": "2026-10-25",
+          "price": 69.9,
+          "available": 1
+        },
+        {
+          "date": "2026-10-26",
+          "price": 69.9,
+          "available": 0
+        },
+        {
+          "date": "2026-10-27",
+          "price": 69.9,
+          "available": 1
+        },
+        {
+          "date": "2026-10-28",
+          "price": 69.9,
+          "available": 0
+        },
+        {
+          "date": "2026-10-29",
+          "price": 69.9,
+          "available": 0
+        },
+        {
+          "date": "2026-10-30",
+          "price": 80.39,
+          "available": 0
+        },
+        {
+          "date": "2026-10-31",
+          "price": 80.39,
+          "available": 1
+        },
+        {
+          "date": "2026-11-01",
+          "price": 69.9,
+          "available": 0
+        },
+        {
+          "date": "2026-11-02",
+          "price": 69.9,
+          "available": 1
+        },
+        {
+          "date": "2026-11-03",
+          "price": 69.9,
+          "available": 1
+        },
+        {
+          "date": "2026-11-04",
+          "price": 69.9,
+          "available": 1
+        },
+        {
+          "date": "2026-11-05",
+          "price": 69.9,
+          "available": 0
+        },
+        {
+          "date": "2026-11-06",
+          "price": 80.39,
+          "available": 0
+        },
+        {
+          "date": "2026-11-07",
+          "price": 80.39,
+          "available": 0
+        },
+        {
+          "date": "2026-11-08",
+          "price": 69.9,
+          "available": 1
+        },
+        {
+          "date": "2026-11-09",
+          "price": 69.9,
+          "available": 0
+        },
+        {
+          "date": "2026-11-10",
+          "price": 69.9,
+          "available": 0
+        },
+        {
+          "date": "2026-11-11",
+          "price": 69.9,
+          "available": 1
+        },
+        {
+          "date": "2026-11-12",
+          "price": 69.9,
+          "available": 0
+        },
+        {
+          "date": "2026-11-13",
+          "price": 80.39,
+          "available": 0
+        },
+        {
+          "date": "2026-11-14",
+          "price": 80.39,
+          "available": 1
+        },
+        {
+          "date": "2026-11-15",
+          "price": 69.9,
+          "available": 0
+        },
+        {
+          "date": "2026-11-16",
+          "price": 69.9,
+          "available": 0
+        },
+        {
+          "date": "2026-11-17",
+          "price": 69.9,
+          "available": 0
+        },
+        {
+          "date": "2026-11-18",
+          "price": 69.9,
+          "available": 0
+        }
+      ],
+      "scraped_at": "2026-10-19T10:28:11.663244"
+    },
+    {
+      "listing": {
+        "listing_id": "1716762976739155303",
+        "title": "Modern, Spacious Apartment & Pool | Self Check-In",
+        "property_type": "Apartment",
+        "room_type": "Entire home/apt",
+        "accommodates": 2,
+        "bedrooms": 1,
+        "bathrooms": 1.0,
+        "latitude": -34.5861,
+        "longitude": -58.4373,
+        "neighborhood": "Palermo Hollywood",
+        "rating": 5.0,
+        "reviews_count": 0,
+        "host_id": "host_1716762976739155303",
+        "host_name": "Host",
+        "host_is_superhost": 1,
+        "amenities": [
+          "Wifi",
+          "Air conditioning",
+          "Cocina",
+          "Lavarropas",
+          "Pool",
+          "Gym",
+          "Check-in autónomo"
+        ],
+        "picture_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-1716762976739155303/original/283cef13-bcd7-4f23-84b0-bed311a4f3da.jpeg?im_w=720&width=720&quality=70&auto=webp",
+        "weekend_price": null,
+        "weekly_discount": null,
+        "monthly_discount": null,
+        "early_bird_discount": null,
+        "last_minute_discount": null,
+        "cleaning_fee": null,
+        "minimum_stay": null,
+        "maximum_stay": null,
+        "instant_book": null,
+        "cancellation_policy": null
+      },
+      "calendar": [
+        {
+          "date": "2026-10-20",
+          "price": 90.0,
+          "available": 1
+        },
+        {
+          "date": "2026-10-21",
+          "price": 90.0,
+          "available": 0
+        },
+        {
+          "date": "2026-10-22",
+          "price": 90.0,
+          "available": 1
+        },
+        {
+          "date": "2026-10-23",
+          "price": 103.5,
+          "available": 0
+        },
+        {
+          "date": "2026-10-24",
+          "price": 103.5,
+          "available": 0
+        },
+        {
+          "date": "2026-10-25",
+          "price": 90.0,
+          "available": 0
+        },
+        {
+          "date": "2026-10-26",
+          "price": 90.0,
+          "available": 0
+        },
+        {
+          "date": "2026-10-27",
+          "price": 90.0,
+          "available": 0
+        },
+        {
+          "date": "2026-10-28",
+          "price": 90.0,
+          "available": 0
+        },
+        {
+          "date": "2026-10-29",
+          "price": 90.0,
+          "available": 0
+        },
+        {
+          "date": "2026-10-30",
+          "price": 103.5,
+          "available": 1
+        },
+        {
+          "date": "2026-10-31",
+          "price": 103.5,
+          "available": 0
+        },
+        {
+          "date": "2026-11-01",
+          "price": 90.0,
+          "available": 0
+        },
+        {
+          "date": "2026-11-02",
+          "price": 90.0,
+          "available": 0
+        },
+        {
+          "date": "2026-11-03",
+          "price": 90.0,
+          "available": 0
+        },
+        {
+          "date": "2026-11-04",
+          "price": 90.0,
+          "available": 0
+        },
+        {
+          "date": "2026-11-05",
+          "price": 90.0,
+          "available": 0
+        },
+        {
+          "date": "2026-11-06",
+          "price": 103.5,
+          "available": 0
+        },
+        {
+          "date": "2026-11-07",
+          "price": 103.5,
+          "available": 1
+        },
+        {
+          "date": "2026-11-08",
+          "price": 90.0,
+          "available": 0
+        },
+        {
+          "date": "2026-11-09",
+          "price": 90.0,
+          "available": 0
+        },
+        {
+          "date": "2026-11-10",
+          "price": 90.0,
+          "available": 1
+        },
+        {
+          "date": "2026-11-11",
+          "price": 90.0,
+          "available": 0
+        },
+        {
+          "date": "2026-11-12",
+          "price": 90.0,
+          "available": 1
+        },
+        {
+          "date": "2026-11-13",
+          "price": 103.5,
+          "available": 1
+        },
+        {
+          "date": "2026-11-14",
+          "price": 103.5,
+          "available": 1
+        },
+        {
+          "date": "2026-11-15",
+          "price": 90.0,
+          "available": 0
+        },
+        {
+          "date": "2026-11-16",
+          "price": 90.0,
+          "available": 0
+        },
+        {
+          "date": "2026-11-17",
+          "price": 90.0,
+          "available": 0
+        },
+        {
+          "date": "2026-11-18",
+          "price": 90.0,
+          "available": 1
+        }
+      ],
+      "scraped_at": "2026-10-19T10:28:12.182358"
+    }
+  ]
+}
